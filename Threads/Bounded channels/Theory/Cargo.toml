@@ -1,0 +1,4 @@
+[package]
+name = "theory_bounded_channels"
+version = "0.1.0"
+edition = "2021"

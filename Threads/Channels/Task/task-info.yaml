@@ -1,0 +1,24 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 163
+        length: 11
+        placeholder_text: todo!()
+      - offset: 728
+        length: 230
+        placeholder_text: /* TODO */
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: true
+    placeholders:
+      - offset: 1075
+        length: 5
+        placeholder_text: false; // TODO
+    propagatable: false
+  - name: src/data.rs
+    visible: true
+  - name: src/store.rs
+    visible: true

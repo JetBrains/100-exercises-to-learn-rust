@@ -1,0 +1,26 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 134
+        length: 30
+        placeholder_text: /* TODO */
+      - offset: 340
+        length: 64
+        placeholder_text: /* TODO */
+      - offset: 485
+        length: 65
+        placeholder_text: /* TODO */
+      - offset: 638
+        length: 86
+        placeholder_text: /* TODO */
+      - offset: 734
+        length: 283
+        placeholder_text: "/* TODO: Create weekday2index method which converts a Weekday\
+      \ enum variant into its corresponding zero-based index. */"
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: true
+    propagatable: false

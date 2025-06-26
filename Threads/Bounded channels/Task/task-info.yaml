@@ -1,0 +1,50 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 280
+        length: 19
+        placeholder_text: /* TODO */
+      - offset: 377
+        length: 15
+        placeholder_text: /* TODO */
+      - offset: 404
+        length: 315
+        placeholder_text: /* TODO */
+      - offset: 789
+        length: 15
+        placeholder_text: /* TODO */
+      - offset: 816
+        length: 309
+        placeholder_text: /* TODO */
+      - offset: 1135
+        length: 98
+        placeholder_text: /* TODO */
+      - offset: 1293
+        length: 65
+        placeholder_text: /* TODO */
+      - offset: 1413
+        length: 28
+        placeholder_text: /* TODO */
+      - offset: 1527
+        length: 20
+        placeholder_text: /* TODO */
+      - offset: 1614
+        length: 26
+        placeholder_text: /* TODO */
+      - offset: 1961
+        length: 34
+        placeholder_text: /* TODO */
+      - offset: 2183
+        length: 47
+        placeholder_text: /* TODO */
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false
+  - name: src/store.rs
+    visible: true
+  - name: src/data.rs
+    visible: true

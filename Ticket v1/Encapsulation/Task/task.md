@@ -1,0 +1,2 @@
+This task requires you to add three public methods to the `Ticket` struct. 
+You'll need to implement a `title` method to return the title field, a `description` method for the description field, and a `status` method for the status field. All instructions are detailed in the `TODO` comment within the code.

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Branching if-else/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Branching if-else/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Branching if-else/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Conversions - as casting/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Conversions - as casting/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Conversions - as casting/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Factorial/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Factorial/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Factorial/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Integers/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Integers/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Integers/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Introduction/A Basic Calculator - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Introduction/A Basic Calculator - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Loops for/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Loops for/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Loops for/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Loops while/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Loops while/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Loops while/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Overflow and underflow/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Overflow and underflow/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Overflow and underflow/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Panics/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Panics/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Panics/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Saturating arithmetic/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Saturating arithmetic/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Saturating arithmetic/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Variables/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Variables/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/A Basic Calculator/Variables/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Async-aware primitives/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Async-aware primitives/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Async-aware primitives/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Asynchronous functions/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Asynchronous functions/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Asynchronous functions/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Blocking the runtime/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Blocking the runtime/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Blocking the runtime/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Cancellation/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Cancellation/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Cancellation/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Future trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Future trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Future trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Introduction/Futures - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Introduction/Futures - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Outro/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Outro/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Outro/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Runtime/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Runtime/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Runtime/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Spawning tasks/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Spawning tasks/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Futures/Spawning tasks/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Going further/Epilogue/What next/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/About/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Course View/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Editor/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/External Linter/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Hello World/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Hello World/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Navigating Around/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Syntax/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Syntax/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Introduction/Getting started/Task Description/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/'static lifetime/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/'static lifetime/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/'static lifetime/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Ack pattern/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Ack pattern/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Ack pattern/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Bounded channels/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Bounded channels/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Bounded channels/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Channels/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Channels/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Channels/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Client/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Client/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Client/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Interior mutability/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Interior mutability/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Interior mutability/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Introduction/Threads - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Introduction/Threads - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Leaking memory/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Leaking memory/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Leaking memory/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Mutex, Send and Arc/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Mutex, Send and Arc/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Mutex, Send and Arc/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Patching/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Patching/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Patching/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/RwLock/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/RwLock/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/RwLock/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Scoped threads/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Scoped threads/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Scoped threads/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Sync trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Sync trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Sync trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Threads/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Threads/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Threads/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Without channels/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Without channels/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Threads/Without channels/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Arrays/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Arrays/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Arrays/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/BTreeMap/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/BTreeMap/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/BTreeMap/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Combinators/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Combinators/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Combinators/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/HashMap/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/HashMap/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/HashMap/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Index trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Index trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Index trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/IndexMut trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/IndexMut trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/IndexMut trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Introduction/Ticket Management - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Introduction/Ticket Management - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Iter/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Iter/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Iter/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Iterators/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Iterators/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Iterators/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Lifetimes/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Lifetimes/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Lifetimes/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Mutable slices/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Mutable slices/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Mutable slices/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Resizing/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Resizing/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Resizing/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Resizing/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Resizing/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Slices/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Slices/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Slices/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Two states/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Two states/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Two states/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Vectors/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Vectors/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/Vectors/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/impl Trait, pt.2/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/impl Trait, pt.2/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/impl Trait, pt.2/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/impl Trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/impl Trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket Management/impl Trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Destructors/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Destructors/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Destructors/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Encapsulation/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Encapsulation/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Encapsulation/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Heap/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Heap/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Heap/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Introduction/Ticket v1 - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Introduction/Ticket v1 - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Modules/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Modules/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Modules/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Outro/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Outro/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Outro/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Ownership/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Ownership/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Ownership/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/References in memory/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/References in memory/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/References in memory/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Setters/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Setters/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Setters/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Stack/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Stack/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Stack/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Structs/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Structs/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Structs/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Structs/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Structs/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Validation/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Validation/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Validation/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Visibility/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Visibility/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v1/Visibility/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Branching - if let and let-else/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Branching - if let and let-else/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Branching - if let and let-else/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Branching - match/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Branching - match/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Branching - match/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Dependencies/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Dependencies/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Dependencies/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Enums/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Enums/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Enums/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error - source/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error - source/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error - source/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error enums/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error enums/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error enums/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Error trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Fallibility/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Fallibility/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Fallibility/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Introduction/Ticket v2 - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Introduction/Ticket v2 - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Nullability/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Nullability/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Nullability/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Outro/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Outro/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Outro/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Packages/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Packages/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Packages/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/TryFrom trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/TryFrom trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/TryFrom trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Unwrap/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Unwrap/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Unwrap/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Variants with data/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Variants with data/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/Variants with data/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/thiserror/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/thiserror/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Ticket v2/thiserror/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Associated vs generic types/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Associated vs generic types/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Associated vs generic types/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Clone trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Clone trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Clone trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Copy trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Copy trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Copy trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Deref trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Deref trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Deref trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Derive macros/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Derive macros/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Derive macros/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Drop trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Drop trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Drop trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/From trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/From trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/From trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Introduction/Traits - Introduction/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Introduction/Traits - Introduction/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Operator overloading/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Operator overloading/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Operator overloading/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Orphan rule/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Orphan rule/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Orphan rule/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Outro/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Outro/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Outro/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Sized trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Sized trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Sized trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Sized trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Sized trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/String slices/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/String slices/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/String slices/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait bounds/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait bounds/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait bounds/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait bounds/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait bounds/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait/Task/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait/Task/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/Traits/Trait/Theory/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/helpers/common/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/helpers/mdbook-exercise-linker/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/helpers/mdbook-link-shortener/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/helpers/ticket_fields/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/.coursecreator" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,37 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 616
+        length: 420
+        placeholder_text: "/* TODO: Ticket struct */"
+      - offset: 1039
+        length: 106
+        placeholder_text: "/* TODO: TicketStatus struct */"
+      - offset: 1148
+        length: 253
+        placeholder_text: "/* TODO: Request structs */"
+      - offset: 1403
+        length: 251
+        placeholder_text: "/* TODO: AppState struct */"
+      - offset: 1656
+        length: 499
+        placeholder_text: "/* TODO: Create ticket function */"
+      - offset: 2157
+        length: 311
+        placeholder_text: "/* TODO: Get Ticket function */"
+      - offset: 2470
+        length: 679
+        placeholder_text: "/* TODO: Patch ticket function */"
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false
+  - name: src/main.rs
+    visible: true
+    placeholders:
+      - offset: 217
+        length: 471
+        placeholder_text: /* TODO */

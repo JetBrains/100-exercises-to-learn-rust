@@ -1,0 +1,4 @@
+[package]
+name = "task_scoped_threads"
+version = "0.1.0"
+edition = "2021"

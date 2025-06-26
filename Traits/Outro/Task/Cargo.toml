@@ -1,0 +1,4 @@
+[package]
+name = "task_traits_outro"
+version = "0.1.0"
+edition = "2021"

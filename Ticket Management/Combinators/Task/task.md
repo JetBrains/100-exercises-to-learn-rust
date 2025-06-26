@@ -1,0 +1,2 @@
+Your task is to implement the `to_dos` method for `TicketStore`. 
+As guided by the `TODO` comment in the code, this method must return a `Vec` of references to tickets that have their status set to `Status::ToDo`.

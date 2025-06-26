@@ -1,0 +1,26 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 486
+        length: 16
+        placeholder_text: /* TODO */
+      - offset: 1078
+        length: 11
+        placeholder_text: /* TODO */
+      - offset: 1111
+        length: 363
+        placeholder_text: |-
+          /* TODO */
+          pub fn add_ticket(&mut self, ticket: Ticket) {
+                  self.tickets.push(ticket);
+          }
+      - offset: 1480
+        length: 117
+        placeholder_text: /* TODO */
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false

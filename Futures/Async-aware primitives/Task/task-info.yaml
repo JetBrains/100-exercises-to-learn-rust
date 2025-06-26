@@ -1,0 +1,41 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 292
+        length: 22
+        placeholder_text: use std::sync::mpsc; // TODO
+      - offset: 880
+        length: 42
+        placeholder_text: "if let Ok(msg) = receiver.recv() { // TODO"
+      - offset: 1034
+        length: 1
+        placeholder_text: /* TODO */
+      - offset: 1228
+        length: 6
+        placeholder_text: /* TODO */
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: true
+    placeholders:
+      - offset: 83
+        length: 22
+        placeholder_text: use std::sync::mpsc; // TODO
+      - offset: 181
+        length: 17
+        placeholder_text: mpsc::channel(); // TODO
+      - offset: 229
+        length: 3
+        placeholder_text: /* TODO */
+      - offset: 254
+        length: 17
+        placeholder_text: mpsc::channel(); // TODO
+      - offset: 372
+        length: 6
+        placeholder_text: /* TODO */
+      - offset: 487
+        length: 26
+        placeholder_text: .unwrap().payload(); // TODO
+    propagatable: false

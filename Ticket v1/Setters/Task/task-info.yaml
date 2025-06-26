@@ -1,0 +1,47 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 477
+        length: 101
+        placeholder_text: |-
+          // TODO:
+                  if title.is_empty() {
+                      panic!("Title cannot be empty");
+                  }
+                  if title.len() > 50 {
+                      panic!("Title cannot be longer than 50 bytes");
+                  }
+                  if description.is_empty() {
+                      panic!("Description cannot be empty");
+                  }
+                  if description.len() > 500 {
+                      panic!("Description cannot be longer than 500 bytes");
+                  }
+                  if status != "To-Do" && status != "In Progress" && status != "Done" {
+                      panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+                  }
+      - offset: 888
+        length: 110
+        placeholder_text: "/* TODO: set_title */"
+      - offset: 1004
+        length: 146
+        placeholder_text: "/* TODO: set_description */"
+      - offset: 1156
+        length: 116
+        placeholder_text: "/* TODO: set_status */"
+      - offset: 1316
+        length: 156
+        placeholder_text: /* TODO */
+      - offset: 1528
+        length: 182
+        placeholder_text: /* TODO */
+      - offset: 1756
+        length: 155
+        placeholder_text: /* TODO */
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false

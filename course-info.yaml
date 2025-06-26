@@ -1,0 +1,33 @@
+type: marketplace
+title: 100 exercises to learn Rust
+language: English
+summary: "100 exercises to learn Rust is a hands-on, practical course designed to\
+  \ teach you Rust by having you complete a series of small, focused coding challenges.\
+  \ Instead of just reading theory, you'll be actively writing code to solve problem.\
+  \ It covers fundamental Rust concepts, from basic syntax and data types to more\
+  \ advanced topics like traits, generics, and error handling."
+programming_language: Rust
+content:
+  - Introduction
+  - A Basic Calculator
+  - Ticket v1
+  - Traits
+  - Ticket v2
+  - Ticket Management
+  - Threads
+  - Futures
+  - Going further
+additional_files:
+  - name: Cargo.toml
+  - name: README.md
+  - name: helpers/common/src/lib.rs
+  - name: helpers/common/Cargo.toml
+  - name: helpers/ticket_fields/src/lib.rs
+  - name: helpers/ticket_fields/src/title.rs
+  - name: helpers/ticket_fields/src/description.rs
+  - name: helpers/ticket_fields/src/test_helpers.rs
+  - name: helpers/ticket_fields/Cargo.toml
+  - name: CODE_OF_CONDUCT.md
+  - name: CONTRIBUTING.md
+  - name: LICENSE
+yaml_version: 2

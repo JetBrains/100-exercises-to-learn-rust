@@ -1,0 +1,4 @@
+[package]
+name = "theory_mutex_send_arc"
+version = "0.1.0"
+edition = "2021"

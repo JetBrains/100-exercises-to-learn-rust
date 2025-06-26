@@ -1,0 +1,13 @@
+type: ide
+custom_name: "Task: Enable External Linter"
+files:
+  - name: src/main.rs
+    visible: true
+  - name: Cargo.toml
+    visible: false
+  - name: images/rustrover_external_linters.png
+    visible: false
+    is_binary: true
+  - name: images/rustrover_external_linters_dark.png
+    visible: false
+    is_binary: true

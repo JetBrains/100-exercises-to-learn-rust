@@ -1,0 +1,20 @@
+type: output
+files:
+  - name: src/main.rs
+    visible: true
+    placeholders:
+      - offset: 378
+        length: 99
+        placeholder_text: |-
+          /* TODO */
+              let non_send = Rc::new(1);
+              yield_now().await;
+              println!("{}", non_send);
+  - name: Cargo.toml
+    visible: false
+  - name: tests/output.txt
+    visible: false
+    propagatable: false
+  - name: tests/input.txt
+    visible: false
+    propagatable: false

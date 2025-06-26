@@ -1,0 +1,4 @@
+[package]
+name = "task_references_in_memory"
+version = "0.1.0"
+edition = "2021"

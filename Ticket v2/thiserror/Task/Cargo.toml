@@ -1,0 +1,10 @@
+[package]
+name = "task_thiserror"
+version = "0.1.0"
+edition = "2021"
+
+[dev-dependencies]
+common = { path = "../../../helpers/common" }
+
+[dependencies]
+thiserror = "2.0.12"

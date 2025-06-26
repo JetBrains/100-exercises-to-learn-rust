@@ -1,0 +1,4 @@
+[package]
+name = "theory_variants_with_data"
+version = "0.1.0"
+edition = "2021"

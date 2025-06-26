@@ -1,0 +1,2 @@
+This task is to modify the title and description accessor methods of the `Ticket` struct. 
+As instructed by the `TODO` comment in the code, ensure that the returned `&str` values have their leading and trailing whitespace removed.

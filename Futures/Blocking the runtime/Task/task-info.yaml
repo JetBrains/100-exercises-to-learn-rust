@@ -1,0 +1,18 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 513
+        length: 255
+        placeholder_text: |-
+          /* TODO */
+                  socket.set_nonblocking(false)?;
+                  let mut buffer = Vec::new();
+                  socket.read_to_end(&mut buffer)?;
+                  socket.write_all(&buffer)?;
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false

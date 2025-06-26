@@ -1,0 +1,2 @@
+This task is to implement the `From` trait for the `WrappingU32` type. 
+Follow the `TODO` comment in the code to ensure the `example` function compiles successfully by enabling conversions from `u32` to `WrappingU32`.

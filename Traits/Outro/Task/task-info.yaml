@@ -1,0 +1,13 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 471
+        length: 1326
+        placeholder_text: /* TODO */
+  - name: Cargo.toml
+    visible: false
+  - name: tests/integration.rs
+    visible: true
+    propagatable: false

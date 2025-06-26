@@ -1,0 +1,4 @@
+[package]
+name = "theory_associated_vs_generic_types"
+version = "0.1.0"
+edition = "2021"

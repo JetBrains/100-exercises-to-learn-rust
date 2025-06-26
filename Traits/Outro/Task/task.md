@@ -1,0 +1,2 @@
+Your task is to define a new `SaturatingU16` type and implement several traits for it. 
+As detailed in the `TODO` comments in the code, you need to provide conversions from various integer types, support saturating addition, enable comparison, and allow debug printing.

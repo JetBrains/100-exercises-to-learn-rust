@@ -1,0 +1,2 @@
+This task is to add the necessary trait bounds to the generic min function. 
+Refer to the `TODO` comment in the code and the `std::cmp` documentation to ensure it compiles successfully, allowing for comparison of its generic arguments.

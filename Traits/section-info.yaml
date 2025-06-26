@@ -1,0 +1,16 @@
+content:
+  - Introduction
+  - Trait
+  - Orphan rule
+  - Operator overloading
+  - Derive macros
+  - Trait bounds
+  - String slices
+  - Deref trait
+  - Sized trait
+  - From trait
+  - Associated vs generic types
+  - Clone trait
+  - Copy trait
+  - Drop trait
+  - Outro

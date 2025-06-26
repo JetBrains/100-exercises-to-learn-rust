@@ -1,0 +1,13 @@
+/target/
+.coursecreator/
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+.DS_Store
+.Trashes
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db

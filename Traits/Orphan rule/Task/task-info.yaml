@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 303
+        length: 11
+        placeholder_text: "impl PartialEq for u32 {\n    fn eq(&self, _other: &Self) ->\
+      \ bool {\n        \n    }\n}"
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false

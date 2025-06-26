@@ -1,0 +1,2 @@
+This task is to define the `distance` variable within the `speed` function. 
+As guided by the `TODO` comment in the code, you need to give it the correct value to make the tests pass and consider if a type annotation is necessary.

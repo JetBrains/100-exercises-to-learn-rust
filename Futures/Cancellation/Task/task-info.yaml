@@ -1,0 +1,13 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: true
+    placeholders:
+      - offset: 1295
+        length: 33
+        placeholder_text: "assert_eq!(buffered, \"\"); // TODO"
+    propagatable: false

@@ -1,0 +1,2 @@
+This task is to implement the `new` function for the `Ticket` struct. 
+All the requirements, including input validation rules for `title`, `description`, and `status`, and the specific panic messages for invalid inputs, are detailed in the comments within the `TODO:` section of the code.

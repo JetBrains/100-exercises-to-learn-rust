@@ -1,0 +1,2 @@
+In this task you'll need to determine the stack size (in bytes) for two specific types: `String` and the custom `Ticket` `struct`. 
+The `TODO` comments directly within the test code will guide you on where to place the correct byte values.
