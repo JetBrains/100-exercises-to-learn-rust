@@ -6,6 +6,10 @@ summary: "100 exercises to learn Rust is a hands-on, practical course designed t
   \ Instead of just reading theory, you'll be actively writing code to solve problem.\
   \ It covers fundamental Rust concepts, from basic syntax and data types to more\
   \ advanced topics like traits, generics, and error handling."
+vendor:
+  name: JetBrains
+  email: support@jetbrains.com
+  url: https://www.jetbrains.com/
 programming_language: Rust
 content:
   - Introduction
