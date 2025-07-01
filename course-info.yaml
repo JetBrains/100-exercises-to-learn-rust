@@ -1,11 +1,13 @@
 type: marketplace
-title: 100 exercises to learn Rust
+title: 100 Exercises to Learn Rust
 language: English
-summary: "100 exercises to learn Rust is a hands-on, practical course designed to\
+summary: "100 Exercises to Learn Rust is a hands-on, practical course designed to\
   \ teach you Rust by having you complete a series of small, focused coding challenges.\
   \ Instead of just reading theory, you'll be actively writing code to solve problem.\
   \ It covers fundamental Rust concepts, from basic syntax and data types to more\
-  \ advanced topics like traits, generics, and error handling."
+  \ advanced topics like traits, generics, and error handling.The course is based\
+  \ on materials from <a href=\"https://rust-exercises.com/100-exercises\">100-exercises-to-learn-rust</a>\
+  \ written by <a href=\"https://www.lpalmieri.com\">Luca Palmieri</a>."
 vendor:
   name: JetBrains
   email: support@jetbrains.com
@@ -34,4 +36,5 @@ additional_files:
   - name: CODE_OF_CONDUCT.md
   - name: CONTRIBUTING.md
   - name: LICENSE
+  - name: plugin.xml
 yaml_version: 2
