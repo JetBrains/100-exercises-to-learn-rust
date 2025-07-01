@@ -1,3 +1,6 @@
 <idea-plugin>
     <id>100_exercises_to_learn_Rust_JetBrains</id>
+    <incompatible-with>com.intellij.modules.python</incompatible-with>
+    <incompatible-with>org.jetbrains.plugins.go</incompatible-with>
+    <incompatible-with>JavaScript</incompatible-with>
 </idea-plugin>
