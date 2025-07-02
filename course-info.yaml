@@ -36,5 +36,4 @@ additional_files:
   - name: CODE_OF_CONDUCT.md
   - name: CONTRIBUTING.md
   - name: LICENSE
-  - name: plugin.xml
 yaml_version: 2
