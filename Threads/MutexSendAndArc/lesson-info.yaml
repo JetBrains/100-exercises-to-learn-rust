@@ -1,0 +1,4 @@
+custom_name: "Mutex, Send and Arc"
+content:
+  - Theory
+  - Task

@@ -15,14 +15,14 @@ vendor:
 programming_language: Rust
 content:
   - Introduction
-  - A Basic Calculator
-  - Ticket v1
+  - ABasicCalculator
+  - TicketV1
   - Traits
-  - Ticket v2
-  - Ticket Management
+  - TicketV2
+  - TicketManagement
   - Threads
   - Futures
-  - Going further
+  - GoingFurther
 additional_files:
   - name: Cargo.toml
   - name: README.md

@@ -1,0 +1,18 @@
+custom_name: Ticket v2
+content:
+  - Introduction
+  - Enums
+  - BranchingMatch
+  - VariantsWithData
+  - BranchingIfLetAndLetElse
+  - Nullability
+  - Fallibility
+  - Unwrap
+  - ErrorEnums
+  - ErrorTrait
+  - Packages
+  - Dependencies
+  - thiserror
+  - TryFromTrait
+  - ErrorSource
+  - Outro

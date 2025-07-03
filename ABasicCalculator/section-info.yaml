@@ -1,0 +1,13 @@
+custom_name: A Basic Calculator
+content:
+  - Introduction
+  - Integers
+  - Variables
+  - BranchingIfElse
+  - Panics
+  - Factorial
+  - LoopsWhile
+  - LoopsFor
+  - OverflowAndUnderflow
+  - SaturatingArithmetic
+  - ConversionsAsCasting
