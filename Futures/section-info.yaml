@@ -1,10 +1,10 @@
 content:
   - Introduction
-  - Asynchronous functions
-  - Spawning tasks
+  - AsynchronousFunctions
+  - SpawningTasks
   - Runtime
-  - Future trait
-  - Blocking the runtime
-  - Async-aware primitives
+  - FutureTrait
+  - BlockingTheRuntime
+  - AsyncAwarePrimitives
   - Cancellation
   - Outro

@@ -1,0 +1,19 @@
+custom_name: Ticket Management
+content:
+  - Introduction
+  - Arrays
+  - Vectors
+  - Resizing
+  - Iterators
+  - Iter
+  - Lifetimes
+  - Combinators
+  - ImplTrait
+  - ImplTraitPt2
+  - Slices
+  - MutableSlices
+  - TwoStates
+  - IndexTrait
+  - IndexMutTrait
+  - HashMap
+  - BTreeMap

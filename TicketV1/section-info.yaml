@@ -1,0 +1,15 @@
+custom_name: Ticket v1
+content:
+  - Introduction
+  - Structs
+  - Validation
+  - Modules
+  - Visibility
+  - Encapsulation
+  - Ownership
+  - Setters
+  - Stack
+  - Heap
+  - ReferencesInMemory
+  - Destructors
+  - Outro

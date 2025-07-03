@@ -1,0 +1,9 @@
+custom_name: Getting started
+content:
+  - About
+  - NavigatingAround
+  - CourseView
+  - Editor
+  - TaskDescription
+  - HelloWorld
+  - ExternalLinter

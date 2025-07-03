@@ -1,0 +1,14 @@
+type: edu
+custom_name: "A Basic Calculator - Introduction"
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 74
+        length: 26
+        placeholder_text: insert here missing part
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: false
+    propagatable: false

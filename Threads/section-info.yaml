@@ -1,16 +1,16 @@
 content:
   - Introduction
   - Threads
-  - '''static lifetime'
-  - Leaking memory
-  - Scoped threads
+  - StaticLifetime
+  - LeakingMemory
+  - ScopedThreads
   - Channels
-  - Interior mutability
-  - Ack pattern
+  - InteriorMutability
+  - AckPattern
   - Client
-  - Bounded channels
+  - BoundedChannels
   - Patching
-  - "Mutex, Send and Arc"
+  - MutexSendAndArc
   - RwLock
-  - Without channels
-  - Sync trait
+  - WithoutChannels
+  - SyncTrait
