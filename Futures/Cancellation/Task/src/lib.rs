@@ -9,7 +9,7 @@ pub async fn run(listener: TcpListener, n_messages: usize, timeout: Duration) ->
         let _ = tokio::time::timeout(timeout, async {
             stream.read_to_end(&mut buffer).await.unwrap();
         })
-            .await;
+        .await;
     }
     buffer
 }

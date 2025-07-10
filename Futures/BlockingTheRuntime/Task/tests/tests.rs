@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod tests {
-    use task_blocking_the_runtime::*;
     use std::net::SocketAddr;
     use std::panic;
+    use task_blocking_the_runtime::*;
     use tokio::io::{AsyncReadExt, AsyncWriteExt};
-    use tokio::task::JoinSet;
     use tokio::net::TcpListener;
+    use tokio::task::JoinSet;
 
     async fn bind_random() -> (TcpListener, SocketAddr) {
         let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();

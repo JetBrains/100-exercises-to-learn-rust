@@ -1,15 +1,19 @@
 #[cfg(test)]
 mod tests {
-use std::sync::Arc;
-    use task_futures_outro::*;
-    use axum::{body::Body, http::{Method, Request, StatusCode}, Router};
     use axum::routing::{get, patch, post};
+    use axum::{
+        body::Body,
+        http::{Method, Request, StatusCode},
+        Router,
+    };
+    use std::sync::Arc;
+    use task_futures_outro::*;
     use tokio::sync::Mutex;
     use tower::ServiceExt;
 
     async fn setup_app() -> Router {
         let state = Arc::new(AppState::new(Mutex::new(Vec::new()), Mutex::new(0)));
-        
+
         Router::new()
             .route("/tickets", post(create_ticket))
             .route("/tickets/{id}", get(get_ticket))
@@ -30,7 +34,7 @@ use std::sync::Arc;
                     "title": "Test Ticket",
                     "description": "Test Description"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
@@ -38,7 +42,9 @@ use std::sync::Arc;
 
         assert_eq!(response.status(), StatusCode::CREATED);
 
-        let body = axum::body::to_bytes(response.into_body(), usize::MAX).await.unwrap();
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
         let ticket: Ticket = serde_json::from_slice(&body).unwrap();
 
         assert_eq!(ticket.id(), 0);
@@ -61,7 +67,7 @@ use std::sync::Arc;
                     "title": "Test Ticket",
                     "description": "Test Description"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
@@ -78,7 +84,9 @@ use std::sync::Arc;
 
         assert_eq!(response.status(), StatusCode::OK);
 
-        let body = axum::body::to_bytes(response.into_body(), usize::MAX).await.unwrap();
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
         let ticket: Ticket = serde_json::from_slice(&body).unwrap();
 
         assert_eq!(ticket.id(), 0);
@@ -115,7 +123,7 @@ use std::sync::Arc;
                     "title": "Test Ticket",
                     "description": "Test Description"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
@@ -131,7 +139,7 @@ use std::sync::Arc;
                     "title": "Updated Title",
                     "status": "InProgress"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
@@ -139,7 +147,9 @@ use std::sync::Arc;
 
         assert_eq!(response.status(), StatusCode::OK);
 
-        let body = axum::body::to_bytes(response.into_body(), usize::MAX).await.unwrap();
+        let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
         let ticket: Ticket = serde_json::from_slice(&body).unwrap();
 
         assert_eq!(ticket.id(), 0);
@@ -160,7 +170,7 @@ use std::sync::Arc;
                 serde_json::json!({
                     "title": "Updated Title"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
@@ -183,7 +193,7 @@ use std::sync::Arc;
                     "title": "First Ticket",
                     "description": "First Description"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
@@ -200,14 +210,16 @@ use std::sync::Arc;
                     "title": "Second Ticket",
                     "description": "Second Description"
                 })
-                    .to_string(),
+                .to_string(),
             ))
             .unwrap();
 
         let response2 = app.clone().oneshot(request2).await.unwrap();
         assert_eq!(response2.status(), StatusCode::CREATED);
 
-        let body2 = axum::body::to_bytes(response2.into_body(), usize::MAX).await.unwrap();
+        let body2 = axum::body::to_bytes(response2.into_body(), usize::MAX)
+            .await
+            .unwrap();
         let ticket2: Ticket = serde_json::from_slice(&body2).unwrap();
 
         assert_eq!(ticket2.id(), 1); // Should have incremented ID

@@ -1,10 +1,10 @@
 #[cfg(test)]
 mod tests {
-    use task_runtime::*;
-    use tokio::net::TcpListener;
     use std::net::SocketAddr;
     use std::panic;
+    use task_runtime::*;
     use tokio::io::AsyncReadExt;
+    use tokio::net::TcpListener;
     use tokio::task::JoinSet;
 
     async fn bind_random() -> (TcpListener, SocketAddr) {

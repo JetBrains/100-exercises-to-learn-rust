@@ -7,7 +7,7 @@ mod tests {
     async fn ping() {
         let (sender, receiver) = mpsc::channel(1);
         let (response_sender, mut response_receiver) = mpsc::channel(1);
-        
+
         sender
             .send(Message::new("pong".into(), response_sender))
             .await

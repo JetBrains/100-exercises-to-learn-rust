@@ -45,14 +45,12 @@ impl Ticket {
     }
 }
 
-
 #[derive(Clone, Serialize, Deserialize)]
 pub enum TicketStatus {
     Open,
     InProgress,
     Resolved,
 }
-
 
 #[derive(Deserialize)]
 pub struct CreateTicketRequest {
@@ -74,10 +72,7 @@ pub struct AppState {
 
 impl AppState {
     pub fn new(tickets: Mutex<Vec<Ticket>>, next_id: Mutex<u64>) -> Self {
-        AppState {
-            tickets,
-            next_id
-        }
+        AppState { tickets, next_id }
     }
 }
 

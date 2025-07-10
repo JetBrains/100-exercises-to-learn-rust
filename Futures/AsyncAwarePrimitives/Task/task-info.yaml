@@ -6,13 +6,13 @@ files:
       - offset: 292
         length: 22
         placeholder_text: use std::sync::mpsc; // TODO
-      - offset: 880
+      - offset: 875
         length: 42
         placeholder_text: "if let Ok(msg) = receiver.recv() { // TODO"
-      - offset: 1034
+      - offset: 1029
         length: 1
         placeholder_text: /* TODO */
-      - offset: 1228
+      - offset: 1223
         length: 6
         placeholder_text: /* TODO */
   - name: Cargo.toml
@@ -26,16 +26,13 @@ files:
       - offset: 181
         length: 17
         placeholder_text: mpsc::channel(); // TODO
-      - offset: 229
-        length: 3
-        placeholder_text: /* TODO */
       - offset: 254
         length: 17
         placeholder_text: mpsc::channel(); // TODO
-      - offset: 372
+      - offset: 364
         length: 6
         placeholder_text: /* TODO */
-      - offset: 487
-        length: 26
-        placeholder_text: .unwrap().payload(); // TODO
+      - offset: 480
+        length: 6
+        placeholder_text: /* TODO */
     propagatable: false
