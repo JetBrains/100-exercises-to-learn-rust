@@ -6,22 +6,22 @@ files:
       - offset: 616
         length: 420
         placeholder_text: "/* TODO: Ticket struct */"
-      - offset: 1039
+      - offset: 1038
         length: 106
         placeholder_text: "/* TODO: TicketStatus struct */"
-      - offset: 1148
+      - offset: 1146
         length: 253
         placeholder_text: "/* TODO: Request structs */"
-      - offset: 1403
-        length: 251
+      - offset: 1401
+        length: 219
         placeholder_text: "/* TODO: AppState struct */"
-      - offset: 1656
+      - offset: 1622
         length: 499
         placeholder_text: "/* TODO: Create ticket function */"
-      - offset: 2157
+      - offset: 2123
         length: 311
-        placeholder_text: "/* TODO: Get Ticket function */"
-      - offset: 2470
+        placeholder_text: "/* TODO: Get ticket function */"
+      - offset: 2436
         length: 679
         placeholder_text: "/* TODO: Patch ticket function */"
   - name: Cargo.toml
@@ -32,6 +32,6 @@ files:
   - name: src/main.rs
     visible: true
     placeholders:
-      - offset: 217
-        length: 471
+      - offset: 216
+        length: 489
         placeholder_text: /* TODO */

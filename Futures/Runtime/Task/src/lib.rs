@@ -8,7 +8,7 @@ use tokio::net::TcpListener;
 
 pub async fn fixed_reply<T>(first: TcpListener, second: TcpListener, reply: T)
 where
-// `T` cannot be cloned. How do you share it between the two server tasks?
+    // `T` cannot be cloned. How do you share it between the two server tasks?
     T: Display + Send + Sync + 'static,
 {
     let reply = Arc::new(reply);

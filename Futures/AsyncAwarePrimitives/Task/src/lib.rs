@@ -18,12 +18,11 @@ impl Message {
             response_channel,
         }
     }
-    
+
     pub fn payload(self) -> String {
         self.payload
     }
 }
-
 
 /// Replies with `pong` to any message it receives, setting up a new
 /// channel to continue communicating with the caller.
