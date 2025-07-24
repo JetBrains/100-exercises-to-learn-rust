@@ -1,8 +1,9 @@
 type: marketplace
 title: 100 Exercises to Learn Rust
 language: English
-summary: "Master Rust with Luca Palmieri’s 100 expert-designed exercises, now powered by RustRover. 
-Learn ownership, lifetimes, and traits while building production-ready IDE skills for real-world development."
+summary: "Master Rust with Mainmatter's Luca Palmieri 100 expert-designed exercises,\
+  \ now powered by RustRover. Learn ownership, lifetimes, and traits while building\
+  \ production-ready IDE skills for real-world development."
 vendor:
   name: JetBrains
   email: support@jetbrains.com
