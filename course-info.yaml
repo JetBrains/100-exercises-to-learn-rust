@@ -1,7 +1,7 @@
 type: marketplace
 title: 100 Exercises to Learn Rust
 language: English
-summary: "Master Rust with Mainmatter's Luca Palmieri 100 expert-designed exercises,\
+summary: "Master Rust with Mainmatter's Luca Palmieri <a href=\"https://rust-exercises.com/?utm_source=jetbrains&utm_medium=partner&utm_campaign=jetbrains-plugins\">100 expert-designed exercises</a>,\
   \ now powered by RustRover. Learn ownership, lifetimes, and traits while building\
   \ production-ready IDE skills for real-world development."
 vendor:
