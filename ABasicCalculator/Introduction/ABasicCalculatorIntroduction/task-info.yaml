@@ -1,5 +1,5 @@
 type: edu
-custom_name: "A Basic Calculator - Introduction"
+custom_name: A Basic Calculator - Introduction
 files:
   - name: src/lib.rs
     visible: true

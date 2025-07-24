@@ -1,4 +1,4 @@
-custom_name: "Saturating arithmetic"
+custom_name: Saturating arithmetic
 content:
   - Theory
   - Task
