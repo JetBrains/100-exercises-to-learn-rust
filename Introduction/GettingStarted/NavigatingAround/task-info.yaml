@@ -1,5 +1,5 @@
 type: theory
-custom_name: "Navigating Around"
+custom_name: Navigating Around
 files:
   - name: src/main.rs
     visible: true

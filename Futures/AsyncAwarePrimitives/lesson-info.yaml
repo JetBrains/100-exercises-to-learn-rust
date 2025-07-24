@@ -1,4 +1,4 @@
-custom_name: "Async-aware primitives"
+custom_name: Async-aware primitives
 content:
   - Theory
   - Task

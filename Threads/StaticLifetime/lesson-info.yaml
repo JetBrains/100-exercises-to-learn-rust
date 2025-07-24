@@ -1,4 +1,4 @@
-custom_name: "'static lifetime"
+custom_name: '''static lifetime'
 content:
   - Theory
   - Task
