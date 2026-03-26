@@ -43,8 +43,8 @@ Your code drifts more and more to the right when you have multiple `if` expressi
 ```rust
 let number = 3;
 
-if number < 5 {
-    println!("`number` is smaller than 5");
+if number >= 5 {
+    println!("`number` is bigger than or equal to 5");
 } else {
     if number >= 3 {
         println!("`number` is greater than or equal to 3, but smaller than 5");
@@ -59,8 +59,8 @@ You can use the `else if` keyword to combine multiple `if` expressions into a si
 ```rust
 let number = 3;
 
-if number < 5 {
-    println!("`number` is smaller than 5");
+if number >= 5 {
+    println!("`number` is bigger than or equal to 5");
 } else if number >= 3 {
     println!("`number` is greater than or equal to 3, but smaller than 5");
 } else {
