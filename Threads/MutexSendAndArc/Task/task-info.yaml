@@ -5,7 +5,7 @@ files:
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs
-    visible: false
+    visible: true
     propagatable: false
   - name: src/store.rs
     visible: true
