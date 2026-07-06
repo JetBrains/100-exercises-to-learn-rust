@@ -21,6 +21,7 @@ content:
   - GoingFurther
 additional_files:
   - name: Cargo.toml
+  - name: Cargo.lock
   - name: README.md
   - name: helpers/common/src/lib.rs
   - name: helpers/common/Cargo.toml
