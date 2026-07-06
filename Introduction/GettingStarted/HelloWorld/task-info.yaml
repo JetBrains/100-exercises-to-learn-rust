@@ -10,7 +10,7 @@ files:
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs
-    visible: false
+    visible: true
   - name: images/run_dark.svg
     visible: false
   - name: images/run.svg

@@ -25,5 +25,5 @@ files:
         length: 20
         placeholder_text: "# TODO"
   - name: tests/tests.rs
-    visible: false
+    visible: true
     propagatable: false
