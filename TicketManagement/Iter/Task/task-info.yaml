@@ -3,7 +3,7 @@ files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 1091
+      - offset: 1092
         length: 82
         placeholder_text: /* TODO */
   - name: Cargo.toml

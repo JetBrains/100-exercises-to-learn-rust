@@ -3,7 +3,7 @@ files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 477
+      - offset: 478
         length: 101
         placeholder_text: |-
           // TODO:
@@ -22,22 +22,22 @@ files:
                   if status != "To-Do" && status != "In Progress" && status != "Done" {
                       panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
                   }
-      - offset: 888
+      - offset: 889
         length: 110
         placeholder_text: "/* TODO: set_title */"
-      - offset: 1004
+      - offset: 1005
         length: 146
         placeholder_text: "/* TODO: set_description */"
-      - offset: 1156
+      - offset: 1157
         length: 116
         placeholder_text: "/* TODO: set_status */"
-      - offset: 1316
+      - offset: 1317
         length: 156
         placeholder_text: /* TODO */
-      - offset: 1528
+      - offset: 1529
         length: 182
         placeholder_text: /* TODO */
-      - offset: 1756
+      - offset: 1757
         length: 155
         placeholder_text: /* TODO */
   - name: Cargo.toml

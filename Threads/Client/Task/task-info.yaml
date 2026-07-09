@@ -5,13 +5,13 @@ files:
     placeholders:
       - offset: 430
         length: 280
-        placeholder_text: /* TODO */
+        placeholder_text: todo!()
       - offset: 782
         length: 274
-        placeholder_text: /* TODO */
+        placeholder_text: todo!()
       - offset: 1216
         length: 28
-        placeholder_text: /* TODO */
+        placeholder_text: todo!()
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

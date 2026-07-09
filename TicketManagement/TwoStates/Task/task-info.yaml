@@ -4,7 +4,7 @@ files:
     visible: true
     placeholders:
       - offset: 486
-        length: 16
+        length: 14
         placeholder_text: /* TODO */
       - offset: 1078
         length: 11

@@ -6,17 +6,17 @@ files:
       - offset: 134
         length: 30
         placeholder_text: /* TODO */
-      - offset: 340
-        length: 64
-        placeholder_text: /* TODO */
-      - offset: 485
+      - offset: 342
         length: 65
         placeholder_text: /* TODO */
-      - offset: 638
+      - offset: 488
+        length: 65
+        placeholder_text: /* TODO */
+      - offset: 641
         length: 86
         placeholder_text: /* TODO */
-      - offset: 734
-        length: 283
+      - offset: 737
+        length: 284
         placeholder_text: "/* TODO: Create weekday2index method which converts a Weekday\
       \ enum variant into its corresponding zero-based index. */"
   - name: Cargo.toml

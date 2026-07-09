@@ -22,8 +22,8 @@ files:
       - offset: 125
         length: 34
         placeholder_text: /* TODO */
-      - offset: 216
-        length: 810
+      - offset: 217
+        length: 811
         placeholder_text: /* TODO */
   - name: src/title.rs
     visible: true
@@ -32,5 +32,5 @@ files:
         length: 34
         placeholder_text: /* TODO */
       - offset: 371
-        length: 818
+        length: 819
         placeholder_text: /* TODO */
