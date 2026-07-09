@@ -5,4 +5,4 @@ edition = "2021"
 
 [dependencies]
 ticket_fields = { path = "../../../helpers/ticket_fields" }
-thiserror = "1.0.69"
+thiserror = "2"
