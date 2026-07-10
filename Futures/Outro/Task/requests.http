@@ -1,0 +1,58 @@
+### Create a ticket
+POST http://127.0.0.1:3000/tickets
+Content-Type: application/json
+
+{
+  "title": "Learn async Rust",
+  "description": "Finish the last exercise"
+}
+
+> {%
+    client.test("ticket created", function () {
+        client.assert(response.status === 201, "expected 201, got " + response.status);
+    });
+    client.global.set("ticket_id", response.body.id);
+%}
+
+### List all tickets
+GET http://127.0.0.1:3000/tickets
+
+> {%
+    client.test("list returned", function () {
+        client.assert(response.status === 200, "expected 200, got " + response.status);
+    });
+%}
+
+### Retrieve the ticket we just created
+GET http://127.0.0.1:3000/tickets/{{ticket_id}}
+
+> {%
+    client.test("ticket retrieved", function () {
+        client.assert(response.status === 200, "expected 200, got " + response.status);
+        client.assert(response.body.status === "ToDo", "new ticket should be ToDo");
+    });
+%}
+
+### Patch the ticket
+PATCH http://127.0.0.1:3000/tickets/{{ticket_id}}
+Content-Type: application/json
+
+{
+  "status": "InProgress"
+}
+
+> {%
+    client.test("ticket patched", function () {
+        client.assert(response.status === 200, "expected 200, got " + response.status);
+        client.assert(response.body.status === "InProgress", "status was not updated");
+    });
+%}
+
+### Request a ticket that does not exist
+GET http://127.0.0.1:3000/tickets/9999
+
+> {%
+    client.test("missing ticket is 404", function () {
+        client.assert(response.status === 404, "expected 404, got " + response.status);
+    });
+%}
