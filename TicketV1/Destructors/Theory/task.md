@@ -166,4 +166,4 @@ a close relative of [**use-after-free bugs**](https://owasp.org/www-community/vu
 Rust's ownership system rules out these kinds of bugs by design.
 
 [^leak]: Rust doesn't guarantee that destructors will run. They won't, for example, if
-you explicitly choose to [leak memory](../../../Threads/Leaking%20memory/Theory/task.md).
+you explicitly choose to [leak memory](../../../Threads/LeakingMemory/Theory/task.md).

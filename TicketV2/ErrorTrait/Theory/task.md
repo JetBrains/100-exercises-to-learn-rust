@@ -22,13 +22,13 @@ that implements the `Error` trait.
 pub trait Error: Debug + Display {}
 ```
 
-You might recall the `:` syntax from [the `From` trait](../../../Traits/From%20trait/Theory/task.md#supertrait--subtrait)—it's used to specify **supertraits**.
+You might recall the `:` syntax from [the `From` trait](../../../Traits/FromTrait/Theory/task.md#supertrait--subtrait)—it's used to specify **supertraits**.
 For `Error`, there are two supertraits: `Debug` and `Display`. If a type wants to implement `Error`, it must also
 implement `Debug` and `Display`.
 
 ### `Display` and `Debug`
 
-We've already encountered the `Debug` trait in [a previous lesson](../../../Traits/Derive%20macros/Theory/task.md)—it's the trait used by
+We've already encountered the `Debug` trait in [a previous lesson](../../../Traits/DeriveMacros/Theory/task.md)—it's the trait used by
 `assert_eq!` to display the values of the variables it's comparing when the assertion fails.
 
 From a "mechanical" perspective, `Display` and `Debug` are identical—they encode how a type should be converted

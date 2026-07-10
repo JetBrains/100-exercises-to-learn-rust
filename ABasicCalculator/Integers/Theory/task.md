@@ -112,7 +112,7 @@ error[E0308]: mismatched types
   |
 ```
 
-We'll see how to convert between types [later in this course](../../../Traits/From%20trait/Theory/task.md)
+We'll see how to convert between types [later in this course](../../../Traits/FromTrait/Theory/task.md)
 
 ## Further reading
 
@@ -122,8 +122,8 @@ We'll see how to convert between types [later in this course](../../../Traits/Fr
 
 [^traits]: Rust doesn't let you define custom operators, but it puts you in control of how the built-in operators
 behave.
-We'll talk about operator overloading [later in the course](../../../Traits/Operator%20overloading/Theory/task.md), after we've covered traits.
+We'll talk about operator overloading [later in the course](../../../Traits/OperatorOverloading/Theory/task.md), after we've covered traits.
 
 [^coercion]: There are some exceptions to this rule, mostly related to references, smart pointers and ergonomics. We'll
-cover those [later on](../../../Traits/Deref%20trait/Theory/task.md).
+cover those [later on](../../../Traits/DerefTrait/Theory/task.md).
 A mental model of "all conversions are explicit" will serve you well in the meantime.

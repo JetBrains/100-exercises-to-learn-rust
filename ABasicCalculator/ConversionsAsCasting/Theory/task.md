@@ -83,7 +83,7 @@ error: literal out of range for `i8`
 As a rule of thumb, be quite careful with `as` casting.\
 Use it _exclusively_ for going from a smaller type to a larger type.
 To convert from a larger to smaller integer type, rely on the
-[_fallible_ conversion machinery](../../../Ticket%20v2/TryFrom%20trait/Theory/task.md) that we'll
+[_fallible_ conversion machinery](../../../TicketV2/TryFromTrait/Theory/task.md) that we'll
 explore later in the course.
 
 ### Limitations
@@ -92,8 +92,8 @@ Surprising behaviour is not the only downside of `as` casting.
 It is also fairly limited: you can only rely on `as` casting
 for primitive types and a few other special cases.\
 When working with composite types, you'll have to rely on
-different conversion mechanisms ([fallible](../../../Ticket%20v2/TryFrom%20trait/Theory/task.md)
-and [infallible](../../../Traits/From%20trait/Theory/task.md), which we'll explore later on.
+different conversion mechanisms ([fallible](../../../TicketV2/TryFromTrait/Theory/task.md)
+and [infallible](../../../Traits/FromTrait/Theory/task.md), which we'll explore later on.
 
 ## Further reading
 

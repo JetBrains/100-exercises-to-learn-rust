@@ -18,7 +18,7 @@ The type of `s` is `&str`, a **reference to a string slice**.
 
 `&str` and `String` are different types—they're not interchangeable.\
 Let's recall the memory layout of a `String` from our
-[previous exploration](../../../Ticket%20v1/Heap/Theory/task.md).
+[previous exploration](../../../TicketV1/Heap/Theory/task.md).
 If we run:
 
 ```rust
@@ -41,7 +41,7 @@ Heap:  | H | e | l | l | o |
        +---+---+---+---+---+
 ```
 
-If you remember, we've [also examined](../../../Ticket%20v1/References%20in%20memory/Theory/task.md)
+If you remember, we've [also examined](../../../TicketV1/ReferencesInMemory/Theory/task.md)
 how a `&String` is laid out in memory:
 
 ```text
