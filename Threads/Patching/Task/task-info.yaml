@@ -6,7 +6,7 @@ files:
       - offset: 1223
         length: 312
         placeholder_text: /* TODO */
-      - offset: 2841
+      - offset: 2840
         length: 513
         placeholder_text: /* TODO */
   - name: Cargo.toml

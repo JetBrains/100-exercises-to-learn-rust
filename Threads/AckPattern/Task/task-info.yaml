@@ -10,17 +10,17 @@ files:
         length: 62
         placeholder_text: /* TODO */
       - offset: 795
-        length: 28
-        placeholder_text: /* TODO */
-      - offset: 863
-        length: 83
-        placeholder_text: /* TODO */
-      - offset: 1010
         length: 39
         placeholder_text: /* TODO */
-      - offset: 1089
-        length: 90
+      - offset: 871
+        length: 83
+        placeholder_text: todo!()
+      - offset: 1015
+        length: 36
         placeholder_text: /* TODO */
+      - offset: 1088
+        length: 90
+        placeholder_text: todo!()
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs
