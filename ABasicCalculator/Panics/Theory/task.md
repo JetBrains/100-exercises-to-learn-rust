@@ -1,6 +1,6 @@
 ## Panics
 
-Let's go back to the `speed` function you wrote for the ["Variables" lesson](../../Variables/Theory/task.md).
+Let's go back to the `speed` function you wrote for the ["Variables" lesson](../../../ABasicCalculator/Variables/Theory/task.md).
 It probably looked something like this:
 
 ```rust
