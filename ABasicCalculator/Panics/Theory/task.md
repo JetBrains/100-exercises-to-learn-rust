@@ -38,7 +38,7 @@ fn main() {
 }
 ```
 
-There are other mechanisms to work with recoverable errors in Rust, which [we'll cover later](../../../Ticket%20v2/Fallibility/Theory/task.md).
+There are other mechanisms to work with recoverable errors in Rust, which [we'll cover later](../../../TicketV2/Fallibility/Theory/task.md).
 For the time being we'll stick with panics as a brutal but simple stopgap solution.
 
 ## Further reading

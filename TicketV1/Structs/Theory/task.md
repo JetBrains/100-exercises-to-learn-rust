@@ -98,7 +98,7 @@ let is_open = ticket.is_open();
 ```
 
 This is the same calling syntax you used to perform saturating arithmetic operations on `u32` values
-in [the previous chapter](../02_basic_calculator/09_saturating.md).
+in [the previous chapter](../../../ABasicCalculator/SaturatingArithmetic/Theory/task.md).
 
 ### Static methods
 

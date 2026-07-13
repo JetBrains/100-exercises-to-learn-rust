@@ -1,6 +1,6 @@
 ## The `Drop` trait
 
-When we introduced [destructors](../../../Ticket%20v1/Destructors/Theory/task.md),
+When we introduced [destructors](../../../TicketV1/Destructors/Theory/task.md),
 we mentioned that the `drop` function:
 
 1. reclaims the memory occupied by the type (i.e. `std::mem::size_of` bytes)

@@ -56,4 +56,4 @@ Accessor methods are public methods that allow you to read the value of a privat
 Rust doesn't have a built-in way to generate accessor methods for you, like some other languages do.
 You have to write them yourself—they're just regular methods.
 
-[^newtype]: Or refine their type, a technique we'll explore [later on](../../../Ticket%20v2/Outro/Theory/task.md).
+[^newtype]: Or refine their type, a technique we'll explore [later on](../../../TicketV2/Outro/Theory/task.md).

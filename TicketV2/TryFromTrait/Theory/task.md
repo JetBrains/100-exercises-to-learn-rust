@@ -1,6 +1,6 @@
 ## `TryFrom` and `TryInto`
 
-In the previous chapter we looked at the [`From` and `Into` traits](../../../Traits/From%20trait/Theory/task.md),
+In the previous chapter we looked at the [`From` and `Into` traits](../../../Traits/FromTrait/Theory/task.md),
 Rust's idiomatic interfaces for **infallible** type conversions.\
 But what if the conversion is not guaranteed to succeed?
 

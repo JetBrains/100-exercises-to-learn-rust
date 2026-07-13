@@ -2,11 +2,11 @@
 
 There's more to `&str` than meets the eye, even after having
 investigated deref coercion.\
-From our previous [discussion on memory layouts](../../../Ticket%20v1/References%20in%20memory/Theory/task.md),
+From our previous [discussion on memory layouts](../../../TicketV1/ReferencesInMemory/Theory/task.md),
 it would have been reasonable to expect `&str` to be represented as a single `usize` on
 the stack, a pointer. That's not the case though. `&str` stores some **metadata** next
 to the pointer: the length of the slice it points to. Going back to the example from
-[a previous section](../../String%20slices/Theory/task.md):
+[a previous section](../../StringSlices/Theory/task.md):
 
 ```rust
 let mut s = String::with_capacity(5);

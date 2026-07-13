@@ -236,4 +236,4 @@ Towards the end of this chapter we'll explain _why_ Rust's ownership system is d
 For the time being, focus on understanding the _how_. Take each compiler error as a learning opportunity!
 
 [^refine]: This is a great mental model to start out, but it doesn't capture the _full_ picture.
-We'll refine our understanding of references [later in the course](../../../Threads/Interior%20mutability/Theory/task.md).
+We'll refine our understanding of references [later in the course](../../../Threads/InteriorMutability/Theory/task.md).
