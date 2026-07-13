@@ -6,7 +6,7 @@ From our previous [discussion on memory layouts](../../../TicketV1/ReferencesInM
 it would have been reasonable to expect `&str` to be represented as a single `usize` on
 the stack, a pointer. That's not the case though. `&str` stores some **metadata** next
 to the pointer: the length of the slice it points to. Going back to the example from
-[a previous section](../../StringSlices/Theory/task.md):
+[a previous section](../../../Traits/StringSlices/Theory/task.md):
 
 ```rust
 let mut s = String::with_capacity(5);

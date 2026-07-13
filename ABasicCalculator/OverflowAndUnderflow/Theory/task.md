@@ -16,7 +16,7 @@ But the _mathematically correct result_ doesn't fit into that integer type!
 > For brevity, we'll only talk about integer overflows for the rest of this section, but keep in mind that
 > everything we say applies to integer underflows as well.
 >
-> The `speed` function you wrote in the ["Variables" lesson](../../Variables/Theory/task.md) underflowed for some input
+> The `speed` function you wrote in the ["Variables" lesson](../../../ABasicCalculator/Variables/Theory/task.md) underflowed for some input
 > combinations.
 > E.g. if `end` is smaller than `start`, `end - start` will underflow the `u32` type since the result is supposed
 > to be negative but `u32` can't represent negative numbers.
@@ -41,7 +41,7 @@ It boils down to two different approaches:
 ### Reject the operation
 
 This is the most conservative approach: we stop the program when an integer overflow occurs.\
-That's done via a panic, the mechanism we've already seen in the ["Panics" lesson](../../Panics/Theory/task.md).
+That's done via a panic, the mechanism we've already seen in the ["Panics" lesson](../../../ABasicCalculator/Panics/Theory/task.md).
 
 ### Come up with a "sensible" result
 
