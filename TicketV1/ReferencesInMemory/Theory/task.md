@@ -2,7 +2,7 @@
 
 What about references, like `&String` or `&mut String`? How are they represented in memory?
 
-Most references[^fat] in Rust are represented, in memory, as a pointer to a memory location.\
+Most references in Rust are represented, in memory, as a pointer to a memory location.\
 It follows that their size is the same as the size of a pointer, a `usize`.
 
 You can verify this using `std::mem::size_of`:
@@ -45,6 +45,8 @@ The same goes for `&mut String`.
 The example above should clarify one thing: not all pointers point to the heap.\
 They just point to a memory location, which _may_ be on the heap, but doesn't have to be.
 
-[^fat]: [Later in the course](../../../Traits/StringSlices/Theory/task.md) we'll talk about **fat pointers**,
-i.e. pointers with additional metadata. As the name implies, they are larger than
-the pointers we discussed in this chapter, also known as **thin pointers**.
+> 💡 **Note**
+>
+> [Later in the course](../../../Traits/StringSlices/Theory/task.md) we'll talk about **fat pointers**,
+> i.e. pointers with additional metadata. As the name implies, they are larger than
+> the pointers we discussed in this chapter, also known as **thin pointers**.

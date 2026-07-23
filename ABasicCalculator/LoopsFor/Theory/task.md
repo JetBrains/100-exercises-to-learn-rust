@@ -5,7 +5,12 @@ To make this easier, Rust provides a more concise way to iterate over a range of
 
 ## The `for` loop
 
-A `for` loop is a way to execute a block of code for each element in an iterator[^iterator].
+A `for` loop is a way to execute a block of code for each element in an iterator.
+
+> 💡 **Note**
+>
+> Later in the course we'll give a precise definition of what counts as an "iterator".
+> For now, think of it as a sequence of values that you can loop over.
 
 Here's the general syntax:
 
@@ -17,7 +22,12 @@ for <element> in <iterator> {
 
 ## Ranges
 
-Rust's standard library provides **range** type that can be used to iterate over a sequence of numbers[^weird-ranges].
+Rust's standard library provides **range** type that can be used to iterate over a sequence of numbers.
+
+> 💡 **Note**
+>
+> You can use ranges with other types too (e.g. characters and IP addresses),
+> but integers are definitely the most common case in day-to-day Rust programming.
 
 For example, if we want to sum the numbers from 1 to 5:
 
@@ -57,8 +67,3 @@ for i in 1..(end + 1) {
 ## Further reading
 
 - [`for` loop documentation](https://doc.rust-lang.org/std/keyword.for.html)
-
-[^iterator]: Later in the course we'll give a precise definition of what counts as an "iterator".
-For now, think of it as a sequence of values that you can loop over.
-[^weird-ranges]: You can use ranges with other types too (e.g. characters and IP addresses),
-but integers are definitely the most common case in day-to-day Rust programming.

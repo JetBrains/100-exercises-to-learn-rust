@@ -126,8 +126,14 @@ impl Add<&u32> for &u32 {
 ```
 
 The type they're implementing the trait for is `&u32`, but the result of the addition is `u32`.\
-It would be impossible[^flexible] to provide this implementation if `add` had to return `Self`, i.e. `&u32` in this case.
+It would be impossible to provide this implementation if `add` had to return `Self`, i.e. `&u32` in this case.
 `Output` lets `std` decouple the implementor from the return type, thus supporting this case.
+
+> 💡 **Note**
+>
+> Flexibility is rarely free: the trait definition is more complex due to `Output`, and implementors have to reason about
+> what they want to return. The trade-off is only justified if that flexibility is actually needed. Keep that in mind
+> when designing your own traits.
 
 On the other hand, `Output` can't be a generic parameter. The output type of the operation **must** be uniquely determined
 once the types of the operands are known. That's why it's an associated type: for a given combination of implementor
@@ -140,7 +146,3 @@ To recap:
 - Use an **associated type** when the type must be uniquely determined for a given trait implementation.
 - Use a **generic parameter** when you want to allow multiple implementations of the trait for the same type,
   with different input types.
-
-[^flexible]: Flexibility is rarely free: the trait definition is more complex due to `Output`, and implementors have to reason about
-what they want to return. The trade-off is only justified if that flexibility is actually needed. Keep that in mind
-when designing your own traits.
