@@ -3,21 +3,21 @@ files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 1144
+      - offset: 1147
         length: 59
         placeholder_text: |-
           // TODO:
               pub fn title(self) -> String {
                   self.title
               }
-      - offset: 1208
+      - offset: 1211
         length: 71
         placeholder_text: |-
           // TODO:
               pub fn description(self) -> String {
                   self.description
               }
-      - offset: 1284
+      - offset: 1287
         length: 61
         placeholder_text: |-
           // TODO:
