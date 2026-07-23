@@ -13,6 +13,12 @@ mod tests {
 
         let status = Status::try_from("Done".to_string()).unwrap();
         assert_eq!(status, Status::Done);
+
+        let empty = String::new();
+        assert!(Status::try_from(empty).is_err());
+
+        let invalid = "InValid".to_string();
+        assert!(Status::try_from(invalid).is_err());
     }
 
     #[test]
@@ -25,5 +31,8 @@ mod tests {
 
         let status = Status::try_from("done").unwrap();
         assert_eq!(status, Status::Done);
+
+        assert!(Status::try_from("").is_err());
+        assert!(Status::try_from("invalid").is_err());
     }
 }
