@@ -23,7 +23,7 @@ negative).
 
 ### Bit width
 
-The `32` in `u32` refers to the **number of bits[^bit]** used to represent the number in memory.\
+The `32` in `u32` refers to the **number of bits** used to represent the number in memory (a bit is the smallest unit of data in a computer—it can only have two values: `0` or `1`).\
 The more bits, the larger the range of numbers that can be represented.
 
 Rust supports multiple bit widths for integers: `8`, `16`, `32`, `64`, `128`.
@@ -69,13 +69,18 @@ For example, `1_000_000` is the same as `1000000`.
 
 ## Arithmetic operators
 
-Rust supports the following arithmetic operators[^traits] for integers:
+Rust supports the following arithmetic operators for integers:
 
 - `+` for addition
 - `-` for subtraction
 - `*` for multiplication
 - `/` for division
 - `%` for remainder
+
+> 💡 **Note**
+>
+> Rust doesn't let you define custom operators, but it puts you in control of how the built-in operators behave.
+> We'll talk about operator overloading [later in the course](../../../Traits/OperatorOverloading/Theory/task.md), after we've covered traits.
 
 Precedence and associativity rules for these operators are the same as in mathematics.\
 You can use parentheses to override the default precedence. E.g. `2 * (3 + 4)`.
@@ -89,8 +94,14 @@ You can use parentheses to override the default precedence. E.g. `2 * (3 + 4)`.
 
 As we discussed in the previous exercise, Rust is a statically typed language.\
 In particular, Rust is quite strict about type coercion. It won't automatically convert a value from one type to
-another[^coercion],
+another,
 even if the conversion is lossless. You have to do it explicitly.
+
+> 💡 **Note**
+>
+> There are some exceptions to this rule, mostly related to references, smart pointers and ergonomics.
+> We'll cover those [later on](../../../Traits/DerefTrait/Theory/task.md).
+> A mental model of "all conversions are explicit" will serve you well in the meantime.
 
 For example, you can't assign a `u8` value to a variable with type `u32`, even though all `u8` values are valid `u32`
 values:
@@ -117,13 +128,3 @@ We'll see how to convert between types [later in this course](../../../Traits/Fr
 ## Further reading
 
 - [The integer types section](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types) in the official Rust book
-
-[^bit]: A bit is the smallest unit of data in a computer. It can only have two values: `0` or `1`.
-
-[^traits]: Rust doesn't let you define custom operators, but it puts you in control of how the built-in operators
-behave.
-We'll talk about operator overloading [later in the course](../../../Traits/OperatorOverloading/Theory/task.md), after we've covered traits.
-
-[^coercion]: There are some exceptions to this rule, mostly related to references, smart pointers and ergonomics. We'll
-cover those [later on](../../../Traits/DerefTrait/Theory/task.md).
-A mental model of "all conversions are explicit" will serve you well in the meantime.

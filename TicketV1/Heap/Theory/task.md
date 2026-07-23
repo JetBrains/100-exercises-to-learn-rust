@@ -36,8 +36,14 @@ and prefer stack-allocated data whenever possible.
 ## `String`'s memory layout
 
 When you create a local variable of type `String`,
-Rust is forced to allocate on the heap[^empty]: it doesn't know in advance how much text you're going to put in it,
-so it can't reserve the right amount of space on the stack.\
+Rust is forced to allocate on the heap: it doesn't know in advance how much text you're going to put in it,
+so it can't reserve the right amount of space on the stack.
+
+> 💡 **Note**
+>
+> `std` doesn't allocate if you create an **empty** `String` (i.e. `String::new()`).
+> Heap memory will be reserved when you push data into it for the first time.
+
 But a `String` is not _entirely_ heap-allocated, it also keeps some data on the stack. In particular:
 
 - The **pointer** to the heap region you reserved.
@@ -108,7 +114,14 @@ Rust abstracts away these architecture-specific details by providing the `usize`
 an unsigned integer that's as big as the number of bytes needed to address memory on your machine.
 On a 32-bit machine, `usize` is equivalent to `u32`. On a 64-bit machine, it matches `u64`.
 
-Capacity, length and pointers are all represented as `usize`s in Rust[^equivalence].
+Capacity, length and pointers are all represented as `usize`s in Rust.
+
+> 💡 **Note**
+>
+> The size of a pointer depends on the operating system too.
+> In certain environments, a pointer is **larger** than a memory address (e.g. [CHERI](https://web.archive.org/web/20240517051950/https://blog.acolyer.org/2019/05/28/cheri-abi/)).
+> Rust makes the simplifying assumption that pointers are the same size as memory addresses,
+> which is true for most modern systems you're likely to encounter.
 
 ### No `std::mem::size_of` for the heap
 
@@ -132,11 +145,3 @@ provide methods to inspect their heap usage (e.g. `String`'s `capacity` method),
 but there is no general-purpose "API" to retrieve runtime heap usage in Rust.\
 You can, however, use a memory profiler tool (e.g. [DHAT](https://valgrind.org/docs/manual/dh-manual.html)
 or [a custom allocator](https://docs.rs/dhat/latest/dhat/)) to inspect the heap usage of your program.
-
-[^empty]: `std` doesn't allocate if you create an **empty** `String` (i.e. `String::new()`).
-Heap memory will be reserved when you push data into it for the first time.
-
-[^equivalence]: The size of a pointer depends on the operating system too.
-In certain environments, a pointer is **larger** than a memory address (e.g. [CHERI](https://web.archive.org/web/20240517051950/https://blog.acolyer.org/2019/05/28/cheri-abi/)).
-Rust makes the simplifying assumption that pointers are the same size as memory addresses,
-which is true for most modern systems you're likely to encounter.

@@ -111,7 +111,7 @@ wrapping is the right choice, other times panicking is preferable.
 
 ## `wrapping_` methods
 
-You can opt into wrapping arithmetic on a per-operation basis by using the `wrapping_` methods[^method].\
+You can opt into wrapping arithmetic on a per-operation basis by using the `wrapping_` methods.\
 For example, you can use `wrapping_add` to add two integers with wrapping:
 
 ```rust
@@ -120,6 +120,11 @@ let y = 1u8;
 let sum = x.wrapping_add(y);
 assert_eq!(sum, 0);
 ```
+
+> 💡 **Note**
+>
+> You can think of methods as functions that are "attached" to a specific type.
+> We'll cover methods (and how to define them) in the next chapter.
 
 ## Further reading
 

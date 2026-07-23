@@ -3,6 +3,7 @@ resolver = "2"
 
 members = [
     "Introduction/GettingStarted/*/",
+    "Introduction/Syntax/*/",
     "ABasicCalculator/Introduction/*/",
     "ABasicCalculator/Integers/*/",
     "ABasicCalculator/Variables/*/",
