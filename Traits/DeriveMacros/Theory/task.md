@@ -98,6 +98,12 @@ impl ::core::cmp::PartialEq for Ticket {
 
 The compiler will nudge you to derive traits when possible.
 
+> **🦀 RustRover Note 🦀**
+>
+> Macros can feel like magic—RustRover will show you the code they expand to. Put
+> the caret on a macro, press **⌥⏎** (macOS) / **Alt+Enter** (Windows & Linux), and
+> choose **Expand macro**.
+
 ## Further reading
 
 - [The little book of Rust macros](https://veykril.github.io/tlborm/)

@@ -13,6 +13,12 @@ You can configure your runtime via `tokio::runtime::Builder`:
 - `Builder::new_multi_thread` gives you a **multithreaded `tokio` runtime**
 - `Builder::new_current_thread` will instead rely on the **current thread** for execution.
 
+> **🦀 RustRover Note 🦀**
+>
+> Need to find anything—a file, a type, an action, a setting? Tap **Shift** twice for
+> **Search Everywhere** and start typing. Same shortcut on every OS, and the fastest
+> way around the IDE.
+
 `#[tokio::main]` returns a multithreaded runtime by default, while
 `#[tokio::test]` uses a current thread runtime out of the box.
 

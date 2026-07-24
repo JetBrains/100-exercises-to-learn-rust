@@ -158,6 +158,13 @@ warning: calls to `std::mem::drop` with a reference
   |
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Rust's linter, **Clippy**, flags non-idiomatic code and suggests fixes. Enable it
+> as the external linter (Settings → Rust → External Linters, or **Double Shift →
+> "Clippy"**) to see its hints as you type. And **⌘⌥L** / **Ctrl+Alt+L** reformats
+> with rustfmt.
+
 It goes back to what we said earlier: we only want to call the destructor once.\
 You can have multiple references to the same value—if we called the destructor for the value they point at
 when one of them goes out of scope, what would happen to the others?

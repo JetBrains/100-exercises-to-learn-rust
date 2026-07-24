@@ -112,3 +112,9 @@ let x = RefCell::new(42);
 let y = x.borrow(); // Immutable borrow
 let z = x.borrow_mut(); // Panics! There is an active immutable borrow.
 ```
+
+> **🦀 RustRover Note 🦀**
+>
+> Curious how `RefCell` is defined—even in the standard library? Put the caret on it
+> and press **⌘B** (macOS) / **Ctrl+B** (Windows & Linux), or ⌘/Ctrl-click, for **Go
+> to Definition**. Try it on a type in `main.rs`.

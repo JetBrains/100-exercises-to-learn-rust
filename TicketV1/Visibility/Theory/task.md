@@ -4,6 +4,11 @@ When you start breaking down your code into multiple modules, you need to start 
 Visibility determines which regions of your code (or other people's code) can access a given entity,
 be it a struct, a function, a field, etc.
 
+> **🦀 RustRover Note 🦀**
+>
+> Wondering where something is used? Put the caret on a field, function, or type and
+> press **⌥F7** (macOS) / **Alt+F7** (Windows & Linux) for **Find Usages**.
+
 ## Private by default
 
 By default, everything in Rust is **private**.\

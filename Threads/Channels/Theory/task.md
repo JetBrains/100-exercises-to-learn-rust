@@ -47,6 +47,11 @@ You get a sender and a receiver.\
 You call `send` on the sender to push data into the channel.\
 You call `recv` on the receiver to pull data from the channel.
 
+> **🦀 RustRover Note 🦀**
+>
+> Type an expression, then a dot and a keyword to transform it: `.match`, `.let`,
+> `.if`, even `.dbg`. These **postfix templates** save a lot of backtracking.
+
 ### Multiple senders
 
 `Sender` is clonable: we can create multiple senders (e.g. one for

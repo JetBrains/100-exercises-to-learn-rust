@@ -15,6 +15,12 @@ Let's mention the most common ones:
 - `take` stops the iterator after `n` elements.
 - `chain` combines two iterators into one.
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious what a type or method does? Put the caret on it and press **F1** (macOS) /
+> **Ctrl+Q** (Windows & Linux) for **Quick Documentation**—the docs, right in the
+> editor.
+
 These methods are called **combinators**.\
 They are usually **chained** together to create complex transformations in a concise and readable way:
 

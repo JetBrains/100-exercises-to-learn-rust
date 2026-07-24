@@ -16,6 +16,11 @@ Within `[package]` you can set the package's metadata, such as its name and vers
 
 Go check the `Cargo.toml` file in the directory of this section's exercise!
 
+> **🦀 RustRover Note 🦀**
+>
+> Hopping between files? **⌘E** (macOS) / **Ctrl+E** (Windows & Linux) opens **Recent
+> Files**, and **⌘[** / **Ctrl+Alt+←** jumps **Back** to where you just were.
+
 ## What is a crate?
 
 Inside a package, you can have one or more **crates**, also known as **targets**.\

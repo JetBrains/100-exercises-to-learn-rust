@@ -63,6 +63,11 @@ In the example above we take advantage of **variable shadowing** to reuse the sa
 you declare a new variable with the same name as an existing one, the new variable **shadows** the old one. This
 is a common pattern in Rust code.
 
+> **🦀 RustRover Note 🦀**
+>
+> Don't rename by hand. Put the caret on a name and press **⇧F6** for **Rename**—
+> RustRover updates every reference, across all files.
+
 `self`-setters work quite nicely when you need to change multiple fields at once: you can chain multiple calls together!
 
 ```rust

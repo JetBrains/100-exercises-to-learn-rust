@@ -38,6 +38,12 @@ loop {
 `loop` is another looping construct, on top of `for` and `while`.\
 A `loop` block will run forever, unless you explicitly `break` out of it.
 
+> **🦀 RustRover Note 🦀**
+>
+> Rust infers most types, and RustRover can show them for you: **inlay hints** print
+> the inferred types right in the editor. Toggle them from **Double Shift → "Inlay
+> Hints"**. Great whenever a `let` or a long expression leaves the type unwritten.
+
 ## `Iterator` trait
 
 The `next` method in the previous code snippet comes from the `Iterator` trait.

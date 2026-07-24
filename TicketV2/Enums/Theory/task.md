@@ -44,4 +44,10 @@ enum Status {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Editing the same thing in several places? Hold **⌥** (macOS) / **Alt** (Windows &
+> Linux) and drag for multiple carets, or press **⌃G** / **Alt+J** to add the next
+> occurrence. Type once, edit everywhere.
+
 `enum`, just like `struct`, defines **a new Rust type**.

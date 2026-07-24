@@ -38,6 +38,12 @@ fn main() {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Macros can feel like magic—RustRover will show you the code they expand to. Put
+> the caret on a macro, press **⌥⏎** (macOS) / **Alt+Enter** (Windows & Linux), and
+> choose **Expand macro**.
+
 There are other mechanisms to work with recoverable errors in Rust, which [we'll cover later](../../../TicketV2/Fallibility/Theory/task.md).
 For the time being we'll stick with panics as a brutal but simple stopgap solution.
 

@@ -104,6 +104,16 @@ Our recommendation is to enable `overflow-checks` for both profiles: it's better
 incorrect results. The runtime performance hit is negligible in most cases; if you're working on a performance-critical
 application, you can run benchmarks to decide if it's something you can afford.
 
+> **🦀 RustRover Note 🦀**
+>
+> Want to *see* the difference? The `main.rs` in this lesson multiplies its way
+> past `u32::MAX` on purpose. Run it with the default **dev** profile (the green
+> **▶** in the gutter next to `main`) and it panics with "attempt to multiply with
+> overflow". Now run it in **release**: `cargo run --release`, or add a run
+> configuration with the `--release` flag. This time it wraps around and prints a
+> (wrong) number instead of panicking. Same code, different profile—that's
+> `overflow-checks` at work.
+
 
 `overflow-checks` is a blunt tool: it's a global setting that affects the whole program.\
 It often happens that you want to handle integer overflows differently depending on the context: sometimes
@@ -120,6 +130,13 @@ let y = 1u8;
 let sum = x.wrapping_add(y);
 assert_eq!(sum, 0);
 ```
+
+> **🦀 RustRover Note 🦀**
+>
+> `wrapping_add` has a big family—`wrapping_mul`, `checked_add`, `saturating_sub`,
+> and more. Put your cursor on any of them and press **F1** (macOS) / **Ctrl+Q**
+> (Windows & Linux) to read its documentation right in the editor, no browser
+> needed.
 
 ## Further reading
 

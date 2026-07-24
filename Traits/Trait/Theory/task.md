@@ -94,6 +94,11 @@ impl MaybeZero for WrappingU32 {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Writing `impl SomeTrait for YourType`? Press **⌃I** (macOS) / **Ctrl+I** (Windows &
+> Linux) and RustRover generates stubs for all the required methods.
+
 ### Invoking a trait method
 
 To invoke a trait method, we use the `.` operator, just like we do with regular methods:

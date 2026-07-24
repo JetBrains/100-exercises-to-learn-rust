@@ -23,6 +23,11 @@ pub trait TryInto<T>: Sized {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Writing `impl TryFrom<T> for YourType`? Press **⌃I** (macOS) / **Ctrl+I** (Windows &
+> Linux) and RustRover generates stubs for all the required methods.
+
 The main difference between `From`/`Into` and `TryFrom`/`TryInto` is that the latter return a `Result` type.\
 This allows the conversion to fail, returning an error instead of panicking.
 

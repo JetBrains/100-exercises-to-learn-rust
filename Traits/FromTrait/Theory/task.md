@@ -135,6 +135,12 @@ where
 If a type `U` implements `From<T>`, then `Into<U> for T` is automatically implemented. That's why
 we can write `let title = "A title".into();`.
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious how something is defined—even in the standard library? Put the caret on it
+> and press **⌘B** (macOS) / **Ctrl+B** (Windows & Linux), or ⌘/Ctrl-click, for **Go
+> to Definition**. Try it on a type in `main.rs`.
+
 ## `.into()`
 
 Every time you see `.into()`, you're witnessing a conversion between types.\

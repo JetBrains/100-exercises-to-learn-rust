@@ -45,6 +45,11 @@ This is the correspondence for the main operators:
 Arithmetic operators live in the [`std::ops`](https://doc.rust-lang.org/std/ops/index.html) module,
 while comparison ones live in the [`std::cmp`](https://doc.rust-lang.org/std/cmp/index.html) module.
 
+> **🦀 RustRover Note 🦀**
+>
+> Want to see who implements a trait? Put the caret on it and press **⌥⌘B** (macOS) /
+> **Ctrl+Alt+B** (Windows & Linux) for **Go to Implementations**.
+
 ## Default implementations
 
 The comment on `PartialEq::ne` states that "`ne` is a provided method".\

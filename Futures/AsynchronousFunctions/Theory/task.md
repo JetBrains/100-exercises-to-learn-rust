@@ -49,6 +49,12 @@ that represents a computation that may complete later. They're called futures
 because they implement the `Future` trait, an interface that we'll examine in
 detail later on in this chapter.
 
+> **🦀 RustRover Note 🦀**
+>
+> An `async fn`'s return type is an opaque `impl Future`—easy to lose track of.
+> Turn on **inlay hints** (**Double Shift → "Inlay Hints"**) and RustRover prints
+> the inferred types inline, including what your futures resolve to.
+
 ## `.await`
 
 The most common way to ask an asynchronous function to do some work is to use

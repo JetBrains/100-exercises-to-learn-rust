@@ -50,6 +50,12 @@ Let's look at an example to understand this better:
 let mut s = String::with_capacity(5);
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious how something is defined—even in the standard library? Put the caret on it
+> and press **⌘B** (macOS) / **Ctrl+B** (Windows & Linux), or ⌘/Ctrl-click, for **Go
+> to Definition**. Try it on a type in `main.rs`.
+
 If you run this code, memory will be laid out like this:
 
 ```

@@ -40,6 +40,12 @@ struct Configuration {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Editing the same thing in several places? Hold **⌥** (macOS) / **Alt** (Windows &
+> Linux) and drag for multiple carets, or press **⌃G** / **Alt+J** to add the next
+> occurrence. Type once, edit everywhere.
+
 ## Instantiation
 
 You can create an instance of a struct by specifying the values for each field:

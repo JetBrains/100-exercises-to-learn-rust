@@ -32,6 +32,11 @@ It has:
 - One generic parameter, `Idx`, to represent the index type
 - One associated type, `Output`, to represent the type we retrieved using the index
 
+> **🦀 RustRover Note 🦀**
+>
+> Writing `impl Index for TicketStore`? Press **⌃I** (macOS) / **Ctrl+I** (Windows &
+> Linux) and RustRover generates stubs for all the required methods.
+
 Notice how the `index` method doesn't return an `Option`. The assumption is that
 `index` will panic if you try to access an element that's not there, as it happens
 for array and vec indexing.

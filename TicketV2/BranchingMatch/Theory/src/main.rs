@@ -1,3 +1,14 @@
+enum Status {
+    ToDo,
+    Done,
+}
+
 fn main() {
-    // put your code here to launch it
+    for status in [Status::ToDo, Status::Done] {
+        // Try typing `status.match` then Tab to generate this match.
+        match status {
+            Status::ToDo => println!("to do"),
+            Status::Done => println!("done"),
+        }
+    }
 }

@@ -30,3 +30,8 @@ where
 As a rule of thumb, prefer generics over `impl Trait` in argument position.\
 Generics allow the caller to explicitly specify the type of the argument, using the turbofish syntax (`::<>`),
 which can be useful for disambiguation. That's not the case with `impl Trait`.
+
+> **🦀 RustRover Note 🦀**
+>
+> Lost in a long file? Press **⌘F12** (macOS) / **Ctrl+F12** (Windows & Linux) for
+> the **File Structure** popup—a jump list of everything defined in the file.

@@ -40,6 +40,12 @@ In the example above, we didn't specify the type of `x`.\
 the compiler infers the type of `x` to be `u32`—the same as `y` and the only type that will allow the program to compile
 without errors.
 
+> **🦀 RustRover Note 🦀**
+>
+> Rust infers most types, and RustRover can show them for you: **inlay hints** print
+> the inferred types right in the editor. Toggle them from **Double Shift → "Inlay
+> Hints"**. Great whenever a `let` or a long expression leaves the type unwritten.
+
 ### Inference limitations
 
 The compiler sometimes needs a little help to infer the correct variable type based on its usage.\
