@@ -19,6 +19,12 @@ book_reviews.insert(
 );
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Red squiggle, or boilerplate you'd rather not type? Press **⌥⏎** (macOS) /
+> **Alt+Enter** (Windows & Linux) for **context actions**: auto-import a type, add a
+> missing trait method, fill in `match` arms, and more.
+
 `HashMap` works with key-value pairs. It's generic over both: `K` is the generic
 parameter for the key type, while `V` is the one for the value type.
 

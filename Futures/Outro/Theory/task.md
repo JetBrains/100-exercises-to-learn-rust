@@ -33,3 +33,10 @@ Don't let these caveats scare you: asynchronous Rust is being used effectively
 at _massive_ scale (e.g. AWS, Meta) to power foundational services.\
 You will have to master it if you're planning building networked applications
 in Rust.
+
+> **🦀 RustRover Note 🦀**
+>
+> One last habit as you go: keep your code clean. Rust's linter, **Clippy**, flags
+> non-idiomatic code and suggests fixes. Enable it as the external linter (Settings →
+> Rust → External Linters, or **Double Shift → "Clippy"**) to see its hints as you type.
+> And **⌘⌥L** / **Ctrl+Alt+L** reformats with rustfmt.

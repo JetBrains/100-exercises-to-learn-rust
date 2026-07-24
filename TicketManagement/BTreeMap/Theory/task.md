@@ -80,3 +80,10 @@ If you choose (or need) to implement them manually, be careful:
 
 - `Ord` and `PartialOrd` must be consistent with `Eq` and `PartialEq`.
 - `Ord` and `PartialOrd` must be consistent with each other.
+
+> **🦀 RustRover Note 🦀**
+>
+> Rust's linter, **Clippy**, flags non-idiomatic code and suggests fixes. Enable it
+> as the external linter (Settings → Rust → External Linters, or **Double Shift →
+> "Clippy"**) to see its hints as you type. And **⌘⌥L** / **Ctrl+Alt+L** reformats
+> with rustfmt.

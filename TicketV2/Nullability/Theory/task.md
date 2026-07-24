@@ -15,6 +15,12 @@ enum Option<T> {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious what a type or method does? Put the caret on it and press **F1** (macOS) /
+> **Ctrl+Q** (Windows & Linux) for **Quick Documentation**—the docs, right in the
+> editor. Try it on `Option`.
+
 `Option` encodes the idea that a value might be present (`Some(T)`) or absent (`None`).\
 It also forces you to **explicitly handle both cases**. You'll get a compiler error if you are working with
 a nullable value and you forget to handle the `None` case.\

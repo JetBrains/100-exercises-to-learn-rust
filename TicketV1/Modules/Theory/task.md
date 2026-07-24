@@ -60,6 +60,12 @@ E.g. `src/animals/dog.rs` or `src/animals/dog/mod.rs` if `dog` is a submodule of
 
 Your IDE might help you create these files automatically when you declare a new module using the `mod` keyword.
 
+> **🦀 RustRover Note 🦀**
+>
+> Now that your code spans multiple files, hopping between them fast matters. **⌘E**
+> (macOS) / **Ctrl+E** (Windows & Linux) opens **Recent Files**, and **⌘[** /
+> **Ctrl+Alt+←** jumps **Back** to where you just were.
+
 ## Item paths and `use` statements
 
 You can access items defined in the same module without any special syntax. You just use their name.

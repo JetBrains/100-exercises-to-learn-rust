@@ -80,6 +80,12 @@ while i <= 5 {
 
 This will compile and run without errors.
 
+> **🦀 RustRover Note 🦀**
+>
+> Need to find anything—a file, a type, an action, a setting? Tap **Shift** twice for
+> **Search Everywhere** and start typing. Same shortcut on every OS, and the fastest
+> way around the IDE.
+
 ## Further reading
 
 - [`while` loop documentation](https://doc.rust-lang.org/std/keyword.while.html)

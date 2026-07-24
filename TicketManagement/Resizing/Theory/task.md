@@ -16,6 +16,12 @@ It will ask the allocator for a new (larger) chunk of heap memory, copy the elem
 
 This operation can be expensive, as it involves a new memory allocation and copying all existing elements.
 
+> **🦀 RustRover Note 🦀**
+>
+> Instead of scattering `println!`s, use the debugger. Click in the gutter to set a
+> breakpoint, then **Debug** (**⌃D** / **Shift+F9**), step with **F8**, and inspect
+> your variables. Try it on the `main.rs` here.
+
 ## `Vec::with_capacity`
 
 If you have a rough idea of how many elements you'll store in a `Vec`, you can use the `Vec::with_capacity`

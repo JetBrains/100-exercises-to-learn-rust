@@ -44,6 +44,12 @@ and manage threads.
 
 You can use `std::thread::spawn` to create new threads and execute code on them.
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious what `spawn` does or what it returns? Put the caret on it and press **F1** (macOS) /
+> **Ctrl+Q** (Windows & Linux) for **Quick Documentation**—the docs, right in the
+> editor.
+
 For example:
 
 ```rust

@@ -141,6 +141,11 @@ by the compiler, based on its definition.\
 You can also implement `Send` manually for your types, but it requires `unsafe` since you have to guarantee that the
 type is indeed safe to send between threads for reasons that the compiler can't automatically verify.
 
+> **🦀 RustRover Note 🦀**
+>
+> Want to see which types implement a marker trait like `Send` or `Sync`? Put the caret on it and press **⌥⌘B** (macOS) /
+> **Ctrl+Alt+B** (Windows & Linux) for **Go to Implementations**.
+
 ### Channel requirements
 
 `Sender<T>`, `SyncSender<T>` and `Receiver<T>` are `Send` if and only if `T` is `Send`.\

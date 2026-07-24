@@ -85,6 +85,12 @@ You can use parentheses to override the default precedence. E.g. `2 * (3 + 4)`.
 > The division operator `/` performs integer division when used with integer types.
 > I.e. the result is truncated towards zero. For example, `5 / 2` is `2`, not `2.5`.
 
+> **🦀 RustRover Note 🦀**
+>
+> You don't need the terminal to run Rust here. Click the green **▶** in the gutter
+> next to `fn main` (or next to a test) and pick **Run**. That's how you'll run
+> every experiment from now on—try it on the `main.rs` in this lesson.
+
 ## No automatic type coercion
 
 As we discussed in the previous exercise, Rust is a statically typed language.\

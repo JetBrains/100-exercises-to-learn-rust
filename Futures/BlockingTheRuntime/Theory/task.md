@@ -69,6 +69,12 @@ async fn run() {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious what a type or method does? Put the caret on it and press **F1** (macOS) /
+> **Ctrl+Q** (Windows & Linux) for **Quick Documentation**—the docs, right in the
+> editor.
+
 The blocking pool is long-lived. `spawn_blocking` should be faster
 than creating a new thread directly via `std::thread::spawn`
 because the cost of thread initialization is amortized over multiple calls.

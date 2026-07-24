@@ -22,6 +22,11 @@ that implements the `Error` trait.
 pub trait Error: Debug + Display {}
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Want to see who implements a trait? Put the caret on it and press **⌥⌘B** (macOS) /
+> **Ctrl+Alt+B** (Windows & Linux) for **Go to Implementations**. Try it on `Error`.
+
 You might recall the `:` syntax from [the `From` trait](../../../Traits/FromTrait/Theory/task.md#supertrait--subtrait)—it's used to specify **supertraits**.
 For `Error`, there are two supertraits: `Debug` and `Display`. If a type wants to implement `Error`, it must also
 implement `Debug` and `Display`.

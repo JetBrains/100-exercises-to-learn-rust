@@ -78,6 +78,12 @@ error: literal out of range for `i8`
   = note: `#[deny(overflowing_literals)]` on by default
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Red squiggle on an `as` cast, or boilerplate you'd rather not type? Press **⌥⏎**
+> (macOS) / **Alt+Enter** (Windows & Linux) for **context actions**: auto-import a
+> type, add a missing trait method, fill in `match` arms, and more.
+
 ### Recommendation
 
 As a rule of thumb, be quite careful with `as` casting.\

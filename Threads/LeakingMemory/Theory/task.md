@@ -16,6 +16,12 @@ let x = Box::new(41u32);
 let static_ref: &'static mut u32 = Box::leak(x);
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Need to find anything—a file, a type, an action, a setting? Tap **Shift** twice for
+> **Search Everywhere** and start typing. Same shortcut on every OS, and the fastest
+> way around the IDE.
+
 ## Data leakage is process-scoped
 
 Leaking data is dangerous: if you keep leaking memory, you'll eventually

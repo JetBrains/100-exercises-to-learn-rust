@@ -107,3 +107,9 @@ async fn run() {
   [`StreamExt::merge`](https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html#method.merge) instead.
 - A [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) may be
   preferable to `JoinHandle::abort` in some cases.
+
+> **🦀 RustRover Note 🦀**
+>
+> `select!` can feel like magic—RustRover will show you the code it expands to. Put
+> the caret on the `select!` macro in the exercise, press **⌥⏎** (macOS) / **Alt+Enter**
+> (Windows & Linux), and choose **Expand macro**.

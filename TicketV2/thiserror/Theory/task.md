@@ -21,6 +21,12 @@ enum TicketNewError {
 }
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious what this `#[derive(thiserror::Error)]` generates? RustRover will show you
+> the code it expands to. Put the caret on the derive in the exercise, press **⌥⏎**
+> (macOS) / **Alt+Enter** (Windows & Linux), and choose **Expand macro**.
+
 ## You can write your own macros
 
 All the `derive` macros we've seen so far were provided by the Rust standard library.\

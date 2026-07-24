@@ -26,6 +26,11 @@ A `match` statement that lets you compare a Rust value against a series of **pat
 You can think of it as a type-level `if`. If `status` is a `Done` variant, execute the first block;
 if it's a `InProgress` or `ToDo` variant, execute the second block.
 
+> **🦀 RustRover Note 🦀**
+>
+> Type an expression, then a dot and a keyword to transform it: `.match`, `.let`,
+> `.if`, even `.dbg`. These **postfix templates** save a lot of backtracking.
+
 ## Exhaustiveness
 
 There's one key detail here: `match` is **exhaustive**. You must handle all enum variants.\

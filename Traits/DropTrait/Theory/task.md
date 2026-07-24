@@ -18,6 +18,12 @@ The `Drop` trait is a mechanism for you to define _additional_ cleanup logic for
 beyond what the compiler does for you automatically.\
 Whatever you put in the `drop` method will be executed when the value goes out of scope.
 
+> **🦀 RustRover Note 🦀**
+>
+> Instead of scattering `println!`s, use the debugger. Click in the gutter to set a
+> breakpoint, then **Debug** (**⌃D** / **Shift+F9**), step with **F8**, and inspect
+> your variables. Try it on the `main.rs` here.
+
 ## `Drop` and `Copy`
 
 When talking about the `Copy` trait, we said that a type can't implement `Copy` if it

@@ -24,6 +24,11 @@ let (sender, receiver) = sync_channel(10);
 `receiver` has the same type as before, `Receiver<T>`.\
 `sender`, instead, is an instance of `SyncSender<T>`.
 
+> **🦀 RustRover Note 🦀**
+>
+> Don't rename by hand. Put the caret on a name and press **⇧F6** for **Rename**—
+> RustRover updates every reference, across all files.
+
 ### Sending messages
 
 You have two different methods to send messages through a `SyncSender`:

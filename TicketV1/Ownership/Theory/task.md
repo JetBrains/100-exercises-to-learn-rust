@@ -101,6 +101,12 @@ let a = "hello, world".to_string(); // <- `a` is the owner of the String
 let b = a;  // <- `b` is now the owner of the String
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Instead of scattering `println!`s, use the debugger. Click in the gutter to set a
+> breakpoint, then **Debug** (**⌃D** / **Shift+F9**), step with **F8**, and inspect
+> your variables. Try it on the `main.rs` here.
+
 Rust's ownership system is baked into the type system: each function has to declare in its signature
 _how_ it wants to interact with its arguments.
 

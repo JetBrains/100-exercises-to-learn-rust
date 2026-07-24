@@ -68,6 +68,12 @@ assert_eq!(numbers.get(0), Some(&1));
 assert_eq!(numbers.get(3), None);
 ```
 
+> **🦀 RustRover Note 🦀**
+>
+> Curious how something is defined—even in the standard library? Put the caret on it
+> and press **⌘B** (macOS) / **Ctrl+B** (Windows & Linux), or ⌘/Ctrl-click, for **Go
+> to Definition**. Try it on a type in `main.rs`.
+
 ### Performance
 
 Since the size of an array is known at compile-time, the compiler can allocate the array on the stack.
