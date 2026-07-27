@@ -160,10 +160,15 @@ It is desirable to have methods that can read the value of a variable without ta
 Programming would be quite limited otherwise. In Rust, that's done via **borrowing**.
 
 Whenever you borrow a value, you get a **reference** to it.\
-References are tagged with their privileges[^refine]:
+References are tagged with their privileges:
 
 - Immutable references (`&`) allow you to read the value, but not to mutate it
 - Mutable references (`&mut`) allow you to read and mutate the value
+
+> 💡 **Note**
+>
+> This is a great mental model to start out, but it doesn't capture the _full_ picture.
+> We'll refine our understanding of references [later in the course](../../../Threads/InteriorMutability/Theory/task.md).
 
 Going back to the goals of Rust's ownership system:
 
@@ -234,6 +239,3 @@ and truly understand how they work.
 
 Towards the end of this chapter we'll explain _why_ Rust's ownership system is designed the way it is.
 For the time being, focus on understanding the _how_. Take each compiler error as a learning opportunity!
-
-[^refine]: This is a great mental model to start out, but it doesn't capture the _full_ picture.
-We'll refine our understanding of references [later in the course](../../../Threads/InteriorMutability/Theory/task.md).

@@ -61,7 +61,7 @@ In the example above, `x` is a variable of type `u32`.\
 The only difference between `x` and a variable declared with `let` is that functions arguments **must** have their type
 explicitly declared. The compiler won't infer it for you.\
 This constraint allows the Rust compiler (and us humans!) to understand the function's signature without having to look
-at its implementation. That's a big boost for compilation speed[^speed]!
+at its implementation. That's a big boost for compilation speed!
 
 ## Initialization
 
@@ -96,5 +96,3 @@ help: consider assigning a value
 2 | let x: u32 = 0;
   |            +++
 ```
-
-[^speed]: The Rust compiler needs all the help it can get when it comes to compilation speed.

@@ -15,7 +15,14 @@ Let's start with the stack.
 The **stack** is a **LIFO** (Last In, First Out) data structure.\
 When you call a function, a new **stack frame** is added on top of the stack. That stack frame stores
 the function's arguments, local variables and a few "bookkeeping" values.\
-When the function returns, the stack frame is popped off the stack[^stack-overflow].
+When the function returns, the stack frame is popped off the stack.
+
+> 💡 **Note**
+>
+> If you have nested function calls, each function pushes its data onto the stack when it's called but
+> it doesn't pop it off until the innermost function returns.
+> If you have too many nested function calls, you can run out of stack space—the stack is not infinite!
+> That's called a [**stack overflow**](https://en.wikipedia.org/wiki/Stack_overflow).
 
 ```text
 +-----------------+
@@ -65,8 +72,3 @@ assert_eq!(std::mem::size_of::<u8>(), 1);
 ```
 
 1 makes sense, because a `u8` is 8 bits long, or 1 byte.
-
-[^stack-overflow]: If you have nested function calls, each function pushes its data onto the stack when it's called but
-it doesn't pop it off until the innermost function returns.
-If you have too many nested function calls, you can run out of stack space—the stack is not infinite!
-That's called a [**stack overflow**](https://en.wikipedia.org/wiki/Stack_overflow).

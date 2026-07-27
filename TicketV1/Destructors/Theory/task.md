@@ -104,8 +104,13 @@ Notice the difference: even though `s` is no longer valid after `compute` is cal
 in `main`.
 When you transfer ownership of a value to a function, you're also **transferring the responsibility of cleaning it up**.
 
-This ensures that the destructor for a value is called **at most[^leak] once**, preventing
+This ensures that the destructor for a value is called **at most once**, preventing
 [double free bugs](https://owasp.org/www-community/vulnerabilities/Doubly_freeing_memory) by design.
+
+> 💡 **Note**
+>
+> Rust doesn't guarantee that destructors will run. They won't, for example, if
+> you explicitly choose to [leak memory](../../../Threads/LeakingMemory/Theory/task.md).
 
 ### Use after drop
 
@@ -164,6 +169,3 @@ when one of them goes out of scope, what would happen to the others?
 They would refer to a memory location that's no longer valid: a so-called [**dangling pointer**](https://en.wikipedia.org/wiki/Dangling_pointer),
 a close relative of [**use-after-free bugs**](https://owasp.org/www-community/vulnerabilities/Using_freed_memory).
 Rust's ownership system rules out these kinds of bugs by design.
-
-[^leak]: Rust doesn't guarantee that destructors will run. They won't, for example, if
-you explicitly choose to [leak memory](../../../Threads/LeakingMemory/Theory/task.md).

@@ -69,7 +69,7 @@ trait MaybeZero {
 
 ### Implementing a trait
 
-To implement a trait for a type we use the `impl` keyword, just like we do for regular[^inherent] methods,
+To implement a trait for a type we use the `impl` keyword, just like we do for regular methods (a method defined directly on a type, without using a trait, is also known as an **inherent method**),
 but the syntax is a bit different:
 
 ```rust
@@ -123,5 +123,3 @@ This is not necessary if:
 
 You can find the list of traits and types in the prelude in the
 [Rust documentation](https://doc.rust-lang.org/std/prelude/index.html).
-
-[^inherent]: A method defined directly on a type, without using a trait, is also known as an **inherent method**.
