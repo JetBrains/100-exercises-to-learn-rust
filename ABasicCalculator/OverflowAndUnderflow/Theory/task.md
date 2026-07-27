@@ -125,3 +125,6 @@ assert_eq!(sum, 0);
 
 - Check out ["Myths and legends about integer overflow in Rust"](https://huonw.github.io/blog/2016/04/myths-and-legends-about-integer-overflow-in-rust/)
   for an in-depth discussion about integer overflow in Rust.
+
+[^method]: You can think of methods as functions that are "attached" to a specific type.
+We'll cover methods (and how to define them) in the next chapter.

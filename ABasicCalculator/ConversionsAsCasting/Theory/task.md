@@ -93,7 +93,7 @@ It is also fairly limited: you can only rely on `as` casting
 for primitive types and a few other special cases.\
 When working with composite types, you'll have to rely on
 different conversion mechanisms ([fallible](../../../TicketV2/TryFromTrait/Theory/task.md)
-and [infallible](../../../Traits/FromTrait/Theory/task.md), which we'll explore later on.
+and [infallible](../../../Traits/FromTrait/Theory/task.md)), which we'll explore later on.
 
 ## Further reading
 
