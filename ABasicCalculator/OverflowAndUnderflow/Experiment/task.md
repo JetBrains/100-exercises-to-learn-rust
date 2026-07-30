@@ -24,14 +24,6 @@ the IDE window and press the green arrow that is located to the right from it.
 
 <img src="choose-profile.png" width="100%"/>
 
-If you don't see the drop-down menu with profiles, chances are you haven't run anything with IDE in this session.
-In that case use the green **▶** next to `main` to run the code for the first time (under the dev profile) and then
-you'll see the dropdown.
-
-<img src="main.png" width="100%"/>
-
-Alternatively,  run `cargo run --release --bin experiment_overflow_and_underflow` from the terminal.
-
 The `release` profile has `overflow-checks = false`, so `factorial(20)` wraps around and prints `2192834560`.
 
 ## Custom `dev` profile 

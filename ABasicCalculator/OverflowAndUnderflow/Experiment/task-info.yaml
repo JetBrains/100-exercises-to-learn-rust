@@ -7,9 +7,6 @@ files:
   - name: choose-profile.png
     visible: false
     is_binary: true
-  - name: main.png
-    visible: false
-    is_binary: true
   - name: project-files.png
     visible: false
     is_binary: true
