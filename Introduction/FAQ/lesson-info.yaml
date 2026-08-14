@@ -1,0 +1,12 @@
+custom_name: FAQ
+content:
+  - InstallRust
+  - WhyNotEverything
+  - CanIUseAI
+  - AskAHuman
+  - CompilerErrors
+  - ImStuck
+  - PeekSolution
+  - FoundAMistake
+  - InOrder
+  - FastTrack

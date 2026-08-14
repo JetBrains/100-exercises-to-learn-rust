@@ -1,7 +1,7 @@
 ## Syntax
 ##
 
-By now you've already been exposed to a bit of Rust **syntax**.
+The previous task barely qualifies as an exercise, but it already exposed you to quite a bit of Rust **syntax**.
 We won't cover every single detail of Rust's syntax here.
 Instead, we'll cover _just enough_ to keep going without getting stuck in the details.\
 One step at a time!
@@ -21,7 +21,7 @@ Functions in Rust are defined using the `fn` keyword, followed by the function's
 return type.
 The function's body is enclosed in curly braces `{}`.
 
-Consider the `greeting` function below:
+In the previous task, you saw the `greeting` function:
 
 ```rust
 // `fn` <function_name> ( <input params> ) -> <return_type> { <body> }
@@ -101,6 +101,6 @@ Every single value in Rust has a type and that type must be known to the compile
 
 Types are a form of **static analysis**.\
 You can think of a type as a **tag** that the compiler attaches to every value in your program. Depending on the
-tag, the compiler can enforce different rules—e.g. you can't add a string to a number, but you can add two numbers
+tag, the compiler can enforce different rules - e.g. you can't add a string to a number, but you can add two numbers
 together.
 If leveraged correctly, types can prevent whole classes of runtime bugs.

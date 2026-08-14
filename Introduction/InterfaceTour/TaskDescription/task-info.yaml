@@ -1,0 +1,38 @@
+type: theory
+custom_name: Task Description
+files:
+  - name: src/main.rs
+    visible: true
+  - name: Cargo.toml
+    visible: false
+  - name: images/back_dark.svg
+    visible: false
+  - name: images/back.svg
+    visible: false
+  - name: images/forward_dark.svg
+    visible: false
+  - name: images/forward.svg
+    visible: false
+  - name: images/reset_dark.svg
+    visible: false
+  - name: images/reset.svg
+    visible: false
+  - name: images/commentTask_dark.svg
+    visible: false
+  - name: images/commentTask.svg
+    visible: false
+  - name: images/moreVertical_dark.svg
+    visible: false
+  - name: images/moreVertical.svg
+    visible: false
+  - name: images/hideToolWindow_dark.svg
+    visible: false
+  - name: images/hideToolWindow.svg
+    visible: false
+  - name: images/edu_task_description_window_settings_dark.png
+    visible: false
+    is_binary: true
+  - name: images/edu_task_description_window_settings.png
+    visible: false
+    is_binary: true
+feedback_link: https://docs.google.com/forms/d/e/1FAIpQLSdfJQgjsbDA4pPGpklj3vJnKNspd9wmEHzAgh6EkoJy2IiRuw/viewform?usp=pp_url&entry.2103429047=Introduction+/+Interface+tour+/+Task+Description

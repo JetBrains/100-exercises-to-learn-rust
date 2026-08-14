@@ -33,4 +33,4 @@ additional_files:
   - name: CODE_OF_CONDUCT.md
   - name: CONTRIBUTING.md
   - name: LICENSE
-yaml_version: 5
+yaml_version: 6
