@@ -46,5 +46,6 @@ It usually is by default.
 2. Set the parameters as follows:
    - Check the **Run external linter on the fly** box.
    - In the **External Tool** list, select **Cargo Check**.
-![External Linters](images/rustrover_external_linters.png)
 3. Press **OK**.
+
+![External Linters](images/rustrover_external_linters.png)
