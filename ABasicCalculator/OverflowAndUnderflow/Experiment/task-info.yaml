@@ -4,6 +4,12 @@ files:
     visible: true
   - name: Cargo.toml
     visible: false
+  - name: choose-profile_dark.png
+    visible: false
+    is_binary: true
+  - name: project-files_dark.png
+    visible: false
+    is_binary: true
   - name: choose-profile.png
     visible: false
     is_binary: true
