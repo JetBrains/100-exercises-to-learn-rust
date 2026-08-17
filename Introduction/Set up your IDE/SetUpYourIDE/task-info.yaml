@@ -1,0 +1,19 @@
+type: ide
+custom_name: Set up your IDE
+files:
+  - name: src/main.rs
+    visible: true
+  - name: Cargo.toml
+    visible: false
+  - name: images/rustrover_external_linters.png
+    visible: false
+    is_binary: true
+  - name: images/rustrover_external_linters_dark.png
+    visible: false
+    is_binary: true
+  - name: images/rustrover_code_completion.png
+    visible: false
+    is_binary: true
+  - name: images/rustrover_code_completion_dark.png
+    visible: false
+    is_binary: true

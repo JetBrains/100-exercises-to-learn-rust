@@ -1,0 +1,6 @@
+custom_name: Interface tour
+content:
+  - NavigatingAround
+  - CourseView
+  - Editor
+  - TaskDescription

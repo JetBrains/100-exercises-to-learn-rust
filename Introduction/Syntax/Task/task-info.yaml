@@ -1,0 +1,14 @@
+type: edu
+files:
+  - name: src/lib.rs
+    visible: true
+    placeholders:
+      - offset: 15
+        length: 14
+        placeholder_text: "a, b"
+  - name: Cargo.toml
+    visible: false
+  - name: tests/tests.rs
+    visible: true
+    propagatable: false
+feedback_link: https://docs.google.com/forms/d/e/1FAIpQLSdfJQgjsbDA4pPGpklj3vJnKNspd9wmEHzAgh6EkoJy2IiRuw/viewform?usp=pp_url&entry.2103429047=Introduction+/+Syntax+/+Task

@@ -1,0 +1,14 @@
+type: theory
+custom_name: Navigating Around
+files:
+  - name: src/main.rs
+    visible: true
+  - name: Cargo.toml
+    visible: false
+  - name: course_overview_dark.png
+    visible: false
+    is_binary: true
+  - name: course_overview.png
+    visible: false
+    is_binary: true
+feedback_link: https://docs.google.com/forms/d/e/1FAIpQLSdfJQgjsbDA4pPGpklj3vJnKNspd9wmEHzAgh6EkoJy2IiRuw/viewform?usp=pp_url&entry.2103429047=Introduction+/+Interface+tour+/+Navigating+Around

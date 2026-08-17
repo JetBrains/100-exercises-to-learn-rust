@@ -1,0 +1,4 @@
+[package]
+name = "faq_can_i_use_ai"
+version = "0.1.0"
+edition = "2021"

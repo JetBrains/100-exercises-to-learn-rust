@@ -111,22 +111,47 @@ dependencies = [
 ]
 
 [[package]]
-name = "escargot"
-version = "0.5.15"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "11c3aea32bc97b500c9ca6a72b768a26e558264303d101d3409cf6d57a9ed0cf"
-dependencies = [
- "log",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "experiment_overflow_and_underflow"
 version = "0.1.0"
 
 [[package]]
-name = "external_linter"
+name = "faq_ask_a_human"
+version = "0.1.0"
+
+[[package]]
+name = "faq_can_i_use_ai"
+version = "0.1.0"
+
+[[package]]
+name = "faq_compiler_errors"
+version = "0.1.0"
+
+[[package]]
+name = "faq_fast_track"
+version = "0.1.0"
+
+[[package]]
+name = "faq_found_a_mistake"
+version = "0.1.0"
+
+[[package]]
+name = "faq_im_stuck"
+version = "0.1.0"
+
+[[package]]
+name = "faq_in_order"
+version = "0.1.0"
+
+[[package]]
+name = "faq_install_rust"
+version = "0.1.0"
+
+[[package]]
+name = "faq_peek_solution"
+version = "0.1.0"
+
+[[package]]
+name = "faq_why_not_everything"
 version = "0.1.0"
 
 [[package]]
@@ -169,13 +194,6 @@ dependencies = [
  "futures-task",
  "pin-project-lite",
  "slab",
-]
-
-[[package]]
-name = "hello_world"
-version = "0.1.0"
-dependencies = [
- "escargot",
 ]
 
 [[package]]
@@ -463,6 +481,10 @@ dependencies = [
  "ryu",
  "serde",
 ]
+
+[[package]]
+name = "set_up_your_ide"
+version = "0.1.0"
 
 [[package]]
 name = "signal-hook-registry"
@@ -941,6 +963,10 @@ version = "0.1.0"
 dependencies = [
  "ticket_fields",
 ]
+
+[[package]]
+name = "task_syntax"
+version = "0.1.0"
 
 [[package]]
 name = "task_thiserror"
@@ -1520,6 +1546,10 @@ name = "unicode-ident"
 version = "1.0.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e6e4313cd5fcd3dad5cafa179702e2b244f760991f45397d14d4ebf38247da75"
+
+[[package]]
+name = "warmup_syntax"
+version = "0.1.0"
 
 [[package]]
 name = "wasi"

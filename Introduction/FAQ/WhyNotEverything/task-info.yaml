@@ -1,0 +1,8 @@
+type: theory
+custom_name: Why doesn't the theory cover everything?
+files:
+  - name: src/main.rs
+    visible: true
+  - name: Cargo.toml
+    visible: false
+feedback_link: https://docs.google.com/forms/d/e/1FAIpQLSdfJQgjsbDA4pPGpklj3vJnKNspd9wmEHzAgh6EkoJy2IiRuw/viewform?usp=pp_url&entry.2103429047=Introduction+/+FAQ+/+Why+doesn%27t+the+theory+cover+everything%3F

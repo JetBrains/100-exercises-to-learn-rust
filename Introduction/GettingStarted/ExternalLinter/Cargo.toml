@@ -1,4 +1,0 @@
-[package]
-name = "external_linter"
-version = "0.1.0"
-edition = "2021"
