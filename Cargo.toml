@@ -4,7 +4,7 @@ resolver = "2"
 members = [
     "Introduction/AboutTheCourse/*/",
     "Introduction/InterfaceTour/*/",
-    "Introduction/Set up your IDE/*/",
+    "Introduction/SetUpYourIDE/*/",
     "Introduction/FAQ/*/",
     "Introduction/Syntax/*/",
     "ABasicCalculator/Introduction/*/",
