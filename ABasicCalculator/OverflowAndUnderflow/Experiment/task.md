@@ -1,4 +1,4 @@
-This is a hands-on **experiment** — there's nothing to submit. Just run the code and
+This is a hands-on **experiment** - there's nothing to submit. Just run the code and
 watch what happens.
 
 `main.rs` defines the same `factorial` function from earlier and calls
@@ -14,35 +14,35 @@ profile sets `overflow-checks = true` by default, so the program **panics** with
 ## Make it wrap around
 
 Now get the *same code* to **wrap around** instead of panicking by changing the
-profile it's compiled with. The options to try are **release profile** and 
+profile it's compiled with. The options to try are **release profile** and
 **custom dev profile**.
 
 ### Release profile
 
-To run under the release profile choose `release` from the drop-down menu in the middle top of 
-the IDE window and press the green arrow that is located to the right from it.
+To run under the release profile choose `release` from the drop-down menu at the top of
+the IDE window, then press the green arrow to the right of it.
 
 <img src="choose-profile.png" width="100%"/>
 
 The `release` profile has `overflow-checks = false`, so `factorial(20)` wraps around and prints `2192834560`.
 
-## Custom `dev` profile 
+### Custom `dev` profile
 
 Add the following to the `Cargo.toml` at the **root of the repository** and run again under `dev`.
 
-  ```toml
-  [profile.dev]
-  overflow-checks = false
-  ```
+```toml
+[profile.dev]
+overflow-checks = false
+```
 
-Profile settings are only read from the workspace root — not from a task's own `Cargo.toml`.
+Profile settings are only read from the workspace root - not from a task's own `Cargo.toml`.
 To locate the root `Cargo.toml` choose `Project Files` instead of `Course` in the course view.
 
 <img src="project-files.png" width="75%"/>
 
 Run the code under `dev` profile. It now wraps under `dev` too. Revert this change once you're done experimenting.
 
-## Outro
+## Summary
 
-Same code, different behaviour depending on the profile — that's `overflow-checks` at
+Same code, different behaviour depending on the profile - that's `overflow-checks` at
 work.

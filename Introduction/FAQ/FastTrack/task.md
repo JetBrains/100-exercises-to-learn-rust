@@ -1,8 +1,8 @@
 ## Is there a meaningful fast track?
 ##
 
-Yes. Skip straight to the last task of the course, in _Futures → Outro_, and build an asynchronous REST API for a ticket
-management system.
+Yes. Skip straight to the final exercise of the course, in _Futures → Outro_, and build an asynchronous REST API for a
+ticket management system.
 
 That task is unlike everything before it: open-ended, much bigger, and yours to design, with your own choice of crates
 from [crates.io](https://crates.io).
