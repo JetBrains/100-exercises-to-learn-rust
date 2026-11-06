@@ -1,12 +1,12 @@
-// TODO: A (derivable) trait implementation is missing for this exercise to compile successfully.
-//   Fix it!
+// TODO: щоб ця вправа успішно скомпілювалася, бракує реалізації трейту (такої, яку можна згенерувати derive-макросом).
+//   Виправте це!
 //
-// # `Debug` primer
+// # Коротко про `Debug`
 //
-// `Debug` returns a representation of a Rust type that's suitable for debugging (hence the name).
-// `assert_eq!` requires `Ticket` to implement `Debug` because, when the assertion fails, it tries to
-// print both sides of the comparison to the terminal.
-// If the compared type doesn't implement `Debug`, it doesn't know how to represent them!
+// `Debug` повертає представлення типу Rust, придатне для налагодження (звідси й назва: англ. debug — «налагоджувати»).
+// `assert_eq!` вимагає, щоб `Ticket` реалізовував `Debug`, бо, коли перевірка не проходить, макрос намагається
+// вивести обидві сторони порівняння в термінал.
+// Якщо тип, що порівнюється, не реалізує `Debug`, макрос не знає, як відобразити значення!
 
 #[derive(Debug, PartialEq)]
 pub struct Ticket {

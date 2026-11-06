@@ -7,7 +7,7 @@ mod tests {
     #[test]
     fn test_type() {
         let ticket = Ticket::new(valid_title(), valid_description(), "To-Do".to_string());
-        // Some dark magic to verify that you used the expected return types
+        // Трохи темної магії, щоб перевірити, що ви використали очікувані типи повернення
         assert_eq!(TypeId::of::<str>(), ticket.title().type_id());
         assert_eq!(TypeId::of::<str>(), ticket.description().type_id());
         assert_eq!(TypeId::of::<str>(), ticket.status().type_id());

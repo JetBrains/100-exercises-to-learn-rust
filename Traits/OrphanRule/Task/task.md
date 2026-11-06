@@ -1,2 +1,2 @@
-This task is to examine the provided code which demonstrates an orphan rule violation in Rust.
-Check `TODO:` in code's comment.
+У цьому завданні потрібно розглянути наданий код, який демонструє порушення правила сироти в Rust.
+Перегляньте коментар `TODO:` у коді.

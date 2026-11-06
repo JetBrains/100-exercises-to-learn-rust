@@ -1,2 +1,2 @@
-This task is to locate and comment out the specific line of code that attempts to get the size of str using `std::mem::size_of`, 
-as instructed by the `TODO` comment.
+У цьому завданні потрібно знайти й закоментувати рядок коду, який намагається отримати розмір str за допомогою `std::mem::size_of`,
+як сказано в коментарі `TODO`.

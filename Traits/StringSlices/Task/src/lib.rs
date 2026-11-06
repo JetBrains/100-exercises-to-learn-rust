@@ -1,4 +1,4 @@
-// TODO: Re-implement `Ticket`'s accessor methods. This time return a `&str` rather than a `&String`.
+// TODO: Заново реалізуйте методи доступу `Ticket`. Цього разу повертайте `&str`, а не `&String`.
 
 pub struct Ticket {
     title: String,

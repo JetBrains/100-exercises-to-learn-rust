@@ -1,2 +1,2 @@
-This task is to implement the `From` trait for the `WrappingU32` type. 
-Follow the `TODO` comment in the code to ensure the `example` function compiles successfully by enabling conversions from `u32` to `WrappingU32`.
+У цьому завданні потрібно реалізувати трейт `From` для типу `WrappingU32`.
+Виконайте інструкцію з коментаря `TODO` у коді: забезпечте перетворення з `u32` на `WrappingU32`, щоб функція `example` успішно скомпілювалася.

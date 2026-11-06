@@ -1,56 +1,56 @@
-## Operator overloading
+## Перевантаження операторів
 
-Now that we have a basic understanding of what traits are, let's circle back to **operator overloading**.
-Operator overloading is the ability to define custom behavior for operators like `+`, `-`, `*`, `/`, `==`, `!=`, etc.
+Тепер, коли ми маємо базове уявлення про те, що таке трейти, повернімося до **перевантаження операторів**.
+Перевантаження операторів — це можливість визначати власну поведінку для таких операторів, як `+`, `-`, `*`, `/`, `==`, `!=` тощо.
 
-## Operators are traits
+## Оператори — це трейти
 
-In Rust, operators are traits.\
-For each operator, there is a corresponding trait that defines the behavior of that operator.
-By implementing that trait for your type, you **unlock** the usage of the corresponding operators.
+У Rust оператори — це трейти.\
+Для кожного оператора існує відповідний трейт, який визначає поведінку цього оператора.
+Реалізувавши цей трейт для свого типу, ви **відкриваєте** можливість використовувати з ним відповідні оператори.
 
-For example, the [`PartialEq` trait](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html) defines the behavior of
-the `==` and `!=` operators:
+Наприклад, [трейт `PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html) визначає поведінку
+операторів `==` і `!=`:
 
 ```rust
-// The `PartialEq` trait definition, from Rust's standard library
-// (It is *slightly* simplified, for now)
+// Визначення трейту `PartialEq` зі стандартної бібліотеки Rust
+// (поки що *трохи* спрощене)
 pub trait PartialEq {
-    // Required method
+    // Обов'язковий метод
     //
-    // `Self` is a Rust keyword that stands for 
-    // "the type that is implementing the trait"
+    // `Self` — це ключове слово Rust, яке означає
+    // «тип, що реалізує цей трейт»
     fn eq(&self, other: &Self) -> bool;
 
-    // Provided method
+    // Наданий метод
     fn ne(&self, other: &Self) -> bool { ... }
 }
 ```
 
-When you write `x == y` the compiler will look for an implementation of the `PartialEq` trait for the types of `x` and `y`
-and replace `x == y` with `x.eq(y)`. It's syntactic sugar!
+Коли ви пишете `x == y`, компілятор шукає реалізацію трейту `PartialEq` для типів `x` і `y`
+та замінює `x == y` на `x.eq(y)`. Це синтаксичний цукор!
 
-This is the correspondence for the main operators:
+Ось як основні оператори відповідають трейтам:
 
-| Operator                 | Trait                                                                   |
+| Оператор                 | Трейт                                                                   |
 | ------------------------ | ----------------------------------------------------------------------- |
 | `+`                      | [`Add`](https://doc.rust-lang.org/std/ops/trait.Add.html)               |
 | `-`                      | [`Sub`](https://doc.rust-lang.org/std/ops/trait.Sub.html)               |
 | `*`                      | [`Mul`](https://doc.rust-lang.org/std/ops/trait.Mul.html)               |
 | `/`                      | [`Div`](https://doc.rust-lang.org/std/ops/trait.Div.html)               |
 | `%`                      | [`Rem`](https://doc.rust-lang.org/std/ops/trait.Rem.html)               |
-| `==` and `!=`            | [`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)   |
-| `<`, `>`, `<=`, and `>=` | [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html) |
+| `==` і `!=`              | [`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)   |
+| `<`, `>`, `<=` і `>=`    | [`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html) |
 
-Arithmetic operators live in the [`std::ops`](https://doc.rust-lang.org/std/ops/index.html) module,
-while comparison ones live in the [`std::cmp`](https://doc.rust-lang.org/std/cmp/index.html) module.
+Арифметичні оператори містяться в модулі [`std::ops`](https://doc.rust-lang.org/std/ops/index.html),
+а оператори порівняння — у модулі [`std::cmp`](https://doc.rust-lang.org/std/cmp/index.html).
 
-## Default implementations
+## Реалізації за замовчуванням
 
-The comment on `PartialEq::ne` states that "`ne` is a provided method".\
-It means that `PartialEq` provides a **default implementation** for `ne` in the trait definition—the `{ ... }` elided
-block in the definition snippet.\
-If we expand the elided block, it looks like this:
+У коментарі до `PartialEq::ne` сказано, що «`ne` — наданий метод» (provided method).\
+Це означає, що `PartialEq` надає **реалізацію за замовчуванням** для `ne` у визначенні трейту — це пропущений
+блок `{ ... }` у наведеному вище фрагменті.\
+Якщо розгорнути пропущений блок, він виглядатиме так:
 
 ```rust
 pub trait PartialEq {
@@ -62,9 +62,9 @@ pub trait PartialEq {
 }
 ```
 
-It's what you expect: `ne` is the negation of `eq`.\
-Since a default implementation is provided, you can skip implementing `ne` when you implement `PartialEq` for your type.
-It's enough to implement `eq`:
+Усе так, як ви й очікували: `ne` — це заперечення `eq`.\
+Оскільки реалізацію за замовчуванням надано, під час реалізації `PartialEq` для свого типу можна не реалізовувати `ne`.
+Достатньо реалізувати `eq`:
 
 ```rust
 struct WrappingU8 {
@@ -76,23 +76,23 @@ impl PartialEq for WrappingU8 {
         self.inner == other.inner
     }
     
-    // No `ne` implementation here
+    // Реалізації `ne` тут немає
 }
 ```
 
-You are not forced to use the default implementation though.
-You can choose to override it when you implement the trait:
+Утім, ви не зобов'язані використовувати реалізацію за замовчуванням.
+Під час реалізації трейту її можна перевизначити:
 
 ```rust
 struct MyType;
 
 impl PartialEq for MyType {
     fn eq(&self, other: &MyType) -> bool {
-        // Custom implementation
+        // Власна реалізація
     }
 
     fn ne(&self, other: &MyType) -> bool {
-        // Custom implementation
+        // Власна реалізація
     }
 }
 ```

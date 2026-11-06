@@ -1,12 +1,12 @@
-## The `Drop` trait
+## Трейт `Drop`
 
-When we introduced [destructors](../../../TicketV1/Destructors/Theory/task.md),
-we mentioned that the `drop` function:
+Коли ми знайомилися з [деструкторами](../../../TicketV1/Destructors/Theory/task.md),
+то згадували, що функція `drop`:
 
-1. reclaims the memory occupied by the type (i.e. `std::mem::size_of` bytes)
-2. cleans up any additional resources that the value might be managing (e.g. the heap buffer of a `String`)
+1. звільняє пам'ять, яку займає тип (тобто `std::mem::size_of` байтів);
+2. прибирає всі додаткові ресурси, якими може керувати значення (наприклад, буфер на купі в `String`).
 
-Step 2. is where the `Drop` trait comes in.
+Саме на кроці 2 у гру вступає трейт `Drop`.
 
 ```rust
 pub trait Drop {
@@ -14,34 +14,34 @@ pub trait Drop {
 }
 ```
 
-The `Drop` trait is a mechanism for you to define _additional_ cleanup logic for your types,
-beyond what the compiler does for you automatically.\
-Whatever you put in the `drop` method will be executed when the value goes out of scope.
+Трейт `Drop` — це механізм, за допомогою якого ви можете визначити для своїх типів _додаткову_ логіку очищення,
+понад те, що компілятор робить за вас автоматично.\
+Усе, що ви напишете в методі `drop`, буде виконано, коли значення вийде з області видимості.
 
-## `Drop` and `Copy`
+## `Drop` і `Copy`
 
-When talking about the `Copy` trait, we said that a type can't implement `Copy` if it
-manages additional resources beyond the `std::mem::size_of` bytes that it occupies in memory.
+Говорячи про трейт `Copy`, ми зазначали, що тип не може реалізувати `Copy`, якщо він
+керує додатковими ресурсами, окрім тих `std::mem::size_of` байтів, які займає в пам'яті.
 
-You might wonder: how does the compiler know if a type manages additional resources?
-That's right: `Drop` trait implementations!\
-If your type has an explicit `Drop` implementation, the compiler will assume
-that your type has additional resources attached to it and won't allow you to implement `Copy`.
+Можливо, ви запитаєте: звідки компілятор знає, чи керує тип додатковими ресурсами?
+Ви вгадали: з реалізацій трейту `Drop`!\
+Якщо ваш тип має явну реалізацію `Drop`, компілятор вважатиме,
+що з вашим типом пов'язані додаткові ресурси, і не дозволить вам реалізувати `Copy`.
 
 ```rust
-// This is a unit struct, i.e. a struct with no fields.
+// Це одинична структура (unit struct), тобто структура без полів.
 #[derive(Clone, Copy)]
 struct MyType;
 
 impl Drop for MyType {
     fn drop(&mut self) {
-       // We don't need to do anything here,
-       // it's enough to have an "empty" Drop implementation
+       // Тут нічого не потрібно робити,
+       // достатньо мати «порожню» реалізацію Drop
     }
 }
 ```
 
-The compiler will complain with this error message:
+Компілятор видасть ось таке повідомлення про помилку:
 
 ```text
 error[E0184]: the trait `Copy` cannot be implemented for this type; 

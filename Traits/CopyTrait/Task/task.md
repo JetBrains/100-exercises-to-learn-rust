@@ -1,2 +1,2 @@
-This task is to implement the necessary traits for the `WrappingU32` struct. 
-Follow the `TODO` comment in the code and check tests.
+У цьому завданні потрібно реалізувати необхідні трейти для структури `WrappingU32`.
+Виконайте інструкцію з коментаря `TODO` у коді та перегляньте тести.

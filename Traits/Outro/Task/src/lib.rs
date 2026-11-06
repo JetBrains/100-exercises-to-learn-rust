@@ -1,11 +1,11 @@
-// TODO: Define a new `SaturatingU16` type.
-//   It should hold a `u16` value.
-//   It should provide conversions from `u16`, `u8`, `&u16` and `&u8`.
-//   It should support addition with a right-hand side of type
-//   SaturatingU16, u16, &u16, and &SaturatingU16. Addition should saturate at the
-//   maximum value for `u16`.
-//   It should be possible to compare it with another `SaturatingU16` or a `u16`.
-//   It should be possible to print its debug representation.
+// TODO: Визначте новий тип `SaturatingU16`.
+//   Він має зберігати значення типу `u16`.
+//   Він має підтримувати перетворення з `u16`, `u8`, `&u16` і `&u8`.
+//   Він має підтримувати додавання, де правий операнд має тип
+//   SaturatingU16, u16, &u16 або &SaturatingU16. Додавання має виконуватися з насиченням:
+//   результат не може перевищити максимальне значення `u16`.
+//   Має бути змога порівнювати його з іншим `SaturatingU16` або з `u16`.
+//   Має бути змога вивести його налагоджувальне (debug) представлення.
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct SaturatingU16 {

@@ -7,7 +7,7 @@ mod tests {
         let title = "title";
         let description = "description";
         let status = "To-Do";
-        // Using Ticket::new
+        // Створюємо через Ticket::new
         let ticket1 = Ticket::new(
             title.to_string(),
             description.to_string(),
@@ -25,7 +25,7 @@ mod tests {
     fn test_description_not_matching() {
         let title = "title";
         let status = "To-Do";
-        // Using Ticket::new
+        // Створюємо через Ticket::new
         let ticket1 = Ticket::new(
             title.to_string(),
             "description".to_string(),
@@ -43,7 +43,7 @@ mod tests {
     fn test_title_not_matching() {
         let status = "To-Do";
         let description = "description";
-        // Using Ticket::new
+        // Створюємо через Ticket::new
         let ticket1 = Ticket::new(
             "title".to_string(),
             description.to_string(),
@@ -61,7 +61,7 @@ mod tests {
     fn test_status_not_matching() {
         let title = "title";
         let description = "description";
-        // Using Ticket::new
+        // Створюємо через Ticket::new
         let ticket1 = Ticket::new(
             title.to_string(),
             description.to_string(),

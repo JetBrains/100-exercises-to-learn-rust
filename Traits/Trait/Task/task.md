@@ -1,2 +1,2 @@
-This task is to define the `IsEven` trait with an `is_even` method. 
-Then, implement this trait for both `u32` and `i32`, as detailed in the comments provided in the code.
+У цьому завданні потрібно визначити трейт `IsEven` з методом `is_even`.
+Потім реалізуйте цей трейт і для `u32`, і для `i32`, як докладно описано в коментарях у коді.

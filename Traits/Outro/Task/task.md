@@ -1,2 +1,2 @@
-Your task is to define a new `SaturatingU16` type and implement several traits for it. 
-As detailed in the `TODO` comments in the code, you need to provide conversions from various integer types, support saturating addition, enable comparison, and allow debug printing.
+Ваше завдання — визначити новий тип `SaturatingU16` і реалізувати для нього кілька трейтів.
+Як докладно описано в коментарях `TODO` у коді, потрібно забезпечити перетворення з різних цілочисельних типів, підтримати додавання з насиченням (saturating), уможливити порівняння й виведення налагоджувального (debug) представлення.

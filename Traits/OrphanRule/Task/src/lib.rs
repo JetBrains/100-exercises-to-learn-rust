@@ -1,7 +1,7 @@
-// TODO: this is an example of an orphan rule violation.
-//  We're implementing a foreign trait (`PartialEq`, from `std`) on
-//  a foreign type (`u32`, from `std`).
-//  Look at the compiler error to get familiar with what it looks like.
-//  Then delete the code below and move on to the next exercise.
+// TODO: це приклад порушення правила сироти (orphan rule).
+//  Ми реалізуємо зовнішній трейт (`PartialEq` з `std`) для
+//  зовнішнього типу (`u32` з `std`).
+//  Подивіться на помилку компіляції, щоб знати, який вигляд вона має.
+//  Потім видаліть код нижче й переходьте до наступної вправи.
 
 /* TODO */

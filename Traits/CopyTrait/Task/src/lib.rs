@@ -1,4 +1,4 @@
-// TODO: implement the necessary traits to make the test compile and pass.
+// TODO: реалізуйте необхідні трейти, щоб тест скомпілювався й пройшов.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct WrappingU32 {
     value: u32,

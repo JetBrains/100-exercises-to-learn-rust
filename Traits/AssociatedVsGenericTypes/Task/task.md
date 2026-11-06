@@ -1,2 +1,2 @@
-This task is to define a new trait named `Power`, including its `power` method. 
-Then, implement this trait to ensure the tests compile and pass, following the instructions provided in the `TODO`. 
+У цьому завданні потрібно визначити новий трейт `Power` разом із його методом `power`.
+Потім, дотримуючись інструкцій у коментарі `TODO`, реалізуйте цей трейт так, щоб тести скомпілювалися й пройшли.

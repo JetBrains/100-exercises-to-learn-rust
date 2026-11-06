@@ -1,2 +1,2 @@
-This task is to implement the `PartialEq` trait for the `Ticket` struct. 
-The `TODO` comment in the code will guide you on where to add the necessary logic for comparing two `Ticket` instances for equality.
+У цьому завданні потрібно реалізувати трейт `PartialEq` для структури `Ticket`.
+Коментар `TODO` у коді підкаже, куди додати потрібну логіку, щоб порівнювати два екземпляри `Ticket` на рівність.

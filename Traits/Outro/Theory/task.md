@@ -1,27 +1,27 @@
-## Wrapping up
+## Підсумки
 
-We've covered quite a few different traits in this chapter—and we've only scratched the surface!
-It may feel like you have a lot to remember, but don't worry: you'll bump into these traits
-so often when writing Rust code that they'll soon become second nature.
+У цьому розділі ми розглянули чимало різних трейтів — і це лише верхівка айсберга!
+Може здатися, що запам'ятати треба дуже багато, але не хвилюйтеся: коли ви писатимете код на Rust, ці трейти
+траплятимуться вам так часто, що невдовзі ви користуватиметеся ними, не замислюючись.
 
-## Closing thoughts
+## Завершальні думки
 
-Traits are powerful, but don't overuse them.\
-A few guidelines to keep in mind:
+Трейти — потужний інструмент, але не зловживайте ними.\
+Кілька порад, про які варто пам'ятати:
 
-- Don't make a function generic if it is always invoked with a single type. It introduces indirection in your
-  codebase, making it harder to understand and maintain.
-- Don't create a trait if you only have one implementation. It's a sign that the trait is not needed.
-- Implement standard traits for your types (`Debug`, `PartialEq`, etc.) whenever it makes sense.
-  It will make your types more idiomatic and easier to work with, unlocking a lot of functionality provided
-  by the standard library and ecosystem crates.
-- Implement traits from third-party crates if you need the functionality they unlock within their ecosystem.
-- Beware of making code generic solely to use mocks in your tests. The maintainability cost of this approach
-  can be high, and it's often better to use a different testing strategy. Check out the
-  [testing masterclass](https://github.com/mainmatter/rust-advanced-testing-workshop)
-  for details on high-fidelity testing.
+- Не робіть функцію узагальненою, якщо її завжди викликають з одним і тим самим типом. Це додає у вашу кодову
+  базу зайвий рівень опосередкування (indirection), через що її важче розуміти й підтримувати.
+- Не створюйте трейт, якщо у вас лише одна реалізація. Це ознака того, що трейт не потрібен.
+- Реалізовуйте для своїх типів стандартні трейти (`Debug`, `PartialEq` тощо), коли це доречно.
+  Так ваші типи стануть ідіоматичнішими й зручнішими в роботі, а вам відкриється багато функціональності,
+  яку надають стандартна бібліотека та крейти екосистеми.
+- Реалізовуйте трейти зі сторонніх крейтів, якщо вам потрібна функціональність, яку вони відкривають у своїй екосистемі.
+- Остерігайтеся робити код узагальненим лише для того, щоб використовувати в тестах моки (mocks). Такий підхід може
+  дорого обійтися з погляду підтримки коду, і часто краще обрати іншу стратегію тестування. Подробиці про тестування,
+  максимально наближене до реальних умов (high-fidelity testing), шукайте в
+  [майстер-класі з тестування](https://github.com/mainmatter/rust-advanced-testing-workshop).
 
-## Testing your knowledge
+## Перевірте свої знання
 
-Before moving on, let's go through one last exercise to consolidate what we've learned.
-You'll have minimal guidance this time—just the exercise description and the tests to guide you.
+Перш ніж рухатися далі, виконаймо останню вправу, щоб закріпити вивчене.
+Цього разу підказок буде мінімум — лише опис вправи й тести, на які можна орієнтуватися.

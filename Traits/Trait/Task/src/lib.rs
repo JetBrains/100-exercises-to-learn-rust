@@ -1,7 +1,7 @@
-// Define a trait named `IsEven` that has a method `is_even` that returns a `true` if `self` is
-// even, otherwise `false`.
+// Визначте трейт з назвою `IsEven`, що має метод `is_even`, який повертає `true`, якщо `self` —
+// парне число, і `false` в іншому разі.
 //
-// Then implement the trait for `u32` and `i32`.
+// Потім реалізуйте цей трейт для `u32` та `i32`.
 
 pub trait IsEven {
     fn is_even(&self) -> bool;

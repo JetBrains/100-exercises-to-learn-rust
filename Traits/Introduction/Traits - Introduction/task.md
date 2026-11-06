@@ -1,26 +1,26 @@
-## Traits
+## Трейти
 ##
-In the previous chapter we covered the basics of Rust's type and ownership system.\
-It's time to dig deeper: we'll explore **traits**, Rust's take on interfaces.
+У попередньому розділі ми розглянули основи системи типів і володіння в Rust.\
+Час копнути глибше: ми дослідимо **трейти** (traits) — інтерфейси в розумінні Rust.
 
-Once you learn about traits, you'll start seeing their fingerprints all over the place.\
-In fact, you've already seen traits in action throughout the previous chapter, e.g. `.into()` invocations as well
-as operators like `==` and `+`.
+Щойно ви познайомитеся з трейтами, почнете помічати їхні сліди буквально всюди.\
+Насправді ви вже бачили трейти в дії впродовж попереднього розділу: наприклад, виклики `.into()`, а також
+оператори на кшталт `==` і `+`.
 
-On top of traits as a concept, we'll also cover some of the key traits that are defined in Rust's standard library:
+Окрім самої концепції трейтів, ми також розглянемо кілька ключових трейтів, визначених у стандартній бібліотеці Rust:
 
-- Operator traits (e.g. `Add`, `Sub`, `PartialEq`, etc.)
-- `From` and `Into`, for infallible conversions
-- `Clone` and `Copy`, for copying values
-- `Deref` and deref coercion
-- `Sized`, to mark types with a known size
-- `Drop`, for custom cleanup logic
+- Трейти операторів (наприклад, `Add`, `Sub`, `PartialEq` тощо)
+- `From` і `Into` — для перетворень, які не можуть завершитися невдачею
+- `Clone` і `Copy` — для копіювання значень
+- `Deref` і приведення через розіменування (deref coercion)
+- `Sized` — щоб позначати типи з відомим розміром
+- `Drop` — для власної логіки очищення
 
-Since we'll be talking about conversions, we'll seize the opportunity to plug some of the "knowledge gaps"
-from the previous chapter—e.g. what is `"A title"`, exactly? Time to learn more about slices too!
+Оскільки ми говоритимемо про перетворення, то скористаємося нагодою, щоб заповнити деякі «прогалини в знаннях»
+із попереднього розділу — наприклад, що ж насправді таке `"A title"`? Настав час дізнатися більше і про зрізи!
 
 <br/>
 
-## Task
-Introduction task is to complete the `intro` function.
-The function should return the string: ***I'm ready to learn about traits!***
+## Завдання
+У цьому вступному завданні потрібно доповнити функцію `intro`.
+Функція має повернути рядок: ***I'm ready to learn about traits!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

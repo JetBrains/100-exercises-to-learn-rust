@@ -1,6 +1,6 @@
-## `From` and `Into`
+## `From` і `Into`
 
-Let's go back to where our string journey started:
+Повернімося туди, звідки почалася наша мандрівка рядками:
 
 ```rust
 let ticket = Ticket::new(
@@ -10,11 +10,11 @@ let ticket = Ticket::new(
 );
 ```
 
-We now know enough to start unpacking what `.into()` is doing here.
+Тепер ми знаємо достатньо, щоб розібратися, що тут робить `.into()`.
 
-## The problem
+## Проблема
 
-This is the signature of the `new` method:
+Ось сигнатура методу `new`:
 
 ```rust
 impl Ticket {
@@ -28,14 +28,14 @@ impl Ticket {
 }
 ```
 
-We've also seen that string literals (such as `"A title"`) are of type `&str`.\
-We have a type mismatch here: a `String` is expected, but we have a `&str`.
-No magical coercion will come to save us this time; we need **to perform a conversion**.
+Ми також бачили, що рядкові літерали (як-от `"A title"`) мають тип `&str`.\
+Тут маємо невідповідність типів: очікується `String`, а в нас `&str`.
+Цього разу жодне магічне приведення нас не врятує — потрібно **виконати перетворення**.
 
-## `From` and `Into`
+## `From` і `Into`
 
-The Rust standard library defines two traits for **infallible conversions**: `From` and `Into`,
-in the `std::convert` module.
+Стандартна бібліотека Rust визначає два трейти для **перетворень, які не можуть завершитися невдачею** (infallible conversions):
+`From` та `Into`. Вони містяться в модулі `std::convert`.
 
 ```rust
 pub trait From<T>: Sized {
@@ -47,20 +47,21 @@ pub trait Into<T>: Sized {
 }
 ```
 
-These trait definitions showcase a few concepts that we haven't seen before: **supertraits** and **implicit trait bounds**.
-Let's unpack those first.
+Ці визначення трейтів демонструють кілька понять, яких ми ще не бачили: **супертрейти** (supertraits)
+та **неявні обмеження трейтів** (implicit trait bounds).
+Спершу розберімося з ними.
 
-### Supertrait / Subtrait
+### Супертрейт / підтрейт
 
-The `From: Sized` syntax implies that `From` is a **subtrait** of `Sized`: any type that
-implements `From` must also implement `Sized`.
-Alternatively, you could say that `Sized` is a **supertrait** of `From`.
+Синтаксис `From: Sized` означає, що `From` — **підтрейт** (subtrait) `Sized`: будь-який тип, що
+реалізує `From`, мусить також реалізовувати `Sized`.
+Інакше кажучи, `Sized` — **супертрейт** (supertrait) `From`.
 
-### Implicit trait bounds
+### Неявні обмеження трейтів
 
-Every time you have a generic type parameter, the compiler implicitly assumes that it's `Sized`.
+Щоразу, коли у вас є узагальнений параметр типу, компілятор неявно припускає, що він `Sized`.
 
-For example:
+Наприклад:
 
 ```rust
 pub struct Foo<T> {
@@ -68,7 +69,7 @@ pub struct Foo<T> {
 }
 ```
 
-is actually equivalent to:
+насправді еквівалентно такому:
 
 ```rust
 pub struct Foo<T: Sized> 
@@ -77,7 +78,7 @@ pub struct Foo<T: Sized>
 }
 ```
 
-In the case of `From<T>`, the trait definition is equivalent to:
+У випадку `From<T>` визначення трейту еквівалентне такому:
 
 ```rust
 pub trait From<T: Sized>: Sized {
@@ -85,41 +86,42 @@ pub trait From<T: Sized>: Sized {
 }
 ```
 
-In other words, _both_ `T` and the type implementing `From<T>` must be `Sized`, even
-though the former bound is implicit.
+Іншими словами, `Sized` мають бути _обидва_: і `T`, і тип, що реалізує `From<T>`, хоча
+перше з цих обмежень неявне.
 
-### Negative trait bounds
+### Негативні обмеження трейтів
 
-You can opt out of the implicit `Sized` bound with a **negative trait bound**:
+Відмовитися від неявного обмеження `Sized` можна за допомогою **негативного обмеження трейту** (negative trait bound):
 
 ```rust
 pub struct Foo<T: ?Sized> {
     //            ^^^^^^^
-    //            This is a negative trait bound
+    //            Це негативне обмеження трейту
     inner: T,
 }
 ```
 
-This syntax reads as "`T` may or may not be `Sized`", and it allows you to
-bind `T` to a DST (e.g. `Foo<str>`). It is a special case, though: negative trait bounds are exclusive to `Sized`,
-you can't use them with other traits.
+Цей синтаксис читається як «`T` може бути `Sized`, а може й не бути», і він дає змогу
+підставити замість `T` DST (наприклад, `Foo<str>`). Утім, це особливий випадок: негативні обмеження трейтів
+існують лише для `Sized`, з іншими трейтами їх використовувати не можна.
 
-## `&str` to `String`
+## Із `&str` у `String`
 
-In [`std`'s documentation](https://doc.rust-lang.org/std/convert/trait.From.html#implementors)
-you can see which `std` types implement the `From` trait.\
-You'll find that `String` implements `From<&str> for String`. Thus, we can write:
+У [документації `std`](https://doc.rust-lang.org/std/convert/trait.From.html#implementors)
+можна побачити, які типи з `std` реалізують трейт `From`.\
+Ви знайдете там, що `String` реалізує `From<&str> for String`. Отже, можна написати:
 
 ```rust
 let title = String::from("A title");
 ```
 
-We've been primarily using `.into()`, though.\
-If you check out the [implementors of `Into`](https://doc.rust-lang.org/std/convert/trait.Into.html#implementors)
-you won't find `Into<String> for &str`. What's going on?
+Утім, досі ми здебільшого використовували `.into()`.\
+Якщо переглянути [реалізації `Into`](https://doc.rust-lang.org/std/convert/trait.Into.html#implementors),
+ви не знайдете там `Into<String> for &str`. У чому ж річ?
 
-`From` and `Into` are **dual traits**.\
-In particular, `Into` is implemented for any type that implements `From` using a **blanket implementation**:
+`From` і `Into` — **двоїсті трейти** (dual traits).\
+Зокрема, `Into` реалізовано для будь-якого типу, що реалізує `From`, за допомогою **загальної реалізації**
+(blanket implementation):
 
 ```rust
 impl<T, U> Into<U> for T
@@ -132,17 +134,17 @@ where
 }
 ```
 
-If a type `U` implements `From<T>`, then `Into<U> for T` is automatically implemented. That's why
-we can write `let title = "A title".into();`.
+Якщо тип `U` реалізує `From<T>`, то `Into<U> for T` реалізується автоматично. Саме тому
+можна написати `let title = "A title".into();`.
 
 ## `.into()`
 
-Every time you see `.into()`, you're witnessing a conversion between types.\
-What's the target type, though?
+Щоразу, коли ви бачите `.into()`, відбувається перетворення між типами.\
+Але який цільовий тип?
 
-In most cases, the target type is either:
+У більшості випадків цільовий тип або:
 
-- Specified by the signature of a function/method (e.g. `Ticket::new` in our example above)
-- Specified in the variable declaration with a type annotation (e.g. `let title: String = "A title".into();`)
+- задано сигнатурою функції чи методу (наприклад, `Ticket::new` у нашому прикладі вище);
+- вказано в оголошенні змінної за допомогою анотації типу (наприклад, `let title: String = "A title".into();`).
 
-`.into()` will work out of the box as long as the compiler can infer the target type from the context without ambiguity.
+`.into()` працюватиме без додаткових зусиль, якщо компілятор може однозначно вивести цільовий тип із контексту.

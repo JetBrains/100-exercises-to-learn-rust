@@ -1,2 +1,2 @@
-This task is to modify the title and description accessor methods of the `Ticket` struct. 
-As instructed by the `TODO` comment in the code, ensure that the returned `&str` values have their leading and trailing whitespace removed.
+У цьому завданні потрібно змінити методи доступу title і description структури `Ticket`.
+Як зазначено в коментарі `TODO` у коді, переконайтеся, що з повернених значень `&str` прибрано пробільні символи на початку й у кінці.

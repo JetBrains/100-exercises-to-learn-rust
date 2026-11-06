@@ -1,7 +1,7 @@
 fn main() {
-    // Trying to get the size of a str (or any other DST)
-    // via `std::mem::size_of` will result in a compile-time error.
+    // Спроба отримати розмір str (або будь-якого іншого DST)
+    // через `std::mem::size_of` призведе до помилки компіляції.
     //
-    // TODO: Comment out the following line and move on to the next exercise.
+    // TODO: Закоментуйте рядок нижче й переходьте до наступної вправи.
     // std::mem::size_of::<str>();
 }

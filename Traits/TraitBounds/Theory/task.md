@@ -1,20 +1,20 @@
-## Trait bounds
+## Обмеження трейтів
 
-We've seen two use cases for traits so far:
+Досі ми бачили два способи використання трейтів:
 
-- Unlocking "built-in" behaviour (e.g. operator overloading)
-- Adding new behaviour to existing types (i.e. extension traits)
+- Відкриття доступу до «вбудованої» поведінки (наприклад, перевантаження операторів)
+- Додавання нової поведінки до наявних типів (тобто трейти-розширення)
 
-There's a third use case: **generic programming**.
+Існує й третій спосіб: **узагальнене програмування** (generic programming).
 
-## The problem
+## Проблема
 
-All our functions and methods, so far, have been working with **concrete types**.\
-Code that operates on concrete types is usually straightforward to write and understand. But it's also
-limited in its reusability.\
-Let's imagine, for example, that we want to write a function that returns `true` if an integer is even.
-Working with concrete types, we'd have to write a separate function for each integer type we want to
-support:
+Досі всі наші функції та методи працювали з **конкретними типами**.\
+Код, який працює з конкретними типами, зазвичай легко писати й розуміти. Але
+його можливості для повторного використання обмежені.\
+Уявімо, наприклад, що ми хочемо написати функцію, яка повертає `true`, якщо ціле число парне.
+Якщо працювати з конкретними типами, довелося б писати окрему функцію для кожного цілочисельного типу, який ми хочемо
+підтримувати:
 
 ```rust
 fn is_even_i32(n: i32) -> bool {
@@ -25,10 +25,10 @@ fn is_even_i64(n: i64) -> bool {
     n % 2 == 0
 }
 
-// Etc.
+// І так далі.
 ```
 
-Alternatively, we could write a single extension trait and then different implementations for each integer type:
+Або ж можна написати один трейт-розширення, а потім окремі реалізації для кожного цілочисельного типу:
 
 ```rust
 trait IsEven {
@@ -47,15 +47,15 @@ impl IsEven for i64 {
     }
 }
 
-// Etc.
+// І так далі.
 ```
 
-The duplication remains.
+Дублювання нікуди не зникає.
 
-## Generic programming
+## Узагальнене програмування
 
-We can do better using **generics**.\
-Generics allow us to write code that works with a **type parameter** instead of a concrete type:
+Це можна зробити краще за допомогою **узагальнень** (generics).\
+Узагальнення дають змогу писати код, який працює з **параметром типу** (type parameter), а не з конкретним типом:
 
 ```rust
 fn print_if_even<T>(n: T)
@@ -68,20 +68,20 @@ where
 }
 ```
 
-`print_if_even` is a **generic function**.\
-It isn't tied to a specific input type. Instead, it works with any type `T` that:
+`print_if_even` — це **узагальнена функція** (generic function).\
+Вона не прив'язана до конкретного типу вхідних даних. Натомість вона працює з будь-яким типом `T`, який:
 
-- Implements the `IsEven` trait.
-- Implements the `Debug` trait.
+- Реалізує трейт `IsEven`.
+- Реалізує трейт `Debug`.
 
-This contract is expressed with a **trait bound**: `T: IsEven + Debug`.\
-The `+` symbol is used to require that `T` implements multiple traits. `T: IsEven + Debug` is equivalent to
-"where `T` implements `IsEven` **and** `Debug`".
+Цей контракт виражено за допомогою **обмеження трейту** (trait bound): `T: IsEven + Debug`.\
+Символ `+` використовують, щоб вимагати від `T` реалізації кількох трейтів. `T: IsEven + Debug` означає те саме, що й
+«де `T` реалізує `IsEven` **і** `Debug`».
 
-## Trait bounds
+## Обмеження трейтів
 
-What purpose do trait bounds serve in `print_if_even`?\
-To find out, let's try to remove them:
+Для чого потрібні обмеження трейтів у `print_if_even`?\
+Щоб з'ясувати це, спробуймо їх прибрати:
 
 ```rust
 fn print_if_even<T>(n: T) {
@@ -91,7 +91,7 @@ fn print_if_even<T>(n: T) {
 }
 ```
 
-This code won't compile:
+Цей код не скомпілюється:
 
 ```text
 error[E0599]: no method named `is_even` found for type parameter `T` 
@@ -118,42 +118,42 @@ help: consider restricting type parameter `T`
   |                   +++++++++++++++++
 ```
 
-Without trait bounds, the compiler doesn't know what `T` **can do**.\
-It doesn't know that `T` has an `is_even` method, and it doesn't know how to format `T` for printing.
-From the compiler point of view, a bare `T` has no behaviour at all.\
-Trait bounds restrict the set of types that can be used by ensuring that the behaviour required by the function
-body is present.
+Без обмежень трейтів компілятор не знає, що **вміє робити** `T`.\
+Він не знає, що `T` має метод `is_even`, і не знає, як відформатувати `T` для виведення.
+З погляду компілятора «голий» `T` взагалі не має жодної поведінки.\
+Обмеження трейтів звужують множину типів, які можна використовувати: вони гарантують, що поведінка, потрібна тілу функції,
+справді наявна.
 
-## Syntax: inlining trait bounds
+## Синтаксис: вбудовані обмеження трейтів
 
-All the examples above used a **`where` clause** to specify trait bounds:
+В усіх наведених вище прикладах обмеження трейтів задано за допомогою **конструкції `where`** (where clause):
 
 ```rust
 fn print_if_even<T>(n: T)
 where
     T: IsEven + Debug
 //  ^^^^^^^^^^^^^^^^^
-//  This is a `where` clause
+//  Це конструкція `where`
 {
     // [...]
 }
 ```
 
-If the trait bounds are simple, you can **inline** them directly next to the type parameter:
+Якщо обмеження трейтів прості, їх можна **вбудувати** (inline) безпосередньо поруч із параметром типу:
 
 ```rust
 fn print_if_even<T: IsEven + Debug>(n: T) {
     //           ^^^^^^^^^^^^^^^^^
-    //           This is an inline trait bound
+    //           Це вбудоване обмеження трейту
     // [...]
 }
 ```
 
-## Syntax: meaningful names
+## Синтаксис: змістовні назви
 
-In the examples above, we used `T` as the type parameter name. This is a common convention when a function has
-only one type parameter.\
-Nothing stops you from using a more meaningful name, though:
+У прикладах вище ми використовували `T` як назву параметра типу. Це поширена домовленість для випадків, коли функція має
+лише один параметр типу.\
+Утім, ніщо не заважає вам використати змістовнішу назву:
 
 ```rust
 fn print_if_even<Number: IsEven + Debug>(n: Number) {
@@ -161,16 +161,16 @@ fn print_if_even<Number: IsEven + Debug>(n: Number) {
 }
 ```
 
-It is actually **desirable** to use meaningful names when there are multiple type parameters at play or when the name
-`T` doesn't convey enough information about the type's role in the function.
-Maximize clarity and readability when naming type parameters, just as you would with variables or function parameters.
-Follow Rust's conventions, though: use [upper camel case for type parameter names](https://rust-lang.github.io/api-guidelines/naming.html#casing-conforms-to-rfc-430-c-case).
+Насправді змістовні назви **бажано** використовувати, коли задіяно кілька параметрів типу або коли назва
+`T` недостатньо передає роль типу у функції.
+Називаючи параметри типів, дбайте про максимальну ясність і читабельність — так само, як і з назвами змінних чи параметрів функцій.
+Проте дотримуйтеся домовленостей Rust: [для назв параметрів типів використовуйте стиль UpperCamelCase](https://rust-lang.github.io/api-guidelines/naming.html#casing-conforms-to-rfc-430-c-case).
 
-## The function signature is king
+## Сигнатура функції — понад усе
 
-You may wonder why we need trait bounds at all. Can't the compiler infer the required traits from the function's body?\
-It could, but it won't.\
-The rationale is the same as for [explicit type annotations on function parameters](../../../ABasicCalculator/Variables/Theory/task.md#function-arguments-are-variables):
-each function signature is a contract between the caller and the callee, and the terms must be explicitly stated.
-This allows for better error messages, better documentation, less unintentional breakages across versions,
-and faster compilation times.
+Можливо, вам цікаво, навіщо взагалі потрібні обмеження трейтів. Хіба компілятор не може вивести потрібні трейти з тіла функції?\
+Міг би, але не робитиме цього.\
+Причина та сама, що й для [явних анотацій типів параметрів функцій](../../../ABasicCalculator/Variables/Theory/task.md#function-arguments-are-variables):
+кожна сигнатура функції — це контракт між кодом, що викликає функцію, і самою функцією, і його умови мають бути зазначені явно.
+Це дає кращі повідомлення про помилки, кращу документацію, менше ненавмисних порушень сумісності між версіями
+та швидшу компіляцію.

@@ -1,7 +1,7 @@
-## Implementing traits
+## Реалізація трейтів
 
-When a type is defined in another crate (e.g. `u32`, from Rust's standard library), you
-can't directly define new methods for it. If you try:
+Коли тип визначено в іншому крейті (наприклад, `u32` зі стандартної бібліотеки Rust), ви
+не можете безпосередньо визначати для нього нові методи. Якщо спробуєте:
 
 ```rust
 impl u32 {
@@ -11,7 +11,7 @@ impl u32 {
 }
 ```
 
-the compiler will complain:
+компілятор поскаржиться:
 
 ```text
 error[E0390]: cannot define inherent `impl` for primitive types
@@ -22,33 +22,33 @@ error[E0390]: cannot define inherent `impl` for primitive types
   = help: consider using an extension trait instead
 ```
 
-## Extension trait
+## Трейт-розширення
 
-An **extension trait** is a trait whose primary purpose is to attach new methods
-to foreign types, such as `u32`.
-That's exactly the pattern you deployed in the previous exercise, by defining
-the `IsEven` trait and then implementing it for `i32` and `u32`. You are then
-free to call `is_even` on those types as long as `IsEven` is in scope.
+**Трейт-розширення** (extension trait) — це трейт, основне призначення якого — додавати нові методи
+до зовнішніх типів, таких як `u32`.
+Саме цей патерн ви застосували в попередній вправі, коли визначили
+трейт `IsEven`, а потім реалізували його для `i32` і `u32`. Після цього ви
+можете вільно викликати `is_even` для цих типів, доки `IsEven` перебуває в області видимості.
 
 ```rust
-// Bring the trait in scope
+// Вводимо трейт в область видимості
 use my_library::IsEven;
 
 fn main() {
-    // Invoke its method on a type that implements it
+    // Викликаємо його метод для типу, який його реалізує
     if 4.is_even() {
         // [...]
     }
 }
 ```
 
-## One implementation
+## Одна реалізація
 
-There are limitations to the trait implementations you can write.\
-The simplest and most straight-forward one: you can't implement the same trait twice,
-in a crate, for the same type.
+Реалізації трейтів, які ви можете писати, мають певні обмеження.\
+Найпростіше й найочевидніше з них: не можна реалізувати той самий трейт двічі
+в одному крейті для одного й того самого типу.
 
-For example:
+Наприклад:
 
 ```rust
 trait IsEven {
@@ -68,7 +68,7 @@ impl IsEven for u32 {
 }
 ```
 
-The compiler will reject it:
+Компілятор відхилить такий код:
 
 ```text
 error[E0119]: conflicting implementations of trait `IsEven` for type `u32`
@@ -80,33 +80,33 @@ error[E0119]: conflicting implementations of trait `IsEven` for type `u32`
    | ^^^^^^^^^^^^^^^^^^^ conflicting implementation for `u32`
 ```
 
-There can be no ambiguity as to what trait implementation should be used when `IsEven::is_even`
-is invoked on a `u32` value, therefore there can only be one.
+Коли `IsEven::is_even` викликається для значення типу `u32`, не може бути жодної неоднозначності
+щодо того, яку реалізацію трейту використати, тому реалізація може бути лише одна.
 
-## Orphan rule
+## Правило сироти
 
-Things get more nuanced when multiple crates are involved.
-In particular, at least one of the following must be true:
+Коли залучено кілька крейтів, з'являються нюанси.
+Зокрема, має виконуватися принаймні одна з таких умов:
 
-- The trait is defined in the current crate
-- The implementor type is defined in the current crate
+- Трейт визначено в поточному крейті
+- Тип, що реалізує трейт, визначено в поточному крейті
 
-This is known as Rust's **orphan rule**. Its goal is to make the method resolution
-process unambiguous.
+У Rust це називають **правилом сироти** (orphan rule). Його мета — зробити однозначним процес вибору методу,
+який буде викликано (method resolution).
 
-Imagine the following situation:
+Уявіть таку ситуацію:
 
-- Crate `A` defines the `IsEven` trait
-- Crate `B` implements `IsEven` for `u32`
-- Crate `C` provides a (different) implementation of the `IsEven` trait for `u32`
-- Crate `D` depends on both `B` and `C` and calls `1.is_even()`
+- Крейт `A` визначає трейт `IsEven`
+- Крейт `B` реалізує `IsEven` для `u32`
+- Крейт `C` надає (іншу) реалізацію трейту `IsEven` для `u32`
+- Крейт `D` залежить і від `B`, і від `C` та викликає `1.is_even()`
 
-Which implementation should be used? The one defined in `B`? Or the one defined in `C`?\
-There's no good answer, therefore the orphan rule was defined to prevent this scenario.
-Thanks to the orphan rule, neither crate `B` nor crate `C` would compile.
+Яку реалізацію слід використати? Ту, що визначено в `B`? Чи ту, що визначено в `C`?\
+Доброї відповіді немає, тому й запровадили правило сироти — щоб запобігти такому сценарію.
+Завдяки правилу сироти не скомпілюється ні крейт `B`, ні крейт `C`.
 
-## Further reading
+## Додаткові матеріали
 
-- There are some caveats and exceptions to the orphan rule as stated above.
-  Check out [the reference](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence)
-  if you want to get familiar with its nuances.
+- Правило сироти в тому вигляді, як його сформульовано вище, має деякі застереження й винятки.
+  Зазирніть у [довідник мови (The Rust Reference)](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence),
+  якщо хочете ознайомитися з його нюансами.

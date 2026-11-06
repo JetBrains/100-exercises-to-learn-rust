@@ -1,8 +1,8 @@
-## `Deref` trait
+## Трейт `Deref`
 
-In the previous exercise you didn't have to do much, did you?
+У попередній вправі вам не довелося робити багато, чи не так?
 
-Changing
+Щоб код скомпілювався, а тести пройшли, достатньо було замінити
 
 ```rust
 impl Ticket {
@@ -12,7 +12,7 @@ impl Ticket {
 }
 ```
 
-to
+на
 
 ```rust
 impl Ticket {
@@ -22,28 +22,27 @@ impl Ticket {
 }
 ```
 
-was all you needed to do to get the code to compile and the tests to pass.
-Some alarm bells should be ringing in your head though.
+Утім, у вашій голові мав би задзвонити тривожний дзвіночок.
 
-## It shouldn't work, but it does
+## Це не мало б працювати, але працює
 
-Let's review the facts:
+Розгляньмо факти:
 
-- `self.title` is a `String`
-- `&self.title` is, therefore, a `&String`
-- The output of the (modified) `title` method is `&str`
+- `self.title` — це `String`
+- отже, `&self.title` — це `&String`
+- результат (зміненого) методу `title` — `&str`
 
-You would expect a compiler error, wouldn't you? `Expected &String, found &str` or something similar.
-Instead, it just works. **Why**?
+Ви б очікували помилку компіляції, чи не так? `Expected &String, found &str` або щось подібне.
+Натомість усе просто працює. **Чому**?
 
-## `Deref` to the rescue
+## `Deref` поспішає на допомогу
 
-The `Deref` trait is the mechanism behind the language feature known as [**deref coercion**](https://doc.rust-lang.org/std/ops/trait.Deref.html#deref-coercion).\
-The trait is defined in the standard library, in the `std::ops` module:
+Трейт `Deref` — це механізм, що стоїть за можливістю мови, відомою як [**приведення через розіменування** (deref coercion)](https://doc.rust-lang.org/std/ops/trait.Deref.html#deref-coercion).\
+Цей трейт визначено в стандартній бібліотеці, у модулі `std::ops`:
 
 ```rust
-// I've slightly simplified the definition for now.
-// We'll see the full definition later on.
+// Поки що визначення трохи спрощено.
+// Повне визначення ми побачимо згодом.
 pub trait Deref {
     type Target;
     
@@ -51,24 +50,24 @@ pub trait Deref {
 }
 ```
 
-`type Target` is an **associated type**.\
-It's a placeholder for a concrete type that must be specified when the trait is implemented.
+`type Target` — це **асоційований тип**.\
+Це заповнювач для конкретного типу, який потрібно вказати під час реалізації трейту.
 
-## Deref coercion
+## Приведення через розіменування
 
-By implementing `Deref<Target = U>` for a type `T` you're telling the compiler that `&T` and `&U` are
-somewhat interchangeable.\
-In particular, you get the following behavior:
+Реалізуючи `Deref<Target = U>` для типу `T`, ви повідомляєте компілятору, що `&T` і `&U`
+певною мірою взаємозамінні.\
+Зокрема, ви отримуєте таку поведінку:
 
-- References to `T` are implicitly converted into references to `U` (i.e. `&T` becomes `&U`)
-- You can call on `&T` all the methods defined on `U` that take `&self` as input.
+- Посилання на `T` неявно перетворюються на посилання на `U` (тобто `&T` стає `&U`)
+- Для `&T` можна викликати всі методи, визначені для `U`, які приймають `&self`.
 
-There is one more thing around the dereference operator, `*`, but we don't need it yet (see `std`'s docs
-if you're curious).
+Є ще одна деталь, пов'язана з оператором розіменування `*`, але поки що вона нам не знадобиться (якщо цікаво,
+зазирніть у документацію `std`).
 
-## `String` implements `Deref`
+## `String` реалізує `Deref`
 
-`String` implements `Deref` with `Target = str`:
+`String` реалізує `Deref` з `Target = str`:
 
 ```rust
 impl Deref for String {
@@ -80,12 +79,12 @@ impl Deref for String {
 }
 ```
 
-Thanks to this implementation and deref coercion, a `&String` is automatically converted into a `&str` when needed.
+Завдяки цій реалізації та приведенню через розіменування `&String` за потреби автоматично перетворюється на `&str`.
 
-## Don't abuse deref coercion
+## Не зловживайте приведенням через розіменування
 
-Deref coercion is a powerful feature, but it can lead to confusion.\
-Automatically converting types can make the code harder to read and understand. If a method with the same name
-is defined on both `T` and `U`, which one will be called?
+Приведення через розіменування — потужна можливість, але воно може заплутувати.\
+Автоматичне перетворення типів може ускладнити читання й розуміння коду. Якщо метод з однаковою назвою
+визначено і для `T`, і для `U`, то який із них буде викликано?
 
-We'll examine later in the course the "safest" use cases for deref coercion: smart pointers.
+Далі в курсі ми розглянемо «найбезпечніші» випадки використання приведення через розіменування — розумні вказівники.

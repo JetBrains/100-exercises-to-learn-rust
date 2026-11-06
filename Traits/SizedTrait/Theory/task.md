@@ -1,22 +1,22 @@
 ## `Sized`
 
-There's more to `&str` than meets the eye, even after having
-investigated deref coercion.\
-From our previous [discussion on memory layouts](../../../TicketV1/ReferencesInMemory/Theory/task.md),
-it would have been reasonable to expect `&str` to be represented as a single `usize` on
-the stack, a pointer. That's not the case though. `&str` stores some **metadata** next
-to the pointer: the length of the slice it points to. Going back to the example from
-[a previous section](../../../Traits/StringSlices/Theory/task.md):
+Навіть після того як ми розібралися з приведенням через розіменування (deref coercion),
+`&str` приховує більше, ніж здається на перший погляд.\
+Зважаючи на наше попереднє [обговорення розміщення в пам'яті](../../../TicketV1/ReferencesInMemory/Theory/task.md),
+було б логічно очікувати, що `&str` представлений у стеку одним `usize` — вказівником.
+Проте це не так. Поруч із вказівником `&str` зберігає певні **метадані**:
+довжину зрізу, на який він вказує. Повернімося до прикладу з
+[одного з попередніх уроків](../../../Traits/StringSlices/Theory/task.md):
 
 ```rust
 let mut s = String::with_capacity(5);
 s.push_str("Hello");
-// Create a string slice reference from the `String`, 
-// skipping the first byte.
+// Створюємо з `String` посилання на рядковий зріз,
+// пропускаючи перший байт.
 let slice: &str = &s[1..];
 ```
 
-In memory, we get:
+У пам'яті отримуємо таке:
 
 ```text
                     s                              slice
@@ -35,46 +35,46 @@ Heap:    | H | e | l | l | o |                  |
                +--------------------------------+
 ```
 
-What's going on?
+Що ж тут відбувається?
 
-## Dynamically sized types
+## Типи динамічного розміру
 
-`str` is a **dynamically sized type** (DST).\
-A DST is a type whose size is not known at compile time. Whenever you have a
-reference to a DST, like `&str`, it has to include additional
-information about the data it points to. It is a **fat pointer**.\
-In the case of `&str`, it stores the length of the slice it points to.
-We'll see more examples of DSTs in the rest of the course.
+`str` — це **тип динамічного розміру** (dynamically sized type, DST).\
+DST — це тип, розмір якого невідомий під час компіляції. Щоразу, коли у вас є
+посилання на DST, як-от `&str`, воно мусить містити додаткову
+інформацію про дані, на які вказує. Таке посилання — це **«товстий» вказівник** (fat pointer).\
+У випадку `&str` він зберігає довжину зрізу, на який вказує.
+Інші приклади DST ми побачимо далі в курсі.
 
-## The `Sized` trait
+## Трейт `Sized`
 
-Rust's `std` library defines a trait called `Sized`.
+У стандартній бібліотеці Rust (`std`) визначено трейт під назвою `Sized`.
 
 ```rust
 pub trait Sized {
-    // This is an empty trait, no methods to implement.
+    // Це порожній трейт: реалізовувати жодних методів не потрібно.
 }
 ```
 
-A type is `Sized` if its size is known at compile time. In other words, it's not a DST.
+Тип є `Sized`, якщо його розмір відомий під час компіляції. Іншими словами, це не DST.
 
-### Marker traits
+### Маркерні трейти
 
-`Sized` is your first example of a **marker trait**.\
-A marker trait is a trait that doesn't require any methods to be implemented. It doesn't define any behavior.
-It only serves to **mark** a type as having certain properties.
-The mark is then leveraged by the compiler to enable certain behaviors or optimizations.
+`Sized` — ваш перший приклад **маркерного трейту** (marker trait).\
+Маркерний трейт — це трейт, який не вимагає реалізації жодних методів. Він не визначає жодної поведінки.
+Він лише **позначає** тип як такий, що має певні властивості.
+Далі компілятор використовує цю позначку, щоб увімкнути певну поведінку чи оптимізації.
 
-### Auto traits
+### Автоматичні трейти
 
-In particular, `Sized` is also an **auto trait**.\
-You don't need to implement it explicitly; the compiler implements it automatically for you
-based on the type's definition.
+Зокрема, `Sized` — це ще й **автоматичний трейт** (auto trait).\
+Вам не потрібно реалізовувати його явно: компілятор автоматично реалізує його за вас
+на основі визначення типу.
 
-### Examples
+### Приклади
 
-All the types we've seen so far are `Sized`: `u32`, `String`, `bool`, etc.
+Усі типи, які ми досі бачили, є `Sized`: `u32`, `String`, `bool` тощо.
 
-`str`, as we just saw, is not `Sized`.\
-`&str` is `Sized` though! We know its size at compile time: two `usize`s, one for the pointer
-and one for the length.
+`str`, як ми щойно побачили, не є `Sized`.\
+А от `&str` — `Sized`! Ми знаємо його розмір під час компіляції: два `usize`, один для вказівника
+й один для довжини.

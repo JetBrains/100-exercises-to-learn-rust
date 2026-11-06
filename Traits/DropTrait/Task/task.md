@@ -1,3 +1,3 @@
-This task is to implement a `DropBomb` type. 
-This type ***should panic when dropped*** unless a specific operation has been performed on it, 
-as detailed in the `TODO` comment and demonstrated in the associated tests.
+У цьому завданні потрібно реалізувати тип `DropBomb`.
+Цей тип ***має панікувати під час знищення (drop)***, якщо над ним не виконали певної операції,
+як описано в коментарі `TODO` і показано у відповідних тестах.

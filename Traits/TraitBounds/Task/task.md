@@ -1,2 +1,2 @@
-This task is to add the necessary trait bounds to the generic min function. 
-Refer to the `TODO` comment in the code and the `std::cmp` documentation to ensure it compiles successfully, allowing for comparison of its generic arguments.
+У цьому завданні потрібно додати необхідні обмеження трейтів до узагальненої функції min.
+Скористайтеся коментарем `TODO` у коді та документацією `std::cmp`, щоб код успішно компілювався, а функція могла порівнювати свої узагальнені аргументи.

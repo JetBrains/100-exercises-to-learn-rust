@@ -1,15 +1,16 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 977
+      - offset: 973
         length: 4
         placeholder_text: /* TODO */
-      - offset: 1044
+      - offset: 1040
         length: 4
         placeholder_text: /* TODO */
-      - offset: 1112
+      - offset: 1108
         length: 4
         placeholder_text: /* TODO */
   - name: Cargo.toml

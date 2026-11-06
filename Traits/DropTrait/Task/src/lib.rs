@@ -1,6 +1,6 @@
-// TODO: implement a so-called "Drop bomb": a type that panics when dropped
-//  unless a certain operation has been performed on it.
-//  You can see the expected API in the tests
+// TODO: реалізуйте так звану «Drop-бомбу» (Drop bomb): тип, який панікує під час знищення (drop),
+//  якщо над ним не виконали певної операції.
+//  Очікуваний API можна побачити в тестах
 pub struct DropBomb {
     defused: bool,
 }

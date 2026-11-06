@@ -1,6 +1,6 @@
-## Generics and associated types
+## Узагальнення та асоційовані типи
 
-Let's re-examine the definition for two of the traits we studied so far, `From` and `Deref`:
+Ще раз погляньмо на визначення двох трейтів, які ми вже вивчили, — `From` і `Deref`:
 
 ```rust
 pub trait From<T> {
@@ -14,28 +14,28 @@ pub trait Deref {
 }
 ```
 
-They both feature type parameters.\
-In the case of `From`, it's a generic parameter, `T`.\
-In the case of `Deref`, it's an associated type, `Target`.
+Обидва мають параметри типу.\
+У випадку `From` це узагальнений параметр (generic parameter) `T`.\
+У випадку `Deref` це асоційований тип (associated type) `Target`.
 
-What's the difference? Why use one over the other?
+У чому різниця? Коли варто обрати одне, а коли інше?
 
-## At most one implementation
+## Щонайбільше одна реалізація
 
-Due to how deref coercion works, there can only be one "target" type for a given type. E.g. `String` can
-only deref to `str`.
-It's about avoiding ambiguity: if you could implement `Deref` multiple times for a type,
-which `Target` type should the compiler choose when you call a `&self` method?
+Через те, як працює приведення через розіменування (deref coercion), для заданого типу може існувати лише один
+«цільовий» тип. Наприклад, `String` можна розіменувати лише в `str`.
+Ідеться про уникнення неоднозначності: якби `Deref` можна було реалізувати для типу кілька разів,
+який тип `Target` мав би обрати компілятор, коли ви викликаєте метод, що приймає `&self`?
 
-That's why `Deref` uses an associated type, `Target`.\
-An associated type is uniquely determined **by the trait implementation**.
-Since you can't implement `Deref` more than once, you'll only be able to specify one `Target` for a given type
-and there won't be any ambiguity.
+Саме тому `Deref` використовує асоційований тип `Target`.\
+Асоційований тип однозначно визначається **реалізацією трейту**.
+Оскільки `Deref` не можна реалізувати більше одного разу, для заданого типу ви зможете вказати лише один `Target`,
+і жодної неоднозначності не виникне.
 
-## Generic traits
+## Узагальнені трейти
 
-On the other hand, you can implement `From` multiple times for a type, **as long as the input type `T` is different**.
-For example, you can implement `From` for `WrappingU32` using both `u32` and `u16` as input types:
+З іншого боку, `From` можна реалізувати для типу кілька разів, **якщо вхідний тип `T` щоразу інший**.
+Наприклад, можна реалізувати `From` для `WrappingU32`, використавши як вхідні типи і `u32`, і `u16`:
 
 ```rust
 impl From<u32> for WrappingU32 {
@@ -51,12 +51,12 @@ impl From<u16> for WrappingU32 {
 }
 ```
 
-This works because `From<u16>` and `From<u32>` are considered **different traits**.\
-There is no ambiguity: the compiler can determine which implementation to use based on type of the value being converted.
+Це працює, тому що `From<u16>` і `From<u32>` вважаються **різними трейтами**.\
+Неоднозначності немає: компілятор може визначити, яку реалізацію використати, за типом значення, яке перетворюють.
 
-## Case study: `Add`
+## Розбір прикладу: `Add`
 
-As a closing example, consider the `Add` trait from the standard library:
+Наостанок розгляньмо трейт `Add` зі стандартної бібліотеки:
 
 ```rust
 pub trait Add<RHS = Self> {
@@ -66,15 +66,15 @@ pub trait Add<RHS = Self> {
 }
 ```
 
-It uses both mechanisms:
+Він використовує обидва механізми:
 
-- it has a generic parameter, `RHS` (right-hand side), which defaults to `Self`
-- it has an associated type, `Output`, the type of the result of the addition
+- має узагальнений параметр `RHS` (right-hand side — права частина виразу), який за замовчуванням дорівнює `Self`;
+- має асоційований тип `Output` — тип результату додавання.
 
 ### `RHS`
 
-`RHS` is a generic parameter to allow for different types to be added together.\
-For example, you'll find these two implementations in the standard library:
+`RHS` — це узагальнений параметр, завдяки якому можна додавати одне до одного значення різних типів.\
+Наприклад, у стандартній бібліотеці ви знайдете такі дві реалізації:
 
 ```rust
 impl Add<u32> for u32 {
@@ -82,10 +82,10 @@ impl Add<u32> for u32 {
     
     fn add(self, rhs: u32) -> u32 {
       //                      ^^^
-      // This could be written as `Self::Output` instead.
-      // The compiler doesn't care, as long as the type you
-      // specify here matches the type you assigned to `Output` 
-      // right above.
+      // Замість цього можна було б написати `Self::Output`.
+      // Компілятору байдуже, головне, щоб тип, який ви
+      // вказуєте тут, збігався з типом, який ви призначили для `Output`
+      // трохи вище.
       // [...]
     }
 }
@@ -99,21 +99,21 @@ impl Add<&u32> for u32 {
 }
 ```
 
-This allows the following code to compile:
+Завдяки цьому компілюється такий код:
 
 ```rust
 let x = 5u32 + &5u32 + 6u32;
 ```
 
-because `u32` implements `Add<&u32>` _as well as_ `Add<u32>`.
+тому що `u32` реалізує `Add<&u32>`, _а також_ `Add<u32>`.
 
 ### `Output`
 
-`Output` represents the type of the result of the addition.
+`Output` — це тип результату додавання.
 
-Why do we need `Output` in the first place? Can't we just use `Self` as output, the type implementing `Add`?
-We could, but it would limit the flexibility of the trait. In the standard library, for example, you'll find
-this implementation:
+Навіщо взагалі потрібен `Output`? Хіба не можна просто використати як результат `Self`, тобто тип, що реалізує `Add`?
+Можна, але це обмежило б гнучкість трейту. Наприклад, у стандартній бібліотеці є
+така реалізація:
 
 ```rust
 impl Add<&u32> for &u32 {
@@ -125,24 +125,24 @@ impl Add<&u32> for &u32 {
 }
 ```
 
-The type they're implementing the trait for is `&u32`, but the result of the addition is `u32`.\
-It would be impossible to provide this implementation if `add` had to return `Self`, i.e. `&u32` in this case.
-`Output` lets `std` decouple the implementor from the return type, thus supporting this case.
+Трейт тут реалізовано для типу `&u32`, але результат додавання має тип `u32`.\
+Таку реалізацію було б неможливо написати, якби `add` мав повертати `Self`, тобто в цьому випадку `&u32`.
+`Output` дає змогу `std` відокремити тип, що реалізує трейт, від типу результату й таким чином підтримати цей випадок.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Flexibility is rarely free: the trait definition is more complex due to `Output`, and implementors have to reason about
-> what they want to return. The trade-off is only justified if that flexibility is actually needed. Keep that in mind
-> when designing your own traits.
+> Гнучкість рідко буває безкоштовною: через `Output` визначення трейту складніше, а тим, хто реалізує трейт, доводиться
+> вирішувати, що саме повертати. Такий компроміс виправданий, лише якщо ця гнучкість справді потрібна. Пам'ятайте про це,
+> коли проєктуєте власні трейти.
 
-On the other hand, `Output` can't be a generic parameter. The output type of the operation **must** be uniquely determined
-once the types of the operands are known. That's why it's an associated type: for a given combination of implementor
-and generic parameters, there is only one `Output` type.
+З іншого боку, `Output` не може бути узагальненим параметром. Тип результату операції **мусить** однозначно визначатися,
+щойно відомі типи операндів. Саме тому це асоційований тип: для заданої комбінації типу, що реалізує трейт,
+і узагальнених параметрів існує лише один тип `Output`.
 
-## Conclusion
+## Висновок
 
-To recap:
+Підсумуймо:
 
-- Use an **associated type** when the type must be uniquely determined for a given trait implementation.
-- Use a **generic parameter** when you want to allow multiple implementations of the trait for the same type,
-  with different input types.
+- Використовуйте **асоційований тип**, коли тип має однозначно визначатися для конкретної реалізації трейту.
+- Використовуйте **узагальнений параметр**, коли хочете дозволити кілька реалізацій трейту для одного й того самого
+  типу з різними вхідними типами.

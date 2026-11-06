@@ -16,7 +16,7 @@ impl Ticket {
     }
 }
 
-// TODO: Implement the `PartialEq` trait for `Ticket`.
+// TODO: Реалізуйте трейт `PartialEq` для `Ticket`.
 impl PartialEq for Ticket {
     fn eq(&self, other: &Self) -> bool {
         self.title == other.title

@@ -1,2 +1,2 @@
-Your task is to add a derivable trait implementation to the `Ticket` struct. 
-The `TODO` comment in the code explains why this is necessary for the exercise to compile.
+Ваше завдання — додати до структури `Ticket` реалізацію трейту, яку можна згенерувати derive-макросом.
+Коментар `TODO` у коді пояснює, чому без неї вправа не скомпілюється.
