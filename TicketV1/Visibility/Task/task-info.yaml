@@ -21,7 +21,7 @@ files:
       - offset: 1137
         length: 51
         placeholder_text: "assert_eq!(ticket.description, \"A description\");"
-      - offset: 1816
+      - offset: 1820
         length: 169
         placeholder_text: "let ticket = Ticket {  \n\t\t\t title: \"A title\".into(),\n\
       \t\t\t description: \"A description\".into(),\n\t\t\t status: \"To-Do\".into()\

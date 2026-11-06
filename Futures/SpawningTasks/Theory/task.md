@@ -58,7 +58,7 @@ pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
 
 `tokio::spawn` повертає `JoinHandle`.\
 За допомогою `JoinHandle` можна дочекатися (`.await`) фонової задачі — так само,
-як ми використовували `join` для запущених потоків.
+як ми використовували `join` для породжених потоків.
 
 ```rust
 pub async fn run() {

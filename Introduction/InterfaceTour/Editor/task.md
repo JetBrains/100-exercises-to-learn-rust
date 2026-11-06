@@ -14,7 +14,7 @@ img {
 <img src="editor.png" class="center" width="100%"/>
 
 
-Якщо в завданні немає функції `main`, його тести однаково можна запустити: відкрийте каталог `tests`, виберіть **Run** у контекстному меню або натисніть <span style="color: #509DD6">&shortcut:Run;</span>:
+Якщо в завданні немає функції `main`, його тести однаково можна запустити: відкрийте теку `tests`, виберіть **Run** у контекстному меню або натисніть <span style="color: #509DD6">&shortcut:Run;</span>:
 
 <img src="run-program.png" class="center" width="100%"/>
 
