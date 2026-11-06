@@ -1,2 +1,2 @@
-This task involves implementing the `magic_number` function.
-The `magic_number` function takes an unsigned `32-bit` integer `n` as input and should return a `u32` based on the rules in code comment.
+У цьому завданні потрібно реалізувати функцію `magic_number`.
+Функція `magic_number` приймає на вхід беззнакове ціле число `n` розрядністю `32-bit` і має повернути `u32` за правилами, описаними в коментарі в коді.

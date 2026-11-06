@@ -1,117 +1,116 @@
-## Primitive types
+## Примітивні типи
 
-`u32` is one of Rust's **primitive types**. Primitive types are the most basic building blocks of a language.
-They're built into the language itself—i.e. they are not defined in terms of other types.
+`u32` — один із **примітивних типів** Rust. Примітивні типи — це найбазовіші будівельні блоки мови.
+Вони вбудовані в саму мову, тобто не визначаються через інші типи.
 
-You can combine these primitive types to create more complex types. We'll see how soon enough.
+Комбінуючи примітивні типи, можна створювати складніші типи. Незабаром ми побачимо, як саме.
 
-## Integers
+## Цілі числа
 
-`u32`, in particular, is an **unsigned 32-bit integer**.
+Зокрема, `u32` — це **беззнакове 32-бітне ціле число**.
 
-An integer is a number that can be written without a fractional component. E.g. `1` is an integer, while `1.2` is not.
+Ціле число — це число, яке можна записати без дробової частини. Наприклад, `1` — ціле число, а `1.2` — ні.
 
-### Signed vs. unsigned
+### Знакові й беззнакові
 
-An integer can be **signed** or **unsigned**.\
-An unsigned integer can only represent non-negative numbers (i.e. `0` or greater).
-A signed integer can represent both positive and negative numbers (e.g. `-1`, `12`, etc.).
+Ціле число може бути **знаковим** (signed) або **беззнаковим** (unsigned).\
+Беззнакове ціле число може представляти лише невід'ємні числа (тобто `0` і більші).
+Знакове ціле число може представляти як додатні, так і від'ємні числа (наприклад, `-1`, `12` тощо).
 
-The `u` in `u32` stands for **unsigned**.\
-The equivalent type for signed integer is `i32`, where the `i` stands for integer (i.e. any integer, positive or
-negative).
+Літера `u` в `u32` означає **unsigned** (беззнаковий).\
+Відповідний тип для знакових цілих чисел — `i32`, де `i` означає integer (тобто будь-яке ціле число, додатне чи
+від'ємне).
 
-### Bit width
+### Розрядність
 
-The `32` in `u32` refers to the **number of bits** used to represent the number in memory (a bit is the smallest unit of data in a computer—it can only have two values: `0` or `1`).\
-The more bits, the larger the range of numbers that can be represented.
+`32` в `u32` — це **кількість бітів**, якими число представлено в пам'яті (біт — найменша одиниця даних у комп'ютері, він може мати лише два значення: `0` або `1`).\
+Що більше бітів, то ширший діапазон чисел можна представити.
 
-Rust supports multiple bit widths for integers: `8`, `16`, `32`, `64`, `128`.
+Rust підтримує цілі числа різної розрядності: `8`, `16`, `32`, `64`, `128` бітів.
 
-With 32 bits, `u32` can represent numbers from `0` to `2^32 - 1` (a.k.a. [`u32::MAX`](https://doc.rust-lang.org/std/primitive.u32.html#associatedconstant.MAX)).\
-With the same number of bits, a signed integer (`i32`) can represent numbers from `-2^31` to `2^31 - 1`
-(i.e. from [`i32::MIN`](https://doc.rust-lang.org/std/primitive.i32.html#associatedconstant.MIN)
-to [`i32::MAX`](https://doc.rust-lang.org/std/primitive.i32.html#associatedconstant.MAX)).\
-The maximum value for `i32` is smaller than the maximum value for `u32` because one bit is used to represent
-the sign of the number. Check out the [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement)
-representation for more details on how signed integers are represented in memory.
+Маючи 32 біти, `u32` може представляти числа від `0` до `2^32 - 1` (це значення також відоме як [`u32::MAX`](https://doc.rust-lang.org/std/primitive.u32.html#associatedconstant.MAX)).\
+З тією самою кількістю бітів знакове ціле число (`i32`) може представляти числа від `-2^31` до `2^31 - 1`
+(тобто від [`i32::MIN`](https://doc.rust-lang.org/std/primitive.i32.html#associatedconstant.MIN)
+до [`i32::MAX`](https://doc.rust-lang.org/std/primitive.i32.html#associatedconstant.MAX)).\
+Максимальне значення `i32` менше за максимальне значення `u32`, бо один біт використовується для представлення
+знака числа. Докладніше про те, як знакові цілі числа представлено в пам'яті, читайте в статті про
+[доповняльний код](https://en.wikipedia.org/wiki/Two%27s_complement) (two's complement).
 
-### Summary
+### Підсумок
 
-Combining the two variables (signed/unsigned and bit width), we get the following integer types:
+Поєднавши ці дві характеристики (знаковість і розрядність), отримуємо такі цілочисельні типи:
 
-| Bit width | Signed | Unsigned |
-| --------- | ------ | -------- |
-| 8-bit     | `i8`   | `u8`     |
-| 16-bit    | `i16`  | `u16`    |
-| 32-bit    | `i32`  | `u32`    |
-| 64-bit    | `i64`  | `u64`    |
-| 128-bit   | `i128` | `u128`   |
+| Розрядність | Знакові | Беззнакові |
+| ----------- | ------- | ---------- |
+| 8-бітні     | `i8`    | `u8`       |
+| 16-бітні    | `i16`   | `u16`      |
+| 32-бітні    | `i32`   | `u32`      |
+| 64-бітні    | `i64`   | `u64`      |
+| 128-бітні   | `i128`  | `u128`     |
 
-## Literals
+## Літерали
 
-A **literal** is a notation for representing a fixed value in source code.\
-For example, `42` is a Rust literal for the number forty-two.
+**Літерал** — це спосіб запису фіксованого значення у вихідному коді.\
+Наприклад, `42` — це літерал Rust, що позначає число сорок два.
 
-### Type annotations for literals
+### Анотації типів для літералів
 
-But all values in Rust have a type, so... what's the type of `42`?
+Але ж усі значення в Rust мають тип, тож... який тип у `42`?
 
-The Rust compiler will try to infer the type of a literal based on how it's used.\
-If you don't provide any context, the compiler will default to `i32` for integer literals.\
-If you want to use a different type, you can add the desired integer type as a suffix—e.g. `2u64` is a 2 that's
-explicitly typed as a `u64`.
+Компілятор Rust спробує вивести тип літерала з того, як його використано.\
+Якщо контексту немає, компілятор за замовчуванням вважає цілочисельні літерали значеннями типу `i32`.\
+Якщо потрібен інший тип, можна додати бажаний цілочисельний тип як суфікс: наприклад, `2u64` — це двійка,
+для якої явно вказано тип `u64`.
 
-### Underscores in literals
+### Підкреслення в літералах
 
-You can use underscores `_` to improve the readability of large numbers.\
-For example, `1_000_000` is the same as `1000000`.
+Щоб великі числа було легше читати, можна використовувати підкреслення `_`.\
+Наприклад, `1_000_000` — те саме, що й `1000000`.
 
-## Arithmetic operators
+## Арифметичні оператори
 
-Rust supports the following arithmetic operators for integers:
+Rust підтримує такі арифметичні оператори для цілих чисел:
 
-- `+` for addition
-- `-` for subtraction
-- `*` for multiplication
-- `/` for division
-- `%` for remainder
+- `+` — додавання
+- `-` — віднімання
+- `*` — множення
+- `/` — ділення
+- `%` — остача від ділення
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Rust doesn't let you define custom operators, but it puts you in control of how the built-in operators behave.
-> We'll talk about operator overloading [later in the course](../../../Traits/OperatorOverloading/Theory/task.md), after we've covered traits.
+> Rust не дозволяє визначати власні оператори, але дає вам змогу керувати тим, як поводяться вбудовані.
+> Про перевантаження операторів ми поговоримо [далі в курсі](../../../Traits/OperatorOverloading/Theory/task.md), коли розберемо трейти.
 
-Precedence and associativity rules for these operators are the same as in mathematics.\
-You can use parentheses to override the default precedence. E.g. `2 * (3 + 4)`.
+Пріоритет і асоціативність цих операторів такі самі, як у математиці.\
+Щоб змінити типовий пріоритет, можна використовувати дужки. Наприклад, `2 * (3 + 4)`.
 
-> ⚠️ **Warning**
+> ⚠️ **Увага**
 >
-> The division operator `/` performs integer division when used with integer types.
-> I.e. the result is truncated towards zero. For example, `5 / 2` is `2`, not `2.5`.
+> Для цілочисельних типів оператор ділення `/` виконує цілочисельне ділення.
+> Тобто дробова частина результату відкидається (округлення в бік нуля). Наприклад, `5 / 2` дорівнює `2`, а не `2.5`.
 
-## No automatic type coercion
+## Жодного автоматичного приведення типів
 
-As we discussed in the previous exercise, Rust is a statically typed language.\
-In particular, Rust is quite strict about type coercion. It won't automatically convert a value from one type to
-another,
-even if the conversion is lossless. You have to do it explicitly.
+Як ми вже обговорювали в попередній вправі, Rust — мова зі статичною типізацією.\
+Зокрема, Rust досить суворий щодо приведення типів. Він не перетворює значення одного типу на інший автоматично,
+навіть якщо перетворення відбувається без втрат. Це потрібно робити явно.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> There are some exceptions to this rule, mostly related to references, smart pointers and ergonomics.
-> We'll cover those [later on](../../../Traits/DerefTrait/Theory/task.md).
-> A mental model of "all conversions are explicit" will serve you well in the meantime.
+> Із цього правила є кілька винятків, здебільшого пов'язаних із посиланнями, розумними вказівниками та ергономікою.
+> Ми розглянемо їх [пізніше](../../../Traits/DerefTrait/Theory/task.md).
+> А поки що вам добре прислужиться проста модель: «усі перетворення явні».
 
-For example, you can't assign a `u8` value to a variable with type `u32`, even though all `u8` values are valid `u32`
-values:
+Наприклад, не можна присвоїти значення типу `u8` змінній типу `u32`, хоча всі значення `u8` є допустимими значеннями
+`u32`:
 
 ```rust
 let b: u8 = 100;
 let a: u32 = b;
 ```
 
-It'll throw a compilation error:
+Це спричинить помилку компіляції:
 
 ```text
 error[E0308]: mismatched types
@@ -123,8 +122,8 @@ error[E0308]: mismatched types
   |
 ```
 
-We'll see how to convert between types [later in this course](../../../Traits/FromTrait/Theory/task.md)
+Як перетворювати значення з одного типу на інший, ми побачимо [далі в цьому курсі](../../../Traits/FromTrait/Theory/task.md).
 
-## Further reading
+## Додаткові матеріали
 
-- [The integer types section](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types) in the official Rust book
+- [Розділ про цілочисельні типи](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-types) в офіційній книзі про Rust

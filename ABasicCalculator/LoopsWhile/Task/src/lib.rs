@@ -1,9 +1,9 @@
-// Rewrite the factorial function using a `while` loop.
+// Перепишіть функцію factorial із використанням циклу `while`.
 pub fn factorial(n: u32) -> u32 {
-    // The `todo!()` macro is a placeholder that the compiler
-    // interprets as "I'll get back to this later", thus
-    // suppressing type errors.
-    // It panics at runtime.
+    // Макрос `todo!()` — це заглушка, яку компілятор
+    // сприймає як «я повернуся до цього пізніше», тож
+    // помилки типів не виникають.
+    // Під час виконання він панікує.
     let mut result = 1;
     let mut i = 1;
     while i <= n {

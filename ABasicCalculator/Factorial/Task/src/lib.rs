@@ -1,14 +1,14 @@
-// Define a function named `factorial` that, given a non-negative integer `n`,
-// returns `n!`, the factorial of `n`.
+// Визначте функцію з назвою `factorial`, яка для невід'ємного цілого числа `n`
+// повертає `n!` — факторіал `n`.
 //
-// The factorial of `n` is defined as the product of all positive integers up to `n`.
-// For example, `5!` (read "five factorial") is `5 * 4 * 3 * 2 * 1`, which is `120`.
-// `0!` is defined to be `1`.
+// Факторіал `n` — це добуток усіх додатних цілих чисел від 1 до `n` включно.
+// Наприклад, `5!` (читається «п'ять факторіал») дорівнює `5 * 4 * 3 * 2 * 1`, тобто `120`.
+// За визначенням `0!` дорівнює `1`.
 //
-// We expect `factorial(0)` to return `1`, `factorial(1)` to return `1`,
-// `factorial(2)` to return `2`, and so on.
+// Ми очікуємо, що `factorial(0)` поверне `1`, `factorial(1)` поверне `1`,
+// `factorial(2)` поверне `2` і так далі.
 //
-// Use only what you learned! No loops yet, so you'll have to use recursion!
+// Використовуйте лише те, що вже вивчили! Циклів поки немає, тож доведеться скористатися рекурсією!
 
 pub fn factorial(n: u32) -> u32 {
     if n == 0 {

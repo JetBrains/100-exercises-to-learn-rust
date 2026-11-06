@@ -1,7 +1,7 @@
-## Panics
+## Паніки
 
-Let's go back to the `speed` function you wrote for the ["Variables" lesson](../../../ABasicCalculator/Variables/Theory/task.md).
-It probably looked something like this:
+Повернімося до функції `speed`, яку ви написали в [уроці «Змінні»](../../../ABasicCalculator/Variables/Theory/task.md).
+Імовірно, вона мала приблизно такий вигляд:
 
 ```rust
 fn speed(start: u32, end: u32, time_elapsed: u32) -> u32 {
@@ -10,50 +10,50 @@ fn speed(start: u32, end: u32, time_elapsed: u32) -> u32 {
 }
 ```
 
-If you have a keen eye, you might have spotted one issue: what happens if `time_elapsed` is zero?
+Якщо ви уважні, то, можливо, помітили одну проблему: що станеться, якщо `time_elapsed` дорівнює нулю?
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> There's another issue with `speed` that we'll address soon enough. Can you spot it?
+> У функції `speed` є ще одна проблема, якою ми незабаром займемося. Зможете її помітити?
 
-You can try it
-out [on the Rust playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=36e5ddbe3b3f741dfa9f74c956622bac)!\
-The program will exit with the following error message:
+Можете спробувати це [у Rust Playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=36e5ddbe3b3f741dfa9f74c956622bac)
+(онлайн-пісочниці для коду на Rust)!\
+Програма завершиться з таким повідомленням про помилку:
 
 ```text
 thread 'main' panicked at src/main.rs:3:5:
 attempt to divide by zero
 ```
 
-This is known as a **panic**.\
-A panic is Rust's way to signal that something went so wrong that
-the program can't continue executing, it's an **unrecoverable error**. Division by zero classifies as such an
-error.
+Це називається **панікою** (panic).\
+Паніка — це спосіб, яким Rust повідомляє, що сталося щось настільки погане, що
+програма не може продовжувати роботу: це **невідновлювана помилка** (unrecoverable error). Ділення на нуль належить саме до таких
+помилок.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> You can try to catch a panic, but it should be a last resort attempt reserved for very specific circumstances.
+> Паніку можна спробувати перехопити, але це крайній захід, до якого варто вдаватися лише за дуже специфічних обставин.
 
-## The panic! macro
+## Макрос panic!
 
-You can intentionally trigger a panic by calling the `panic!` macro:
+Паніку можна викликати навмисно — за допомогою макросу `panic!`:
 
 ```rust
 fn main() {
     panic!("This is a panic!");
-    // The line below will never be executed
+    // Рядок нижче ніколи не буде виконано
     let x = 1 + 2;
 }
 ```
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> If it's followed by a `!`, it's a macro invocation. Think of macros as spicy functions for now.
-> We'll cover them in more detail later in the course.
+> Якщо після назви стоїть `!`, це виклик макросу. Поки що вважайте макроси функціями з перчинкою.
+> Докладніше ми розглянемо їх далі в курсі.
 
-There are other mechanisms to work with recoverable errors in Rust, which [we'll cover later](../../../TicketV2/Fallibility/Theory/task.md).
-For the time being we'll stick with panics as a brutal but simple stopgap solution.
+У Rust є й інші механізми для роботи з відновлюваними помилками, які [ми розглянемо пізніше](../../../TicketV2/Fallibility/Theory/task.md).
+Поки що ми обходитимемося паніками як грубим, але простим тимчасовим рішенням.
 
-## Further reading
+## Додаткові матеріали
 
-- [The panic! macro documentation](https://doc.rust-lang.org/std/macro.panic.html)
+- [Документація макросу panic!](https://doc.rust-lang.org/std/macro.panic.html)

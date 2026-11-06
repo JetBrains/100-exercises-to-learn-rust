@@ -1,55 +1,55 @@
-## Variables
+## Змінні
 
-In Rust, you can use the `let` keyword to declare **variables**.\
-For example:
+У Rust для оголошення **змінних** використовують ключове слово `let`.\
+Наприклад:
 
 ```rust
 let x = 42;
 ```
 
-Above we defined a variable `x` and assigned it the value `42`.
+Вище ми визначили змінну `x` і присвоїли їй значення `42`.
 
-## Type
+## Тип
 
-Every variable in Rust must have a type. It can either be inferred by the compiler or explicitly specified by the
-developer.
+Кожна змінна в Rust повинна мати тип. Його може вивести компілятор або явно вказати
+розробник.
 
-### Explicit type annotation
+### Явна анотація типу
 
-You can specify the variable type by adding a colon `:` followed by the type after the variable name. For example:
+Щоб указати тип змінної, додайте після її імені двокрапку `:`, а за нею — тип. Наприклад:
 
 ```rust
 // let <variable_name>: <type> = <expression>;
 let x: u32 = 42;
 ```
 
-In the example above, we explicitly constrained the type of `x` to be `u32`.
+У прикладі вище ми явно задали для `x` тип `u32`.
 
-### Type inference
+### Виведення типів
 
-If we don't specify the type of a variable, the compiler will try to infer it based on the context in which the variable
-is used.
+Якщо ми не вкажемо тип змінної, компілятор спробує вивести його з контексту, у якому цю змінну
+використано.
 
 ```rust
 let x = 42;
 let y: u32 = x;
 ```
 
-In the example above, we didn't specify the type of `x`.\
-`x` is later assigned to `y`, which is explicitly typed as `u32`. Since Rust doesn't perform automatic type coercion,
-the compiler infers the type of `x` to be `u32`—the same as `y` and the only type that will allow the program to compile
-without errors.
+У прикладі вище ми не вказали тип `x`.\
+Далі `x` присвоюється змінній `y`, тип якої явно вказано як `u32`. Оскільки Rust не виконує автоматичного приведення типів,
+компілятор виводить для `x` тип `u32` — той самий, що й у `y`, і єдиний тип, з яким програма скомпілюється
+без помилок.
 
-### Inference limitations
+### Обмеження виведення типів
 
-The compiler sometimes needs a little help to infer the correct variable type based on its usage.\
-In those cases you'll get a compilation error and the compiler will ask you to provide an explicit type hint to
-disambiguate the situation.
+Іноді компілятору потрібна невелика допомога, щоб за тим, як використано змінну, вивести її правильний тип.\
+У таких випадках ви отримаєте помилку компіляції, і компілятор попросить вас явно вказати тип, щоб
+усунути неоднозначність.
 
-## Function arguments are variables
+## Аргументи функцій — теж змінні
 
-Not all heroes wear capes, not all variables are declared with `let`.\
-Function arguments are variables too!
+Не всі герої носять плащі, і не всі змінні оголошують через `let`.\
+Аргументи функцій — це теж змінні!
 
 ```rust
 fn add_one(x: u32) -> u32 {
@@ -57,30 +57,30 @@ fn add_one(x: u32) -> u32 {
 }
 ```
 
-In the example above, `x` is a variable of type `u32`.\
-The only difference between `x` and a variable declared with `let` is that functions arguments **must** have their type
-explicitly declared. The compiler won't infer it for you.\
-This constraint allows the Rust compiler (and us humans!) to understand the function's signature without having to look
-at its implementation. That's a big boost for compilation speed!
+У прикладі вище `x` — це змінна типу `u32`.\
+Єдина відмінність між `x` і змінною, оголошеною через `let`, полягає в тому, що тип аргументів функції **обов'язково**
+треба оголошувати явно. Компілятор не виведе його за вас.\
+Це обмеження дає змогу компілятору Rust (і нам, людям!) зрозуміти сигнатуру функції, не зазираючи
+в її реалізацію. Це суттєво пришвидшує компіляцію!
 
-## Initialization
+## Ініціалізація
 
-You don't have to initialize a variable when you declare it.\
-For example
+Змінну не обов'язково ініціалізувати під час оголошення.\
+Наприклад,
 
 ```rust
 let x: u32;
 ```
 
-is a valid variable declaration.\
-However, you must initialize the variable before using it. The compiler will throw an error if you don't:
+— цілком коректне оголошення змінної.\
+Однак змінну потрібно ініціалізувати, перш ніж її використовувати. Якщо цього не зробити, компілятор видасть помилку:
 
 ```rust
 let x: u32;
 let y = x + 1;
 ```
 
-will throw a compilation error:
+Такий код спричинить помилку компіляції:
 
 ```text
 error[E0381]: used binding `x` isn't initialized

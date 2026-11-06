@@ -1,118 +1,117 @@
-## Overflow
+## Переповнення
 
-The factorial of a number grows quite fast.\
-For example, the factorial of 20 is 2,432,902,008,176,640,000. That's already bigger than the maximum value for a
-32-bit integer, 2,147,483,647.
+Факторіал числа зростає досить швидко.\
+Наприклад, факторіал 20 дорівнює 2 432 902 008 176 640 000. Це вже більше за максимальне значення
+32-бітного цілого числа — 2 147 483 647.
 
-When the result of an arithmetic operation is bigger than the maximum value for a given integer type,
-we are talking about **an integer overflow**.
+Коли результат арифметичної операції більший за максимальне значення певного цілочисельного типу,
+ідеться про **цілочисельне переповнення** (integer overflow).
 
-Integer overflows are an issue because they violate the contract for arithmetic operations.\
-The result of an arithmetic operation between two integers of a given type should be another integer of the same type.
-But the _mathematically correct result_ doesn't fit into that integer type!
+Цілочисельні переповнення — це проблема, бо вони порушують контракт арифметичних операцій.\
+Результатом арифметичної операції над двома цілими числами певного типу має бути ціле число того самого типу.
+Але _математично правильний результат_ у цей цілочисельний тип не вміщується!
 
-> If the result is smaller than the minimum value for a given integer type, we refer to the event as **an integer
-> underflow**.\
-> For brevity, we'll only talk about integer overflows for the rest of this section, but keep in mind that
-> everything we say applies to integer underflows as well.
+> Якщо результат менший за мінімальне значення певного цілочисельного типу, таку подію називають **цілочисельним
+> антипереповненням** (integer underflow).\
+> Для стислості далі в цьому розділі ми говоритимемо лише про цілочисельні переповнення, але пам'ятайте, що
+> все сказане стосується й цілочисельних антипереповнень.
 >
-> The `speed` function you wrote in the ["Variables" lesson](../../../ABasicCalculator/Variables/Theory/task.md) underflowed for some input
-> combinations.
-> E.g. if `end` is smaller than `start`, `end - start` will underflow the `u32` type since the result is supposed
-> to be negative but `u32` can't represent negative numbers.
+> Функція `speed`, яку ви написали в [уроці «Змінні»](../../../ABasicCalculator/Variables/Theory/task.md), за деяких вхідних даних
+> спричиняла антипереповнення.
+> Наприклад, якщо `end` менше за `start`, вираз `end - start` спричинить антипереповнення типу `u32`, адже результат мав би
+> бути від'ємним, а `u32` не може представляти від'ємні числа.
 
-## No automatic promotion
+## Жодного автоматичного розширення типу
 
-One possible approach would be automatically promote the result to a bigger integer type.
-E.g. if you're summing two `u8` integers and the result is 256 (`u8::MAX + 1`), Rust could choose to interpret the
-result as `u16`, the next integer type that's big enough to hold 256.
+Один із можливих підходів — автоматично розширювати тип результату до більшого цілочисельного типу.
+Наприклад, якщо ви додаєте два цілі числа типу `u8` і результат дорівнює 256 (`u8::MAX + 1`), Rust міг би інтерпретувати
+результат як `u16` — наступний цілочисельний тип, достатньо великий, щоб умістити 256.
 
-But, as we've discussed before, Rust is quite picky about type conversions. Automatic integer promotion
-is not Rust's solution to the integer overflow problem.
+Але, як ми вже обговорювали, Rust досить прискіпливий щодо перетворень типів. Тож автоматичне розширення цілочисельних типів —
+не те рішення проблеми цілочисельного переповнення, яке обрав Rust.
 
-## Alternatives
+## Альтернативи
 
-Since we ruled out automatic promotion, what can we do when an integer overflow occurs?\
-It boils down to two different approaches:
+Якщо автоматичне розширення типу відпадає, що ж робити, коли стається цілочисельне переповнення?\
+Усе зводиться до двох різних підходів:
 
-- Reject the operation
-- Come up with a "sensible" result that fits into the expected integer type
+- Відхилити операцію
+- Придумати «розумний» результат, який уміщується в очікуваний цілочисельний тип
 
-### Reject the operation
+### Відхилити операцію
 
-This is the most conservative approach: we stop the program when an integer overflow occurs.\
-That's done via a panic, the mechanism we've already seen in the ["Panics" lesson](../../../ABasicCalculator/Panics/Theory/task.md).
+Це найобережніший підхід: коли стається цілочисельне переповнення, ми зупиняємо програму.\
+Для цього використовують паніку — механізм, який ми вже бачили в [уроці «Паніки»](../../../ABasicCalculator/Panics/Theory/task.md).
 
-### Come up with a "sensible" result
+### Придумати «розумний» результат
 
-When the result of an arithmetic operation is bigger than the maximum value for a given integer type, you can
-choose to **wrap around**.\
-If you think of all the possible values for a given integer type as a circle, wrapping around means that when you
-reach the maximum value, you start again from the minimum value.
+Коли результат арифметичної операції більший за максимальне значення певного цілочисельного типу, можна
+обрати **циклічне переповнення** (wrap around), тобто перехід по колу.\
+Якщо уявити всі можливі значення цілочисельного типу у вигляді кола, то циклічне переповнення означає, що, досягнувши
+максимального значення, ви знову починаєте з мінімального.
 
-For example, if you do a **wrapping addition** between 1 and 255 (=`u8::MAX`), the result is 0 (=`u8::MIN`).
-If you're working with signed integers, the same principle applies. E.g. adding 1 to 127 (=`i8::MAX`) with wrapping
-will give you -128 (=`i8::MIN`).
+Наприклад, якщо виконати **додавання з циклічним переповненням** (wrapping addition) чисел 1 і 255 (=`u8::MAX`), результат дорівнюватиме 0 (=`u8::MIN`).
+Для знакових цілих чисел діє той самий принцип. Наприклад, якщо додати 1 до 127 (=`i8::MAX`) з циклічним переповненням,
+отримаємо -128 (=`i8::MIN`).
 
 ## `overflow-checks`
 
-Rust lets you, the developer, choose which approach to use when an integer overflow occurs.
-The behaviour is controlled by the `overflow-checks` profile setting.
+Rust дає вам, розробникові, змогу самостійно вибрати, який підхід застосовувати в разі цілочисельного переповнення.
+Цю поведінку визначає параметр профілю `overflow-checks`.
 
-If `overflow-checks` is set to `true`, Rust will **panic at runtime** when an integer operation overflows.
-If `overflow-checks` is set to `false`, Rust will **wrap around** when an integer operation overflows.
+Якщо `overflow-checks` має значення `true`, то в разі переповнення в цілочисельній операції Rust **панікуватиме під час виконання**.
+Якщо `overflow-checks` має значення `false`, то в разі переповнення в цілочисельній операції результат **переходитиме по колу** (wrap around).
 
-You may be wondering—what is a profile setting? Let's get into that!
+Можливо, вам цікаво: а що таке параметр профілю? Зараз розберемося!
 
-## Profiles
+## Профілі
 
-A [**profile**](https://doc.rust-lang.org/cargo/reference/profiles.html) is a set of configuration options that can be
-used to customize the way Rust code is compiled.
+[**Профіль**](https://doc.rust-lang.org/cargo/reference/profiles.html) — це набір параметрів конфігурації, за допомогою яких можна
+налаштувати, як компілюється код Rust.
 
-Cargo provides 4 built-in profiles: `dev`, `release`, `test`, and `bench`.\
-The `dev` profile is used every time you run `cargo build`, `cargo run` or `cargo test`. It's aimed at local
-development,
-therefore it sacrifices runtime performance in favor of faster compilation times and a better debugging experience.\
-The `release` profile, instead, is optimized for runtime performance but incurs longer compilation times. You need
-to explicitly request via the `--release` flag—e.g. `cargo build --release` or `cargo run --release`.
-The `test` profile is the default profile used by `cargo test`. The `test` profile inherits the settings from the `dev` profile.
-The `bench` profile is the default profile used by `cargo bench`. The `bench` profile inherits from the `release` profile.
-Use `dev` for iterative development and debugging, `release` for optimized production builds,\
-`test` for correctness testing, and `bench` for performance benchmarking.
+Cargo має 4 вбудовані профілі: `dev`, `release`, `test` і `bench`.\
+Профіль `dev` використовується щоразу, коли ви запускаєте `cargo build`, `cargo run` або `cargo test`. Він призначений для локальної
+розробки, тому жертвує продуктивністю під час виконання заради швидшої компіляції та зручнішого налагодження.\
+Профіль `release`, навпаки, оптимізований для продуктивності під час виконання, але компіляція з ним триває довше. Його потрібно
+явно запросити за допомогою прапорця `--release` — наприклад, `cargo build --release` або `cargo run --release`.
+Профіль `test` — це профіль, який за замовчуванням використовує `cargo test`. Профіль `test` успадковує налаштування профілю `dev`.
+Профіль `bench` — це профіль, який за замовчуванням використовує `cargo bench`. Профіль `bench` успадковує налаштування профілю `release`.
+Використовуйте `dev` для ітеративної розробки й налагодження, `release` — для оптимізованих продакшн-збірок,\
+`test` — для перевірки коректності, а `bench` — для вимірювання продуктивності (бенчмарків).
 
-> "Have you built your project in release mode?" is almost a meme in the Rust community.\
-> It refers to developers who are not familiar with Rust and complain about its performance on
-> social media (e.g. Reddit, Twitter) before realizing they haven't built their project in
-> release mode.
+> «Ви зібрали проєкт у режимі release?» — у спільноті Rust це вже майже мем.\
+> Так відповідають розробникам, які ще не знайомі з Rust і скаржаться на його продуктивність
+> у соцмережах (наприклад, на Reddit чи у Twitter), перш ніж зрозуміти, що зібрали свій проєкт не в
+> режимі release.
 
-You can also define custom profiles or customize the built-in ones.
+Ви також можете визначати власні профілі або змінювати налаштування вбудованих.
 
 ### `overflow-check`
 
-By default, `overflow-checks` is set to:
+За замовчуванням `overflow-checks` має значення:
 
-- `true` for the `dev` profile
-- `false` for the `release` profile
+- `true` для профілю `dev`
+- `false` для профілю `release`
 
-This is in line with the goals of the two profiles.\
-`dev` is aimed at local development, so it panics in order to highlight potential issues as early as possible.\
-`release`, instead, is tuned for runtime performance: checking for overflows would slow down the program, so it
-prefers to wrap around.
+Це відповідає призначенню цих двох профілів.\
+`dev` призначений для локальної розробки, тому панікує, щоб якомога раніше виявляти потенційні проблеми.\
+`release`, навпаки, налаштований на продуктивність під час виконання: перевірки на переповнення сповільнювали б програму, тому
+він віддає перевагу переходу по колу.
 
-At the same time, having different behaviours for the two profiles can lead to subtle bugs.\
-Our recommendation is to enable `overflow-checks` for both profiles: it's better to crash than to silently produce
-incorrect results. The runtime performance hit is negligible in most cases; if you're working on a performance-critical
-application, you can run benchmarks to decide if it's something you can afford.
+Водночас різна поведінка у двох профілях може призводити до малопомітних багів.\
+Ми рекомендуємо вмикати `overflow-checks` для обох профілів: краще аварійно завершити програму, ніж мовчки отримати
+неправильні результати. Здебільшого втрата продуктивності під час виконання незначна; якщо ж ви працюєте над застосунком,
+для якого продуктивність критична, можна запустити бенчмарки й вирішити, чи можете ви собі це дозволити.
 
 
-`overflow-checks` is a blunt tool: it's a global setting that affects the whole program.\
-It often happens that you want to handle integer overflows differently depending on the context: sometimes
-wrapping is the right choice, other times panicking is preferable.
+`overflow-checks` — грубий інструмент: це глобальне налаштування, яке впливає на всю програму.\
+Часто цілочисельні переповнення потрібно обробляти по-різному залежно від контексту: іноді
+правильний вибір — перехід по колу, а іноді краще панікувати.
 
-## `wrapping_` methods
+## Методи `wrapping_`
 
-You can opt into wrapping arithmetic on a per-operation basis by using the `wrapping_` methods.\
-For example, you can use `wrapping_add` to add two integers with wrapping:
+Арифметику з циклічним переповненням можна вмикати для окремих операцій за допомогою методів `wrapping_`.\
+Наприклад, за допомогою `wrapping_add` можна додати два цілі числа з циклічним переповненням:
 
 ```rust
 let x = 255u8;
@@ -121,12 +120,12 @@ let sum = x.wrapping_add(y);
 assert_eq!(sum, 0);
 ```
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> You can think of methods as functions that are "attached" to a specific type.
-> We'll cover methods (and how to define them) in the next chapter.
+> Методи можна уявляти як функції, «прикріплені» до певного типу.
+> Методи (і те, як їх визначати) ми розглянемо в наступному розділі.
 
-## Further reading
+## Додаткові матеріали
 
-- Check out ["Myths and legends about integer overflow in Rust"](https://huonw.github.io/blog/2016/04/myths-and-legends-about-integer-overflow-in-rust/)
-  for an in-depth discussion about integer overflow in Rust.
+- Прочитайте статтю [«Myths and legends about integer overflow in Rust»](https://huonw.github.io/blog/2016/04/myths-and-legends-about-integer-overflow-in-rust/),
+  щоб глибше розібратися з цілочисельним переповненням у Rust.

@@ -1,2 +1,2 @@
-Adjust the `factorial` function's multiplication. 
-As instructed by the `TODO` comment, use saturating multiplication to cap the result at `u32::MAX` instead of wrapping on overflow.
+Змініть множення у функції `factorial`. 
+Як зазначено в коментарі `TODO`, використайте множення з насиченням, щоб у разі переповнення результат обмежувався значенням `u32::MAX`, а не переходив по колу.

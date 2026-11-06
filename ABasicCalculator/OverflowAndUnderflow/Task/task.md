@@ -1,1 +1,1 @@
-Adjust the `factorial` function so arithmetic overflows wrap around, matching the `twentieth()` test case's expected result for `factorial(20)`.
+Змініть функцію `factorial` так, щоб у разі арифметичного переповнення відбувався перехід по колу (wrap around) і результат `factorial(20)` збігався зі значенням, яке очікує тест `twentieth()`.

@@ -1,9 +1,9 @@
-## `saturating_` methods
+## Методи `saturating_`
 ##
 
-You can opt into **saturating arithmetic** by using the `saturating_` methods.\
-Instead of wrapping around, saturating arithmetic will return the maximum or minimum value for the integer type.
-For example:
+Увімкнути **арифметику з насиченням** (saturating arithmetic) можна за допомогою методів `saturating_`.\
+Замість переходу по колу арифметика з насиченням повертає максимальне або мінімальне значення цілочисельного типу.
+Наприклад:
 
 ```rust
 let x = 255u8;
@@ -12,8 +12,8 @@ let sum = x.saturating_add(y);
 assert_eq!(sum, 255);
 ```
 
-Since `255 + 1` is `256`, which is bigger than `u8::MAX`, the result is `u8::MAX` (255).\
-The opposite happens for underflows: `0 - 1` is `-1`, which is smaller than `u8::MIN`, so the result is `u8::MIN` (0).
+Оскільки `255 + 1` дорівнює `256`, що більше за `u8::MAX`, результатом буде `u8::MAX` (255).\
+З антипереповненням відбувається протилежне: `0 - 1` дорівнює `-1`, що менше за `u8::MIN`, тож результатом буде `u8::MIN` (0).
 
-You can't get saturating arithmetic via the `overflow-checks` profile setting—you have to explicitly opt into it
-when performing the arithmetic operation.
+Арифметику з насиченням не можна ввімкнути через параметр профілю `overflow-checks` — її потрібно явно обирати
+під час виконання арифметичної операції.

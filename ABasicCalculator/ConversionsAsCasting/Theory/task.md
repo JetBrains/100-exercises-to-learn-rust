@@ -1,49 +1,49 @@
-## Conversions, `as` casting
+## Перетворення типів через `as`
 
-We've repeated over and over again that Rust won't perform
-implicit type conversions for integers.\
-How do you perform _explicit_ conversions then?
+Ми вже неодноразово повторювали, що Rust не виконує
+неявних перетворень цілочисельних типів.\
+Як же тоді виконувати _явні_ перетворення?
 
 ## `as`
 
-You can use the `as` operator to convert between integer types.\
-`as` conversions are **infallible**.
+Для перетворення між цілочисельними типами можна використовувати оператор `as`.\
+Перетворення через `as` **не можуть завершитися невдачею** (infallible).
 
-For example:
+Наприклад:
 
 ```rust
 let a: u32 = 10;
 
-// Cast `a` into the `u64` type
+// Явно перетворюємо `a` на тип `u64`
 let b = a as u64;
 
-// You can use `_` as the target type
-// if it can be correctly inferred 
-// by the compiler. For example:
+// Як цільовий тип можна вказати `_`,
+// якщо компілятор може правильно
+// його вивести. Наприклад:
 let c: u64 = a as _;
 ```
 
-The semantics of this conversion are what you expect: all `u32` values are valid `u64`
-values.
+Семантика такого перетворення цілком очікувана: усі значення `u32` є допустимими значеннями
+`u64`.
 
-### Truncation
+### Обрізання
 
-Things get more interesting if we go in the opposite direction:
+Цікавіше стає, якщо рухатися у зворотному напрямку:
 
 ```rust
-// A number that's too big 
-// to fit into a `u8`
+// Число, яке завелике,
+// щоб уміститися в `u8`
 let a: u16 = 255 + 1;
 let b = a as u8;
 ```
 
-This program will run without issues, because `as` conversions are infallible.
-But what is the value of `b`?
-When going from a larger integer type to a smaller, the Rust compiler will perform
-a **truncation**.
+Ця програма виконається без проблем, бо перетворення через `as` не можуть завершитися невдачею.
+Але яке значення матиме `b`?
+Під час перетворення більшого цілочисельного типу на менший компілятор Rust виконує
+**обрізання** (truncation).
 
-To understand what happens, let's start by looking at how `256u16` is
-represented in memory, as a sequence of bits:
+Щоб зрозуміти, що відбувається, погляньмо спершу, як `256u16`
+представлено в пам'яті у вигляді послідовності бітів:
 
 ```text
  0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0
@@ -52,8 +52,8 @@ represented in memory, as a sequence of bits:
   First 8 bits    Last 8 bits
 ```
 
-When converting to a `u8`, the Rust compiler will keep the last 8 bits of a `u16`
-memory representation:
+Під час перетворення на `u8` компілятор Rust залишає останні 8 бітів
+представлення `u16` у пам'яті:
 
 ```text
  0 0 0 0 0 0 0 0 
@@ -62,9 +62,9 @@ memory representation:
   Last 8 bits
 ```
 
-Hence `256 as u8` is equal to `0`. That's... not ideal, in most scenarios.\
-In fact, the Rust compiler will actively try to stop you if it sees you trying
-to cast a literal value which will result in a truncation:
+Отже, `256 as u8` дорівнює `0`. У більшості випадків це... не ідеально.\
+Насправді компілятор Rust активно намагатиметься вас зупинити, якщо побачить, що ви явно
+перетворюєте літерал і це призведе до обрізання:
 
 ```text
 error: literal out of range for `i8`
@@ -78,25 +78,25 @@ error: literal out of range for `i8`
   = note: `#[deny(overflowing_literals)]` on by default
 ```
 
-### Recommendation
+### Рекомендація
 
-As a rule of thumb, be quite careful with `as` casting.\
-Use it _exclusively_ for going from a smaller type to a larger type.
-To convert from a larger to smaller integer type, rely on the
-[_fallible_ conversion machinery](../../../TicketV2/TryFromTrait/Theory/task.md) that we'll
-explore later in the course.
+Загальне правило: будьте дуже обережні з явним перетворенням через `as`.\
+Використовуйте його _лише_ для переходу від меншого типу до більшого.
+Щоб перетворити більший цілочисельний тип на менший, покладайтеся на
+[механізм перетворень, які _можуть завершитися невдачею_](../../../TicketV2/TryFromTrait/Theory/task.md) (fallible), — ми
+розглянемо його далі в курсі.
 
-### Limitations
+### Обмеження
 
-Surprising behaviour is not the only downside of `as` casting.
-It is also fairly limited: you can only rely on `as` casting
-for primitive types and a few other special cases.\
-When working with composite types, you'll have to rely on
-different conversion mechanisms ([fallible](../../../TicketV2/TryFromTrait/Theory/task.md)
-and [infallible](../../../Traits/FromTrait/Theory/task.md)), which we'll explore later on.
+Неочікувана поведінка — не єдиний недолік явного перетворення через `as`.
+Воно ще й досить обмежене: покладатися на `as` можна лише
+для примітивних типів і кількох інших особливих випадків.\
+Працюючи зі складеними типами, доведеться покладатися на
+інші механізми перетворення ([ті, що можуть завершитися невдачею](../../../TicketV2/TryFromTrait/Theory/task.md),
+і [ті, що не можуть завершитися невдачею](../../../Traits/FromTrait/Theory/task.md)), які ми розглянемо пізніше.
 
-## Further reading
+## Додаткові матеріали
 
-- Check out [Rust's official reference](https://doc.rust-lang.org/reference/expressions/operator-expr.html#numeric-cast)
-  to learn the precise behaviour of `as` casting for each source/target combination,
-  as well as the exhaustive list of allowed conversions.
+- Зазирніть в [офіційний довідник Rust](https://doc.rust-lang.org/reference/expressions/operator-expr.html#numeric-cast) (Rust Reference),
+  щоб дізнатися, як саме поводиться явне перетворення через `as` для кожної комбінації вихідного й цільового типів,
+  а також ознайомитися з вичерпним переліком дозволених перетворень.

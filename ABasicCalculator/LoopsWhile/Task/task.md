@@ -1,2 +1,2 @@
-This task requires you to rewrite the `factorial` function.
-Previously, the `factorial` function was likely implemented using recursion. In this iteration, your goal is to reimplement the same functionality but using a `while` loop instead.
+У цьому завданні потрібно переписати функцію `factorial`.
+Імовірно, раніше ви реалізували функцію `factorial` за допомогою рекурсії. Цього разу ваша мета — реалізувати ту саму функціональність, але вже за допомогою циклу `while`.

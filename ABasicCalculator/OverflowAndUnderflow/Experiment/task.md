@@ -1,48 +1,47 @@
-This is a hands-on **experiment** - there's nothing to submit. Just run the code and
-watch what happens.
+Це практичний **експеримент** — здавати нічого не потрібно. Просто запустіть код і
+подивіться, що станеться.
 
-`main.rs` defines the same `factorial` function from earlier and calls
-`factorial(20)`. As the theory explained, `20!` is far bigger than `u32::MAX`, so
-this multiplication overflows.
+У `main.rs` визначено ту саму функцію `factorial`, що й раніше, і викликано
+`factorial(20)`. Як пояснювалося в теорії, `20!` значно більше за `u32::MAX`, тому
+це множення спричиняє переповнення.
 
-## Run it under the `dev` profile
+## Запустіть код у профілі `dev`
 
-Run `main.rs` as it is (the green **▶** next to `main`). The `dev`
-profile sets `overflow-checks = true` by default, so the program **panics** with
+Запустіть `main.rs` як є (зелена кнопка **▶** поруч із `main`). Профіль `dev`
+за замовчуванням задає `overflow-checks = true`, тому програма **панікує** з повідомленням
 `attempt to multiply with overflow`.
 
-## Make it wrap around
+## Увімкніть перехід по колу
 
-Now get the *same code* to **wrap around** instead of panicking by changing the
-profile it's compiled with. The options to try are **release profile** and
-**custom dev profile**.
+Тепер змініть профіль, з яким компілюється код, щоб у *тому самому коді* замість паніки відбувався
+**перехід по колу** (wrap around). Спробуйте два варіанти: **профіль release** і
+**власний профіль dev**.
 
-### Release profile
+### Профіль release
 
-To run under the release profile choose `release` from the drop-down menu at the top of
-the IDE window, then press the green arrow to the right of it.
+Щоб запустити код у профілі release, виберіть `release` у випадному меню вгорі
+вікна IDE, а потім натисніть зелену стрілку праворуч від нього.
 
 <img src="choose-profile.png" width="100%"/>
 
-The `release` profile has `overflow-checks = false`, so `factorial(20)` wraps around and prints `2192834560`.
+У профілі `release` задано `overflow-checks = false`, тому результат `factorial(20)` переходить по колу, і програма виводить `2192834560`.
 
-### Custom `dev` profile
+### Власний профіль `dev`
 
-Add the following to the `Cargo.toml` at the **root of the repository** and run again under `dev`.
+Додайте наведений нижче фрагмент до `Cargo.toml` у **корені репозиторію** й знову запустіть код у профілі `dev`.
 
 ```toml
 [profile.dev]
 overflow-checks = false
 ```
 
-Profile settings are only read from the workspace root - not from a task's own `Cargo.toml`.
-To locate the root `Cargo.toml` choose `Project Files` instead of `Course` in the course view.
+Налаштування профілів зчитуються лише з кореня робочого простору (workspace), а не з власного `Cargo.toml` завдання.
+Щоб знайти кореневий `Cargo.toml`, виберіть у вікні курсу `Project Files` замість `Course`.
 
 <img src="project-files.png" width="75%"/>
 
-Run the code under `dev` profile. It now wraps under `dev` too. Revert this change once you're done experimenting.
+Запустіть код у профілі `dev`. Тепер перехід по колу відбувається й у `dev`. Завершивши експерименти, скасуйте цю зміну.
 
-## Summary
+## Підсумок
 
-Same code, different behaviour depending on the profile - that's `overflow-checks` at
-work.
+Той самий код, але різна поведінка залежно від профілю — ось як працює `overflow-checks`.

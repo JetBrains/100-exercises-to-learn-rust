@@ -1,5 +1,5 @@
-This task requires you to modify the existing `speed` function.
+У цьому завданні потрібно змінити наявну функцію `speed`.
 
-The `speed` function calculates the average speed based on a start point, end point, and time_elapsed.
+Функція `speed` обчислює середню швидкість за початковою точкою, кінцевою точкою та витраченим часом (time_elapsed).
 
-Your objective is to add error handling to prevent division by zero.
+Ваша мета — додати обробку помилок, щоб запобігти діленню на нуль.

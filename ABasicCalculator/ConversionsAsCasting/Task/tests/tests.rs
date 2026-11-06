@@ -9,18 +9,18 @@ mod tests {
 
     #[test]
     fn u8_to_i8() {
-        // The compiler is smart enough to know that the value 255 cannot fit
-        // inside an i8, so it'll emit a hard error. We intentionally disable
-        // this guardrail to make this (bad) conversion possible.
-        // The compiler is only able to pick on this because the value is a
-        // literal. If we were to use a variable, the compiler wouldn't be able to
-        // catch this at compile time.
+        // Компілятор достатньо розумний, щоб знати, що значення 255 не вміщується
+        // в i8, тому він видасть помилку (а не попередження). Ми навмисно вимикаємо
+        // цей запобіжник, щоб уможливити це (погане) перетворення.
+        // Компілятор може це помітити лише тому, що значення є
+        // літералом. Якби ми використали змінну, компілятор не зміг би
+        // виявити це під час компіляції.
         #[allow(overflowing_literals)]
         let x = { 255 as i8 };
 
-        // You could solve this by using exactly the same expression as above,
-        // but that would defeat the purpose of the exercise. Instead, use a genuine
-        // `i8` value that is equivalent to `255` when converted to `u8`.
+        // Можна було б розв'язати це, використавши точнісінько такий самий вираз, як вище,
+        // але тоді вправа втратила б сенс. Натомість використайте справжнє
+        // значення `i8`, яке після перетворення на `u8` дорівнює `255`.
         let y: i8 = -1;
 
         assert_eq!(x, y);

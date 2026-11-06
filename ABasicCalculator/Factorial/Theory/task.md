@@ -1,11 +1,11 @@
-## Factorial
+## Факторіал
 ##
-So far you've learned:
+Ось що ви вже дізналися:
 
-- How to define a function
-- How to call a function
-- Which integer types are available in Rust
-- Which arithmetic operators are available for integers
-- How to execute conditional logic via comparisons and `if`/`else` expressions
+- як визначити функцію;
+- як викликати функцію;
+- які цілочисельні типи є в Rust;
+- які арифметичні оператори доступні для цілих чисел;
+- як виконувати умовну логіку за допомогою порівнянь і виразів `if`/`else`.
 
-It looks like you're ready to tackle factorials!
+Схоже, ви готові взятися за факторіали!

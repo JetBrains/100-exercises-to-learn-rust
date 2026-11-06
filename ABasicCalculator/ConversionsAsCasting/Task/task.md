@@ -1,1 +1,1 @@
-This task is to replace TODOs in the tests with the correct values for explicit type conversions, applying Rust's casting rules.
+У цьому завданні потрібно замінити TODO в тестах на правильні значення для явних перетворень типів, застосувавши правила явного перетворення в Rust.

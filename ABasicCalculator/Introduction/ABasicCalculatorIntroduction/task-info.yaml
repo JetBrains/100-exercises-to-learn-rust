@@ -1,12 +1,12 @@
 type: edu
-custom_name: A Basic Calculator - Introduction
+custom_name: Простий калькулятор — вступ
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 74
+      - offset: 81
         length: 26
-        placeholder_text: insert here missing part
+        placeholder_text: "вставте тут пропущену частину"
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

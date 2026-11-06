@@ -1,2 +1,2 @@
-This task is to modify the `compute` function to resolve a compiler error and allow tests to pass.
-Check `TODO` comment in the code.
+У цьому завданні потрібно змінити функцію `compute` так, щоб зникла помилка компіляції й тести проходили.
+Перегляньте коментар `TODO` у коді.

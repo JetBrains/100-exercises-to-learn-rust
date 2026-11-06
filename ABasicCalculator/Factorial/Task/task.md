@@ -1,2 +1,2 @@
-This task is to implement the `factorial` function. 
-As instructed by the comments in the code, you must calculate `n!` for a non-negative integer `n` using recursion, without using loops.
+У цьому завданні потрібно реалізувати функцію `factorial`. 
+Як зазначено в коментарях у коді, потрібно обчислити `n!` для невід'ємного цілого числа `n` за допомогою рекурсії, не використовуючи циклів.

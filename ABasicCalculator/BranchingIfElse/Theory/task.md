@@ -1,15 +1,15 @@
-## Control flow
+## Керування потоком виконання
 
-All our programs so far have been pretty straightforward.\
-A sequence of instructions is executed from top to bottom, and that's it.
+Досі всі наші програми були доволі прямолінійними.\
+Послідовність інструкцій виконується згори донизу — і все.
 
-It's time to introduce some **branching**.
+Настав час познайомитися з **розгалуженням**.
 
-## `if` clauses
+## Конструкція `if`
 
-The `if` keyword is used to execute a block of code only if a condition is true.
+Ключове слово `if` використовують, щоб виконати блок коду лише тоді, коли умова істинна.
 
-Here's a simple example:
+Ось простий приклад:
 
 ```rust
 let number = 3;
@@ -18,13 +18,13 @@ if number < 5 {
 }
 ```
 
-This program will print `number is smaller than 5` because the condition `number < 5` is true.
+Ця програма виведе `number is smaller than 5`, бо умова `number < 5` істинна.
 
-### `else` clauses
+### Гілка `else`
 
-Like most programming languages, Rust supports an optional `else` branch to execute a block of code when the condition in an
-`if` expression is false.\
-For example:
+Як і більшість мов програмування, Rust підтримує необов'язкову гілку `else`, яка виконує блок коду, коли умова у виразі
+`if` хибна.\
+Наприклад:
 
 ```rust
 let number = 3;
@@ -36,9 +36,9 @@ if number < 5 {
 }
 ```
 
-### `else if` clauses
+### Гілка `else if`
 
-Your code drifts more and more to the right when you have multiple `if` expressions, one nested inside the other.
+Коли кілька виразів `if` вкладено один в одного, ваш код дедалі більше зсувається праворуч.
 
 ```rust
 let number = 3;
@@ -54,7 +54,7 @@ if number < 5 {
 }
 ```
 
-You can use the `else if` keyword to combine multiple `if` expressions into a single one:
+Щоб об'єднати кілька виразів `if` в один, можна скористатися ключовими словами `else if`:
 
 ```rust
 let number = 3;
@@ -68,18 +68,18 @@ if number < 5 {
 }
 ```
 
-## Booleans
+## Булеві значення
 
-The condition in an `if` expression must be of type `bool`, a **boolean**.\
-Booleans, just like integers, are a primitive type in Rust.
+Умова у виразі `if` повинна мати тип `bool`, тобто бути **булевим значенням**.\
+Булеві значення, як і цілі числа, належать до примітивних типів Rust.
 
-A boolean can have one of two values: `true` or `false`.
+Булеве значення може бути одним із двох: `true` або `false`.
 
-### No truthy or falsy values
+### Жодних «truthy» і «falsy» значень
 
-If the condition in an `if` expression is not a boolean, you'll get a compilation error.
+Якщо умова у виразі `if` не є булевим значенням, ви отримаєте помилку компіляції.
 
-For example, the following code will not compile:
+Наприклад, такий код не скомпілюється:
 
 ```rust
 let number = 3;
@@ -88,7 +88,7 @@ if number {
 }
 ```
 
-You'll get the following compilation error:
+Ви отримаєте таку помилку компіляції:
 
 ```text
 error[E0308]: mismatched types
@@ -98,26 +98,26 @@ error[E0308]: mismatched types
   |        ^^^^^^ expected `bool`, found integer
 ```
 
-This follows from Rust's philosophy around type coercion: there's no automatic conversion from non-boolean types to booleans.
-Rust doesn't have the concept of **truthy** or **falsy** values, like JavaScript or Python.\
-You have to be explicit about the condition you want to check.
+Це випливає з філософії Rust щодо приведення типів: автоматичного перетворення небулевих типів на булеві немає.
+У Rust немає поняття **truthy** чи **falsy** значень (небулевих значень, які в умові вважаються істиною чи хибою), як у JavaScript або Python.\
+Умову, яку ви хочете перевірити, потрібно записувати явно.
 
-### Comparison operators
+### Оператори порівняння
 
-It's quite common to use comparison operators to build conditions for `if` expressions.\
-Here are the comparison operators available in Rust when working with integers:
+Для побудови умов у виразах `if` дуже часто використовують оператори порівняння.\
+Ось оператори порівняння, доступні в Rust для цілих чисел:
 
-- `==`: equal to
-- `!=`: not equal to
-- `<`: less than
-- `>`: greater than
-- `<=`: less than or equal to
-- `>=`: greater than or equal to
+- `==`: дорівнює
+- `!=`: не дорівнює
+- `<`: менше ніж
+- `>`: більше ніж
+- `<=`: менше або дорівнює
+- `>=`: більше або дорівнює
 
-## `if/else` is an expression
+## `if/else` — це вираз
 
-In Rust, `if` expressions are **expressions**, not statements: they return a value.\
-That value can be assigned to a variable or used in other expressions. For example:
+У Rust вирази `if` — це саме **вирази**, а не інструкції: вони повертають значення.\
+Це значення можна присвоїти змінній або використати в інших виразах. Наприклад:
 
 ```rust
 let number = 3;
@@ -128,6 +128,6 @@ let message = if number < 5 {
 };
 ```
 
-In the example above, each branch of the `if` evaluates to a string literal,
-which is then assigned to the `message` variable.\
-The only requirement is that both `if` branches return the same type.
+У прикладі вище результатом кожної гілки `if` є рядковий літерал,
+який потім присвоюється змінній `message`.\
+Єдина вимога — обидві гілки `if` мають повертати значення одного й того самого типу.

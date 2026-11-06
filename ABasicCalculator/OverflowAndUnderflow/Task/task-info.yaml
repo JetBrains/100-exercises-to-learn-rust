@@ -1,12 +1,12 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
       - offset: 92
         length: 32
-        placeholder_text: "/* TODO: Use wrapping_mul to ensure multiplication wraps around\
-      \ on overflow */"
+        placeholder_text: "/* TODO: використайте wrapping_mul, щоб у разі переповнення результат множення переходив по колу */"
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

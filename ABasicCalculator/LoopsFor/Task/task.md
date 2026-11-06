@@ -1,1 +1,1 @@
-This task requires you to rewrite the `factorial` function using a `for` loop.
+У цьому завданні потрібно переписати функцію `factorial` із використанням циклу `for`.

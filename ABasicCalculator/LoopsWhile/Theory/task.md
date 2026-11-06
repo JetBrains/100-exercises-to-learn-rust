@@ -1,40 +1,40 @@
-## Loops, part 1: `while`
+## Цикли, частина 1: `while`
 
-Your implementation of `factorial` has been forced to use recursion.\
-This may feel natural to you, especially if you're coming from a functional programming background.
-Or it may feel strange, if you're used to more imperative languages like C or Python.
+Вашу реалізацію `factorial` довелося писати з використанням рекурсії.\
+Вам це може здаватися природним, особливо якщо ви маєте досвід функціонального програмування.
+А може — дивним, якщо ви звикли до імперативніших мов, як-от C чи Python.
 
-Let's see how you can implement the same functionality using a **loop** instead.
+Подивімося, як натомість реалізувати ту саму функціональність за допомогою **циклу**.
 
-## The `while` loop
+## Цикл `while`
 
-A `while` loop is a way to execute a block of code as long as a **condition** is true.\
-Here's the general syntax:
+Цикл `while` дає змогу виконувати блок коду, доки **умова** істинна.\
+Ось загальний синтаксис:
 
 ```rust
 while <condition> {
-    // code to execute
+    // код, який потрібно виконати
 }
 ```
 
-For example, we might want to sum the numbers from 1 to 5:
+Наприклад, нам може знадобитися підсумувати числа від 1 до 5:
 
 ```rust
 let sum = 0;
 let i = 1;
-// "while i is less than or equal to 5"
+// «поки i менше або дорівнює 5»
 while i <= 5 {
-    // `+=` is a shorthand for `sum = sum + i`
+    // `+=` — це скорочений запис `sum = sum + i`
     sum += i;
     i += 1;
 }
 ```
 
-This will keep adding 1 to `i` and `i` to `sum` until `i` is no longer less than or equal to 5.
+Цей код раз у раз додаватиме 1 до `i` та `i` до `sum`, доки `i` не стане більшим за 5.
 
-## The `mut` keyword
+## Ключове слово `mut`
 
-The example above won't compile as is. You'll get an error like:
+Приклад вище в такому вигляді не скомпілюється. Ви отримаєте приблизно таку помилку:
 
 ```text
 error[E0384]: cannot assign twice to immutable variable `sum`
@@ -62,13 +62,13 @@ error[E0384]: cannot assign twice to immutable variable `i`
   |         ^^^^^^ cannot assign twice to immutable variable
 ```
 
-This is because variables in Rust are **immutable** by default.\
-You can't change their value once it has been assigned.
+Так стається тому, що змінні в Rust за замовчуванням **незмінювані** (immutable).\
+Після того як значення присвоєно, змінити його не можна.
 
-If you want to allow modifications, you have to declare the variable as **mutable** using the `mut` keyword:
+Якщо ви хочете дозволити зміни, потрібно оголосити змінну **змінюваною** (mutable) за допомогою ключового слова `mut`:
 
 ```rust
-// `sum` and `i` are mutable now!
+// Тепер `sum` та `i` змінювані!
 let mut sum = 0;
 let mut i = 1;
 
@@ -78,8 +78,8 @@ while i <= 5 {
 }
 ```
 
-This will compile and run without errors.
+Тепер код скомпілюється й виконається без помилок.
 
-## Further reading
+## Додаткові матеріали
 
-- [`while` loop documentation](https://doc.rust-lang.org/std/keyword.while.html)
+- [Документація циклу `while`](https://doc.rust-lang.org/std/keyword.while.html)

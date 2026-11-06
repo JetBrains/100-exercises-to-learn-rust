@@ -8,9 +8,9 @@ mod tests {
     }
 
     #[test]
-    // 👇 With the `#[should_panic]` annotation we can assert that we expect the code
-    //    under test to panic. We can also check the panic message by using `expected`.
-    //    This is all part of Rust's built-in test framework!
+    // 👇 За допомогою анотації `#[should_panic]` можна вказати, що ми очікуємо паніки
+    //    від тестованого коду. Також можна перевірити повідомлення паніки за допомогою `expected`.
+    //    Усе це — частина вбудованого фреймворку тестування Rust!
     #[should_panic(expected = "The journey took no time at all. That's impossible!")]
     fn by_zero() {
         speed(0, 10, 0);

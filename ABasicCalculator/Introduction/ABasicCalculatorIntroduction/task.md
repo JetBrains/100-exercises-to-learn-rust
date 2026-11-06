@@ -1,22 +1,22 @@
-# A Basic Calculator
+# Простий калькулятор
 
-In this section we'll learn how to use Rust as a **calculator**.\
-It might not sound like much, but it'll give us a chance to cover a lot of Rust's basics, such as:
+У цьому розділі ми навчимося використовувати Rust як **калькулятор**.\
+Може здатися, що це не так уже й багато, але так ми зможемо розібрати чимало основ Rust, зокрема:
 
-- How to define and call functions
-- How to declare and use variables
-- Primitive types (integers and booleans)
-- Arithmetic operators (including overflow and underflow behavior)
-- Comparison operators
-- Control flow
-- Panics
+- як визначати й викликати функції;
+- як оголошувати й використовувати змінні;
+- примітивні типи (цілі числа та булеві значення);
+- арифметичні оператори, зокрема їхню поведінку в разі переповнення та антипереповнення (underflow);
+- оператори порівняння;
+- керування потоком виконання;
+- паніки.
 
-Nailing the basics with a few exercises will get the language flowing under your fingers.
-When we move on to more complex topics, such as traits and ownership, you'll be able to focus on the new concepts
-without getting bogged down by the syntax or other trivial details.
+Кілька вправ на основи — і ви почнете писати цією мовою вільно, ніби вона сама лягає під пальці.
+Коли ми перейдемо до складніших тем, як-от трейти та володіння, ви зможете зосередитися на нових концепціях,
+не загрузаючи в синтаксисі чи інших дрібницях.
 
 <br/>
 
-## Task
-Introduction task is to complete the `intro` function. 
-The function should return the string: ***I'm ready to build a calculator in Rust!***
+## Завдання
+У вступному завданні потрібно дописати функцію `intro`. 
+Функція має повернути рядок: ***I'm ready to build a calculator in Rust!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

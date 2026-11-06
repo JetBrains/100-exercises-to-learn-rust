@@ -4,12 +4,12 @@ mod tests {
 
     #[test]
     fn twentieth() {
-        // 20! is 2432902008176640000, which is too large to fit in a u32
-        // With the default dev profile, this will panic when you run `cargo test`
-        // We want it to wrap around instead
+        // 20! дорівнює 2432902008176640000, а це число занадто велике, щоб уміститися в u32
+        // Зі стандартним профілем dev це спричинить паніку, коли ви запустите `cargo test`
+        // Ми ж хочемо, щоб натомість відбувався перехід по колу (wrap around)
         assert_eq!(factorial(20), 2_192_834_560);
         //                           ☝️
-        // A large number literal using underscores to improve readability!
+        // Великий числовий літерал, у якому для зручності читання використано підкреслення!
     }
 
     #[test]

@@ -1,35 +1,35 @@
-## Loops, part 2: `for`
+## Цикли, частина 2: `for`
 
-Having to manually increment a counter variable is somewhat tedious. The pattern is also extremely common!\
-To make this easier, Rust provides a more concise way to iterate over a range of values: the `for` loop.
+Вручну збільшувати змінну-лічильник доволі нудно. До того ж цей патерн трапляється надзвичайно часто!\
+Щоб спростити цю роботу, Rust пропонує лаконічніший спосіб перебрати діапазон значень — цикл `for`.
 
-## The `for` loop
+## Цикл `for`
 
-A `for` loop is a way to execute a block of code for each element in an iterator.
+Цикл `for` дає змогу виконати блок коду для кожного елемента ітератора.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Later in the course we'll give a precise definition of what counts as an "iterator".
-> For now, think of it as a sequence of values that you can loop over.
+> Далі в курсі ми дамо точне визначення того, що вважається «ітератором».
+> Поки що вважайте його послідовністю значень, яку можна перебрати в циклі.
 
-Here's the general syntax:
+Ось загальний синтаксис:
 
 ```rust
 for <element> in <iterator> {
-    // code to execute
+    // код, який потрібно виконати
 }
 ```
 
-## Ranges
+## Діапазони
 
-Rust's standard library provides **range** type that can be used to iterate over a sequence of numbers.
+Стандартна бібліотека Rust надає тип **діапазону** (range), який можна використовувати, щоб перебирати послідовність чисел.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> You can use ranges with other types too (e.g. characters and IP addresses),
-> but integers are definitely the most common case in day-to-day Rust programming.
+> Діапазони можна використовувати й з іншими типами (наприклад, із символами та IP-адресами),
+> але цілі числа — безперечно, найпоширеніший випадок у повсякденному програмуванні на Rust.
 
-For example, if we want to sum the numbers from 1 to 5:
+Наприклад, якщо ми хочемо підсумувати числа від 1 до 5:
 
 ```rust
 let mut sum = 0;
@@ -38,22 +38,22 @@ for i in 1..=5 {
 }
 ```
 
-Every time the loop runs, `i` will be assigned the next value in the range before executing the block of code.
+На кожній ітерації циклу, перш ніж виконати блок коду, змінній `i` присвоюється наступне значення з діапазону.
 
-There are five kinds of ranges in Rust:
+У Rust є п'ять видів діапазонів:
 
-- `1..5`: A (half-open) range. It includes all numbers from 1 to 4. It doesn't include the last value, 5.
-- `1..=5`: An inclusive range. It includes all numbers from 1 to 5. It includes the last value, 5.
-- `1..`: An open-ended range. It includes all numbers from 1 to infinity (well, until the maximum value of the integer type).
-- `..5`: A range that starts at the minimum value for the integer type and ends at 4. It doesn't include the last value, 5.
-- `..=5`: A range that starts at the minimum value for the integer type and ends at 5. It includes the last value, 5.
+- `1..5`: (напіввідкритий) діапазон. Містить усі числа від 1 до 4. Останнє значення, 5, не входить.
+- `1..=5`: включний діапазон. Містить усі числа від 1 до 5. Останнє значення, 5, входить.
+- `1..`: діапазон без верхньої межі. Містить усі числа від 1 до нескінченності (ну, до максимального значення цілочисельного типу).
+- `..5`: діапазон, що починається з мінімального значення цілочисельного типу й закінчується на 4. Останнє значення, 5, не входить.
+- `..=5`: діапазон, що починається з мінімального значення цілочисельного типу й закінчується на 5. Останнє значення, 5, входить.
 
-You can use a `for` loop with the first three kinds of ranges, where the starting point
-is explicitly specified. The last two range types are used in other contexts, that we'll cover later.
+Цикл `for` можна використовувати з першими трьома видами діапазонів, у яких початкову точку
+задано явно. Два останні види діапазонів використовують в інших контекстах, які ми розглянемо пізніше.
 
-The extreme values of a range don't have to be integer literals—they can be variables or expressions too!
+Межі діапазону не обов'язково мають бути цілочисельними літералами — це можуть бути й змінні чи вирази!
 
-For example:
+Наприклад:
 
 ```rust
 let end = 5;
@@ -64,6 +64,6 @@ for i in 1..(end + 1) {
 }
 ```
 
-## Further reading
+## Додаткові матеріали
 
-- [`for` loop documentation](https://doc.rust-lang.org/std/keyword.for.html)
+- [Документація циклу `for`](https://doc.rust-lang.org/std/keyword.for.html)
