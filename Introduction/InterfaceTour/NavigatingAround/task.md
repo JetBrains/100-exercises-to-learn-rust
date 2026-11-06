@@ -1,18 +1,18 @@
-### JetBrains Academy plugin overview
+### Огляд плагіна JetBrains Academy
 ##
-This lesson will help you take your first steps with the [JetBrains Academy plugin](https://www.jetbrains.com/help/education/educational-products.html) and use it to learn Rust.
+Цей урок допоможе вам зробити перші кроки з [плагіном JetBrains Academy](https://www.jetbrains.com/help/education/educational-products.html) і почати вивчати Rust за його допомогою.
 
-With the JetBrains Academy plugin, you can learn programming languages and tools by completing coding tasks, and get instant feedback right inside the IDE.
+Плагін JetBrains Academy дає змогу вивчати мови програмування та інструменти, виконуючи завдання з програмування, і отримувати миттєвий зворотний зв'язок просто в IDE.
 
-Enough talking - let's get started!
+Досить розмов — почнімо!
 
-If you're already familiar with the interface, you can skip this lesson.
+Якщо ви вже знайомі з інтерфейсом, цей урок можна пропустити.
 
-### Working with courses
-Every course available in JetBrains Academy is structured as a list of lessons. Lessons, in turn, can be grouped into sections. Each lesson contains several tasks.
+### Робота з курсами
+Кожен курс у JetBrains Academy складається зі списку уроків. Уроки, своєю чергою, можуть бути згруповані в розділи. Кожен урок містить кілька завдань.
 
-When you open a course, you will see the main tool windows used for navigation: **Course View**, **Editor**, and **Task Description**:
+Відкривши курс, ви побачите основні вікна інструментів для навігації: **Course View** (вікно курсу), **Editor** (редактор) і **Task Description** (опис завдання):
 
 <img src="course_overview.png" width="100%"/>
 
-Click the **Next** button to navigate to the next task.
+Щоб перейти до наступного завдання, натисніть кнопку **Next**.

@@ -1,46 +1,50 @@
-Welcome to **100 Exercises To Learn Rust**!
+Вітаємо на курсі **100 Exercises To Learn Rust** («100 вправ для вивчення Rust»)!
 
-You'll learn Rust's core concepts one exercise at a time: its syntax, its type system, its standard library and its
-ecosystem. Each lesson introduces one idea and then hands you an exercise, with tests that tell you straight away
-whether you've got it.
+Вправа за вправою ви опануєте ключові концепції Rust: синтаксис мови, її систему типів, стандартну бібліотеку та
+екосистему. Кожен урок знайомить вас з однією ідеєю, а потім пропонує вправу з тестами, які одразу покажуть, чи ви
+її засвоїли.
 
-There's more code here than prose, and that's deliberate.
-Reading about the borrow checker isn't the same experience as having it reject your program and working out why.
+Коду тут більше, ніж тексту, і це навмисно.
+Читати про borrow checker (механізм перевірки запозичень) — зовсім не те саме, що бачити, як він відхиляє вашу
+програму, і самостійно розбиратися, чому так сталося.
 
-## What you'll build
+## Що ви створите
 
-Most of the course grows a single project: a ticket management system, the kind of thing you'd use to track bugs and
-features in a software project.
+Протягом більшої частини курсу ви розвиватимете один проєкт — систему керування тікетами, на зразок тих, у яких
+відстежують помилки й запити на нові функції в програмних проєктах.
 
-It starts out as one struct with a title, a description and a status.
-By the end it holds a whole collection of tickets, hands them out to several threads at once, and serves them over an
-asynchronous REST API that you design yourself.
+Спочатку це лише одна структура з назвою, описом і статусом.
+А наприкінці система зберігає цілу колекцію тікетів, роздає їх одночасно кільком потокам і надає до них доступ через
+асинхронний REST API, який ви спроєктуєте самостійно.
 
-Along the way you'll meet the ideas Rust is known for: ownership and borrowing, traits, and fearless concurrency.
+Дорогою ви познайомитеся з ідеями, якими славиться Rust: володінням і запозиченням, трейтами та «безстрашною
+конкурентністю» (fearless concurrency).
 
-## You don't need to know Rust
+## Знати Rust не обов'язково
 
-We assume you know at least one other programming language. That's the only prerequisite.
+Ми припускаємо, що ви знаєте принаймні одну іншу мову програмування. Це єдина вимога.
 
-You don't need a systems programming background, and you don't need to have managed memory by hand before.
-Stack and heap, ownership, borrowing and the rest are all covered here, starting from scratch.
-By the end you'll have solved around 100 exercises, enough to feel at home in small to medium-sized Rust projects.
+Досвід системного програмування не потрібен, як і досвід ручного керування пам'яттю.
+Стек і купу, володіння, запозичення та все інше ми розбираємо тут з нуля.
+До кінця курсу ви розв'яжете близько 100 вправ — цього досить, щоб почуватися впевнено в малих і середніх проєктах
+на Rust.
 
-You don't have to go front to back, either. The **FAQ** lesson explains the alternatives.
+Проходити курс від початку до кінця теж не обов'язково. Інші варіанти описано в уроці **Часті запитання**.
 
-## What's next
+## Що далі
 
-The next few lessons are short: a tour of the interface, a couple of minutes setting up your IDE, and a brief FAQ.
-Then we start writing Rust.
+Кілька наступних уроків короткі: огляд інтерфейсу, кілька хвилин на налаштування IDE та стислі відповіді на часті
+запитання. А потім ми почнемо писати на Rust.
 
-## Credits
+## Подяки
 
-This is the JetBrains Academy adaptation of
-[100 Exercises To Learn Rust](https://rust-exercises.com/100-exercises/01_intro/00_welcome.html) by
-[Luca Palmieri](https://www.lpalmieri.com/), who has worked with Rust since 2018, first at TrueLayer and then at AWS,
-and who wrote ["Zero to Production in Rust"](https://zero2prod.com).
-[Mainmatter](https://mainmatter.com/rust-consulting/) also delivers the course as an instructor-led workshop.
+Це адаптація для JetBrains Academy курсу
+[100 Exercises To Learn Rust](https://rust-exercises.com/100-exercises/01_intro/00_welcome.html), автор якого —
+[Лука Пальмієрі](https://www.lpalmieri.com/) (Luca Palmieri). Він працює з Rust від 2018 року — спершу в TrueLayer,
+згодом в AWS — і написав книжку [«Zero to Production in Rust»](https://zero2prod.com).
+Компанія [Mainmatter](https://mainmatter.com/rust-consulting/) також проводить цей курс у форматі воркшопу з
+інструктором.
 
-We've kept the substance of the original and added contextual Rust hints that appear as you work in the IDE.
+Ми зберегли суть оригіналу й додали контекстні підказки щодо Rust, які з'являються під час роботи в IDE.
 
-Enjoy the course!
+Приємного навчання!

@@ -1,5 +1,5 @@
 type: theory
-custom_name: I'm stuck. What now?
+custom_name: Застрягли? Що робити далі
 files:
   - name: src/main.rs
     visible: true

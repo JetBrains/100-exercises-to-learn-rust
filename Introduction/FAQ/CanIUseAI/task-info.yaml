@@ -1,5 +1,5 @@
 type: theory
-custom_name: Can I use AI?
+custom_name: Чи можна користуватися ШІ?
 files:
   - name: src/main.rs
     visible: true

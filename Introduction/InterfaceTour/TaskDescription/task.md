@@ -1,27 +1,27 @@
-## Task Description
+## Опис завдання
 
-The **Task Description** window gives you all the information you need to complete a task.
+Вікно **Task Description** (опис завдання) містить усю інформацію, потрібну для виконання завдання.
 
-For theory tasks, it provides the learning and reading material.
-For programming tasks, it states the problem to be solved.
+У теоретичних завданнях тут навчальний матеріал для читання.
+У завданнях із програмування тут сформульовано умову: що саме потрібно зробити.
 
-Use the Task Description window elements for the following actions:
+Елементи вікна Task Description дають змогу виконувати такі дії:
 
-| Element                                                          | Description                                                                                                             |
-|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **Check**                                                        | <font size="-1">Check your solution to a programming task</font>                                                        |   
-| **Run**                                                          | <font size="-1">Run your code (for a theory task)</font>                                                                |
-| ![](images/back.svg)                                             | <font size="-1">Go to the previous task</font>                                                                          |    
-| ![](images/forward.svg) &nbsp;<font size="-1">or</font> **Next** | <font size="-1">Go to the next task</font>                                                                              | 
-| ![](images/reset.svg)                                            | <font size="-1">Discard all the changes you've made in the task, and start over</font>                                  | 
-| ![](images/commentTask.svg)                                      | <font size="-1">Leave a comment on a particular task</font>                                                             | 
-| **Peek Solution...**                                             | <font size="-1">Reveal the author's solution and show the <b>diff</b></font>                                            |
-| ![](images/moreVertical.svg)                                   | <font size="-1">Change the Task Description window display options </font>                                          | 
-| ![](images/hideToolWindow.svg)                                   | <font size="-1">Hide the Task Description window</font>                                                                 | 
+| Елемент                                                           | Опис                                                                                                  |
+|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Check**                                                         | <font size="-1">Перевірити розв'язок завдання з програмування</font>                                  |
+| **Run**                                                           | <font size="-1">Запустити код (у теоретичному завданні)</font>                                        |
+| ![](images/back.svg)                                              | <font size="-1">Перейти до попереднього завдання</font>                                               |
+| ![](images/forward.svg) &nbsp;<font size="-1">або</font> **Next** | <font size="-1">Перейти до наступного завдання</font>                                                 |
+| ![](images/reset.svg)                                             | <font size="-1">Скасувати всі зміни, зроблені в завданні, і почати спочатку</font>                    |
+| ![](images/commentTask.svg)                                       | <font size="-1">Залишити коментар до конкретного завдання</font>                                      |
+| **Peek Solution...**                                              | <font size="-1">Показати авторський розв'язок і <b>diff</b> — різницю з вашим кодом</font>            |
+| ![](images/moreVertical.svg)                                      | <font size="-1">Змінити параметри відображення вікна Task Description</font>                          |
+| ![](images/hideToolWindow.svg)                                    | <font size="-1">Сховати вікно Task Description</font>                                                 |
 
-We recommend keeping the Task Description window visible while you work. If it does get in your way, you can hide it with the **Hide** (![](images/hideToolWindow.svg)) button in the top right-hand corner of the window.
+Радимо тримати вікно Task Description відкритим під час роботи. Якщо воно все ж заважає, його можна сховати кнопкою **Hide** (![](images/hideToolWindow.svg)) у правому верхньому куті вікна.
 
-If you use two monitors, it may be helpful to switch the Task Description panel to the floating mode and move it to the second monitor, or just place it near the main IDE window. To do this, click the tool window settings ![](images/moreVertical.svg) icon :
+Якщо у вас два монітори, зручно відкріпити панель Task Description (режим **Float**) і перенести її на другий монітор або просто розмістити поруч із головним вікном IDE. Для цього натисніть значок налаштувань вікна інструментів ![](images/moreVertical.svg):
 
 <img src="images/edu_task_description_window_settings.png" width="65%"/>
 

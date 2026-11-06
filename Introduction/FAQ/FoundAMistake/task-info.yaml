@@ -1,5 +1,5 @@
 type: theory
-custom_name: What if I think the course is wrong?
+custom_name: Що, як мені здається, що в курсі помилка?
 files:
   - name: src/main.rs
     visible: true

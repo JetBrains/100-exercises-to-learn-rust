@@ -1,18 +1,19 @@
-## Is there anyone I can ask?
+## Чи є кого запитати?
 ##
 
-Yes, and Rust's community has a good reputation for being patient with beginners.
+Так, і спільнота Rust має добру репутацію: до початківців тут ставляться терпляче.
 
-This course was originally written to be taught in a room with an instructor on hand.
-Working through it on your own means you don't have one, so it's worth knowing where the people are:
+Спочатку цей курс створювали для занять в аудиторії, де поруч є інструктор.
+Коли ви проходите його самостійно, інструктора поруч немає, тож варто знати, де шукати людей:
 
-- **[The Rust users forum](https://users.rust-lang.org)** is the best place for a real question, especially one that
-  needs code and context to explain. Beginner questions are entirely normal there.
-- **[rust-lang.org/community](https://www.rust-lang.org/community)** lists everywhere else: the Zulip chat server, user
-  groups and events. There are Rust meetups in more than 35 countries, so there may well be one near you.
+- **[Форум користувачів Rust](https://users.rust-lang.org)** — найкраще місце для змістовного запитання, особливо
+  такого, яке не пояснити без коду й контексту. Запитання від початківців там цілком звична справа.
+- **[rust-lang.org/community](https://www.rust-lang.org/community)** — тут перелічено всі інші місця: чат-сервер Zulip,
+  групи користувачів і заходи. Зустрічі прихильників Rust (мітапи) відбуваються в понад 35 країнах, тож цілком можливо,
+  що одна з них — десь неподалік від вас.
 
-Two things make a question easy for someone to answer: the smallest piece of code that still shows the problem, and the
-exact compiler error, pasted in full rather than described from memory.
+Відповісти на запитання значно легше, якщо в ньому є дві речі: найменший фрагмент коду, на якому ще відтворюється
+проблема, і точний текст помилки компіляції — вставлений повністю, а не переказаний із пам'яті.
 
-And if you can arrange it, working through the course alongside a friend or a colleague beats all of the above.
-Explaining ownership out loud to another person is one of the quickest ways to find out whether you really understand it.
+А якщо є змога проходити курс разом із другом чи колегою, це краще за все перелічене вище.
+Пояснити комусь уголос, що таке володіння, — один із найшвидших способів з'ясувати, чи ви справді його розумієте.

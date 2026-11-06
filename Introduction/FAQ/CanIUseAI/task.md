@@ -1,28 +1,29 @@
-## Can I use AI?
+## Чи можна користуватися ШІ?
 ##
 
-Yes. You're not cheating by asking an AI assistant, and we'd rather you ask it than stay stuck.
+Так. Звертаючись до ШІ-асистента, ви не шахраюєте, і ми воліємо, щоб ви його запитали, а не залишалися в глухому куті.
 
-Use it as a tutor, though, not as a ghostwriter.
+Тільки використовуйте його як наставника, а не як того, хто виконає роботу замість вас.
 
-Questions that make you a better Rust programmer:
+Запитання, які допоможуть вам краще програмувати на Rust:
 
-- _"Explain this compiler error to me: ..."_
-- _"Why does Rust want `&mut` here and not `&`?"_
-- _"What's the difference between `String` and `&str`?"_
-- _"Show me a small example of `Iterator::filter_map`."_
+- _«Поясни мені цю помилку компіляції: ...»_
+- _«Чому Rust вимагає тут `&mut`, а не `&`?»_
+- _«Яка різниця між `String` і `&str`?»_
+- _«Покажи невеликий приклад використання `Iterator::filter_map`»_
 
-What to avoid is pasting the exercise in and asking for the solution.
-The exercises are small, so this is easy to do. But the understanding you came for is built in the minutes when you
-don't yet know the answer. Skip those minutes and you skip the learning.
+Чого варто уникати, то це вставляти умову вправи й просити розв'язок.
+Вправи невеликі, тож зробити це легко. Але розуміння, заради якого ви прийшли, формується саме в ті хвилини, коли ви
+ще не знаєте відповіді. Пропустите ці хвилини — пропустите й навчання.
 
-That's why we suggested switching AI code completion off in the **Set up your IDE** lesson.
-A suggestion that writes the answer before you've had a chance to think takes the exercise away from you.
-The same goes for pasting in code you haven't read.
+Саме тому в уроці **Налаштуйте IDE** ми радили вимкнути автодоповнення коду на основі ШІ.
+Підказка, яка пише відповідь раніше, ніж ви встигнете подумати, позбавляє вас самої вправи.
+Те саме стосується вставлення коду, який ви не прочитали.
 
-Rule of thumb: **ask AI to explain, not to solve.**
+Просте правило: **просіть ШІ пояснювати, а не розв'язувати.**
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Language models are sometimes confidently wrong about Rust, especially about lifetimes and async.
-> The compiler is the authority here: when the two disagree, the compiler wins.
+> Мовні моделі іноді впевнено помиляються щодо Rust, особливо коли йдеться про часи життя (lifetimes) та асинхронність
+> (async).
+> Головний авторитет тут — компілятор: якщо він і модель розходяться в думках, правий компілятор.

@@ -1,23 +1,24 @@
-## Is there a meaningful fast track?
+## Чи є розумний короткий шлях?
 ##
 
-Yes. Skip straight to the final exercise of the course, in _Final Challenge_, and build an asynchronous REST API for a
-ticket management system.
+Так. Перейдіть одразу до останньої вправи курсу — у розділі _Фінальне завдання_ — і створіть асинхронний REST API для
+системи керування тікетами.
 
-That task is unlike everything before it: open-ended, much bigger, and yours to design, with your own choice of crates
-from [crates.io](https://crates.io).
+Це завдання не схоже на все, що було до нього: воно не має жорстких рамок, значно більше за обсягом, і проєктуєте його
+ви самі, обираючи крейти з [crates.io](https://crates.io) на власний розсуд.
 
-It isn't a shortcut around the material, it's a different order.
-You meet each concept at the point where your own program needs it, rather than meeting it in a lesson and applying it
-afterwards.
+Це не спосіб оминути матеріал, а просто інший порядок його вивчення.
+Ви знайомитеся з кожною концепцією саме тоді, коли вона потрібна вашій програмі, а не спершу на уроці, щоб застосувати
+її згодом.
 
-Build as much as you can and look up whatever you're missing.
-When you hit something you can't work out, come back into the course for the parts you need: the sections on threads and
-futures, or ownership once the borrow checker starts pushing back.
-You'll arrive at that material with concrete questions, which is a good way to read it.
+Реалізуйте стільки, скільки зможете, а все, чого бракує, шукайте самостійно.
+Коли натрапите на щось, із чим не вдається розібратися, повертайтеся до курсу по ті частини, які вам потрібні: розділи
+про потоки та асинхронний Rust (future) або матеріал про володіння — щойно borrow checker почне чинити опір.
+Ви прийдете до цього матеріалу з конкретними запитаннями, а це хороший спосіб його читати.
 
-This suits you if you've written Rust before and only want to fill in the gaps.
-It also suits you if you haven't, but you'd rather wrestle with one real program than be walked through a hundred short
-ones. Some people learn better that way. If that's you, take the harder road; it just means more looking things up.
+Такий шлях вам підійде, якщо ви вже писали на Rust і хочете лише заповнити прогалини.
+Він підійде й тоді, коли не писали, але волієте поборотися з однією справжньою програмою, ніж покроково пройти сотню
+коротких. Деякі люди так навчаються краще. Якщо ви з таких, обирайте складніший шлях — просто доведеться більше
+шукати самостійно.
 
-And if it turns out not to suit you after all, come back here and start from the beginning. Nothing is lost.
+А якщо зрештою виявиться, що цей шлях вам не до душі, поверніться сюди й почніть спочатку. Нічого не втрачено.

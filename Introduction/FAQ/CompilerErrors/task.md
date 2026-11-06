@@ -1,18 +1,18 @@
-## Do I have to read all these compiler errors?
+## Чи треба читати всі ці помилки компіляції?
 ##
 
-Yes, and there's a good chance you'll come to like them.
+Так, і цілком імовірно, що з часом вони вам навіть сподобаються.
 
-Rust's compiler produces some of the best diagnostics of any language.
-It tells you what's wrong, often points at the exact spot, and frequently suggests the fix.
-Think of it as your pair programming partner for the rest of this course.
+Компілятор Rust видає одні з найкращих діагностичних повідомлень серед усіх мов програмування.
+Він пояснює, що не так, часто вказує точне місце помилки й нерідко пропонує, як її виправити.
+Вважайте його своїм напарником із парного програмування до кінця цього курсу.
 
-Read the message in full before you start changing code. The answer is often already in there.
+Перш ніж змінювати код, прочитайте повідомлення повністю. Часто відповідь уже в ньому.
 
-For a longer explanation of any error, note its code (something like `E0382`) and look it up in the
-[Rust error index](https://doc.rust-lang.org/error_codes/).
+Щоб отримати розгорнуте пояснення будь-якої помилки, зверніть увагу на її код (щось на кшталт `E0382`) і знайдіть
+його в [довіднику кодів помилок Rust](https://doc.rust-lang.org/error_codes/).
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> If errors only show up when you run the tests, check the external linter setting from the
-> **Set up your IDE** lesson. With it on, you get the compiler's feedback as you type.
+> Якщо помилки з'являються лише тоді, коли ви запускаєте тести, перевірте налаштування зовнішнього лінтера з уроку
+> **Налаштуйте IDE**. Коли він увімкнений, ви отримуєте відгук компілятора просто під час набору коду.

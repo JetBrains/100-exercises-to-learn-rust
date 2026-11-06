@@ -1,7 +1,7 @@
-This task is to fix the signature of the `compute` function so that the code compiles and the tests pass.
-The input parameters should have the same type as the return type. Don't touch the function body.
+У цьому завданні потрібно виправити сигнатуру функції `compute`, щоб код компілювався, а тести проходили.
+Вхідні параметри мають бути того самого типу, що й тип повернення. Не змінюйте тіло функції.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Make sure to read the compiler error message. The Rust compiler is your pair programming partner in this course,
-> and it'll often guide you in the right direction!
+> Обов'язково прочитайте повідомлення про помилку компіляції. У цьому курсі компілятор Rust — ваш напарник у парному
+> програмуванні, і він часто підказуватиме вам правильний напрямок!

@@ -1,4 +1,4 @@
 pub fn greeting() -> &'static str {
-    // TODO: fix me 👇
+    // TODO: виправте мене 👇
     "I'm ready to learn Rust!"
 }

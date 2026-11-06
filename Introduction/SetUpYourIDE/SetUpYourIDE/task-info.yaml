@@ -1,5 +1,5 @@
 type: ide
-custom_name: Set up your IDE
+custom_name: Налаштуйте IDE
 files:
   - name: src/main.rs
     visible: true

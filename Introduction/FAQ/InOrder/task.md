@@ -1,14 +1,14 @@
-## Do I have to do the tasks in order?
+## Чи треба проходити завдання по порядку?
 ##
 
-No. The order is a suggestion, not a requirement.
+Ні. Порядок — це рекомендація, а не вимога.
 
-Lessons are arranged so that each one builds on the last, which makes front to back the path of least resistance if
-Rust is new to you. Nothing stops you from skipping a topic you already know, jumping ahead to something you're curious
-about, or leaving a lesson for later and coming back to it.
+Уроки впорядковано так, що кожен спирається на попередній, тож якщо Rust для вас новий, найпростіше проходити їх від
+початку до кінця. Але ніщо не заважає вам пропустити тему, яку ви вже знаєте, перескочити до того, що вас цікавить,
+або відкласти урок на потім і згодом до нього повернутися.
 
-Whichever route you take, do write the exercises rather than just read them.
-Typing the code is slower, and that's the point: you'll notice the syntax, meet the error messages, and let the shape
-of the language settle into your fingers.
+Хоч би який шлях ви обрали, обов'язково пишіть код вправ, а не просто читайте їх.
+Набирати код повільніше, і саме в цьому суть: ви помічатимете синтаксис, зустрічатимете повідомлення про помилки, а
+мова поступово «ляже вам під пальці».
 
-And if skipping ahead sounds appealing, see the next question.
+А якщо вам кортить перескочити вперед, див. наступне запитання.

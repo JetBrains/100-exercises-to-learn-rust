@@ -1,18 +1,19 @@
-## Do I need to install Rust?
+## Чи треба встановлювати Rust?
 ##
 
-You need a Rust toolchain, but you probably don't need to install it by hand.
+Вам потрібен набір інструментів Rust (toolchain), але встановлювати його вручну, найімовірніше, не доведеться.
 
-If you followed the **Set up your IDE** lesson you've checked this already.
-This is the longer version, for when the automatic setup doesn't do what you want, or when something stops working later
-on.
+Якщо ви виконали інструкції з уроку **Налаштуйте IDE**, то вже перевірили це.
+Тут — докладніша версія: на випадок, якщо автоматичне налаштування спрацювало не так, як вам потрібно, або якщо згодом
+щось перестане працювати.
 
-RustRover can fetch a toolchain for you: use the **Set up toolchain** banner above the editor, or open
-**Settings / Preferences | Rust** and click **Install Rustup**, which installs both the toolchain and the standard
-library. The **Toolchain version** and **Standard library** fields then fill in by themselves.
+RustRover може сам завантажити набір інструментів: скористайтеся банером **Set up toolchain** над редактором або
+відкрийте **Settings / Preferences | Rust** і натисніть **Install Rustup** — так буде встановлено і набір інструментів,
+і стандартну бібліотеку. Після цього поля **Toolchain version** і **Standard library** заповняться автоматично.
 
-If you already have a toolchain and RustRover hasn't picked it up, you can enter the paths yourself on that same settings
-page. RustRover needs Rust 1.70 or newer.
+Якщо набір інструментів у вас уже є, а RustRover його не знайшов, шляхи до нього можна вказати вручну на тій самій
+сторінці налаштувань. RustRover потребує Rust версії 1.70 або новішої.
 
-A missing or misconfigured toolchain is the usual explanation when nothing compiles at all.
-Full details: [Rust toolchain](https://www.jetbrains.com/help/rust/rust-toolchain.html) in the RustRover documentation.
+Якщо взагалі нічого не компілюється, найчастіше причина в тому, що набір інструментів відсутній або налаштований
+неправильно.
+Докладніше — на сторінці [Rust toolchain](https://www.jetbrains.com/help/rust/rust-toolchain.html) документації RustRover.

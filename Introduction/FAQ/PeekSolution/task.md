@@ -1,29 +1,29 @@
-## My code works. Should I peek at the solution?
+## Мій код працює. Чи варто підглянути розв'язок?
 ##
 
-Yes, always. It's one of the most useful few minutes you can spend on an exercise.
+Так, завжди. Це одні з найкорисніших хвилин, які можна присвятити вправі.
 
-Every exercise in this course comes with the author's solution.
-Click **Peek Solution** in the Task Description panel and you'll see it, together with a diff against your own code.
-Not every set of Rust exercises out there gives you that.
+Кожна вправа в цьому курсі має авторський розв'язок.
+Натисніть **Peek Solution** на панелі Task Description — і побачите його разом із diff, тобто порівнянням із вашим
+кодом. Таку можливість дає далеко не кожен збірник вправ із Rust.
 
-Passing the tests means your code is correct. It doesn't mean it's idiomatic.
-Comparing the two versions is where a lot of the learning happens: often the author's is shorter, or reaches for a
-standard library method you didn't know existed, or expresses the same idea in a way that reads better.
+Якщо тести проходять, ваш код правильний. Але це ще не означає, що він ідіоматичний.
+Саме під час порівняння двох версій ви багато чого навчаєтеся: часто авторська коротша, або використовує метод
+стандартної бібліотеки, про який ви навіть не знали, або висловлює ту саму ідею так, що код легше читати.
 
-Note the word "often". What you're looking at is _a_ solution, not _the_ solution.
-Most of these exercises have several reasonable answers, and this one was written by a person making judgement calls,
-just like you. Sometimes you'll compare the two and prefer your own. That's a perfectly good outcome, as long as you can
-say what makes yours better.
+Зверніть увагу на слово «часто». Перед вами _один із_ розв'язків, а не _єдино правильний_.
+Більшість цих вправ має кілька розумних відповідей, а цей розв'язок написала людина, яка, як і ви, робила вибір на
+власний розсуд. Іноді, порівнявши дві версії, ви надасте перевагу своїй. Це цілком добрий результат — якщо ви можете
+пояснити, чим ваша версія краща.
 
-So read it as a second opinion from an experienced Rust developer rather than as a verdict on your code.
-The habit worth building is the comparison itself, not the agreeing.
+Тож сприймайте авторський розв'язок як другу думку досвідченого Rust-розробника, а не як вирок вашому коду.
+Виробляти варто звичку порівнювати, а не погоджуватися.
 
-The best moment to look is right after your tests go green, while your own attempt is still fresh in your mind.
-If the two versions differ and you can't work out which one you prefer, or why, that's an excellent thing to look up or
-to ask about.
+Найкращий момент, щоб подивитися, — одразу після того, як тести «позеленіли», поки ваша власна спроба ще свіжа в пам'яті.
+Якщо версії відрізняються, а ви не можете зрозуміти, яка вам більше до вподоби або чому, — це чудовий привід
+пошукати інформацію чи запитати когось.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Peeking _before_ you've solved an exercise isn't cheating either, it's just less useful.
-> See **I'm stuck. What now?** for that case.
+> Підглядати _до того_, як ви розв'язали вправу, — теж не шахрайство, просто це менш корисно.
+> Про цей випадок див. **Застрягли? Що робити далі**.

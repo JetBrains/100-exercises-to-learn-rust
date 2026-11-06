@@ -1,5 +1,5 @@
 type: theory
-custom_name: Do I need to install Rust?
+custom_name: Чи треба встановлювати Rust?
 files:
   - name: src/main.rs
     visible: true

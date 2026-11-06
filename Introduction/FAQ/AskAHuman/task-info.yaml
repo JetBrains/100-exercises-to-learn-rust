@@ -1,5 +1,5 @@
 type: theory
-custom_name: Is there anyone I can ask?
+custom_name: Чи є кого запитати?
 files:
   - name: src/main.rs
     visible: true

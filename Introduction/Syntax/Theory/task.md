@@ -1,27 +1,27 @@
-## Syntax
+## Синтаксис
 ##
 
-The previous task barely qualifies as an exercise, but it already exposed you to quite a bit of Rust **syntax**.
-We won't cover every single detail of Rust's syntax here.
-Instead, we'll cover _just enough_ to keep going without getting stuck in the details.\
-One step at a time!
+Попереднє завдання ледве можна назвати вправою, але воно вже познайомило вас із чималою частиною **синтаксису** Rust.
+Ми не розглядатимемо тут кожну дрібницю синтаксису Rust.
+Натомість розберемо _рівно стільки_, скільки потрібно, щоб рухатися далі й не загрузнути в деталях.\
+Крок за кроком!
 
-## Comments
+## Коментарі
 
-You can use `//` for single-line comments:
+Для однорядкових коментарів можна використовувати `//`:
 
 ```rust
-// This is a single-line comment
-// Followed by another single-line comment
+// Це однорядковий коментар
+// А за ним — ще один однорядковий коментар
 ```
 
-## Functions
+## Функції
 
-Functions in Rust are defined using the `fn` keyword, followed by the function's name, its input parameters, and its
-return type.
-The function's body is enclosed in curly braces `{}`.
+Функції в Rust визначають за допомогою ключового слова `fn`, після якого записують ім'я функції, її вхідні параметри
+та тип повернення.
+Тіло функції береться у фігурні дужки `{}`.
 
-In the previous task, you saw the `greeting` function:
+У попередньому завданні ви бачили функцію `greeting`:
 
 ```rust
 // `fn` <function_name> ( <input params> ) -> <return_type> { <body> }
@@ -30,13 +30,13 @@ fn greeting() -> &'static str {
 }
 ```
 
-`greeting` has no input parameters and returns a reference to a string slice (`&'static str`).
+`greeting` не має вхідних параметрів і повертає посилання на рядковий зріз (`&'static str`).
 
-### Return type
+### Тип повернення
 
-The return type can be omitted from the signature if the function doesn't return anything (i.e. if it returns `()`,
-Rust's unit type).
-That's the case for the `test_welcome` function below:
+Тип повернення можна не вказувати в сигнатурі, якщо функція нічого не повертає (тобто якщо вона повертає `()` —
+одиничний тип Rust, так званий unit type).
+Саме такий випадок — функція `test_welcome` нижче:
 
 ```rust
 fn test_welcome() {
@@ -44,63 +44,62 @@ fn test_welcome() {
 }
 ```
 
-The above is equivalent to:
+Цей код еквівалентний такому:
 
 ```rust
-// Spelling out the unit return type explicitly
+// Явно вказуємо одиничний тип як тип повернення
 //                   👇
 fn test_welcome() -> () {
     assert_eq!(greeting(), "I'm ready to learn Rust!");
 }
 ```
 
-### Returning values
+### Повернення значень
 
-The last expression in a function is implicitly returned:
+Значення останнього виразу у функції повертається неявно:
 
 ```rust
 fn greeting() -> &'static str {
-    // This is the last expression in the function
-    // Therefore its value is returned by `greeting`
+    // Це останній вираз у функції,
+    // тому `greeting` повертає його значення
     "I'm ready to learn Rust!"
 }
 ```
 
-You can also use the `return` keyword to return a value early:
+Також можна скористатися ключовим словом `return`, щоб повернути значення достроково:
 
 ```rust
 fn greeting() -> &'static str {
-    // Notice the semicolon at the end of the line!
+    // Зверніть увагу на крапку з комою в кінці рядка!
     return "I'm ready to learn Rust!";
 }
 ```
 
-It is considered idiomatic to omit the `return` keyword when possible.
+Ідіоматичним вважається не писати ключове слово `return`, якщо без нього можна обійтися.
 
-### Input parameters
+### Вхідні параметри
 
-Input parameters are declared inside the parentheses `()` that follow the function's name.\
-Each parameter is declared with its name, followed by a colon `:`, followed by its type.
+Вхідні параметри оголошують у круглих дужках `()`, що йдуть після імені функції.\
+Для кожного параметра вказують його ім'я, потім двокрапку `:`, а потім його тип.
 
-For example, the `greet` function below takes a `name` parameter of type `&str` (a "string slice"):
+Наприклад, функція `greet` нижче приймає параметр `name` типу `&str` («рядковий зріз»):
 
 ```rust
-// An input parameter
+// Вхідний параметр
 //        👇
 fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 ```
 
-If there are multiple input parameters, they must be separated with commas.
+Якщо вхідних параметрів кілька, їх потрібно розділяти комами.
 
-### Type annotations
+### Анотації типів
 
-Since we've mentioned "types" a few times, let's state it clearly: Rust is a **statically typed language**.\
-Every single value in Rust has a type and that type must be known to the compiler at compile-time.
+Ми вже кілька разів згадували «типи», тож скажімо прямо: Rust — **мова зі статичною типізацією**.\
+Кожне значення в Rust має тип, і цей тип має бути відомий компілятору під час компіляції.
 
-Types are a form of **static analysis**.\
-You can think of a type as a **tag** that the compiler attaches to every value in your program. Depending on the
-tag, the compiler can enforce different rules - e.g. you can't add a string to a number, but you can add two numbers
-together.
-If leveraged correctly, types can prevent whole classes of runtime bugs.
+Типи — це різновид **статичного аналізу**.\
+Тип можна уявити як **мітку**, яку компілятор прикріплює до кожного значення у вашій програмі. Залежно від мітки
+компілятор може застосовувати різні правила: наприклад, не можна додати рядок до числа, а от два числа додати можна.
+Якщо правильно ними користуватися, типи можуть запобігти цілим класам помилок, що виникають під час виконання програми.

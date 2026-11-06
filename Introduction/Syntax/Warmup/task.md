@@ -1,23 +1,23 @@
-Your first exercise, and a small one.
+Ось ваша перша вправа, зовсім невелика.
 
-The file in the editor is `src/lib.rs`, a Rust source file: plain text with a `.rs` extension.
-Everything from `//` to the end of a line is a comment, ignored by the compiler.
+У редакторі відкрито `src/lib.rs` — файл із вихідним кодом Rust, тобто звичайний текстовий файл із розширенням `.rs`.
+Усе, що йде від `//` до кінця рядка, — це коментар, і компілятор його ігнорує.
 
-Exercises in this course mark the spots where you need to write code with `TODO`, `todo!()` or `__`.
-Replace those markers with code of your own. Sometimes a single line is enough, sometimes you'll write a lot more.
+У вправах цього курсу місця, де вам потрібно написати код, позначено `TODO`, `todo!()` або `__`.
+Замініть ці позначки власним кодом. Іноді вистачає одного рядка, а іноді доведеться написати значно більше.
 
-Your solutions are verified by tests. They live in `tests/tests.rs`, they're visible, and they're worth reading:
-they tell you exactly what's expected of your code.
+Тести перевіряють ваші розв'язки. Вони містяться у файлі `tests/tests.rs`, доступні для перегляду, і їх варто
+прочитати: тести точно показують, чого очікують від вашого коду.
 
-> ⚠️ **Don't modify the tests.**
+> ⚠️ **Не змінюйте тести.**
 >
-> They are there to help you validate your solutions. You should only change the code that's being tested, not the
-> tests themselves.
+> Вони потрібні, щоб допомогти вам перевіряти свої розв'язки. Змінювати слід лише код, який тестується, а не самі
+> тести.
 
 <br/>
 
-## Task
-This task is to complete the `greeting` function.
-The function should return the string: ***I'm ready to learn Rust!***
+## Завдання
+У цьому завданні потрібно доповнити функцію `greeting`.
+Функція має повернути рядок: ***I'm ready to learn Rust!*** (Рядок лишаємо англійською — саме його перевіряє тест.)
 
-Then press **Check** below.
+Потім натисніть кнопку **Check** нижче.

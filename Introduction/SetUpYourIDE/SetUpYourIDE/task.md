@@ -1,51 +1,51 @@
-Three quick things before you start.
-The first is a prerequisite for anything here to run; the other two are recommendations for this course.
+Перш ніж почати, зробіть три швидкі кроки.
+Перший обов'язковий, бо без нього тут нічого не запуститься; два інші — наші рекомендації для цього курсу.
 
-### 1. Check that you have a Rust toolchain
+### 1. Перевірте, чи є у вас набір інструментів Rust (toolchain)
 
-Nothing in this course compiles without one, so it's worth thirty seconds now.
+Без нього в цьому курсі нічого не скомпілюється, тож варто приділити цьому пів хвилини вже зараз.
 
-Open **Settings / Preferences | Rust** and look at the **Toolchain version** field.
-If it shows a version, you're set. If it shows `N/A`, click **Install Rustup** and wait for it to finish: that installs
-both the toolchain and the standard library.
+Відкрийте **Settings / Preferences | Rust** і подивіться на поле **Toolchain version**.
+Якщо там указано версію, усе готово. Якщо ж там `N/A`, натисніть **Install Rustup** і дочекайтеся завершення:
+буде встановлено і набір інструментів, і стандартну бібліотеку.
 
-If the automatic setup doesn't work, or you'd rather point the IDE at a toolchain you already have, see
-**Do I need to install Rust?** in the next lesson.
+Якщо автоматичне налаштування не спрацювало або ви хочете підключити до IDE набір інструментів, який у вас уже є, див.
+**Чи треба встановлювати Rust?** у наступному уроці.
 
-### 2. Switch off AI code completion
+### 2. Вимкніть автодоповнення коду на основі ШІ
 
-We recommend turning AI-powered completion off for the duration of this course.
+Радимо вимкнути автодоповнення на основі ШІ на весь час проходження курсу.
 
-The exercises are small on purpose, and an AI suggestion will often produce the whole answer while you're still reading
-the task. That's convenient, but it's also exactly the moment where the learning was supposed to happen.
-You can always turn it back on when you work on your own projects.
+Вправи навмисно невеликі, і підказка ШІ часто видає готову відповідь цілком, поки ви ще читаєте умову завдання.
+Це зручно, але ж саме в цю мить і мало відбуватися навчання.
+Коли працюватимете над власними проєктами, автодоповнення завжди можна ввімкнути знову.
 
-1. Go to **Settings / Preferences | Editor | General | Code Completion | Inline**.
-2. Clear the **Enable inline completion using language models** checkbox.
-3. Press **OK**.
+1. Перейдіть до розділу **Settings / Preferences | Editor | General | Code Completion | Inline**.
+2. Зніміть прапорець **Enable inline completion using language models**.
+3. Натисніть **OK**.
 
 ![Code Completion](images/rustrover_code_completion.png)
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> This does not turn off ordinary code completion, the popup that lists methods and types based on what's actually in
-> scope. Keep that one! It's driven by the compiler's knowledge of your code, and browsing what a type offers is a good
-> way to get familiar with the standard library.
+> Це не вимикає звичайне автодоповнення коду — спливний список методів і типів, які справді доступні в поточній області
+> видимості. Його залиште! Воно ґрунтується на тому, що компілятор знає про ваш код, а переглядати, що пропонує той чи
+> інший тип, — добрий спосіб познайомитися зі стандартною бібліотекою.
 
-Asking an AI assistant to _explain_ something is still very much encouraged.
-See **Can I use AI?** in the next lesson.
+Водночас ми всіляко заохочуємо просити ШІ-асистента щось _пояснити_.
+Див. **Чи можна користуватися ШІ?** у наступному уроці.
 
-### 3. Check that the external linter is on
+### 3. Перевірте, чи ввімкнено зовнішній лінтер
 
-This one you want _enabled_. It runs `cargo check` as you type, so you see real compiler errors right in the editor
-instead of discovering them when you run the tests.
-This course leans a lot on reading compiler messages, so it's worth confirming that the linter is active.
-It usually is by default.
+А от цей параметр, навпаки, має бути _ввімкнений_. Лінтер запускає `cargo check` просто під час набору коду, тож
+справжні помилки компіляції ви бачите одразу в редакторі, а не дізнаєтеся про них лише тоді, коли запускаєте тести.
+Цей курс значною мірою спирається на читання повідомлень компілятора, тож варто переконатися, що лінтер працює.
+Зазвичай він увімкнений за замовчуванням.
 
-1. Go to **Settings / Preferences | Rust | External Linters**.
-2. Set the parameters as follows:
-   - Check the **Run external linter on the fly** box.
-   - In the **External Tool** list, select **Cargo Check**.
-3. Press **OK**.
+1. Перейдіть до розділу **Settings / Preferences | Rust | External Linters**.
+2. Задайте такі параметри:
+   - Установіть прапорець **Run external linter on the fly**.
+   - У списку **External Tool** виберіть **Cargo Check**.
+3. Натисніть **OK**.
 
 ![External Linters](images/rustrover_external_linters.png)

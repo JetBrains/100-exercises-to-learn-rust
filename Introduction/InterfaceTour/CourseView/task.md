@@ -1,6 +1,6 @@
-## Course View
+## Вікно курсу
 
-**Course View** shows you the course syllabus: a list of lessons with tasks.
+**Course View** (вікно курсу) показує програму курсу: список уроків із завданнями.
 
 <style>
 img {
@@ -11,8 +11,8 @@ img {
 </style>
 <img src="course_view.png" class="center" width="75%"/>
 
-You can navigate to any task by double-clicking its name.
+Щоб перейти до будь-якого завдання, двічі клацніть його назву.
 
-To hide the Course View window, click the Project Tool Window button or press <span style="color: #509DD6">&shortcut:ActivateProjectToolWindow;</span>. This will give you more space for the Editor and Task Description windows.
+Щоб сховати вікно Course View, клацніть кнопку Project Tool Window або натисніть <span style="color: #509DD6">&shortcut:ActivateProjectToolWindow;</span>. Так у вас буде більше місця для редактора та вікна Task Description.
 
-To show the hidden Course View window, click the Project Tool Window button (or press <span style="color: #509DD6">&shortcut:ActivateProjectToolWindow;</span>) again.
+Щоб повернути сховане вікно Course View, клацніть кнопку Project Tool Window ще раз (або повторно натисніть <span style="color: #509DD6">&shortcut:ActivateProjectToolWindow;</span>).

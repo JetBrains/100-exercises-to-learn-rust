@@ -1,5 +1,5 @@
 type: theory
-custom_name: Why doesn't the theory cover everything?
+custom_name: Чому теорія пояснює не все?
 files:
   - name: src/main.rs
     visible: true

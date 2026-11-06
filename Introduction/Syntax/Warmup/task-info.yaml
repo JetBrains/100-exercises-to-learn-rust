@@ -1,9 +1,10 @@
 type: edu
+custom_name: Розминка
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 77
+      - offset: 84
         length: 10
         placeholder_text: __
   - name: Cargo.toml

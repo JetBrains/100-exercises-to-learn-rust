@@ -1,5 +1,5 @@
 type: theory
-custom_name: Is there a meaningful fast track?
+custom_name: Чи є розумний короткий шлях?
 files:
   - name: src/main.rs
     visible: true

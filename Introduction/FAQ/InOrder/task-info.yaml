@@ -1,5 +1,5 @@
 type: theory
-custom_name: Do I have to do the tasks in order?
+custom_name: Чи треба проходити завдання по порядку?
 files:
   - name: src/main.rs
     visible: true

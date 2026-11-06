@@ -1,5 +1,5 @@
 type: theory
-custom_name: Do I have to read all these compiler errors?
+custom_name: Чи треба читати всі ці помилки компіляції?
 files:
   - name: src/main.rs
     visible: true

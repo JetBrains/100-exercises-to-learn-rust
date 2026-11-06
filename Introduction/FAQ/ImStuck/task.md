@@ -1,17 +1,18 @@
-## I'm stuck. What now?
+## Застрягли? Що робити далі
 ##
 
-That happens to everybody, and it's not a sign that you're doing this wrong.
-Everyone argues with the borrow checker at the beginning.
+Таке трапляється з усіма, і це не означає, що ви робите щось не так.
+На початку всі сперечаються з borrow checker (механізмом перевірки запозичень).
 
-Time-box it. Give the problem a solid attempt, say fifteen minutes of real effort, and then do one of these:
+Обмежте себе в часі. Серйозно спробуйте розв'язати проблему — скажімо, приділіть їй хвилин п'ятнадцять зосередженої
+роботи, — а тоді зробіть одне з наведеного нижче:
 
-- look it up in the standard library docs or the Rust Book
-- ask an AI assistant to explain the part that confuses you
-- ask a person, if you have one to hand or don't mind posting a question
-- use **Peek Solution** in the Task Description panel
+- пошукайте відповідь у документації стандартної бібліотеки або в офіційній книзі про Rust;
+- попросіть ШІ-асистента пояснити те, що вас спантеличує;
+- запитайте людину — якщо хтось є поруч або ви не проти опублікувати запитання;
+- скористайтеся кнопкою **Peek Solution** на панелі Task Description.
 
-Peeking isn't cheating either. Just don't stop at "the tests pass now": read the diff and make sure you understand
-_why_ that solution works.
+Підглядати — теж не шахрайство. Тільки не зупиняйтеся на думці «тепер тести проходять»: перегляньте diff (порівняння
+розв'язку з вашим кодом) і переконайтеся, що розумієте, _чому_ цей розв'язок працює.
 
-It's worth peeking once you've solved an exercise on your own, too. See the next question.
+Підглянути розв'язок варто й тоді, коли ви розв'язали вправу самостійно. Див. наступне запитання.

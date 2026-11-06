@@ -1,24 +1,22 @@
-## What if I think the course is wrong?
+## Що, як мені здається, що в курсі помилка?
 ##
 
-Then you might be right.
+Тоді, можливо, ви маєте рацію.
 
-The obvious mistakes are long gone: this material has been read and worked through by a great many people.
-But it was written by humans, it describes a language that keeps evolving, and none of it is handed down from on high.
+Очевидні помилки давно виправлено: цей матеріал прочитали й опрацювали дуже багато людей.
+Але його писали люди, він описує мову, яка постійно розвивається, і ніщо в ньому не є істиною в останній інстанції.
 
-If an explanation or a solution looks wrong to you, work out why you think so.
-One of two things will happen. Either you find the reason it's correct after all, and you've learned something worth
-knowing, or you find a real mistake. Both beat assuming the course must be right and moving on.
+Якщо якесь пояснення чи розв'язок здається вам хибним, розберіться, чому ви так вважаєте.
+Станеться одне з двох. Або ви зрозумієте, чому це все-таки правильно, — і дізнаєтеся щось вартісне, або знайдете
+справжню помилку. Обидва варіанти кращі, ніж вирішити, що курс не може помилятися, і просто піти далі.
 
-## If it is a mistake
+## Якщо це справді помилка
 
-- Leave a comment on the task itself, using the **comment** button in the Task Description panel.
-- Open an issue on GitHub, or send a pull request if you already know the fix. This course is open source: the
-  adaptation you're working through lives at
-  [JetBrains/100-exercises-to-learn-rust](https://github.com/JetBrains/100-exercises-to-learn-rust), and the original
-  material it's based on at
-  [mainmatter/100-exercises-to-learn-rust](https://github.com/mainmatter/100-exercises-to-learn-rust).
-  If you're not sure which one your problem belongs to, start with the first.
+- Залиште коментар до самого завдання — кнопкою **comment** (значок коментаря) на панелі Task Description.
+- Створіть issue (повідомлення про проблему) на GitHub або надішліть pull request, якщо вже знаєте, як це виправити.
+  Цей курс має відкритий вихідний код: адаптація, яку ви зараз проходите, розміщена в репозиторії [JetBrains/100-exercises-to-learn-rust](https://github.com/JetBrains/100-exercises-to-learn-rust),
+  а оригінальний матеріал, на якому вона ґрунтується, — у репозиторії [mainmatter/100-exercises-to-learn-rust](https://github.com/mainmatter/100-exercises-to-learn-rust).
+  Якщо не впевнені, якого з них стосується ваша проблема, почніть із першого.
 
-The same goes for anything that isn't wrong exactly, but could be clearer.
-Fixing something for the people coming after you is a good way to spend twenty minutes.
+Те саме стосується всього, що не те щоб хибне, але могло б бути зрозумілішим.
+Виправити щось для тих, хто прийде після вас, — чудовий спосіб провести двадцять хвилин.
