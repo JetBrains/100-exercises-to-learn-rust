@@ -81,7 +81,7 @@ impl <T> Vec<T> {
 Офіційну документацію щодо пропуску часів життя ви знайдете в розділі [Додаткові матеріали](#references).\
 У більшості випадків можна покластися на компілятор: він сам підкаже, коли потрібно додати явні анотації часів життя.
 
-## Додаткові матеріали
+## Додаткові матеріали <a id="references"></a>
 
 - [std::vec::Vec::iter](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.iter)
 - [std::slice::Iter](https://doc.rust-lang.org/std/slice/struct.Iter.html)

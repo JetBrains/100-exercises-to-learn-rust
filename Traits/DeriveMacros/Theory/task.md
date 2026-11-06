@@ -98,7 +98,7 @@ impl ::core::cmp::PartialEq for Ticket {
 
 Коли це можливо, компілятор сам підказуватиме вам реалізувати трейти через derive-макроси.
 
-## Додаткові матеріали
+## Додаткові матеріали <a id="further-reading"></a>
 
 - [The little book of Rust macros](https://veykril.github.io/tlborm/)
 - [Proc macro workshop](https://github.com/dtolnay/proc-macro-workshop)
