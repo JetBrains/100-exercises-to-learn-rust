@@ -92,7 +92,7 @@ async fn transfer_money(
 
 ```rust
 async fn run() {
-    let handle = tokio::spawn(/* якась асинхронна задача */);
+    let handle = tokio::spawn(/* some async task */);
     // Скасовуємо запущену задачу
     handle.abort();
 }

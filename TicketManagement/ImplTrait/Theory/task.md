@@ -22,7 +22,7 @@ impl TicketStore {
 Метод `filter` повертає екземпляр `std::iter::Filter`, який визначено так:
 
 ```rust
-pub struct Filter<I, P> { /* поля пропущено */ }
+pub struct Filter<I, P> { /* fields omitted */ }
 ```
 
 де `I` — тип ітератора, елементи якого фільтруються, а `P` — предикат, за яким відбираються елементи.\

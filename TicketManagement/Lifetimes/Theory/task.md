@@ -22,7 +22,7 @@ impl IntoIterator for &TicketStore {
 Ось визначення `Iter`:
 
 ```rust
-pub struct Iter<'a, T> { /* поля пропущено */ }
+pub struct Iter<'a, T> { /* fields omitted */ }
 ```
 
 `'a` — це **параметр часу життя** (lifetime parameter).
