@@ -1,92 +1,92 @@
-## Locks, `Send` and `Arc`
+## Блокування, `Send` і `Arc`
 
-The patching strategy you just implemented has a major drawback: it's racy.\
-If two clients send patches for the same ticket roughly at same time, the server will apply them in an arbitrary order.
-Whoever enqueues their patch last will overwrite the changes made by the other client.
+Стратегія часткового оновлення, яку ви щойно реалізували, має суттєвий недолік: у ній можливий стан гонитви (race condition).\
+Якщо два клієнти надішлють патчі для одного тікета приблизно одночасно, сервер застосує їх у довільному порядку.
+Чий патч потрапить у чергу останнім, той і перезапише зміни, зроблені іншим клієнтом.
 
-## Version numbers
+## Номери версій
 
-We could try to fix this by using a **version number**.\
-Each ticket gets assigned a version number upon creation, set to `0`.\
-Whenever a client sends a patch, they must include the current version number of the ticket alongside the
-desired changes. The server will only apply the patch if the version number matches the one it has stored.
+Це можна спробувати виправити за допомогою **номера версії**.\
+Під час створення кожен тікет отримує номер версії, що дорівнює `0`.\
+Надсилаючи патч, клієнт має разом із бажаними змінами вказати поточний номер версії тікета.
+Сервер застосує патч, лише якщо цей номер збігається з номером версії, який зберігається в нього.
 
-In the scenario described above, the server would reject the second patch, because the version number would
-have been incremented by the first patch and thus wouldn't match the one sent by the second client.
+В описаному вище сценарії сервер відхилив би другий патч: перший патч збільшив би номер версії, тож той
+уже не збігався б із номером, який надіслав другий клієнт.
 
-This approach is fairly common in distributed systems (e.g. when client and servers don't share memory),
-and it is known as **optimistic concurrency control**.\
-The idea is that most of the time, conflicts won't happen, so we can optimize for the common case.
-You know enough about Rust by now to implement this strategy on your own as a bonus exercise, if you want to.
+Такий підхід досить поширений у розподілених системах (наприклад, коли клієнт і сервери не мають спільної пам'яті),
+і він відомий як **оптимістичне керування паралельним доступом** (optimistic concurrency control).\
+Ідея в тому, що здебільшого конфліктів не виникає, тож можна оптимізувати систему під типовий випадок.
+Ви вже достатньо знаєте Rust, щоб за бажання самостійно реалізувати цю стратегію як додаткову вправу.
 
-## Locking
+## Блокування
 
-We can also fix the race condition by introducing a **lock**.\
-Whenever a client wants to update a ticket, they must first acquire a lock on it. While the lock is active,
-no other client can modify the ticket.
+Стан гонитви можна усунути й інакше — запровадивши **блокування** (lock).\
+Щоразу, коли клієнт хоче оновити тікет, він спершу має захопити блокування цього тікета. Поки блокування активне,
+жоден інший клієнт не може змінити тікет.
 
-Rust's standard library provides two different locking primitives: `Mutex<T>` and `RwLock<T>`.\
-Let's start with `Mutex<T>`. It stands for **mut**ual **ex**clusion, and it's the simplest kind of lock:
-it allows only one thread to access the data, no matter if it's for reading or writing.
+Стандартна бібліотека Rust надає два різні примітиви блокування: `Mutex<T>` і `RwLock<T>`.\
+Почнімо з `Mutex<T>`. Його назва походить від **mut**ual **ex**clusion (взаємне виключення), і це найпростіший вид блокування:
+лише один потік може звертатися до даних, незалежно від того, читає він їх чи записує.
 
-`Mutex<T>` wraps the data it protects, and it's therefore generic over the type of the data.\
-You can't access the data directly: the type system forces you to acquire a lock first using either `Mutex::lock` or
-`Mutex::try_lock`. The former blocks until the lock is acquired, the latter returns immediately with an error if the lock
-can't be acquired.\
-Both methods return a guard object that dereferences to the data, allowing you to modify it. The lock is released when
-the guard is dropped.
+`Mutex<T>` обгортає дані, які захищає, тому він узагальнений (generic) за типом цих даних.\
+Звернутися до даних напряму не можна: система типів змушує спершу захопити блокування за допомогою `Mutex::lock` або
+`Mutex::try_lock`. Перший метод блокує потік, доки блокування не буде захоплено, а другий одразу повертає помилку, якщо
+захопити блокування не вдається.\
+Обидва методи повертають об'єкт-охоронець (guard), який розіменовується в захищені дані й дає змогу їх змінювати. Блокування звільняється,
+коли охоронця знищують (drop).
 
 ```rust
 use std::sync::Mutex;
 
-// An integer protected by a mutex lock
+// Ціле число, захищене м'ютексом
 let lock = Mutex::new(0);
 
-// Acquire a lock on the mutex
+// Захоплюємо блокування м'ютекса
 let mut guard = lock.lock().unwrap();
 
-// Modify the data through the guard,
-// leveraging its `Deref` implementation
+// Змінюємо дані через охоронця,
+// користуючись його реалізацією `Deref`
 *guard += 1;
 
-// The lock is released when `data` goes out of scope
-// This can be done explicitly by dropping the guard
-// or happen implicitly when the guard goes out of scope
+// Блокування звільняється, коли `data` виходить з області видимості.
+// Це можна зробити явно, знищивши охоронця (drop),
+// або це станеться неявно, коли охоронець вийде з області видимості
 drop(guard)
 ```
 
-## Locking granularity
+## Гранулярність блокування
 
-What should our `Mutex` wrap?\
-The simplest option would be to wrap the entire `TicketStore` in a single `Mutex`.\
-This would work, but it would severely limit the system's performance: you wouldn't be able to read tickets in parallel,
-because every read would have to wait for the lock to be released.\
-This is known as **coarse-grained locking**.
+Що саме має обгортати наш `Mutex`?\
+Найпростіший варіант — обгорнути весь `TicketStore` одним `Mutex`.\
+Це спрацює, але суттєво обмежить продуктивність системи: ви не зможете читати тікети паралельно,
+бо кожне читання муситиме чекати, доки блокування звільниться.\
+Це називають **грубозернистим блокуванням** (coarse-grained locking).
 
-It would be better to use **fine-grained locking**, where each ticket is protected by its own lock.
-This way, clients can keep working with tickets in parallel, as long as they aren't trying to access the same ticket.
+Краще використати **дрібнозернисте блокування** (fine-grained locking), коли кожен тікет захищений власним блокуванням.
+Тоді клієнти можуть і далі працювати з тікетами паралельно, якщо тільки вони не намагаються звернутися до одного й того самого тікета.
 
 ```rust
-// The new structure, with a lock for each ticket
+// Нова структура з окремим блокуванням для кожного тікета
 struct TicketStore {
     tickets: BTreeMap<TicketId, Mutex<Ticket>>,
 }
 ```
 
-This approach is more efficient, but it has a downside: `TicketStore` has to become **aware** of the multithreaded
-nature of the system; up until now, `TicketStore` has been blissfully ignoring the existence of threads.\
-Let's go for it anyway.
+Цей підхід ефективніший, але має недолік: `TicketStore` тепер має **знати** про багатопотокову
+природу системи, тоді як досі `TicketStore` безтурботно ігнорував існування потоків.\
+Та все одно спробуймо.
 
-## Who holds the lock?
+## Хто тримає блокування?
 
-For the whole scheme to work, the lock must be passed to the client that wants to modify the ticket.\
-The client can then directly modify the ticket (as if they had a `&mut Ticket`) and release the lock when they're done.
+Щоб уся схема працювала, блокування треба передати клієнтові, який хоче змінити тікет.\
+Тоді клієнт зможе змінювати тікет напряму (ніби в нього є `&mut Ticket`), а закінчивши — звільнити блокування.
 
-This is a bit tricky.\
-We can't send a `Mutex<Ticket>` over a channel, because `Mutex` is not `Clone` and
-we can't move it out of the `TicketStore`. Could we send the `MutexGuard` instead?
+Тут не все так просто.\
+Ми не можемо надіслати `Mutex<Ticket>` каналом, бо `Mutex` не реалізує `Clone`, а
+перемістити його з `TicketStore` ми не можемо. Може, натомість надіслати `MutexGuard`?
 
-Let's test the idea with a small example:
+Перевірмо цю ідею на невеликому прикладі:
 
 ```rust
 use std::thread::spawn;
@@ -102,13 +102,13 @@ fn main() {
         receiver.recv().unwrap();
     });
 
-    // Try to send the guard over the channel
-    // to another thread
+    // Пробуємо надіслати охоронця каналом
+    // в інший потік
     sender.send(guard);
 }
 ```
 
-The compiler is not happy with this code:
+Компілятору цей код не подобається:
 
 ```text
 error[E0277]: `MutexGuard<'_, i32>` cannot be sent between 
@@ -131,62 +131,62 @@ error[E0277]: `MutexGuard<'_, i32>` cannot be sent between
 note: required because it's used within this closure
 ```
 
-`MutexGuard<'_, i32>` is not `Send`: what does it mean?
+`MutexGuard<'_, i32>` не є `Send` — що це означає?
 
 ## `Send`
 
-`Send` is a marker trait that indicates that a type can be safely transferred from one thread to another.\
-`Send` is also an auto-trait, just like `Sized`; it's automatically implemented (or not implemented) for your type
-by the compiler, based on its definition.\
-You can also implement `Send` manually for your types, but it requires `unsafe` since you have to guarantee that the
-type is indeed safe to send between threads for reasons that the compiler can't automatically verify.
+`Send` — це маркерний трейт (marker trait): він позначає, що значення цього типу можна безпечно передавати з одного потоку в інший.\
+Крім того, `Send` — автоматичний трейт (auto trait), так само як `Sized`: компілятор автоматично реалізує (або не реалізує) його для вашого типу
+на основі визначення цього типу.\
+`Send` можна реалізувати для своїх типів і вручну, але для цього потрібен `unsafe`, адже ви берете на себе гарантію, що
+тип справді безпечно передавати між потоками, хоча компілятор не може перевірити цього автоматично.
 
-### Channel requirements
+### Вимоги каналів
 
-`Sender<T>`, `SyncSender<T>` and `Receiver<T>` are `Send` if and only if `T` is `Send`.\
-That's because they are used to send values between threads, and if the value itself is not `Send`, it would be
-unsafe to send it between threads.
+`Sender<T>`, `SyncSender<T>` і `Receiver<T>` є `Send` тоді й лише тоді, коли `T` є `Send`.\
+Річ у тім, що вони слугують для передавання значень між потоками, і якщо саме значення не є `Send`, передавати його
+між потоками було б небезпечно.
 
 ### `MutexGuard`
 
-`MutexGuard` is not `Send` because the underlying operating system primitives that `Mutex` uses to implement
-the lock require (on some platforms) that the lock must be released by the same thread that acquired it.\
-If we were to send a `MutexGuard` to another thread, the lock would be released by a different thread, which would
-lead to undefined behavior.
+`MutexGuard` не є `Send`, бо примітиви операційної системи, на яких `Mutex` реалізує
+блокування, вимагають (на деяких платформах), щоб блокування звільняв той самий потік, який його захопив.\
+Якби ми надіслали `MutexGuard` в інший потік, блокування звільнив би інший потік, а це призвело б
+до невизначеної поведінки (undefined behavior).
 
-## Our challenges
+## Наші труднощі
 
-Summing it up:
+Підсумуймо:
 
-- We can't send a `MutexGuard` over a channel. So we can't lock on the server-side and then modify the ticket on the
-  client-side.
-- We can send a `Mutex` over a channel because it's `Send` as long as the data it protects is `Send`, which is the
-  case for `Ticket`.
-  At the same time, we can't move the `Mutex` out of the `TicketStore` nor clone it.
+- Ми не можемо надіслати `MutexGuard` каналом. Тож не можна захопити блокування на боці сервера, а потім змінити тікет на
+  боці клієнта.
+- Ми можемо надіслати `Mutex` каналом, бо він є `Send`, якщо дані, які він захищає, є `Send`, а для `Ticket` це
+  так.
+  Водночас ми не можемо ані перемістити `Mutex` із `TicketStore`, ані клонувати його.
 
-How can we solve this conundrum?\
-We need to look at the problem from a different angle.
-To lock a `Mutex`, we don't need an owned value. A shared reference is enough, since `Mutex` uses internal mutability:
+Як розв'язати цю головоломку?\
+Треба поглянути на проблему під іншим кутом.
+Щоб заблокувати `Mutex`, не потрібне значення у володінні (owned value). Досить спільного посилання (shared reference), бо `Mutex` використовує внутрішню змінюваність:
 
 ```rust
 impl<T> Mutex<T> {
-    // `&self`, not `self`!
+    // `&self`, а не `self`!
     pub fn lock(&self) -> LockResult<MutexGuard<'_, T>> {
-        // Implementation details
+        // Деталі реалізації
     }
 }
 ```
 
-It is therefore enough to send a shared reference to the client.\
-We can't do that directly, though, because the reference would have to be `'static` and that's not the case.\
-In a way, we need an "owned shared reference". It turns out that Rust has a type that fits the bill: `Arc`.
+Отже, клієнтові досить надіслати спільне посилання.\
+Проте напряму цього зробити не вийде, бо посилання мало б бути `'static`, а це не так.\
+У певному сенсі нам потрібне «спільне посилання у володінні» (owned shared reference). Виявляється, у Rust є тип, який саме для цього підходить: `Arc`.
 
-## `Arc` to the rescue
+## `Arc` поспішає на допомогу
 
-`Arc` stands for **atomic reference counting**.\
-`Arc` wraps around a value and keeps track of how many references to the value exist.
-When the last reference is dropped, the value is deallocated.\
-The value wrapped in an `Arc` is immutable: you can only get shared references to it.
+`Arc` означає **atomic reference counting** (атомарний підрахунок посилань).\
+`Arc` обгортає значення й відстежує, скільки посилань на нього існує.
+Коли останнє посилання знищується (drop), пам'ять, виділена під значення, звільняється.\
+Значення, обгорнуте в `Arc`, незмінюване: ви можете отримати на нього лише спільні посилання.
 
 ```rust
 use std::sync::Arc;
@@ -194,33 +194,33 @@ use std::sync::Arc;
 let data: Arc<u32> = Arc::new(0);
 let data_clone = Arc::clone(&data);
 
-// `Arc<T>` implements `Deref<T>`, so can convert 
-// a `&Arc<T>` to a `&T` using deref coercion
+// `Arc<T>` реалізує `Deref<T>`, тож `&Arc<T>` можна перетворити
+// на `&T` завдяки приведенню через розіменування (deref coercion)
 let data_ref: &u32 = &data;
 ```
 
-If you're having a déjà vu moment, you're right: `Arc` sounds very similar to `Rc`, the reference-counted pointer we
-introduced when talking about interior mutability. The difference is thread-safety: `Rc` is not `Send`, while `Arc` is.
-It boils down to the way the reference count is implemented: `Rc` uses a "normal" integer, while `Arc` uses an
-**atomic** integer, which can be safely shared and modified across threads.
+Якщо у вас виникло відчуття дежавю, то недарма: `Arc` дуже схожий на `Rc` — вказівник із підрахунком посилань, з яким ми
+познайомилися, коли говорили про внутрішню змінюваність. Різниця в потокобезпечності: `Rc` не є `Send`, а `Arc` — є.
+Уся справа в тому, як реалізовано лічильник посилань: `Rc` використовує «звичайне» ціле число, а `Arc` —
+**атомарне** ціле число, яке можна безпечно спільно використовувати й змінювати з різних потоків.
 
 ## `Arc<Mutex<T>>`
 
-If we pair `Arc` with `Mutex`, we finally get a type that:
+Якщо поєднати `Arc` із `Mutex`, ми нарешті отримаємо тип, який:
 
-- Can be sent between threads, because:
-    - `Arc` is `Send` if `T` is `Send`, and
-    - `Mutex` is `Send` if `T` is `Send`.
-    - `T` is `Ticket`, which is `Send`.
-- Can be cloned, because `Arc` is `Clone` no matter what `T` is.
-  Cloning an `Arc` increments the reference count, the data is not copied.
-- Can be used to modify the data it wraps, because `Arc` lets you get a shared
-  reference to `Mutex<T>` which can in turn be used to acquire a lock.
+- Можна передавати між потоками, бо:
+    - `Arc` є `Send`, якщо `T` є `Send`, і
+    - `Mutex` є `Send`, якщо `T` є `Send`.
+    - `T` — це `Ticket`, а він є `Send`.
+- Можна клонувати, бо `Arc` є `Clone` незалежно від того, яким є `T`.
+  Клонування `Arc` збільшує лічильник посилань, а дані не копіюються.
+- Можна використовувати для зміни обгорнутих даних, бо `Arc` дає змогу отримати спільне
+  посилання на `Mutex<T>`, через яке, своєю чергою, можна захопити блокування.
 
-We have all the pieces we need to implement the locking strategy for our ticket store.
+Тепер у нас є все потрібне, щоб реалізувати стратегію блокувань для нашого сховища тікетів.
 
-## Further reading
+## Додаткові матеріали
 
-- We won't be covering the details of atomic operations in this course, but you can find more information
-  [in the `std` documentation](https://doc.rust-lang.org/std/sync/atomic/index.html) as well as in the
-  ["Rust atomics and locks" book](https://marabos.nl/atomics/).
+- У цьому курсі ми не розглядатимемо атомарні операції докладно, але більше інформації можна знайти
+  [у документації `std`](https://doc.rust-lang.org/std/sync/atomic/index.html), а також у
+  [книзі «Rust atomics and locks»](https://marabos.nl/atomics/).

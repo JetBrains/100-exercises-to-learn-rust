@@ -1,54 +1,54 @@
-## Design review
+## Огляд архітектури
 
-Let's take a moment to review the journey we've been through.
+Зупинімося на хвилинку й озирнімося на шлях, який ми пройшли.
 
-## Lockless with channel serialization
+## Без блокувань: серіалізація через канали
 
-Our first implementation of a multithreaded ticket store used:
+Наша перша реалізація багатопотокового сховища тікетів складалася з:
 
-- a single long-lived thread (server), to hold the shared state
-- multiple clients sending requests to it via channels from their own threads.
+- одного довгоживучого потоку (сервера), який зберігав спільний стан
+- кількох клієнтів, які надсилали йому запити каналами з власних потоків.
 
-No locking of the state was necessary, since the server was the only one modifying the state. That's because
-the "inbox" channel naturally **serialized** incoming requests: the server would process them one by one.\
-We've already discussed the limitations of this approach when it comes to patching behaviour, but we didn't
-discuss the performance implications of the original design: the server could only process one request at a time,
-including reads.
+Блокувати стан не було потреби, бо змінював його лише сервер. Так виходило тому, що
+вхідний канал («inbox») природним чином **серіалізував** запити, що надходили, тобто вишиковував їх у чергу: сервер обробляв їх по одному.\
+Ми вже обговорили обмеження цього підходу щодо часткових оновлень, але не
+обговорювали, як початкова архітектура впливала на продуктивність: сервер міг обробляти лише один запит за раз,
+зокрема й запити на читання.
 
-## Fine-grained locking
+## Дрібнозернисте блокування
 
-We then moved to a more sophisticated design, where each ticket was protected by its own lock and
-clients could independently decide if they wanted to read or atomically modify a ticket, acquiring the appropriate lock.
+Потім ми перейшли до складнішої архітектури, у якій кожен тікет захищало власне блокування, а
+клієнти могли самостійно вирішувати, чи хочуть вони прочитати тікет, чи атомарно змінити його, і захоплювали відповідне блокування.
 
-This design allows for better parallelism (i.e. multiple clients can read tickets at the same time), but it is
-still fundamentally **serial**: the server processes commands one by one. In particular, it hands out locks to clients
-one by one.
+Така архітектура краще підтримує паралелізм (тобто кілька клієнтів можуть читати тікети одночасно), але
+за своєю суттю вона все ще **послідовна**: сервер обробляє команди одну за одною. Зокрема, він видає блокування клієнтам
+по одному.
 
-Could we remove the channels entirely and allow clients to directly access the `TicketStore`, relying exclusively on
-locks to synchronize access?
+Чи можна повністю прибрати канали й дозволити клієнтам звертатися до `TicketStore` напряму, покладаючись для синхронізації доступу
+лише на блокування?
 
-## Removing channels
+## Прибираємо канали
 
-We have two problems to solve:
+Нам треба розв'язати дві проблеми:
 
-- Sharing `TicketStore` across threads
-- Synchronizing access to the store
+- Спільний доступ до `TicketStore` з різних потоків
+- Синхронізація доступу до сховища
 
-### Sharing `TicketStore` across threads
+### Спільний доступ до `TicketStore` з різних потоків
 
-We want all threads to refer to the same state, otherwise we don't really have a multithreaded system—we're just
-running multiple single-threaded systems in parallel.\
-We've already encountered this problem when we tried to share a lock across threads: we can use an `Arc`.
+Ми хочемо, щоб усі потоки зверталися до одного й того самого стану, інакше в нас насправді не багатопотокова система — ми просто
+паралельно запускаємо кілька однопотокових систем.\
+Ми вже стикалися з цією проблемою, коли намагалися спільно використовувати блокування в кількох потоках: можна скористатися `Arc`.
 
-### Synchronizing access to the store
+### Синхронізація доступу до сховища
 
-There is one interaction that's still lockless thanks to the serialization provided by the channels: inserting
-(or removing) a ticket from the store.\
-If we remove the channels, we need to introduce (another) lock to synchronize access to the `TicketStore` itself.
+Є одна взаємодія, яка досі обходиться без блокувань завдяки серіалізації, що її забезпечують канали: вставлення
+тікета в сховище (або видалення з нього).\
+Якщо прибрати канали, доведеться запровадити (ще одне) блокування, щоб синхронізувати доступ до самого `TicketStore`.
 
-If we use a `Mutex`, then it makes no sense to use an additional `RwLock` for each ticket: the `Mutex` will
-already serialize access to the entire store, so we wouldn't be able to read tickets in parallel anyway.\
-If we use a `RwLock`, instead, we can read tickets in parallel. We just need to pause all reads while inserting
-or removing a ticket.
+Якщо взяти `Mutex`, то немає сенсу використовувати ще й окремий `RwLock` для кожного тікета: `Mutex` і так
+серіалізуватиме доступ до всього сховища, тож паралельно читати тікети ми все одно не зможемо.\
+Якщо ж узяти `RwLock`, читати тікети паралельно можна. Треба лише призупиняти всі операції читання на час вставлення
+або видалення тікета.
 
-Let's go down this path and see where it leads us.
+Ходімо цим шляхом і подивімося, куди він нас приведе.

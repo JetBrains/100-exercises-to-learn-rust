@@ -1,27 +1,27 @@
-## Update operations
+## Операції оновлення
 
-So far we've implemented only insertion and retrieval operations.\
-Let's see how we can expand the system to provide an update operation.
+Досі ми реалізували лише операції вставлення та отримання.\
+Подивімося, як розширити систему, щоб вона підтримувала й операцію оновлення.
 
-## Legacy updates
+## Оновлення в попередній версії
 
-In the non-threaded version of the system, updates were fairly straightforward: `TicketStore` exposed a
-`get_mut` method that allowed the caller to obtain a mutable reference to a ticket, and then modify it.
+У версії системи без потоків оновлення були доволі простими: `TicketStore` надавав
+метод `get_mut`, через який код, що його викликає, міг отримати змінюване посилання на тікет, а потім змінити тікет.
 
-## Multithreaded updates
+## Багатопотокові оновлення
 
-The same strategy won't work in the current multithreaded version. The borrow checker would
-stop us: `SyncSender<&mut Ticket>` isn't `'static` because `&mut Ticket` doesn't satisfy the `'static` lifetime, therefore
-they can't be captured by the closure that gets passed to `std::thread::spawn`.
+У нинішній багатопотоковій версії ця сама стратегія не спрацює. Нас зупинить
+borrow checker: `SyncSender<&mut Ticket>` не є `'static`, бо `&mut Ticket` не задовольняє час життя `'static`, тож
+замикання, яке передається в `std::thread::spawn`, не може його захопити.
 
-There are a few ways to work around this limitation. We'll explore a few of them in the following exercises.
+Обійти це обмеження можна кількома способами. Деякі з них ми розглянемо в наступних вправах.
 
-### Patching
+### Часткове оновлення (patching)
 
-We can't send a `&mut Ticket` over a channel, therefore we can't mutate on the client-side.\
-Can we mutate on the server-side?
+Ми не можемо надіслати `&mut Ticket` каналом, тож не можемо змінювати тікет на боці клієнта.\
+А чи можна змінювати його на боці сервера?
 
-We can, if we tell the server what needs to be changed. In other words, if we send a **patch** to the server:
+Можна, якщо повідомити серверу, що саме треба змінити. Інакше кажучи, якщо надіслати серверу **патч** (patch) — опис змін:
 
 ```rust
 struct TicketPatch {
@@ -32,8 +32,8 @@ struct TicketPatch {
 }
 ```
 
-The `id` field is mandatory, since it's required to identify the ticket that needs to be updated.\
-All other fields are optional:
+Поле `id` обов'язкове, бо без нього не визначити, який тікет треба оновити.\
+Усі інші поля необов'язкові:
 
-- If a field is `None`, it means that the field should not be changed.
-- If a field is `Some(value)`, it means that the field should be changed to `value`.
+- Якщо поле має значення `None`, це поле змінювати не треба.
+- Якщо поле має значення `Some(value)`, це поле треба змінити на `value`.

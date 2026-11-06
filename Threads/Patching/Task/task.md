@@ -1,3 +1,3 @@
-This task is to implement patching functionality. This means completing the `TicketStoreClient::update` method and handling the `Command::Update` in the `server` function.
+У цьому завданні потрібно реалізувати часткове оновлення (patching). Тобто треба дописати метод `TicketStoreClient::update` і обробити `Command::Update` у функції `server`.
 
-Follow the `TODO` comments in the code.
+Виконайте вказівки з коментарів `TODO` у коді.

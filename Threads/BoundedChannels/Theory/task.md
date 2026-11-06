@@ -1,19 +1,19 @@
-## Bounded vs unbounded channels
+## Обмежені й необмежені канали
 
-So far we've been using unbounded channels.\
-You can send as many messages as you want, and the channel will grow to accommodate them.\
-In a multi-producer single-consumer scenario, this can be problematic: if the producers
-enqueue messages at a faster rate than the consumer can process them, the channel will
-keep growing, potentially consuming all available memory.
+Досі ми використовували необмежені канали.\
+Ви можете надіслати скільки завгодно повідомлень, і канал розростатиметься, щоб їх умістити.\
+У сценарії з багатьма виробниками й одним споживачем це може стати проблемою: якщо виробники
+ставлять повідомлення в чергу швидше, ніж споживач устигає їх обробляти, канал безупинно
+розростатиметься й зрештою може зайняти всю доступну пам'ять.
 
-Our recommendation is to **never** use an unbounded channel in a production system.\
-You should always enforce an upper limit on the number of messages that can be enqueued using a
-**bounded channel**.
+Ми радимо **ніколи** не використовувати необмежені канали в продакшн-системах.\
+Завжди встановлюйте верхню межу кількості повідомлень, які можна поставити в чергу, — для цього
+використовуйте **обмежений канал** (bounded channel).
 
-## Bounded channels
+## Обмежені канали
 
-A bounded channel has a fixed capacity.\
-You can create one by calling `sync_channel` with a capacity greater than zero:
+Обмежений канал має фіксовану ємність.\
+Щоб створити такий канал, викличте `sync_channel` з ємністю, більшою за нуль:
 
 ```rust
 use std::sync::mpsc::sync_channel;
@@ -21,23 +21,23 @@ use std::sync::mpsc::sync_channel;
 let (sender, receiver) = sync_channel(10);
 ```
 
-`receiver` has the same type as before, `Receiver<T>`.\
-`sender`, instead, is an instance of `SyncSender<T>`.
+`receiver` має той самий тип, що й раніше, — `Receiver<T>`.\
+А от `sender` — це екземпляр `SyncSender<T>`.
 
-### Sending messages
+### Надсилання повідомлень
 
-You have two different methods to send messages through a `SyncSender`:
+Надсилати повідомлення через `SyncSender` можна двома різними методами:
 
-- `send`: if there is space in the channel, it will enqueue the message and return `Ok(())`.\
-  If the channel is full, it will block and wait until there is space available.
-- `try_send`: if there is space in the channel, it will enqueue the message and return `Ok(())`.\
-  If the channel is full, it will return `Err(TrySendError::Full(value))`, where `value` is the message that couldn't be sent.
+- `send`: якщо в каналі є місце, метод ставить повідомлення в чергу й повертає `Ok(())`.\
+  Якщо канал заповнений, метод блокує потік і чекає, доки в каналі не звільниться місце.
+- `try_send`: якщо в каналі є місце, метод ставить повідомлення в чергу й повертає `Ok(())`.\
+  Якщо канал заповнений, метод повертає `Err(TrySendError::Full(value))`, де `value` — повідомлення, яке не вдалося надіслати.
 
-Depending on your use case, you might want to use one or the other.
+Залежно від вашого сценарію вам може знадобитися той чи інший метод.
 
-### Backpressure
+### Зворотний тиск
 
-The main advantage of using bounded channels is that they provide a form of **backpressure**.\
-They force the producers to slow down if the consumer can't keep up.
-The backpressure can then propagate through the system, potentially affecting the whole architecture and
-preventing end users from overwhelming the system with requests.
+Головна перевага обмежених каналів у тому, що вони забезпечують певну форму **зворотного тиску** (backpressure).\
+Вони змушують виробників сповільнитися, якщо споживач не встигає за ними.
+Далі зворотний тиск може поширюватися системою, потенційно впливаючи на всю архітектуру й
+не даючи кінцевим користувачам перевантажити систему запитами.

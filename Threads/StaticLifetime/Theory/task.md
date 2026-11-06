@@ -1,7 +1,7 @@
 ## `'static`
 
-If you tried to borrow a slice from the vector in the previous exercise,
-you probably got a compiler error that looks something like this:
+Якщо в попередній вправі ви намагалися позичити зріз вектора,
+то, імовірно, отримали помилку компіляції приблизно такого вигляду:
 
 ```text
 error[E0597]: `v` does not live long enough
@@ -18,15 +18,15 @@ error[E0597]: `v` does not live long enough
    |  - `v` dropped here while still borrowed
 ```
 
-`argument requires that v is borrowed for 'static`, what does that mean?
+`argument requires that v is borrowed for 'static` — що це означає?
 
-The `'static` lifetime is a special lifetime in Rust.\
-It means that the value will be valid for the entire duration of the program.
+Час життя `'static` — особливий час життя в Rust.\
+Він означає, що значення буде дійсним протягом усього часу виконання програми.
 
-## Detached threads
+## Від'єднані потоки (detached threads)
 
-A thread launched via `thread::spawn` can **outlive** the thread that spawned it.\
-For example:
+Потік, запущений через `thread::spawn`, може **пережити** (outlive) потік, який його породив.\
+Наприклад:
 
 ```rust
 use std::thread;
@@ -43,25 +43,25 @@ fn f() {
 }
 ```
 
-In this example, the first spawned thread will in turn spawn
-a child thread that prints a message every second.\
-The first thread will then finish and exit. When that happens,
-its child thread will **continue running** for as long as the
-overall process is running.\
-In Rust's lingo, we say that the child thread has **outlived**
-its parent.
+У цьому прикладі перший породжений потік своєю чергою породжує
+дочірній потік, який щосекунди виводить повідомлення.\
+Потім перший потік завершує роботу й виходить. Коли це стається,
+його дочірній потік **продовжує працювати**, доки працює
+весь процес.\
+У термінології Rust кажуть, що дочірній потік **пережив**
+свій батьківський потік.
 
-## `'static` lifetime
+## Час життя `'static`
 
-Since a spawned thread can:
+Оскільки породжений потік може:
 
-- outlive the thread that spawned it (its parent thread)
-- run until the program exits
+- пережити потік, який його породив (батьківський потік)
+- працювати аж до завершення програми
 
-it must not borrow any values that might be dropped before the program exits;
-violating this constraint would expose us to a use-after-free bug.\
-That's why `std::thread::spawn`'s signature requires that the closure passed to it
-has the `'static` lifetime:
+він не повинен позичати жодних значень, які можуть бути знищені (drop) до завершення програми;
+порушення цього обмеження зробило б нас вразливими до помилки «використання після звільнення» (use-after-free).\
+Саме тому сигнатура `std::thread::spawn` вимагає, щоб замикання, передане цій функції,
+мало час життя `'static`:
 
 ```rust
 pub fn spawn<F, T>(f: F) -> JoinHandle<T> 
@@ -73,42 +73,42 @@ where
 }
 ```
 
-## `'static` is not (just) about references
+## `'static` стосується не (лише) посилань
 
-All values in Rust have a lifetime, not just references.
+Час життя мають усі значення в Rust, а не лише посилання.
 
-In particular, a type that owns its data (like a `Vec` or a `String`)
-satisfies the `'static` constraint: if you own it, you can keep working with it
-for as long as you want, even after the function that originally created it
-has returned.
+Зокрема, тип, який володіє своїми даними (як-от `Vec` чи `String`),
+задовольняє обмеження `'static`: якщо ви володієте таким значенням, то можете працювати з ним
+скільки завгодно, навіть після того, як функція, що його створила,
+завершила роботу.
 
-You can thus interpret `'static` as a way to say:
+Отже, `'static` можна тлумачити як спосіб сказати:
 
-- Give me an owned value
-- Give me a reference that's valid for the entire duration of the program
+- Дайте мені значення у володіння
+- Дайте мені посилання, дійсне протягом усього часу виконання програми
 
-The first approach is how you solved the issue in the previous exercise:
-by allocating new vectors to hold the left and right parts of the original vector,
-which were then moved into the spawned threads.
+Саме першим підходом ви скористалися, щоб розв'язати проблему в попередній вправі:
+виділили пам'ять під нові вектори для лівої та правої частин початкового вектора,
+а потім перемістили ці вектори в породжені потоки.
 
-## `'static` references
+## Посилання `'static`
 
-Let's talk about the second case, references that are valid for the entire
-duration of the program.
+Поговорімо про другий випадок — посилання, дійсні протягом усього часу
+виконання програми.
 
-### Static data
+### Статичні дані
 
-The most common case is a reference to **static data**, such as string literals:
+Найпоширеніший випадок — посилання на **статичні дані**, як-от рядкові літерали:
 
 ```rust
 let s: &'static str = "Hello world!";
 ```
 
-Since string literals are known at compile-time, Rust stores them _inside_ your executable,
-in a region known as **read-only data segment**.
-All references pointing to that region will therefore be valid for as long as
-the program runs; they satisfy the `'static` contract.
+Оскільки рядкові літерали відомі ще на етапі компіляції, Rust зберігає їх _всередині_ виконуваного файлу,
+в області, яка називається **сегментом даних лише для читання** (read-only data segment).
+Тож усі посилання на цю область будуть дійсними, доки
+працює програма; вони виконують контракт `'static`.
 
-## Further reading
+## Додаткові матеріали
 
-- [The data segment](https://en.wikipedia.org/wiki/Data_segment)
+- [Сегмент даних](https://en.wikipedia.org/wiki/Data_segment)

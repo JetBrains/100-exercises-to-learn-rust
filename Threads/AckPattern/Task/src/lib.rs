@@ -5,7 +5,7 @@ use std::sync::mpsc::{Receiver, Sender};
 pub mod data;
 pub mod store;
 
-// Refer to the tests to understand the expected schema.
+// Щоб зрозуміти очікувану схему, зазирніть у тести.
 pub enum Command {
     Insert {
         draft: TicketDraft,
@@ -23,7 +23,7 @@ pub fn launch() -> Sender<Command> {
     sender
 }
 
-// TODO: handle incoming commands as expected.
+// TODO: обробляйте вхідні команди так, як очікується.
 pub fn server(receiver: Receiver<Command>) {
     let mut store = TicketStore::new();
     loop {
@@ -43,8 +43,8 @@ pub fn server(receiver: Receiver<Command>) {
                 let _ = response_sender.send(ticket.cloned());
             }
             Err(_) => {
-                // There are no more senders, so we can safely break
-                // and shut down the server.
+                // Відправників більше немає, тож можна безпечно вийти з циклу
+                // і зупинити сервер.
                 break;
             }
         }

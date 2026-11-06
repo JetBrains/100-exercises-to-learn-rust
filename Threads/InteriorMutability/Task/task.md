@@ -1,2 +1,2 @@
-This task is to implement the `DropTracker<T>` `struct` and its `Drop` trait.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно реалізувати структуру `DropTracker<T>` (`struct`) і трейт `Drop` для неї.
+Дотримуйтеся вказівок із коментарів `TODO` у коді.

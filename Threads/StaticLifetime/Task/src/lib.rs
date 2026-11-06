@@ -1,6 +1,6 @@
-// TODO: Given a static slice of integers, split the slice into two halves and
-//  sum each half in a separate thread.
-//  Do not allocate any additional memory!
+// TODO: маючи статичний зріз цілих чисел, розділіть його на дві половини й
+//  обчисліть суму кожної половини в окремому потоці.
+//  Не виділяйте жодної додаткової пам'яті!
 use std::thread;
 
 pub fn sum(slice: &'static [i32]) -> i32 {

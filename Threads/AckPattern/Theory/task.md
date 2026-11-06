@@ -1,16 +1,16 @@
-## Two-way communication
+## Двостороння взаємодія
 
-In our current client-server implementation, communication flows in one direction: from the client to the server.\
-The client has no way of knowing if the server received the message, executed it successfully, or failed.
-That's not ideal.
+У нашій поточній клієнт-серверній реалізації дані передаються лише в одному напрямку: від клієнта до сервера.\
+Клієнт ніяк не може дізнатися, чи отримав сервер повідомлення, чи успішно його виконав, чи стався збій.
+Це не ідеально.
 
-To solve this issue, we can introduce a two-way communication system.
+Щоб розв'язати цю проблему, можна запровадити систему двосторонньої взаємодії.
 
-## Response channel
+## Канал для відповіді
 
-We need a way for the server to send a response back to the client.\
-There are various ways to do this, but the simplest option is to include a `Sender` channel in
-the message that the client sends to the server. After processing the message, the server can use
-this channel to send a response back to the client.
+Нам потрібен спосіб, у який сервер зможе надіслати клієнтові відповідь.\
+Зробити це можна по-різному, але найпростіше — вкласти `Sender` окремого каналу в
+повідомлення, яке клієнт надсилає серверу. Обробивши повідомлення, сервер може скористатися
+цим каналом, щоб надіслати клієнтові відповідь.
 
-This is a fairly common pattern in Rust applications built on top of message-passing primitives.
+Це доволі поширений патерн у застосунках на Rust, побудованих на примітивах обміну повідомленнями.

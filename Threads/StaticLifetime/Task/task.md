@@ -1,2 +1,2 @@
-This task is to implement a multi-threaded `sum` function for a static slice (`&'static [i32]`).
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно реалізувати багатопотокову функцію `sum` для статичного зрізу (`&'static [i32]`).
+Дотримуйтеся вказівок із коментарів `TODO` у коді.

@@ -1,4 +1,5 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
@@ -6,7 +7,7 @@ files:
       - offset: 163
         length: 11
         placeholder_text: todo!()
-      - offset: 728
+      - offset: 756
         length: 230
         placeholder_text: /* TODO */
   - name: Cargo.toml
@@ -14,7 +15,7 @@ files:
   - name: tests/tests.rs
     visible: true
     placeholders:
-      - offset: 1075
+      - offset: 1048
         length: 5
         placeholder_text: false; // TODO
     propagatable: false

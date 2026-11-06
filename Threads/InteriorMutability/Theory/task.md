@@ -1,6 +1,6 @@
-## Interior mutability
+## Внутрішня змінюваність
 
-Let's take a moment to reason about the signature of `Sender`'s `send`:
+Поміркуймо трохи над сигнатурою методу `send` типу `Sender`:
 
 ```rust
 impl<T> Sender<T> {
@@ -10,105 +10,105 @@ impl<T> Sender<T> {
 }
 ```
 
-`send` takes `&self` as its argument.\
-But it's clearly causing a mutation: it's adding a new message to the channel.
-What's even more interesting is that `Sender` is cloneable: we can have multiple instances of `Sender`
-trying to modify the channel state **at the same time**, from different threads.
+`send` приймає як аргумент `&self`.\
+Але цей метод явно щось змінює: він додає нове повідомлення в канал.
+Ще цікавіше те, що `Sender` можна клонувати: у нас може бути кілька екземплярів `Sender`,
+які намагаються змінити стан каналу **одночасно**, з різних потоків.
 
-That's the key property we are using to build this client-server architecture. But why does it work?
-Doesn't it violate Rust's rules about borrowing? How are we performing mutations via an _immutable_ reference?
+Саме на цій ключовій властивості ми будуємо нашу клієнт-серверну архітектуру. Але чому це працює?
+Хіба це не порушує правил запозичення в Rust? Як ми змінюємо дані через _незмінюване_ посилання?
 
-## Shared rather than immutable references
+## Спільні, а не незмінювані посилання
 
-When we introduced the borrow-checker, we named the two types of references we can have in Rust:
+Коли ми знайомили вас із borrow checker, ми назвали два типи посилань, які бувають у Rust:
 
-- immutable references (`&T`)
-- mutable references (`&mut T`)
+- незмінювані посилання (`&T`)
+- змінювані посилання (`&mut T`)
 
-It would have been more accurate to name them:
+Точніше було б назвати їх так:
 
-- shared references (`&T`)
-- exclusive references (`&mut T`)
+- спільні посилання (`&T`)
+- ексклюзивні посилання (`&mut T`)
 
-Immutable/mutable is a mental model that works for the vast majority of cases, and it's a great one to get started
-with Rust. But it's not the whole story, as you've just seen: `&T` doesn't actually guarantee that the data it
-points to is immutable.\
-Don't worry, though: Rust is still keeping its promises.
-It's just that the terms are a bit more nuanced than they might seem at first.
+Поділ на незмінювані та змінювані — це ментальна модель, яка працює в переважній більшості випадків і чудово підходить
+для знайомства з Rust. Але, як ви щойно побачили, це ще не все: `&T` насправді не гарантує, що дані, на які
+воно вказує, незмінювані.\
+Утім, не хвилюйтеся: Rust і далі дотримується своїх обіцянок.
+Просто терміни мають трохи більше нюансів, ніж може здатися на перший погляд.
 
 ## `UnsafeCell`
 
-Whenever a type allows you to mutate data through a shared reference, you're dealing with **interior mutability**.
+Щоразу, коли тип дає змогу змінювати дані через спільне посилання, ви маєте справу з **внутрішньою змінюваністю** (interior mutability).
 
-By default, the Rust compiler assumes that shared references are immutable. It **optimises your code** based on that assumption.\
-The compiler can reorder operations, cache values, and do all sorts of magic to make your code faster.
+За замовчуванням компілятор Rust припускає, що спільні посилання незмінювані. Спираючись на це припущення, він **оптимізує ваш код**.\
+Компілятор може переставляти операції, кешувати значення й творити всіляку магію, щоб ваш код працював швидше.
 
-You can tell the compiler "No, this shared reference is actually mutable" by wrapping the data in an `UnsafeCell`.\
-Every time you see a type that allows interior mutability, you can be certain that `UnsafeCell` is involved,
-either directly or indirectly.\
-Using `UnsafeCell`, raw pointers and `unsafe` code, you can mutate data through shared references.
+Щоб сказати компілятору «Ні, це спільне посилання насправді змінюване», обгорніть дані в `UnsafeCell`.\
+Щоразу, коли ви бачите тип, що підтримує внутрішню змінюваність, можете бути певні: тут задіяно `UnsafeCell` —
+прямо чи опосередковано.\
+За допомогою `UnsafeCell`, сирих вказівників (raw pointers) і `unsafe`-коду можна змінювати дані через спільні посилання.
 
-Let's be clear, though: `UnsafeCell` isn't a magic wand that allows you to ignore the borrow-checker!\
-`unsafe` code is still subject to Rust's rules about borrowing and aliasing.
-It's an (advanced) tool that you can leverage to build **safe abstractions** whose safety can't be directly expressed
-in Rust's type system. Whenever you use the `unsafe` keyword you're telling the compiler:
-"I know what I'm doing, I won't violate your invariants, trust me."
+Але розставмо всі крапки над «і»: `UnsafeCell` — не чарівна паличка, яка дає змогу ігнорувати borrow checker!\
+На `unsafe`-код і далі поширюються правила Rust щодо запозичення та псевдонімів (aliasing).
+Це (просунутий) інструмент, за допомогою якого можна будувати **безпечні абстракції**, чию безпечність неможливо безпосередньо виразити
+в системі типів Rust. Щоразу, коли ви використовуєте ключове слово `unsafe`, ви кажете компілятору:
+«Я знаю, що роблю, я не порушу твоїх інваріантів, повір мені».
 
-Every time you call an `unsafe` function, there will be documentation explaining its **safety preconditions**:
-under what circumstances it's safe to execute its `unsafe` block. You can find the ones for `UnsafeCell`
-[in `std`'s documentation](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html).
+До кожної `unsafe`-функції, яку ви викликаєте, є документація з описом її **передумов безпечності** (safety preconditions):
+за яких обставин її `unsafe`-блок безпечно виконувати. Передумови для `UnsafeCell` можна знайти
+[у документації `std`](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html).
 
-We won't be using `UnsafeCell` directly in this course, nor will we be writing `unsafe` code.
-But it's important to know that it's there, why it exists and how it relates to the types you use
-every day in Rust.
+У цьому курсі ми не використовуватимемо `UnsafeCell` напряму й не писатимемо `unsafe`-код.
+Але важливо знати, що він існує, навіщо він потрібен і як пов'язаний із типами, якими ви щодня
+користуєтеся в Rust.
 
-## Key examples
+## Ключові приклади
 
-Let's go through a couple of important `std` types that leverage interior mutability.\
-These are types that you'll encounter somewhat often in Rust code, especially if you peek under the hood of
-some the libraries you use.
+Розгляньмо кілька важливих типів зі `std`, які використовують внутрішню змінюваність.\
+Ці типи доволі часто трапляються в коді на Rust, особливо якщо зазирнути під капот
+деяких бібліотек, якими ви користуєтеся.
 
-### Reference counting
+### Підрахунок посилань
 
-`Rc` is a reference-counted pointer.\
-It wraps around a value and keeps track of how many references to the value exist.
-When the last reference is dropped, the value is deallocated.\
-The value wrapped in an `Rc` is immutable: you can only get shared references to it.
+`Rc` — це вказівник із підрахунком посилань (reference-counted pointer).\
+Він обгортає значення й відстежує, скільки посилань на це значення існує.
+Коли останнє посилання знищується (drop), пам'ять, яку займає значення, звільняється.\
+Значення, обгорнуте в `Rc`, незмінюване: ви можете отримати на нього лише спільні посилання.
 
 ```rust
 use std::rc::Rc;
 
 let a: Rc<String> = Rc::new("My string".to_string());
-// Only one reference to the string data exists.
+// Існує лише одне посилання на дані рядка.
 assert_eq!(Rc::strong_count(&a), 1);
 
-// When we call `clone`, the string data is not copied!
-// Instead, the reference count for `Rc` is incremented.
+// Коли ми викликаємо `clone`, дані рядка не копіюються!
+// Натомість збільшується лічильник посилань `Rc`.
 let b = Rc::clone(&a);
 assert_eq!(Rc::strong_count(&a), 2);
 assert_eq!(Rc::strong_count(&b), 2);
-// ^ Both `a` and `b` point to the same string data
-//   and share the same reference counter.
+// ^ І `a`, і `b` вказують на ті самі дані рядка
+//   та мають спільний лічильник посилань.
 ```
 
-`Rc` uses `UnsafeCell` internally to allow shared references to increment and decrement the reference count.
+`Rc` використовує всередині `UnsafeCell`, щоб спільні посилання могли збільшувати й зменшувати лічильник посилань.
 
 ### `RefCell`
 
-`RefCell` is one of the most common examples of interior mutability in Rust.
-It allows you to mutate the value wrapped in a `RefCell` even if you only have an
-immutable reference to the `RefCell` itself.
+`RefCell` — один із найпоширеніших прикладів внутрішньої змінюваності в Rust.
+Він дає змогу змінювати значення, обгорнуте в `RefCell`, навіть якщо у вас є лише
+незмінюване посилання на сам `RefCell`.
 
-This is done via **runtime borrow checking**.
-The `RefCell` keeps track of the number (and type) of references to the value it contains at runtime.
-If you try to borrow the value mutably while it's already borrowed immutably,
-the program will panic, ensuring that Rust's borrowing rules are always enforced.
+Це досягається завдяки **перевірці запозичень під час виконання** (runtime borrow checking).
+`RefCell` під час виконання відстежує кількість (і тип) посилань на значення, яке він містить.
+Якщо спробувати позичити значення як змінюване, поки воно вже позичене як незмінюване,
+програма запанікує — так правила запозичення Rust завжди залишаються в силі.
 
 ```rust
 use std::cell::RefCell;
 
 let x = RefCell::new(42);
 
-let y = x.borrow(); // Immutable borrow
-let z = x.borrow_mut(); // Panics! There is an active immutable borrow.
+let y = x.borrow(); // Незмінюване запозичення
+let z = x.borrow_mut(); // Паніка! Уже є активне незмінюване запозичення.
 ```

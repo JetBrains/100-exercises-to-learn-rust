@@ -1,8 +1,8 @@
-## Scoped threads
+## Scoped-потоки
 
-All the lifetime issues we discussed so far have a common source:
-the spawned thread can outlive its parent.\
-We can sidestep this issue by using **scoped threads**.
+Усі проблеми з часами життя, які ми досі обговорювали, мають спільне джерело:
+породжений потік може пережити свій батьківський потік.\
+Цю проблему можна обійти за допомогою **scoped-потоків** (scoped threads) — потоків, прив'язаних до певної області (scope).
 
 ```rust
 let v = vec![1, 2, 3];
@@ -22,21 +22,21 @@ std::thread::scope(|scope| {
 println!("Here's v: {v:?}");
 ```
 
-Let's unpack what's happening.
+Розберімо, що тут відбувається.
 
 ## `scope`
 
-The `std::thread::scope` function creates a new **scope**.\
-`std::thread::scope` takes a closure as input, with a single argument: a `Scope` instance.
+Функція `std::thread::scope` створює нову **область** (scope).\
+`std::thread::scope` приймає на вхід замикання з єдиним аргументом — екземпляром `Scope`.
 
-## Scoped spawns
+## Породження потоків в області
 
-`Scope` exposes a `spawn` method.\
-Unlike `std::thread::spawn`, all threads spawned using a `Scope` will be
-**automatically joined** when the scope ends.
+`Scope` надає метод `spawn`.\
+На відміну від `std::thread::spawn`, усі потоки, породжені через `Scope`,
+будуть **автоматично приєднані** (join), коли область закінчиться: вихід з області відбудеться лише після їхнього завершення.
 
-If we were to "translate" the previous example to `std::thread::spawn`,
-it'd look like this:
+Якби ми «переклали» попередній приклад на `std::thread::spawn`,
+він мав би такий вигляд:
 
 ```rust
 let v = vec![1, 2, 3];
@@ -57,17 +57,17 @@ handle2.join().unwrap();
 println!("Here's v: {v:?}");
 ```
 
-## Borrowing from the environment
+## Запозичення з оточення
 
-The translated example wouldn't compile, though: the compiler would complain
-that `&v` can't be used from our spawned threads since its lifetime isn't
+Однак «перекладений» приклад не скомпілювався б: компілятор поскаржився б,
+що `&v` не можна використовувати в наших породжених потоках, оскільки його час життя не
 `'static`.
 
-That's not an issue with `std::thread::scope`—you can **safely borrow from the environment**.
+Із `std::thread::scope` такої проблеми немає — ви можете **безпечно позичати з оточення**.
 
-In our example, `v` is created before the spawning points.
-It will only be dropped _after_ `scope` returns. At the same time,
-all threads spawned inside `scope` are guaranteed to finish _before_ `scope` returns,
-therefore there is no risk of having dangling references.
+У нашому прикладі `v` створюється до місць, де породжуються потоки.
+Його буде знищено лише _після_ того, як `scope` поверне керування. Водночас
+усі потоки, породжені всередині `scope`, гарантовано завершаться _до_ того, як `scope` поверне керування,
+тож ризику отримати висячі посилання (dangling references) немає.
 
-The compiler won't complain!
+Компілятор не скаржитиметься!

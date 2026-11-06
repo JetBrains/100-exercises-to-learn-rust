@@ -1,4 +1,4 @@
-This task is to convert the channel implementation to use bounded channels. 
-This requires updating sender/receiver types, method return types to handle errors, and channel initialization.
+У цьому завданні потрібно перевести наявну реалізацію на обмежені канали.
+Для цього доведеться оновити типи відправника й отримувача, типи значень, які повертають методи (щоб обробляти помилки), а також ініціалізацію каналів.
 
-Follow the `TODO` comments in the code.
+Дотримуйтеся вказівок із коментарів `TODO` у коді.

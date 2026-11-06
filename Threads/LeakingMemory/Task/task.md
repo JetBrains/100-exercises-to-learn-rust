@@ -1,2 +1,2 @@
-This task is to implement a multi-threaded `sum` function. 
-As guided by the `TODO` comments, leak the input `Vec` using `Vec::leak`, then `sum` its two halves in separate threads.
+У цьому завданні потрібно реалізувати багатопотокову функцію `sum`.
+Як підказують коментарі `TODO`, навмисно допустіть витік вхідного `Vec` за допомогою `Vec::leak`, а потім підсумуйте (`sum`) дві його половини в окремих потоках.

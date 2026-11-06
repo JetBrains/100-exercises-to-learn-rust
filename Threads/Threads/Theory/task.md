@@ -1,27 +1,26 @@
-## Threads
+## Потоки
 
-Before we start writing multithreaded code, let's take a step back and talk about what threads are
-and why we might want to use them.
+Перш ніж почати писати багатопотоковий код, зробімо крок назад і поговорімо про те, що таке потоки
+і навіщо вони можуть знадобитися.
 
-## What is a thread?
+## Що таке потік?
 
-A **thread** is an execution context managed by the underlying operating system.\
-Each thread has its own stack and instruction pointer.
+**Потік** (thread) — це контекст виконання, яким керує операційна система.\
+Кожен потік має власний стек і власний вказівник інструкцій (instruction pointer).
 
-A single **process** can manage multiple threads.
-These threads share the same memory space, which means they can access the same data.
+Один **процес** може керувати кількома потоками.
+Ці потоки спільно використовують той самий простір пам'яті, тобто мають доступ до тих самих даних.
 
-Threads are a **logical** construct. In the end, you can only run one set of instructions
-at a time on a CPU core, the **physical** execution unit.\
-Since there can be many more threads than there are CPU cores, the operating system's
-**scheduler** is in charge of deciding which thread to run at any given time,
-partitioning CPU time among them to maximize throughput and responsiveness.
+Потоки — це **логічна** конструкція. Зрештою, ядро процесора — **фізичний** блок виконання — може виконувати
+лише один набір інструкцій за раз.\
+Оскільки потоків може бути набагато більше, ніж ядер процесора, саме **планувальник** (scheduler) операційної системи
+вирішує, який потік виконувати в кожен момент часу, і розподіляє між потоками процесорний час так,
+щоб досягти максимальної пропускної здатності й швидкості відгуку.
 
 ## `main`
 
-When a Rust program starts, it runs on a single thread, the **main thread**.\
-This thread is created by the operating system and is responsible for running the `main`
-function.
+Коли програма на Rust запускається, вона працює в одному потоці — **головному потоці** (main thread).\
+Цей потік створює операційна система, і саме він виконує функцію `main`.
 
 ```rust
 use std::thread;
@@ -37,14 +36,14 @@ fn main() {
 
 ## `std::thread`
 
-Rust's standard library provides a module, `std::thread`, that allows you to create
-and manage threads.
+Стандартна бібліотека Rust надає модуль `std::thread`, за допомогою якого можна створювати
+потоки й керувати ними.
 
 ### `spawn`
 
-You can use `std::thread::spawn` to create new threads and execute code on them.
+Щоб створювати (породжувати, spawn) нові потоки й виконувати в них код, скористайтеся `std::thread::spawn`.
 
-For example:
+Наприклад:
 
 ```rust
 use std::thread;
@@ -65,14 +64,14 @@ fn main() {
 }
 ```
 
-If you execute this program on the [Rust playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=afedf7062298ca8f5a248bc551062eaa)
-you'll see that the main thread and the spawned thread run concurrently.\
-Each thread makes progress independently of the other.
+Якщо запустити цю програму в онлайн-пісочниці [Rust playground](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=afedf7062298ca8f5a248bc551062eaa),
+ви побачите, що головний і породжений потоки виконуються конкурентно.\
+Кожен потік просувається у своїй роботі незалежно від іншого.
 
-### Process termination
+### Завершення процесу
 
-When the main thread finishes, the overall process will exit.\
-A spawned thread will continue running until it finishes or the main thread finishes.
+Коли головний потік завершується, завершується й увесь процес.\
+Породжений потік працюватиме, доки не завершиться сам або доки не завершиться головний потік.
 
 ```rust
 use std::thread;
@@ -90,13 +89,13 @@ fn main() {
 }
 ```
 
-In the example above, you can expect to see the message "Hello from a thread!" printed roughly five times.\
-Then the main thread will finish (when the `sleep` call returns), and the spawned thread will be terminated
-since the overall process exits.
+У прикладі вище повідомлення «Hello from a thread!» буде виведено приблизно п'ять разів.\
+Потім головний потік завершиться (коли виклик `sleep` поверне керування), а породжений потік буде зупинено,
+оскільки завершується весь процес.
 
 ### `join`
 
-You can also wait for a spawned thread to finish by calling the `join` method on the `JoinHandle` that `spawn` returns.
+Також можна дочекатися завершення породженого потоку, викликавши метод `join` для `JoinHandle`, який повертає `spawn`.
 
 ```rust
 use std::thread;
@@ -109,7 +108,7 @@ fn main() {
 }
 ```
 
-In this example, the main thread will wait for the spawned thread to finish before exiting.\
-This introduces a form of **synchronization** between the two threads: you're guaranteed to see the message
-"Hello from a thread!" printed before the program exits, because the main thread won't exit
-until the spawned thread has finished.
+У цьому прикладі головний потік перед виходом дочекається, поки завершиться породжений потік.\
+Так між двома потоками з'являється певна **синхронізація**: ви гарантовано побачите виведене повідомлення
+«Hello from a thread!» до завершення програми, адже головний потік не завершиться,
+доки не завершиться породжений.

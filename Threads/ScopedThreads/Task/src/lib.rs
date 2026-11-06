@@ -1,6 +1,6 @@
-// TODO: Given a vector of integers, split it in two halves
-//  and compute the sum of each half in a separate thread.
-//  Don't perform any heap allocation. Don't leak any memory.
+// TODO: маючи вектор цілих чисел, розділіть його на дві половини
+//  та обчисліть суму кожної половини в окремому потоці.
+//  Не виділяйте жодної пам'яті в купі. Не допускайте жодних витоків пам'яті.
 
 pub fn sum(v: Vec<i32>) -> i32 {
     let mid = v.len() / 2;

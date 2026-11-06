@@ -1,29 +1,29 @@
-## Leaking data
+## Витік даних
 
-The main concern around passing references to spawned threads is use-after-free bugs:
-accessing data using a pointer to a memory region that's already been freed/de-allocated.\
-If you're working with heap-allocated data, you can avoid the issue by
-telling Rust that you'll never reclaim that memory: you choose to **leak memory**,
-intentionally.
+Головна небезпека передавання посилань у породжені потоки — помилки «використання після звільнення» (use-after-free):
+доступ до даних через вказівник на область пам'яті, яку вже звільнили.\
+Якщо ви працюєте з даними, розміщеними в купі, цієї проблеми можна уникнути,
+повідомивши Rust, що ви ніколи не звільните цю пам'ять: ви свідомо, навмисно допускаєте
+**витік пам'яті** (memory leak).
 
-This can be done, for example, using the `Box::leak` method from Rust's standard library:
+Зробити це можна, наприклад, за допомогою методу `Box::leak` зі стандартної бібліотеки Rust:
 
 ```rust
-// Allocate a `u32` on the heap, by wrapping it in a `Box`.
+// Розміщуємо `u32` у купі, обгорнувши його в `Box`.
 let x = Box::new(41u32);
-// Tell Rust that you'll never free that heap allocation
-// using `Box::leak`. You can thus get back a 'static reference.
+// За допомогою `Box::leak` повідомляємо Rust, що ніколи не звільнимо
+// цю пам'ять у купі. Завдяки цьому можна отримати посилання з часом життя 'static.
 let static_ref: &'static mut u32 = Box::leak(x);
 ```
 
-## Data leakage is process-scoped
+## Витік даних обмежений процесом
 
-Leaking data is dangerous: if you keep leaking memory, you'll eventually
-run out and crash with an out-of-memory error.
+Витік даних небезпечний: якщо пам'ять постійно витікає, рано чи пізно
+вона закінчиться, і програма аварійно завершиться з помилкою нестачі пам'яті (out-of-memory).
 
 ```rust
-// If you leave this running for a while, 
-// it'll eventually use all the available memory.
+// Якщо залишити цей код працювати якийсь час,
+// рано чи пізно він використає всю доступну пам'ять.
 fn oom_trigger() {
     loop {
         let v: Vec<usize> = Vec::with_capacity(1024);
@@ -32,15 +32,15 @@ fn oom_trigger() {
 }
 ```
 
-At the same time, memory leaked via `leak` method is not truly forgotten.\
-The operating system can map each memory region to the process responsible for it.
-When the process exits, the operating system will reclaim that memory.
+Водночас пам'ять, що витекла через метод `leak`, не втрачено назавжди.\
+Операційна система може зіставити кожну область пам'яті з процесом, якому вона належить.
+Коли процес завершується, операційна система повертає собі цю пам'ять.
 
-Keeping this in mind, it can be OK to leak memory when:
+З огляду на це, допускати витік пам'яті може бути цілком нормально, якщо:
 
-- The amount of memory you need to leak is bounded/known upfront, or
-- Your process is short-lived and you're confident you won't exhaust
-  all the available memory before it exits
+- обсяг пам'яті, який має витекти, обмежений або відомий заздалегідь, або
+- ваш процес живе недовго, і ви впевнені, що він не вичерпає
+  всю доступну пам'ять до свого завершення
 
-"Let the OS deal with it" is a perfectly valid memory management strategy
-if your usecase allows for it.
+«Хай із цим розбирається ОС» — цілком слушна стратегія керування пам'яттю,
+якщо ваш сценарій використання це дозволяє.

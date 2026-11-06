@@ -1,2 +1,2 @@
-This task is to implement a multi-threaded sum function using `std::thread::scope`.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно реалізувати багатопотокову функцію підсумовування за допомогою `std::thread::scope`.
+Дотримуйтеся вказівок із коментарів `TODO` у коді.

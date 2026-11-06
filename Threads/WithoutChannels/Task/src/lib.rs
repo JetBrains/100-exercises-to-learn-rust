@@ -1,7 +1,7 @@
-// TODO: You don't actually have to change anything in the library itself!
-//  We mostly had to **remove** code (the client type, the launch function, the command enum)
-//  that's no longer necessary.
-//  Fix the `todo!()` in the testing code and see how the new design can be used.
+// TODO: Насправді в самій бібліотеці нічого змінювати не треба!
+//  Здебільшого нам довелося **видалити** код (тип клієнта, функцію launch, перелік команд),
+//  який більше не потрібен.
+//  Виправте `todo!()` у коді тесту й подивіться, як можна використовувати нову архітектуру.
 
 pub mod data;
 pub mod store;

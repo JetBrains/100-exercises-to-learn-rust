@@ -1,4 +1,5 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
@@ -13,10 +14,10 @@ files:
       - offset: 768
         length: 54
         placeholder_text: /* TODO */
-      - offset: 1016
+      - offset: 1023
         length: 18
         placeholder_text: /* TODO */
-      - offset: 1046
+      - offset: 1053
         length: 30
         placeholder_text: /* TODO */
   - name: src/data.rs

@@ -1,41 +1,41 @@
-## Channels
+## Канали
 
-All our spawned threads have been fairly short-lived so far.\
-Get some input, run a computation, return the result, shut down.
+Досі всі наші породжені потоки жили доволі недовго.\
+Отримати вхідні дані, виконати обчислення, повернути результат, завершитися.
 
-For our ticket management system, we want to do something different:
-a client-server architecture.
+Для нашої системи керування тікетами ми хочемо зробити дещо інше —
+клієнт-серверну архітектуру.
 
-We will have **one long-running server thread**, responsible for managing
-our state, the stored tickets.
+У нас буде **один довготривалий серверний потік**, відповідальний за керування
+нашим станом — збереженими тікетами.
 
-We will then have **multiple client threads**.\
-Each client will be able to send **commands** and **queries** to
-the stateful thread, in order to change its state (e.g. add a new ticket)
-or retrieve information (e.g. get the status of a ticket).\
-Client threads will run concurrently.
+Крім того, у нас буде **кілька клієнтських потоків**.\
+Кожен клієнт зможе надсилати **команди** та **запити**
+потоку, що зберігає стан, щоб змінити цей стан (наприклад, додати новий тікет)
+або отримати інформацію (наприклад, дізнатися статус тікета).\
+Клієнтські потоки виконуватимуться конкурентно.
 
-## Communication
+## Взаємодія
 
-So far we've only had very limited parent-child communication:
+Досі взаємодія між батьківським і дочірнім потоками була дуже обмеженою:
 
-- The spawned thread borrowed/consumed data from the parent context
-- The spawned thread returned data to the parent when joined
+- Породжений потік позичав або поглинав (consume) дані з батьківського контексту
+- Породжений потік повертав дані батьківському потоку під час приєднання (join)
 
-This isn't enough for a client-server design.\
-Clients need to be able to send and receive data from the server thread
-_after_ it has been launched.
+Для клієнт-серверної архітектури цього недостатньо.\
+Клієнти повинні мати змогу надсилати дані серверному потоку й отримувати дані від нього
+_після_ того, як його запущено.
 
-We can solve the issue using **channels**.
+Цю проблему можна розв'язати за допомогою **каналів**.
 
-## Channels
+## Канали
 
-Rust's standard library provides **multi-producer, single-consumer** (mpsc) channels
-in its `std::sync::mpsc` module.\
-There are two channel flavours: bounded and unbounded. We'll stick to the unbounded
-version for now, but we'll discuss the pros and cons later on.
+Стандартна бібліотека Rust надає канали з **багатьма виробниками й одним споживачем** (multi-producer, single-consumer, mpsc)
+у модулі `std::sync::mpsc`.\
+Канали бувають двох різновидів: обмежені (bounded) і необмежені (unbounded). Поки що ми використовуватимемо
+необмежений варіант, а переваги й недоліки обох обговоримо пізніше.
 
-Channel creation looks like this:
+Канал створюється так:
 
 ```rust
 use std::sync::mpsc::channel;
@@ -43,31 +43,31 @@ use std::sync::mpsc::channel;
 let (sender, receiver) = channel();
 ```
 
-You get a sender and a receiver.\
-You call `send` on the sender to push data into the channel.\
-You call `recv` on the receiver to pull data from the channel.
+Ви отримуєте відправника (sender) і отримувача (receiver).\
+Щоб надіслати дані в канал, викличте `send` у відправника.\
+Щоб забрати дані з каналу, викличте `recv` в отримувача.
 
-### Multiple senders
+### Кілька відправників
 
-`Sender` is clonable: we can create multiple senders (e.g. one for
-each client thread) and they will all push data into the same channel.
+`Sender` можна клонувати: ми можемо створити кілька відправників (наприклад, по одному
+для кожного клієнтського потоку), і всі вони надсилатимуть дані в той самий канал.
 
-`Receiver`, instead, is not clonable: there can only be a single receiver
-for a given channel.
+А от `Receiver` клонувати не можна: у каналу може бути лише один
+отримувач.
 
-That's what **mpsc** (multi-producer single-consumer) stands for!
+Саме це й означає **mpsc** (multi-producer single-consumer — багато виробників, один споживач)!
 
-### Message type
+### Тип повідомлень
 
-Both `Sender` and `Receiver` are generic over a type parameter `T`.\
-That's the type of the _messages_ that can travel on our channel.
+І `Sender`, і `Receiver` узагальнені (generic) за параметром типу `T`.\
+Це тип _повідомлень_, які можуть передаватися нашим каналом.
 
-It could be a `u64`, a struct, an enum, etc.
+Це може бути `u64`, структура, перелік (enum) тощо.
 
-### Errors
+### Помилки
 
-Both `send` and `recv` can fail.\
-`send` returns an error if the receiver has been dropped.\
-`recv` returns an error if all senders have been dropped and the channel is empty.
+І `send`, і `recv` можуть завершитися невдачею.\
+`send` повертає помилку, якщо отримувача вже знищено (drop).\
+`recv` повертає помилку, якщо всіх відправників уже знищено, а канал порожній.
 
-In other words, `send` and `recv` error when the channel is effectively closed.
+Іншими словами, `send` і `recv` повертають помилку, коли канал фактично закрито.

@@ -1,2 +1,2 @@
-This task is to define `Command` enum variants and implement the `server` function to handle them. 
-Follow the `TODO` comments for details on command fields and server-side processing.
+У цьому завданні потрібно визначити варіанти переліку `Command` і реалізувати функцію `server`, яка їх оброблятиме.
+Подробиці про поля команд і їхню обробку на боці сервера шукайте в коментарях `TODO`.

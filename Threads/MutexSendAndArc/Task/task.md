@@ -1,2 +1,2 @@
-This task is to complete methods, `add_ticket` and `get`, for `TicketStore` in `store.rs`.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно дописати методи `add_ticket` і `get` структури `TicketStore` у файлі `store.rs`.
+Виконайте вказівки з коментарів `TODO` у коді.

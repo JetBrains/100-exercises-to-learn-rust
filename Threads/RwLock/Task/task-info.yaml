@@ -1,13 +1,14 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 890
+      - offset: 891
         length: 89
         placeholder_text: "pub fn get(&self, id: TicketId) -> Result<Option<Arc<Mutex<Ticket>>>,\
       \ OverloadedError> { // TODO"
-      - offset: 1734
+      - offset: 1735
         length: 58
         placeholder_text: "response_channel: SyncSender<Option<Arc<Mutex<Ticket>>>>, //\
       \ TODO"
@@ -25,7 +26,7 @@ files:
       - offset: 790
         length: 30
         placeholder_text: Arc::new(Mutex::new(ticket)); // TODO
-      - offset: 1048
+      - offset: 1055
         length: 29
         placeholder_text: "Option<Arc<Mutex<Ticket>>> { // TODO"
   - name: src/data.rs

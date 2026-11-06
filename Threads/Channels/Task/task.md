@@ -1,2 +1,2 @@
-This task is to define the `Command::Insert` variant and implement the `server` function. 
-As guided by the `TODO` comments, the server should loop indefinitely, processing commands from its receiver.
+У цьому завданні потрібно визначити варіант `Command::Insert` і реалізувати функцію `server`.
+Як підказують коментарі `TODO`, сервер має працювати в нескінченному циклі, обробляючи команди, що надходять до його отримувача.

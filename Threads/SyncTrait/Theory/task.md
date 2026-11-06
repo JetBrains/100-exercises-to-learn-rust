@@ -1,28 +1,28 @@
 ## `Sync`
 
-Before we wrap up this chapter, let's talk about another key trait in Rust's standard library: `Sync`.
+Перш ніж завершити цей розділ, поговорімо про ще один ключовий трейт стандартної бібліотеки Rust — `Sync`.
 
-`Sync` is an auto trait, just like `Send`.\
-It is automatically implemented by all types that can be safely **shared** between threads.
+`Sync` — автоматичний трейт (auto trait), так само як `Send`.\
+Його автоматично реалізують усі типи, значення яких можна безпечно **спільно використовувати** (share) з кількох потоків.
 
-In other words: `T` is Sync if `&T` is `Send`.
+Іншими словами, `T` є Sync, якщо `&T` є `Send`.
 
-## `T: Sync` doesn't imply `T: Send`
+## З `T: Sync` не випливає `T: Send`
 
-It's important to note that `T` can be `Sync` without being `Send`.\
-For example: `MutexGuard` is not `Send`, but it is `Sync`.
+Важливо зауважити, що `T` може бути `Sync` і при цьому не бути `Send`.\
+Наприклад, `MutexGuard` не є `Send`, але є `Sync`.
 
-It isn't `Send` because the lock must be released on the same thread that acquired it, therefore we don't
-want `MutexGuard` to be dropped on a different thread.\
-But it is `Sync`, because giving a `&MutexGuard` to another thread has no impact on where the lock is released.
+Він не є `Send`, бо блокування має звільнити той самий потік, який його захопив, тож ми не
+хочемо, щоб `MutexGuard` знищувався (drop) в іншому потоці.\
+Але він є `Sync`, бо передавання `&MutexGuard` іншому потоку ніяк не впливає на те, де буде звільнено блокування.
 
-## `T: Send` doesn't imply `T: Sync`
+## З `T: Send` не випливає `T: Sync`
 
-The opposite is also true: `T` can be `Send` without being `Sync`.\
-For example: `RefCell<T>` is `Send` (if `T` is `Send`), but it is not `Sync`.
+Буває й навпаки: `T` може бути `Send` і при цьому не бути `Sync`.\
+Наприклад, `RefCell<T>` є `Send` (якщо `T` є `Send`), але не є `Sync`.
 
-`RefCell<T>` performs runtime borrow checking, but the counters it uses to track borrows are not thread-safe.
-Therefore, having multiple threads holding a `&RefCell` would lead to a data race, with potentially
-multiple threads obtaining mutable references to the same data. Hence `RefCell` is not `Sync`.\
-`Send` is fine, instead, because when we send a `RefCell` to another thread we're not
-leaving behind any references to the data it contains, hence no risk of concurrent mutable access.
+`RefCell<T>` перевіряє запозичення під час виконання, але лічильники, якими він відстежує запозичення, не потокобезпечні.
+Тож якби кілька потоків тримали `&RefCell`, це призвело б до гонитви даних (data race): потенційно
+кілька потоків могли б отримати змінювані посилання на ті самі дані. Тому `RefCell` не є `Sync`.\
+А от `Send` — без проблем: коли ми надсилаємо `RefCell` в інший потік, ми не
+залишаємо після себе жодних посилань на дані, які він містить, тож ризику одночасного змінюваного доступу немає.

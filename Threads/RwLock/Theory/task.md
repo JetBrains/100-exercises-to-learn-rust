@@ -1,45 +1,45 @@
-## Readers and writers
+## Читачі й письменники
 
-Our new `TicketStore` works, but its read performance is not great: there can only be one client at a time
-reading a specific ticket, because `Mutex<T>` doesn't distinguish between readers and writers.
+Наш новий `TicketStore` працює, але з продуктивністю читання в нього не все гаразд: певний тікет водночас може читати
+лише один клієнт, бо `Mutex<T>` не розрізняє читачів і письменників.
 
-We can solve the issue by using a different locking primitive: `RwLock<T>`.\
-`RwLock<T>` stands for **read-write lock**. It allows **multiple readers** to access the data simultaneously,
-but only one writer at a time.
+Цю проблему можна розв'язати за допомогою іншого примітиву блокування — `RwLock<T>`.\
+`RwLock<T>` означає **read-write lock** (блокування читання-запису). Воно дозволяє **кільком читачам** звертатися до даних одночасно,
+але письменник у кожен момент може бути лише один.
 
-`RwLock<T>` has two methods to acquire a lock: `read` and `write`.\
-`read` returns a guard that allows you to read the data, while `write` returns a guard that allows you to modify it.
+`RwLock<T>` має два методи для захоплення блокування: `read` і `write`.\
+`read` повертає охоронця (guard), який дає змогу читати дані, а `write` — охоронця, який дає змогу їх змінювати.
 
 ```rust
 use std::sync::RwLock;
 
-// An integer protected by a read-write lock
+// Ціле число, захищене блокуванням читання-запису
 let lock = RwLock::new(0);
 
-// Acquire a read lock on the RwLock
+// Захоплюємо блокування RwLock для читання
 let guard1 = lock.read().unwrap();
 
-// Acquire a **second** read lock
-// while the first one is still active
+// Захоплюємо **друге** блокування для читання,
+// поки перше ще активне
 let guard2 = lock.read().unwrap();
 ```
 
-## Trade-offs
+## Компроміси
 
-On the surface, `RwLock<T>` seems like a no-brainer: it provides a superset of the functionality of `Mutex<T>`.
-Why would you ever use `Mutex<T>` if you can use `RwLock<T>` instead?
+На перший погляд, `RwLock<T>` — очевидний вибір: його функціональність є надмножиною функціональності `Mutex<T>`.
+Навіщо взагалі використовувати `Mutex<T>`, якщо можна натомість використати `RwLock<T>`?
 
-There are two key reasons:
+Є дві ключові причини:
 
-- Locking a `RwLock<T>` is more expensive than locking a `Mutex<T>`.\
-  This is because `RwLock<T>` has to keep track of the number of active readers and writers, while `Mutex<T>`
-  only has to keep track of whether the lock is held or not.
-  This performance overhead is not an issue if there are more readers than writers, but if the workload
-  is write-heavy `Mutex<T>` might be a better choice.
-- `RwLock<T>` can cause **writer starvation**.\
-  If there are always readers waiting to acquire the lock, writers might never get a chance to run.\
-  `RwLock<T>` doesn't provide any guarantees about the order in which readers and writers are granted access to the lock.
-  It depends on the policy implemented by the underlying OS, which might not be fair to writers.
+- Блокування `RwLock<T>` обходиться дорожче, ніж блокування `Mutex<T>`.\
+  Річ у тім, що `RwLock<T>` має відстежувати кількість активних читачів і письменників, а `Mutex<T>`
+  відстежує лише те, захоплене блокування чи ні.
+  Ці додаткові витрати не становлять проблеми, якщо читачів більше, ніж письменників, але якщо навантаження
+  складається переважно з операцій запису, `Mutex<T>` може виявитися кращим вибором.
+- `RwLock<T>` може спричинити **голодування письменників** (writer starvation).\
+  Якщо постійно є читачі, які чекають на блокування, письменники можуть так і не дістати змоги виконатися.\
+  `RwLock<T>` не дає жодних гарантій щодо порядку, у якому читачі й письменники отримують доступ до блокування.
+  Це залежить від політики, яку реалізує операційна система, а вона може бути несправедливою до письменників.
 
-In our case, we can expect the workload to be read-heavy (since most clients will be reading tickets, not modifying them),
-so `RwLock<T>` is a good choice.
+У нашому випадку можна очікувати, що навантаження складатиметься переважно з операцій читання (адже більшість клієнтів читатиме тікети, а не змінюватиме їх),
+тож `RwLock<T>` — гарний вибір.

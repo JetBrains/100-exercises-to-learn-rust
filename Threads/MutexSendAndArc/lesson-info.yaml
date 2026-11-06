@@ -1,4 +1,4 @@
-custom_name: "Mutex, Send and Arc"
+custom_name: Mutex, Send і Arc
 content:
   - Theory
   - Task

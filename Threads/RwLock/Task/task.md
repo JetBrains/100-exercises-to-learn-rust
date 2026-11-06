@@ -1,3 +1,3 @@
-This task is to replace `Mutex` with `RwLock` within the `TicketStore` struct and all other necessary locations.
+У цьому завданні потрібно замінити `Mutex` на `RwLock` у структурі `TicketStore` і в усіх інших місцях, де це потрібно.
 
-Follow the `TODO` comments in the code.
+Виконайте вказівки з коментарів `TODO` у коді.

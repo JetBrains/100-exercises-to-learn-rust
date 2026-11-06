@@ -1,4 +1,4 @@
-// TODO: Convert the implementation to use bounded channels.
+// TODO: переведіть реалізацію на обмежені канали.
 use crate::data::{Ticket, TicketDraft};
 use crate::store::{TicketId, TicketStore};
 use std::sync::mpsc::{Receiver, SyncSender};
@@ -75,8 +75,8 @@ fn server(receiver: Receiver<Command>) {
                 let _ = response_channel.send(ticket.cloned());
             }
             Err(_) => {
-                // There are no more senders, so we can safely break
-                // and shut down the server.
+                // Відправників більше немає, тож можна безпечно вийти з циклу
+                // і зупинити сервер.
                 break;
             }
         }
