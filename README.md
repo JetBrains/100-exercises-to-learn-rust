@@ -1,3 +1,26 @@
+# 100 вправ для вивчення Rust — український переклад
+
+Це український переклад курсу **100 Exercises to Learn Rust** для плагіна JetBrains Academy у RustRover.
+
+- **Оригінал:** книга й вправи [100 Exercises To Learn Rust](https://github.com/mainmatter/100-exercises-to-learn-rust),
+  автор — [Luca Palmieri](https://www.lpalmieri.com/) / [Mainmatter](https://mainmatter.com/).
+- **Адаптація для RustRover і JetBrains Academy:** JetBrains.
+- **Переклад українською:** цей форк.
+
+Що перекладено: теорія й умови завдань (`task.md`), назви розділів, уроків і завдань у дереві курсу (`custom_name`),
+коментарі з інструкціями в коді вправ, назва й опис курсу.
+Англійською лишилися код, рядки, які перевіряють тести, виводи компілятора та назви елементів інтерфейсу RustRover.
+
+## Ліцензія тексту
+
+Оригінальний текст книги розповсюджується за ліцензією
+[Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/).
+Тому цей переклад некомерційний. Як вимагає ліцензія, зазначаємо, що матеріал змінено: текст перекладено українською
+й адаптовано до курсу (див. перелік вище). Умови ліцензування коду й інших матеріалів репозиторію описано
+англійською нижче, у розділі [License](#license).
+
+---
+
 #  100 exercises to learn Rust [![official JetBrains project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 
 Greetings and welcome to `100 exercises to learn Rust`.

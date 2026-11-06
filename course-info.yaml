@@ -1,9 +1,7 @@
 type: marketplace
-title: 100 Exercises to Learn Rust
-language: English
-summary: "Master Rust with Mainmatter's Luca Palmieri <a href=\"https://rust-exercises.com/?utm_source=jetbrains&utm_medium=partner&utm_campaign=jetbrains-plugins\"\
-  >100 expert-designed exercises</a>, now powered by RustRover. Learn ownership, lifetimes,\
-  \ and traits while building production-ready IDE skills for real-world development."
+title: 100 вправ для вивчення Rust
+language: Ukrainian
+summary: "Опануйте Rust за допомогою <a href=\"https://rust-exercises.com/?utm_source=jetbrains&utm_medium=partner&utm_campaign=jetbrains-plugins\">100 вправ від експерта</a> Луки Пальмієрі (Luca Palmieri) з Mainmatter — тепер у RustRover. Вивчіть володіння, часи життя й трейти та здобудьте навички роботи в IDE, які знадобляться в реальних проєктах."
 vendor:
   name: JetBrains
   email: support@jetbrains.com
