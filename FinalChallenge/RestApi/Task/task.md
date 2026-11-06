@@ -1,48 +1,47 @@
-The final exercise is open-ended: build an **asynchronous REST API** for the
-ticket management system you've grown throughout the course.
+Остання вправа не має єдиного правильного розв'язку: створіть **асинхронний REST API**
+для системи керування тікетами, яку ви розбудовували впродовж курсу.
 
-Your API should let a client:
+Ваш API має дозволяти клієнтові:
 
-- **create** a ticket - `POST /tickets`
-- **list** every ticket - `GET /tickets`
-- **retrieve** a single ticket - `GET /tickets/{id}`
-- **update** a ticket - `PATCH /tickets/{id}`
+- **створювати** тікет — `POST /tickets`
+- **отримувати список** усіх тікетів — `GET /tickets`
+- **отримувати** окремий тікет — `GET /tickets/{id}`
+- **оновлювати** тікет — `PATCH /tickets/{id}`
 
-`Cargo.toml` is visible and yours to edit: add any crates you need from
-[crates.io](https://crates.io). We suggest [`axum`](https://docs.rs/axum) - it's
-an industry standard and is nicely supported by RustRover - together with
-[`tokio`](https://docs.rs/tokio) and [`serde`](https://docs.rs/serde), but you're
-free to pick a different stack.
+Файл `Cargo.toml` видимий, і ви можете вільно його редагувати: додавайте будь-які потрібні
+крейти з [crates.io](https://crates.io). Радимо [`axum`](https://docs.rs/axum) — це галузевий
+стандарт, який добре підтримується в RustRover, — разом із [`tokio`](https://docs.rs/tokio)
+і [`serde`](https://docs.rs/serde), але ви можете обрати й інший стек.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Many Rust crates are feature-gated: some parts compile only if you opt in through
-> Cargo features. The recommended stack needs two of them.
+> У багатьох крейтах Rust частину можливостей винесено у фічі (features): такий код
+> компілюється, лише якщо ви явно ввімкнете відповідну фічу Cargo. Рекомендованому стеку
+> потрібні дві такі фічі.
 >
-> Add serde with its `derive` feature:
+> Додайте serde з фічею `derive`:
 > `serde = { version = "1", features = ["derive"] }`.
-> This enables `#[derive(Serialize, Deserialize)]`.
+> Вона вмикає `#[derive(Serialize, Deserialize)]`.
 >
-> Add tokio with its `full` feature:
+> Додайте tokio з фічею `full`:
 > `tokio = { version = "1", features = ["full"] }`.
-> This turns on the runtime, `#[tokio::main]`, networking, and `RwLock`/`Mutex`.
+> Вона вмикає середовище виконання (runtime), `#[tokio::main]`, роботу з мережею, а також `RwLock`/`Mutex`.
 >
-> Without these features you'll get "cannot find" errors.
-> `full` is the simplest choice, but you can also list your own set of features for
-> finer-grained control - each crate's docs.rs page documents what every feature
-> enables.
+> Без цих фіч ви отримаєте помилки «cannot find».
+> `full` — найпростіший варіант, але для точнішого контролю можна перелічити власний набір
+> фіч: на сторінці кожного крейта на docs.rs описано, що саме вмикає кожна з них.
 
-Store the tickets in memory behind some shared state. That state is touched by
-many requests at once, so it needs a lock: think about whether a
-[`Mutex`](https://docs.rs/tokio/latest/tokio/sync/struct.Mutex.html) or an
-[`RwLock`](https://docs.rs/tokio/latest/tokio/sync/struct.RwLock.html) is the
-better fit for an API that reads far more often than it writes.
+Зберігайте тікети в пам'яті, у спільному стані. До цього стану звертається багато запитів
+одночасно, тож його треба захистити блокуванням: подумайте, що краще підходить для API,
+який читає дані набагато частіше, ніж записує, —
+[`Mutex`](https://docs.rs/tokio/latest/tokio/sync/struct.Mutex.html) чи
+[`RwLock`](https://docs.rs/tokio/latest/tokio/sync/struct.RwLock.html).
 
-## What each endpoint should do
+## Що має робити кожен ендпоінт
 
-These are exactly the requests `requests.http` sends and the responses it expects,
-so treat them as the spec for your handlers. A ticket is represented in JSON like
-this:
+Нижче описано саме ті запити, які надсилає `requests.http`, і саме ті відповіді, яких він
+очікує, тож вважайте цей опис специфікацією для своїх обробників. У JSON тікет виглядає
+так:
 
 ```json
 {
@@ -53,11 +52,11 @@ this:
 }
 ```
 
-`status` is one of `"ToDo"`, `"InProgress"`, or `"Done"`.
+`status` — одне зі значень `"ToDo"`, `"InProgress"` або `"Done"`.
 
-### `POST /tickets` - create a ticket
+### `POST /tickets` — створення тікета
 
-Request body (no `id` or `status` - the server assigns those):
+Тіло запиту (без `id` і `status` — їх призначає сервер):
 
 ```json
 {
@@ -66,14 +65,14 @@ Request body (no `id` or `status` - the server assigns those):
 }
 ```
 
-Assign a fresh `id`, default the `status` to `"ToDo"`, store the ticket, and
-respond with `201 Created` and the newly created ticket as JSON.
+Призначте новий `id`, за замовчуванням задайте для `status` значення `"ToDo"`, збережіть
+тікет і поверніть відповідь `201 Created` разом зі щойно створеним тікетом у форматі JSON.
 
-### `GET /tickets` - list every ticket
+### `GET /tickets` — список усіх тікетів
 
-No request body. Respond with `200 OK` and a JSON array in which **each element is
-a complete ticket object** (`id`, `title`, `description`, and `status` - the same
-shape shown above), not just the ids or titles:
+Тіла запиту немає. Поверніть `200 OK` і JSON-масив, у якому **кожен елемент — повний об'єкт тікета**
+(`id`, `title`, `description` і `status` — та сама структура, що й вище), а не лише
+ідентифікатори чи заголовки:
 
 ```json
 [
@@ -92,16 +91,16 @@ shape shown above), not just the ids or titles:
 ]
 ```
 
-Return an empty array `[]` when there are no tickets.
+Якщо тікетів немає, поверніть порожній масив `[]`.
 
-### `GET /tickets/{id}` - retrieve one ticket
+### `GET /tickets/{id}` — отримання одного тікета
 
-No request body. Respond with `200 OK` and the ticket when `id` exists, or
-`404 Not Found` when it doesn't.
+Тіла запиту немає. Якщо тікет із таким `id` існує, поверніть `200 OK` і цей тікет,
+інакше — `404 Not Found`.
 
-### `PATCH /tickets/{id}` - update a ticket
+### `PATCH /tickets/{id}` — оновлення тікета
 
-Request body carrying only the fields to change - any of `title`, `description`,
+Тіло запиту містить лише ті поля, які треба змінити, — будь-які з `title`, `description`,
 `status`:
 
 ```json
@@ -110,102 +109,102 @@ Request body carrying only the fields to change - any of `title`, `description`,
 }
 ```
 
-Apply the provided fields to the stored ticket and respond with `200 OK` and the
-updated ticket, or `404 Not Found` when `id` doesn't exist.
+Застосуйте передані поля до збереженого тікета й поверніть `200 OK` з оновленим тікетом
+або `404 Not Found`, якщо тікета з таким `id` не існує.
 
-## Testing it
+## Тестування
 
-There are no automated tests for this exercise - the design is yours, so you drive
-the API by hand with real HTTP requests. The exercise ships with a
-[`requests.http`](requests.http) file that you can use to test your solution. It is written
-in RustRover's built-in [HTTP Client](https://www.jetbrains.com/help/rust/http-client-in-product-code-editor.html)
-format.
+Автоматичних тестів для цієї вправи немає: архітектуру ви обираєте самі, тож перевіряти
+API доведеться вручну, справжніми HTTP-запитами. До вправи додано файл
+[`requests.http`](requests.http), за допомогою якого можна протестувати ваш розв'язок.
+Його написано у форматі вбудованого в RustRover інструмента
+[HTTP Client](https://www.jetbrains.com/help/rust/http-client-in-product-code-editor.html).
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> The requests in `requests.http` target `http://127.0.0.1:3000`, so they assume
-> your server is listening on port `3000`. If you bind to a different address or
-> port, update the URLs in `requests.http` to match.
+> Запити в `requests.http` надсилаються на `http://127.0.0.1:3000`, тобто розраховують на те,
+> що ваш сервер слухає порт `3000`. Якщо ви прив'яжете сервер до іншої адреси чи порту,
+> відповідно змініть URL-адреси в `requests.http`.
 
-**How to run it:**
+**Як це запустити:**
 
-1. Start the server first (green **▶** icon next to main) - the requests hit `http://127.0.0.1:3000`,
-   so the app has to be listening.
-2. Open `requests.http` in the editor. Each request has a green **▶** icon in the
-   left gutter - click it to send that single request, or use **Run All Requests in
-   File** to fire them top to bottom.
-3. The response (status line, headers, body) opens in the **Services** tool window,
-   along with a green/red result for each check.
+1. Спочатку запустіть сервер (зелений значок **▶** поруч із функцією main): запити надсилаються
+   на `http://127.0.0.1:3000`, тож застосунок має слухати цю адресу.
+2. Відкрийте `requests.http` у редакторі. Біля кожного запиту на лівому полі редактора (gutter)
+   є зелений значок **▶** — натисніть його, щоб надіслати лише цей запит, або скористайтеся
+   **Run All Requests in File**, щоб виконати всі запити згори донизу.
+3. Відповідь (рядок стану, заголовки, тіло) відкриється у вікні інструментів **Services**
+   разом із зеленим чи червоним результатом кожної перевірки.
 
-**Run them in order.** The requests share state through a variable: the
-`### Create a ticket` request saves the new ticket's `id` into `ticket_id`
-(the `client.global.set("ticket_id", response.body.id)` line), and the later
-"retrieve" and "patch" requests reuse it as `/tickets/{{ticket_id}}`. If you run
-those before creating a ticket, `{{ticket_id}}` will be empty.
+**Запускайте запити по порядку.** Вони обмінюються станом через змінну: запит
+`### Create a ticket` зберігає `id` нового тікета в `ticket_id`
+(рядок `client.global.set("ticket_id", response.body.id)`), а наступні запити на отримання
+(retrieve) та оновлення (patch) тікета підставляють його в шлях `/tickets/{{ticket_id}}`.
+Якщо запустити їх до створення тікета, `{{ticket_id}}` буде порожнім.
 
-Each request also carries a small response handler (the `> {% ... %}` block) that
-asserts the outcome, so you get a pass/fail without reading the JSON yourself. In
-order, they:
+Кожен запит також містить невеликий обробник відповіді (блок `> {% ... %}`), який перевіряє
+результат, тож ви одразу бачите, чи пройдено перевірку, і не мусите самостійно читати JSON.
+По черзі запити:
 
-1. **create** a ticket and expect `201 Created`;
-2. **list** all tickets and expect `200 OK`;
-3. **retrieve** the created ticket and expect `200` with `status == "ToDo"`;
-4. **patch** its status and expect `200` with `status == "InProgress"`;
-5. **request a missing ticket** (`/tickets/9999`) and expect `404 Not Found`.
+1. **створюють** тікет і очікують `201 Created`;
+2. **отримують список** усіх тікетів і очікують `200 OK`;
+3. **отримують** створений тікет і очікують код `200` та `status == "ToDo"`;
+4. **оновлюють** (patch) його статус і очікують код `200` та `status == "InProgress"`;
+5. **запитують відсутній тікет** (`/tickets/9999`) і очікують `404 Not Found`.
 
-## Hints
+## Підказки
 
-This exercise is open-ended, so if you're not sure where to begin, work through
-the hints below **one at a time** - click a hint to expand it. Each one nudges you
-toward a design close to the reference solution without writing it for you, so
-try one, take it as far as you can, and only open the next when you're stuck.
-Reveal the complete reference solution only once you've given the hints a genuine
-attempt.
+Ця вправа не має єдиного правильного розв'язку, тож якщо ви не знаєте, з чого почати,
+переглядайте підказки нижче **по одній** — натисніть підказку, щоб розгорнути її.
+Кожна з них підштовхує вас до архітектури, близької до еталонного розв'язку, але не пише
+код за вас. Тож відкрийте одну, просуньтеся з нею якомога далі й відкривайте наступну,
+лише коли застрягнете. Повний еталонний розв'язок відкривайте тільки після того, як
+по-справжньому спробували скористатися підказками.
 
 <div class="hint">
 
-Mark `main` with `#[tokio::main]` so it runs as an asynchronous function on the
-Tokio runtime. Inside, build an `axum::Router`, bind a
-`tokio::net::TcpListener` to `127.0.0.1:3000`, and hand both to
+Позначте `main` атрибутом `#[tokio::main]`, щоб ця функція виконувалася асинхронно
+в середовищі виконання Tokio. Усередині створіть `axum::Router`, прив'яжіть
+`tokio::net::TcpListener` до `127.0.0.1:3000` і передайте обидва в
 `axum::serve(listener, app).await`.
 
 </div>
 
 <div class="hint">
 
-Register one route per endpoint on the router. `axum::routing::{get, post}` attach
-handlers to a path, and you can chain methods on the same path - e.g.
-`.route("/tickets", post(create).get(list))`. Capture the id with a path
-parameter: `.route("/tickets/{id}", get(get_one).patch(patch))`.
+Зареєструйте в маршрутизаторі (router) по одному маршруту на кожен ендпоінт.
+`axum::routing::{get, post}` прив'язують обробники до шляху, а для того самого шляху методи
+можна об'єднувати в ланцюжок — наприклад, `.route("/tickets", post(create).get(list))`.
+Ідентифікатор отримайте через параметр шляху: `.route("/tickets/{id}", get(get_one).patch(patch))`.
 
 </div>
 
 <div class="hint">
 
-Every handler needs to reach the same in-memory store, and axum clones the state
-for each request - so wrap it in an `Arc`. Because this API reads far more often
-than it writes, a `tokio::sync::RwLock` is a better fit than a `Mutex`. Attach the
-state with `.with_state(...)` and receive it in each handler through the `State`
-extractor.
+Кожному обробнику потрібен доступ до того самого сховища в пам'яті, а axum клонує стан
+для кожного запиту, тож обгорніть його в `Arc`. Оскільки цей API читає дані набагато
+частіше, ніж записує, `tokio::sync::RwLock` підходить краще, ніж `Mutex`. Під'єднайте
+стан через `.with_state(...)` і отримуйте його в кожному обробнику за допомогою
+екстрактора (extractor) `State`.
 
 </div>
 
 <div class="hint">
 
-Model a `Ticket` (id, title, description, and a `Status` enum) and
-`#[derive(Serialize, Deserialize)]` on it so axum's `Json` can convert to and from
-JSON. Separate request structs for *create* and *patch* keep things tidy - and if
-the *patch* fields are `Option<...>`, a client can update only the fields it
-actually sends.
+Опишіть структуру `Ticket` (поля id, title, description і перелік `Status`) і додайте
+до неї `#[derive(Serialize, Deserialize)]`, щоб `Json` з axum міг перетворювати тікет
+на JSON і назад. Окремі структури запитів для *створення* та *оновлення* допоможуть
+тримати код у порядку, а якщо поля структури для *оновлення* мають тип `Option<...>`,
+клієнт зможе змінювати лише ті поля, які справді надсилає.
 
 </div>
 
 <div class="hint">
 
-Each handler is an `async fn` whose parameters are just the extractors it needs
-(`State<...>`, `Json<Payload>`, `Path<u64>`) and whose return type implements
-`IntoResponse`. Return `StatusCode::CREATED` after inserting a new ticket, and
-surface a missing id as `StatusCode::NOT_FOUND` - for example by returning
+Кожен обробник — це функція `async fn`, параметри якої — лише потрібні їй екстрактори
+(`State<...>`, `Json<Payload>`, `Path<u64>`), а тип повернення реалізує `IntoResponse`.
+Після додавання нового тікета повертайте `StatusCode::CREATED`, а на відсутній
+ідентифікатор відповідайте кодом `StatusCode::NOT_FOUND` — наприклад, повертаючи
 `Result<Json<Ticket>, StatusCode>`.
 
 </div>

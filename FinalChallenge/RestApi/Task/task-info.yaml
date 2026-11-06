@@ -1,41 +1,35 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 427
+      - offset: 448
         length: 216
-        placeholder_text: "/* TODO: bring into scope the crates (axum, serde, tokio) and\
-      \ std items you need */"
-      - offset: 645
+        placeholder_text: "/* TODO: імпортуйте в область видимості все потрібне з крейтів (axum, serde, tokio) і з std */"
+      - offset: 666
         length: 502
-        placeholder_text: "/* TODO: define the `Ticket` and `Status` types plus the request\
-      \ payloads */"
-      - offset: 1149
+        placeholder_text: "/* TODO: визначте типи `Ticket` і `Status`, а також типи для тіл запитів */"
+      - offset: 1170
         length: 293
-        placeholder_text: "/* TODO: define the shared application state (a store behind\
-      \ a lock) */"
-      - offset: 1444
+        placeholder_text: "/* TODO: визначте спільний стан застосунку (сховище, захищене блокуванням) */"
+      - offset: 1465
         length: 1543
-        placeholder_text: "/* TODO: implement the create / list / get / patch handlers\
-      \ */"
+        placeholder_text: "/* TODO: реалізуйте обробники create / list / get / patch */"
   - name: src/main.rs
     visible: true
     placeholders:
       - offset: 0
         length: 157
-        placeholder_text: "/* TODO: bring the router helpers, shared-state wrapper, and\
-      \ your handlers into scope */"
+        placeholder_text: "/* TODO: імпортуйте в область видимості допоміжні засоби маршрутизатора, обгортку для спільного стану та ваші обробники */"
       - offset: 159
         length: 557
-        placeholder_text: "/* TODO: define the async entry point: build the router, attach\
-      \ the shared state, bind a TcpListener, and serve the app */"
+        placeholder_text: "/* TODO: визначте асинхронну точку входу: створіть маршрутизатор, під'єднайте спільний стан, прив'яжіть TcpListener і запустіть застосунок */"
   - name: Cargo.toml
     visible: true
     placeholders:
       - offset: 86
         length: 108
-        placeholder_text: "# TODO: add the dependencies you need (axum, serde, tokio,\
-      \ ...)"
+        placeholder_text: "# TODO: додайте потрібні залежності (axum, serde, tokio, ...)"
   - name: requests.http
     visible: true

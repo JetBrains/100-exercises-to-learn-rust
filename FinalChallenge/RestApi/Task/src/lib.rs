@@ -1,10 +1,10 @@
-// This is the final exercise: build an asynchronous REST API for the ticket
-// management system we've grown throughout the course.
+// Це фінальна вправа: створіть асинхронний REST API для системи керування
+// тікетами, яку ми розбудовували впродовж курсу.
 //
-// The API should let a client create, list, retrieve and patch tickets.
-// `Cargo.toml` is yours to edit - pull in whatever crates you like from
-// crates.io. We suggest `axum`, `tokio` and `serde`, but you're free to
-// choose a different stack. See `task.md` for how to run and test it.
+// API має дозволяти клієнтові створювати тікети, отримувати їхній список або окремий тікет і оновлювати їх.
+// `Cargo.toml` можна вільно редагувати — додавайте будь-які крейти з
+// crates.io. Радимо `axum`, `tokio` і `serde`, але ви можете
+// обрати й інший стек. Як запустити й протестувати API, читайте в `task.md`.
 
 use axum::{
     extract::{Path, State},
