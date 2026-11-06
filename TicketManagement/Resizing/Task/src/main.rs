@@ -1,13 +1,13 @@
 fn main() {
     let mut v = Vec::with_capacity(2);
     v.push(1);
-    v.push(2); // max capacity reached
+    v.push(2); // досягнуто максимальної ємності
     assert_eq!(v.capacity(), 2);
 
-    v.push(3); // beyond capacity, needs to resize
+    v.push(3); // ємність перевищено, потрібно змінити розмір
 
-    // Can you guess what the new capacity will be?
-    // Beware that the standard library makes no guarantees about the
-    // algorithm used to resize the vector, so this may change in the future.
+    // Чи здогадаєтеся, якою буде нова ємність?
+    // Зверніть увагу: стандартна бібліотека не дає жодних гарантій щодо
+    // алгоритму зміни розміру вектора, тож у майбутньому це може змінитися.
     assert_eq!(v.capacity(), 4);
 }

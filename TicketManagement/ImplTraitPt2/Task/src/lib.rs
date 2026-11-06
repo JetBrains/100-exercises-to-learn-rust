@@ -1,5 +1,5 @@
-// TODO: Rework the signature of `TicketStore::add_ticket` to use a generic type parameter rather
-//  than `impl Trait` syntax.
+// TODO: Змініть сигнатуру `TicketStore::add_ticket` так, щоб у ній використовувався узагальнений параметр типу
+//  замість синтаксису `impl Trait`.
 
 use ticket_fields::{TicketDescription, TicketTitle};
 
@@ -29,10 +29,10 @@ impl TicketStore {
         }
     }
 
-    // Using `Into<Ticket>` as the type parameter for `ticket` allows the method to accept any type
-    // that can be infallibly converted into a `Ticket`.
-    // This can make it nicer to use the method, as it removes the syntax noise of `.into()`
-    // from the calling site. It can worsen the quality of the compiler error messages, though.
+    // Якщо використати `Into<Ticket>` як параметр типу для `ticket`, метод зможе приймати будь-який тип,
+    // який можна гарантовано (без можливості помилки) перетворити на `Ticket`.
+    // Так методом зручніше користуватися, бо в місці виклику зникає синтаксичний шум `.into()`.
+    // Щоправда, через це можуть стати менш зрозумілими повідомлення про помилки компіляції.
     pub fn add_ticket<T: Into<Ticket>>(&mut self, ticket: T) {
         self.tickets.push(ticket.into());
     }

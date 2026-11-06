@@ -1,20 +1,20 @@
-// Given a number `n`, return the `n+1`th number in the Fibonacci sequence.
+// Для заданого числа `n` поверніть `n+1`-ше число послідовності Фібоначчі.
 //
-// The Fibonacci sequence is defined as follows:
+// Послідовність Фібоначчі визначається так:
 //
-// - The first number of the sequence is 0.
-// - The second number of the sequence is 1.
-// - Every subsequent number is the sum of the two preceding numbers.
+// - Перше число послідовності — 0.
+// - Друге число послідовності — 1.
+// - Кожне наступне число — це сума двох попередніх.
 //
-// So the sequence goes: 0, 1, 1, 2, 3, 5, 8, 13, 21, and so on.
+// Тобто послідовність така: 0, 1, 1, 2, 3, 5, 8, 13, 21 і так далі.
 //
-// We expect `fibonacci(0)` to return `0`, `fibonacci(1)` to return `1`,
-// `fibonacci(2)` to return `1`, and so on.
+// Ми очікуємо, що `fibonacci(0)` поверне `0`, `fibonacci(1)` поверне `1`,
+// `fibonacci(2)` поверне `1` і так далі.
 pub fn fibonacci(n: u32) -> u32 {
-    // TODO: implement the `fibonacci` function
+    // TODO: реалізуйте функцію `fibonacci`
     //
-    // Hint: use a `Vec` to memoize the results you have already calculated
-    // so that you don't have to recalculate them several times.
+    // Підказка: використайте `Vec`, щоб запам'ятовувати (мемоізувати) вже обчислені результати
+    // і не обчислювати їх повторно кілька разів.
 
     let n = n as usize;
     let mut memo = vec![0, 1];

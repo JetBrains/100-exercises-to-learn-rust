@@ -1,9 +1,10 @@
 type: output
+custom_name: Завдання
 files:
   - name: src/main.rs
     visible: true
     placeholders:
-      - offset: 420
+      - offset: 439
         length: 1
         placeholder_text: /* TODO */
   - name: Cargo.toml

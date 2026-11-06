@@ -1,2 +1,2 @@
-This task is to change the signature of `add_ticket` method to use generic type parameter.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно змінити сигнатуру методу `add_ticket` так, щоб у ній використовувався узагальнений (generic) параметр типу.
+Виконайте вказівки з коментарів `TODO` у коді.

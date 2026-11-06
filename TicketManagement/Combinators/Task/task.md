@@ -1,2 +1,2 @@
-Your task is to implement the `to_dos` method for `TicketStore`. 
-As guided by the `TODO` comment in the code, this method must return a `Vec` of references to tickets that have their status set to `Status::ToDo`.
+Ваше завдання — реалізувати метод `to_dos` для `TicketStore`.
+Як зазначено в коментарі `TODO` у коді, цей метод має повертати `Vec` посилань на тікети, статус яких — `Status::ToDo`.

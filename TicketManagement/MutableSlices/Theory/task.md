@@ -1,30 +1,30 @@
-## Mutable slices
+## Змінювані зрізи
 
-Every time we've talked about slice types (like `str` and `[T]`), we've used their immutable borrow form (`&str` and `&[T]`).\
-But slices can also be mutable!
+Щоразу, коли ми говорили про типи зрізів (як-от `str` і `[T]`), ми використовували їхню незмінювану запозичену форму (`&str` і `&[T]`).\
+Але зрізи можуть бути й змінюваними!
 
-Here's how you create a mutable slice:
+Ось як створити змінюваний зріз:
 
 ```rust
 let mut numbers = vec![1, 2, 3];
 let slice: &mut [i32] = &mut numbers;
 ```
 
-You can then modify the elements in the slice:
+Після цього можна змінювати елементи зрізу:
 
 ```rust
 slice[0] = 42;
 ```
 
-This will change the first element of the `Vec` to `42`.
+Так перший елемент `Vec` зміниться на `42`.
 
-## Limitations
+## Обмеження
 
-When working with immutable borrows, the recommendation was clear: prefer slice references over references to
-the owned type (e.g. `&[T]` over `&Vec<T>`).\
-That's **not** the case with mutable borrows.
+Для незмінюваних запозичень рекомендація була однозначна: віддавайте перевагу посиланням на зрізи, а не посиланням
+на тип, що володіє даними (наприклад, `&[T]`, а не `&Vec<T>`).\
+Зі змінюваними запозиченнями це **не** так.
 
-Consider this scenario:
+Розгляньмо такий сценарій:
 
 ```rust
 let mut numbers = Vec::with_capacity(2);
@@ -32,10 +32,10 @@ let mut slice: &mut [i32] = &mut numbers;
 slice.push(1);
 ```
 
-It won't compile!\
-`push` is a method on `Vec`, not on slices. This is the manifestation of a more general principle: Rust won't
-allow you to add or remove elements from a slice. You will only be able to modify/replace the elements that are
-already there.
+Цей код не скомпілюється!\
+`push` — це метод `Vec`, а не зрізів. Це прояв загальнішого принципу: Rust не дозволяє
+додавати елементи до зрізу чи вилучати їх із нього. Змінювати/замінювати можна лише ті елементи, які
+вже там є.
 
-In this regard, a `&mut Vec` or a `&mut String` are strictly more powerful than a `&mut [T]` or a `&mut str`.\
-Choose the type that best fits based on the operations you need to perform.
+У цьому сенсі `&mut Vec` чи `&mut String` строго потужніші за `&mut [T]` чи `&mut str`.\
+Обирайте тип, який найкраще підходить для операцій, що їх вам потрібно виконати.

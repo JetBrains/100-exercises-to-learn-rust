@@ -1,2 +1,2 @@
-This task is to implement `fibonacci` function.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно реалізувати функцію `fibonacci`.
+Виконайте вказівки з коментарів `TODO` у коді.

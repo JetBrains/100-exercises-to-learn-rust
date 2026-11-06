@@ -1,38 +1,38 @@
 
 
-As soon as we start talking about "ticket management" we need to think about a way to store _multiple_ tickets.
-In turn, this means we need to think about collections. In particular, homogeneous collections:
-we want to store multiple instances of the same type.
+Щойно ми починаємо говорити про «керування тікетами», доводиться думати, як зберігати _кілька_ тікетів.
+А це, своєю чергою, означає, що треба подумати про колекції. Зокрема, про однорідні колекції:
+ми хочемо зберігати кілька екземплярів того самого типу.
 
-What does Rust have to offer in this regard?
+Що Rust може запропонувати для цього?
 
-## Arrays
+## Масиви
 
-A first attempt could be to use an **array**.\
-Arrays in Rust are fixed-size collections of elements of the same type.
+Перше, що можна спробувати, — **масив**.\
+Масиви в Rust — це колекції фіксованого розміру, що складаються з елементів одного типу.
 
-Here's how you can define an array:
+Ось як можна визначити масив:
 
 ```rust
-// Array type syntax: [ <type> ; <number of elements> ]
+// Синтаксис типу масиву: [ <тип> ; <кількість елементів> ]
 let numbers: [u32; 3] = [1, 2, 3];
 ```
 
-This creates an array of 3 integers, initialized with the values `1`, `2`, and `3`.\
-The type of the array is `[u32; 3]`, which reads as "an array of `u32`s with a length of 3".
+Цей код створює масив із 3 цілих чисел, ініціалізованих значеннями `1`, `2` і `3`.\
+Тип цього масиву — `[u32; 3]`, що читається як «масив значень `u32` довжиною 3».
 
-If all array elements are the same, you can use a shorter syntax to initialize it:
+Якщо всі елементи масиву однакові, для його ініціалізації можна скористатися коротшим синтаксисом:
 
 ```rust
-// [ <value> ; <number of elements> ]
+// [ <значення> ; <кількість елементів> ]
 let numbers: [u32; 3] = [1; 3];
 ```
 
-`[1; 3]` creates an array of three elements, all equal to `1`.
+`[1; 3]` створює масив із трьох елементів, кожен з яких дорівнює `1`.
 
-### Accessing elements
+### Доступ до елементів
 
-You can access elements of an array using square brackets:
+До елементів масиву можна звертатися за допомогою квадратних дужок:
 
 ```rust
 let first = numbers[0];
@@ -40,44 +40,44 @@ let second = numbers[1];
 let third = numbers[2];
 ```
 
-The index must be of type `usize`.\
-Arrays are **zero-indexed**, like everything in Rust. You've seen this before with string slices and field indexing in
-tuples/tuple-like variants.
+Індекс має бути типу `usize`.\
+Як і все в Rust, масиви **індексуються з нуля**. Ви вже бачили це раніше на прикладі рядкових зрізів та
+індексації полів у кортежах і кортежоподібних варіантах.
 
-### Out-of-bounds access
+### Вихід за межі
 
-If you try to access an element that's out of bounds, Rust will panic:
+Якщо спробувати звернутися до елемента за межами масиву, Rust запанікує:
 
 ```rust
 let numbers: [u32; 3] = [1, 2, 3];
-let fourth = numbers[3]; // This will panic
+let fourth = numbers[3]; // Тут виникне паніка
 ```
 
-This is enforced at runtime using **bounds checking**. It comes with a small performance overhead, but it's how
-Rust prevents buffer overflows.\
-In some scenarios the Rust compiler can optimize away bounds checks, especially if iterators are involved—we'll speak
-more about this later on.
+Це забезпечується під час виконання за допомогою **перевірки меж** (bounds checking). Вона трохи знижує
+продуктивність, але саме так Rust запобігає переповненню буфера.\
+У деяких випадках компілятор Rust може під час оптимізації прибрати перевірки меж, особливо якщо задіяно
+ітератори, — докладніше про це поговоримо згодом.
 
-If you don't want to panic, you can use the `get` method, which returns an `Option<&T>`:
+Якщо паніка вам не потрібна, скористайтеся методом `get`, який повертає `Option<&T>`:
 
 ```rust
 let numbers: [u32; 3] = [1, 2, 3];
 assert_eq!(numbers.get(0), Some(&1));
-// You get a `None` if you try to access an out-of-bounds index
-// rather than a panic.
+// Якщо звернутися за індексом, що виходить за межі,
+// ви отримаєте `None`, а не паніку.
 assert_eq!(numbers.get(3), None);
 ```
 
-### Performance
+### Продуктивність
 
-Since the size of an array is known at compile-time, the compiler can allocate the array on the stack.
-If you run the following code:
+Оскільки розмір масиву відомий під час компіляції, компілятор може розмістити масив на стеку.
+Якщо виконати такий код:
 
 ```rust
 let numbers: [u32; 3] = [1, 2, 3];
 ```
 
-You'll get the following memory layout:
+ви отримаєте таке розміщення в пам'яті:
 
 ```text
         +---+---+---+
@@ -85,6 +85,6 @@ Stack:  | 1 | 2 | 3 |
         +---+---+---+
 ```
 
-In other words, the size of an array is `std::mem::size_of::<T>() * N`, where `T` is the type of the elements and `N` is
-the number of elements.\
-You can access and replace each element in `O(1)` time.
+Іншими словами, розмір масиву дорівнює `std::mem::size_of::<T>() * N`, де `T` — тип елементів, а `N` —
+кількість елементів.\
+Прочитати або замінити будь-який елемент можна за час `O(1)`.

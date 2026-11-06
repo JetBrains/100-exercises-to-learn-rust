@@ -1,4 +1,4 @@
-// TODO: Implement `Index<&TicketId>` and `Index<TicketId>` for `TicketStore`.
+// TODO: Реалізуйте `Index<&TicketId>` і `Index<TicketId>` для `TicketStore`.
 
 use std::ops::Index;
 use ticket_fields::{TicketDescription, TicketTitle};

@@ -1,10 +1,10 @@
 use ticket_fields::{TicketDescription, TicketTitle};
 
-// TODO: Provide an `iter` method that returns an iterator over `&Ticket` items.
+// TODO: Додайте метод `iter`, який повертає ітератор по елементах `&Ticket`.
 //
-// Hint: just like in the previous exercise, you want to delegate the iteration to
-//   the `Vec<Ticket>` field in `TicketStore`. Look at the standard library documentation
-//   for `Vec` to find the right type to return from `iter`.
+// Підказка: як і в попередній вправі, потрібно делегувати ітерацію
+//   полю `Vec<Ticket>` у `TicketStore`. Зазирніть у документацію стандартної бібліотеки
+//   для `Vec`, щоб знайти правильний тип, який слід повертати з `iter`.
 #[derive(Clone)]
 pub struct TicketStore {
     tickets: Vec<Ticket>,

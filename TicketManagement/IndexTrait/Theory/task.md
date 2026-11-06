@@ -1,37 +1,37 @@
-## Indexing
+## Індексування
 
-`TicketStore::get` returns an `Option<&Ticket>` for a given `TicketId`.\
-We've seen before how to access elements of arrays and vectors using Rust's
-indexing syntax:
+`TicketStore::get` повертає `Option<&Ticket>` для заданого `TicketId`.\
+Ми вже бачили, як отримувати доступ до елементів масивів і векторів за допомогою
+синтаксису індексування в Rust:
 
 ```rust
 let v = vec![0, 1, 2];
 assert_eq!(v[0], 0);
 ```
 
-How can we provide the same experience for `TicketStore`?\
-You guessed right: we need to implement a trait, `Index`!
+Як забезпечити таку саму зручність для `TicketStore`?\
+Ви правильно здогадалися: потрібно реалізувати трейт `Index`!
 
 ## `Index`
 
-The `Index` trait is defined in Rust's standard library:
+Трейт `Index` визначено в стандартній бібліотеці Rust:
 
 ```rust
-// Slightly simplified
+// Трохи спрощено
 pub trait Index<Idx>
 {
     type Output;
 
-    // Required method
+    // Обов'язковий метод
     fn index(&self, index: Idx) -> &Self::Output;
 }
 ```
 
-It has:
+Він має:
 
-- One generic parameter, `Idx`, to represent the index type
-- One associated type, `Output`, to represent the type we retrieved using the index
+- один узагальнений (generic) параметр `Idx`, що позначає тип індексу;
+- один асоційований тип `Output`, що позначає тип значення, яке ми отримуємо за індексом.
 
-Notice how the `index` method doesn't return an `Option`. The assumption is that
-`index` will panic if you try to access an element that's not there, as it happens
-for array and vec indexing.
+Зверніть увагу: метод `index` не повертає `Option`. Передбачається, що
+`index` панікуватиме, якщо ви спробуєте звернутися до елемента, якого немає, — так само,
+як це відбувається під час індексування масивів і векторів.

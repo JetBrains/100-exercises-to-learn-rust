@@ -1,2 +1,2 @@
-This task is to implement an `iter` method for `TicketStore`.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно реалізувати метод `iter` для `TicketStore`.
+Виконайте вказівки з коментарів `TODO` у коді.

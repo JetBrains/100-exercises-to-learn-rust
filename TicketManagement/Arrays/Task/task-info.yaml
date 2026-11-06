@@ -1,24 +1,24 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 134
+      - offset: 129
         length: 30
         placeholder_text: /* TODO */
-      - offset: 342
+      - offset: 337
         length: 65
         placeholder_text: /* TODO */
-      - offset: 488
+      - offset: 483
         length: 65
         placeholder_text: /* TODO */
-      - offset: 641
+      - offset: 636
         length: 86
         placeholder_text: /* TODO */
-      - offset: 737
+      - offset: 732
         length: 284
-        placeholder_text: "/* TODO: Create weekday2index method which converts a Weekday\
-      \ enum variant into its corresponding zero-based index. */"
+        placeholder_text: "/* TODO: Створіть функцію weekday2index, яка перетворює варіант переліку Weekday на відповідний індекс (з відліком від нуля). */"
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

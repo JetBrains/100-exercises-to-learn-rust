@@ -1,3 +1,3 @@
-This task is to implement `TicketStore` methods (`new`, `add_ticket`, `get`, `get_mut`) and `IntoIterator` for `&TicketStore`, all leveraging a `BTreeMap`. You'll also need to add traits to `TicketId`.
+У цьому завданні потрібно реалізувати методи `TicketStore` (`new`, `add_ticket`, `get`, `get_mut`) та `IntoIterator` для `&TicketStore` — усе на основі `BTreeMap`. Також доведеться реалізувати для `TicketId` додаткові трейти.
 
-Check all `TODO` comments for specific locations.
+Перегляньте всі коментарі `TODO`, щоб знайти конкретні місця для змін.

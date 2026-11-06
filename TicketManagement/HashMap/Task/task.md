@@ -1,3 +1,3 @@
-This task is to replace all todo!() macros in the `TicketStore` implementation. This includes initializing the `HashMap` in `new`, correctly adding tickets, and implementing `get` and `get_mut` methods. You'll also need to implement any additional traits on `TicketId` required for `HashMap` keys.
+У цьому завданні потрібно замінити всі макроси todo!() у реалізації `TicketStore`. Зокрема, потрібно ініціалізувати `HashMap` у `new`, правильно додавати тікети та реалізувати методи `get` і `get_mut`. Також доведеться реалізувати для `TicketId` додаткові трейти, яких `HashMap` вимагає від ключів.
 
-Check all `TODO` comments for specific locations.
+Перегляньте всі коментарі `TODO`, щоб знайти конкретні місця для змін.

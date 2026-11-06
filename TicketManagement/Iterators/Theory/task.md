@@ -1,27 +1,28 @@
-## Iteration
+## Ітерація
 
-During the very first exercises, you learned that Rust lets you iterate over collections using `for` loops.
-We were looking at ranges at that point (e.g. `0..5`), but the same holds true for collections like arrays and vectors.
+Ще в найперших вправах ви дізналися, що Rust дає змогу перебирати колекції за допомогою циклів `for`.
+Тоді ми розглядали діапазони (наприклад, `0..5`), але те саме справедливо й для колекцій, як-от масивів і векторів.
 
 ```rust
-// It works for `Vec`s
+// Це працює для `Vec`
 let v = vec![1, 2, 3];
 for n in v {
     println!("{}", n);
 }
 
-// It also works for arrays
+// І для масивів теж
 let a: [u32; 3] = [1, 2, 3];
 for n in a {
     println!("{}", n);
 }
 ```
 
-It's time to understand how this works under the hood.
+Настав час розібратися, як це працює «під капотом».
 
-## `for` desugaring
+## Цикл `for` без синтаксичного цукру
 
-Every time you write a `for` loop in Rust, the compiler _desugars_ it into the following code:
+Щоразу, коли ви пишете в Rust цикл `for`, компілятор _розгортає_ цей синтаксичний цукор (desugaring)
+у такий код:
 
 ```rust
 let mut iter = IntoIterator::into_iter(v);
@@ -35,14 +36,14 @@ loop {
 }
 ```
 
-`loop` is another looping construct, on top of `for` and `while`.\
-A `loop` block will run forever, unless you explicitly `break` out of it.
+`loop` — ще одна конструкція циклу, окрім `for` і `while`.\
+Блок `loop` виконуватиметься нескінченно, доки ви явно не вийдете з нього за допомогою `break`.
 
-## `Iterator` trait
+## Трейт `Iterator`
 
-The `next` method in the previous code snippet comes from the `Iterator` trait.
-The `Iterator` trait is defined in Rust's standard library and provides a shared interface for
-types that can produce a sequence of values:
+Метод `next` у попередньому фрагменті коду походить із трейту `Iterator`.
+Трейт `Iterator` визначено в стандартній бібліотеці Rust; він надає спільний інтерфейс для
+типів, які можуть породжувати послідовність значень:
 
 ```rust
 trait Iterator {
@@ -51,19 +52,19 @@ trait Iterator {
 }
 ```
 
-The `Item` associated type specifies the type of the values produced by the iterator.
+Асоційований тип `Item` задає тип значень, які видає ітератор.
 
-`next` returns the next value in the sequence.\
-It returns `Some(value)` if there's a value to return, and `None` when there isn't.
+`next` повертає наступне значення послідовності.\
+Він повертає `Some(value)`, якщо є що повернути, і `None`, якщо повертати нічого.
 
-Be careful: there is no guarantee that an iterator is exhausted when it returns `None`. That's only
-guaranteed if the iterator implements the (more restrictive)
-[`FusedIterator`](https://doc.rust-lang.org/std/iter/trait.FusedIterator.html) trait.
+Будьте уважні: немає жодної гарантії, що ітератор вичерпано, коли він повертає `None`. Це гарантовано
+лише тоді, коли ітератор реалізує (суворіший) трейт
+[`FusedIterator`](https://doc.rust-lang.org/std/iter/trait.FusedIterator.html).
 
-## `IntoIterator` trait
+## Трейт `IntoIterator`
 
-Not all types implement `Iterator`, but many can be converted into a type that does.\
-That's where the `IntoIterator` trait comes in:
+Не всі типи реалізують `Iterator`, але багато з них можна перетворити на тип, який його реалізує.\
+Саме для цього існує трейт `IntoIterator`:
 
 ```rust
 trait IntoIterator {
@@ -73,18 +74,20 @@ trait IntoIterator {
 }
 ```
 
-The `into_iter` method consumes the original value and returns an iterator over its elements.\
-A type can only have one implementation of `IntoIterator`: there can be no ambiguity as to what `for` should desugar to.
+Метод `into_iter` поглинає (consumes) початкове значення й повертає ітератор по його елементах.\
+Тип може мати лише одну реалізацію `IntoIterator`: не повинно бути жодної неоднозначності щодо того,
+у що має розгортатися `for`.
 
-One detail: every type that implements `Iterator` automatically implements `IntoIterator` as well.
-They just return themselves from `into_iter`!
+Ще одна деталь: кожен тип, що реалізує `Iterator`, автоматично реалізує й `IntoIterator`.
+Такі типи просто повертають із `into_iter` самих себе!
 
-## Bounds checks
+## Перевірки меж
 
-Iterating over iterators has a nice side effect: you can't go out of bounds, by design.\
-This allows Rust to remove bounds checks from the generated machine code, making iteration faster.
+Перебір за допомогою ітераторів має приємний побічний ефект: вийти за межі неможливо, і це закладено в самому
+задумі.\
+Завдяки цьому Rust може прибрати перевірки меж зі згенерованого машинного коду, тож ітерація стає швидшою.
 
-In other words,
+Іншими словами, такий код:
 
 ```rust
 let v = vec![1, 2, 3];
@@ -93,7 +96,7 @@ for n in v {
 }
 ```
 
-is usually faster than
+зазвичай працює швидше, ніж такий:
 
 ```rust
 let v = vec![1, 2, 3];
@@ -102,6 +105,6 @@ for i in 0..v.len() {
 }
 ```
 
-There are exceptions to this rule: the compiler can sometimes prove that you're not going out of bounds even
-with manual indexing, thus removing the bounds checks anyway. But in general, prefer iteration to indexing
-where possible.
+З цього правила є винятки: інколи компілятор може довести, що ви не виходите за межі, навіть коли
+індексація ручна, і все одно прибрати перевірки меж. Але загалом, де це можливо, віддавайте перевагу
+ітерації над індексацією.

@@ -1,2 +1,2 @@
-This task is to determine the new capacity of a `Vec` after it has been forced to resize.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно визначити нову ємність `Vec` після того, як йому довелося змінити розмір.
+Виконайте вказівки з коментарів `TODO` у коді.

@@ -1,43 +1,43 @@
-## Ordering
+## Упорядкування
 
-By moving from a `Vec` to a `HashMap` we have improved the performance of our ticket management system,
-and simplified our code in the process.\
-It's not all roses, though. When iterating over a `Vec`-backed store, we could be sure that the tickets
-would be returned in the order they were added.\
-That's not the case with a `HashMap`: you can iterate over the tickets, but the order is random.
+Перейшовши від `Vec` до `HashMap`, ми покращили продуктивність нашої системи керування тікетами
+і заразом спростили код.\
+Утім, не все так безхмарно. Коли сховище було побудоване на `Vec`, ми могли бути певні, що під час ітерації тікети
+повертатимуться в тому порядку, в якому їх додали.\
+З `HashMap` це не так: тікети можна перебирати, але порядок буде випадковим.
 
-We can recover a consistent ordering by switching from a `HashMap` to a `BTreeMap`.
+Відновити сталий порядок можна, якщо замінити `HashMap` на `BTreeMap`.
 
 ## `BTreeMap`
 
-A `BTreeMap` guarantees that entries are sorted by their keys.\
-This is useful when you need to iterate over the entries in a specific order, or if you need to
-perform range queries (e.g. "give me all tickets with an id between 10 and 20").
+`BTreeMap` гарантує, що записи відсортовано за ключами.\
+Це корисно, коли потрібно перебирати записи в певному порядку або
+виконувати запити за діапазоном (наприклад, «дай мені всі тікети з id від 10 до 20»).
 
-Just like `HashMap`, you won't find trait bounds on the definition of `BTreeMap`.
-But you'll find trait bounds on its methods. Let's look at `insert`:
+Як і у випадку з `HashMap`, у визначенні `BTreeMap` ви не знайдете обмежень трейтів (trait bounds).
+Зате вони є в методах. Погляньмо на `insert`:
 
 ```rust
-// `K` and `V` stand for the key and value types, respectively,
-// just like in `HashMap`.
+// `K` і `V` позначають типи ключа та значення відповідно,
+// так само як у `HashMap`.
 impl<K, V> BTreeMap<K, V> {
     pub fn insert(&mut self, key: K, value: V) -> Option<V>
     where
         K: Ord,
     {
-        // implementation
+        // реалізація
     }
 }
 ```
 
-`Hash` is no longer required. Instead, the key type must implement the `Ord` trait.
+`Hash` більше не потрібен. Натомість тип ключа має реалізовувати трейт `Ord`.
 
 ## `Ord`
 
-The `Ord` trait is used to compare values.\
-While `PartialEq` is used to compare for equality, `Ord` is used to compare for ordering.
+Трейт `Ord` використовують для порівняння значень.\
+Якщо `PartialEq` порівнює значення на рівність, то `Ord` визначає їхній порядок (що менше, а що більше).
 
-It's defined in `std::cmp`:
+Його визначено в `std::cmp`:
 
 ```rust
 pub trait Ord: Eq + PartialOrd {
@@ -45,14 +45,14 @@ pub trait Ord: Eq + PartialOrd {
 }
 ```
 
-The `cmp` method returns an `Ordering` enum, which can be one
-of `Less`, `Equal`, or `Greater`.\
-`Ord` requires that two other traits are implemented: `Eq` and `PartialOrd`.
+Метод `cmp` повертає перелік (enum) `Ordering`, значенням якого може бути один
+із варіантів: `Less`, `Equal` або `Greater`.\
+`Ord` вимагає, щоб були реалізовані ще два трейти: `Eq` і `PartialOrd`.
 
 ## `PartialOrd`
 
-`PartialOrd` is a weaker version of `Ord`, just like `PartialEq` is a weaker version of `Eq`.
-You can see why by looking at its definition:
+`PartialOrd` — слабша версія `Ord`, так само як `PartialEq` — слабша версія `Eq`.
+Чому так, видно з його визначення:
 
 ```rust
 pub trait PartialOrd: PartialEq {
@@ -60,23 +60,23 @@ pub trait PartialOrd: PartialEq {
 }
 ```
 
-`PartialOrd::partial_cmp` returns an `Option`—it is not guaranteed that two values can
-be compared.\
-For example, `f32` doesn't implement `Ord` because `NaN` values are not comparable,
-the same reason why `f32` doesn't implement `Eq`.
+`PartialOrd::partial_cmp` повертає `Option` — немає гарантії, що два значення можна
+порівняти.\
+Наприклад, `f32` не реалізує `Ord`, бо значення `NaN` непорівнянні, —
+з тієї самої причини `f32` не реалізує й `Eq`.
 
-## Implementing `Ord` and `PartialOrd`
+## Реалізація `Ord` і `PartialOrd`
 
-Both `Ord` and `PartialOrd` can be derived for your types:
+І `Ord`, і `PartialOrd` можна реалізувати для ваших типів через derive-макрос:
 
 ```rust
-// You need to add `Eq` and `PartialEq` too,
-// since `Ord` requires them.
+// Потрібно також додати `Eq` і `PartialEq`,
+// оскільки їх вимагає `Ord`.
 #[derive(Eq, PartialEq, Ord, PartialOrd)]
 struct TicketId(u64);
 ```
 
-If you choose (or need) to implement them manually, be careful:
+Якщо ви вирішите (або муситимете) реалізувати їх вручну, будьте уважні:
 
-- `Ord` and `PartialOrd` must be consistent with `Eq` and `PartialEq`.
-- `Ord` and `PartialOrd` must be consistent with each other.
+- `Ord` і `PartialOrd` мають бути узгоджені з `Eq` і `PartialEq`.
+- `Ord` і `PartialOrd` мають бути узгоджені між собою.

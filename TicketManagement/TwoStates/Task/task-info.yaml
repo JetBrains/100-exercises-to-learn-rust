@@ -1,22 +1,23 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 486
+      - offset: 467
         length: 14
         placeholder_text: /* TODO */
-      - offset: 1078
+      - offset: 1059
         length: 11
         placeholder_text: /* TODO */
-      - offset: 1111
+      - offset: 1092
         length: 363
         placeholder_text: |-
           /* TODO */
           pub fn add_ticket(&mut self, ticket: Ticket) {
                   self.tickets.push(ticket);
           }
-      - offset: 1480
+      - offset: 1461
         length: 117
         placeholder_text: /* TODO */
   - name: Cargo.toml

@@ -1,22 +1,22 @@
-In the previous chapter we modelled `Ticket` in a vacuum: we defined its fields and their constraints, we learned
-how to best represent them in Rust, but we didn't consider how `Ticket` fits into a larger system.
-We'll use this chapter to build a simple workflow around `Ticket`, introducing a (rudimentary) management system to
-store and retrieve tickets.
+У попередньому розділі ми моделювали `Ticket` ізольовано: визначили його поля та обмеження для них, з'ясували,
+як найкраще представити їх у Rust, але не думали про те, яке місце `Ticket` посідає в більшій системі.
+У цьому розділі ми побудуємо навколо `Ticket` простий робочий процес і створимо (примітивну) систему керування,
+яка зберігатиме тікети й дозволятиме їх отримувати.
 
-The task will give us an opportunity to explore new Rust concepts, such as:
+Ця робота дасть нам змогу познайомитися з новими концепціями Rust, зокрема:
 
-- Stack-allocated arrays
-- `Vec`, a growable array type
-- `Iterator` and `IntoIterator`, for iterating over collections
-- Slices (`&[T]`), to work with parts of a collection
-- Lifetimes, to describe how long references are valid
-- `HashMap` and `BTreeMap`, two key-value data structures
-- `Eq` and `Hash`, to compare keys in a `HashMap`
-- `Ord` and `PartialOrd`, to work with a `BTreeMap`
-- `Index` and `IndexMut`, to access elements in a collection
+- Масиви, розміщені на стеку
+- `Vec` — тип масиву, що може зростати
+- `Iterator` і `IntoIterator` — для перебору колекцій
+- Зрізи (`&[T]`) — для роботи з частинами колекції
+- Часи життя (lifetimes) — щоб описувати, як довго посилання залишаються дійсними
+- `HashMap` і `BTreeMap` — дві структури даних типу «ключ — значення»
+- `Eq` і `Hash` — для порівняння ключів у `HashMap`
+- `Ord` і `PartialOrd` — для роботи з `BTreeMap`
+- `Index` і `IndexMut` — для доступу до елементів колекції
 
 <br/>
 
-## Task
-Introduction task is to complete the `intro` function.
-The function should return the string: ***I'm ready to build a ticket management system!***
+## Завдання
+У цьому вступному завданні потрібно доповнити функцію `intro`.
+Функція має повернути рядок: ***I'm ready to build a ticket management system!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

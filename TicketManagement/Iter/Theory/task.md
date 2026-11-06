@@ -1,43 +1,43 @@
 ## `.iter()`
 ##
 
-`IntoIterator` **consumes** `self` to create an iterator.
+`IntoIterator` **поглинає** (consumes) `self`, щоб створити ітератор.
 
-This has its benefits: you get **owned** values from the iterator.
-For example: if you call `.into_iter()` on a `Vec<Ticket>` you'll get an iterator that returns `Ticket` values.
+Це має свої переваги: ітератор видає значення, якими ви **володієте** (owned values).
+Наприклад, якщо викликати `.into_iter()` для `Vec<Ticket>`, ви отримаєте ітератор, що повертає значення `Ticket`.
 
-That's also its downside: you can no longer use the original collection after calling `.into_iter()` on it.
-Quite often you want to iterate over a collection without consuming it, looking at **references** to the values instead.
-In the case of `Vec<Ticket>`, you'd want to iterate over `&Ticket` values.
+Але в цьому ж і недолік: після виклику `.into_iter()` початковою колекцією більше не можна користуватися.
+Досить часто колекцію потрібно перебрати, не поглинаючи її, а переглядаючи натомість **посилання** на значення.
+У випадку `Vec<Ticket>` вам знадобиться перебирати значення `&Ticket`.
 
-Most collections expose a method called `.iter()` that returns an iterator over references to the collection's elements.
-For example:
+Більшість колекцій надають метод `.iter()`, який повертає ітератор по посиланнях на елементи колекції.
+Наприклад:
 
 ```rust
 let numbers: Vec<u32> = vec![1, 2];
-// `n` has type `&u32` here
+// Тут `n` має тип `&u32`
 for n in numbers.iter() {
     // [...]
 }
 ```
 
-This pattern can be simplified by implementing `IntoIterator` for a **reference to the collection**.
-In our example above, that would be `&Vec<Ticket>`.\
-The standard library does this, that's why the following code works:
+Цей патерн можна спростити, реалізувавши `IntoIterator` для **посилання на колекцію**.
+У нашому прикладі вище це був би `&Vec<Ticket>`.\
+Стандартна бібліотека так і робить, тому працює такий код:
 
 ```rust
 let numbers: Vec<u32> = vec![1, 2];
-// `n` has type `&u32` here
-// We didn't have to call `.iter()` explicitly
-// It was enough to use `&numbers` in the `for` loop
+// Тут `n` має тип `&u32`
+// Нам не довелося явно викликати `.iter()`
+// Достатньо було використати `&numbers` у циклі `for`
 for n in &numbers {
     // [...]
 }
 ```
 
-It's idiomatic to provide both options:
+Ідіоматично надавати обидва варіанти:
 
-- An implementation of `IntoIterator` for a reference to the collection.
-- An `.iter()` method that returns an iterator over references to the collection's elements.
+- Реалізацію `IntoIterator` для посилання на колекцію.
+- Метод `.iter()`, який повертає ітератор по посиланнях на елементи колекції.
 
-The former is convenient in `for` loops, the latter is more explicit and can be used in other contexts.
+Перший варіант зручний у циклах `for`, другий — явніший і придатний для використання в інших контекстах.

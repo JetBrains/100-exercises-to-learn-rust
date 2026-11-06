@@ -1,3 +1,3 @@
-This task is implement `IndexMut<&TicketId>` and `IndexMut<TicketId>` for `TicketStore`.
+У цьому завданні потрібно реалізувати `IndexMut<&TicketId>` і `IndexMut<TicketId>` для `TicketStore`.
 
-Follow the `TODO` comments in the code.
+Виконайте вказівки з коментарів `TODO` у коді.

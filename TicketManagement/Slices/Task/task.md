@@ -1,2 +1,2 @@
-This task is to define a `sum` function. It needs to take a reference to a slice of `u32` and return the sum of its elements.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно визначити функцію `sum`. Вона має приймати посилання на зріз `u32` і повертати суму його елементів.
+Виконайте вказівки з коментарів `TODO` у коді.

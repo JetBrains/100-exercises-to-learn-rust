@@ -1,4 +1,4 @@
 pub fn intro() -> &'static str {
-    // TODO: fix me 👇
+    // TODO: виправте мене 👇
     "I'm ready to build a ticket management system!"
 }

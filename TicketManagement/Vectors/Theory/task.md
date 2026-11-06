@@ -1,7 +1,7 @@
-## Vectors
+## Вектори
 
-Arrays' strength is also their weakness: their size must be known upfront, at compile-time.
-If you try to create an array with a size that's only known at runtime, you'll get a compilation error:
+Сильна сторона масивів водночас є їхньою слабкістю: їхній розмір має бути відомий заздалегідь, ще під час компіляції.
+Якщо спробувати створити масив, розмір якого стає відомим лише під час виконання, ви отримаєте помилку компіляції:
 
 ```rust
 let n = 10;
@@ -17,19 +17,20 @@ error[E0435]: attempt to use a non-constant value in a constant
   |                    ^ non-constant value
 ```
 
-Arrays wouldn't work for our ticket management system—we don't know how many tickets we'll need to store at compile-time.
-This is where `Vec` comes in.
+Для нашої системи керування тікетами масиви не підійдуть: під час компіляції ми не знаємо, скільки тікетів
+доведеться зберігати.
+Саме тут на допомогу приходить `Vec`.
 
 ## `Vec`
 
-`Vec` is a growable array type, provided by the standard library.\
-You can create an empty array using the `Vec::new` function:
+`Vec` — це тип масиву, що може зростати; його надає стандартна бібліотека.\
+Створити порожній вектор можна за допомогою функції `Vec::new`:
 
 ```rust
 let mut numbers: Vec<u32> = Vec::new();
 ```
 
-You would then push elements into the vector using the `push` method:
+Потім можна додавати елементи у вектор за допомогою методу `push`:
 
 ```rust
 numbers.push(1);
@@ -37,16 +38,17 @@ numbers.push(2);
 numbers.push(3);
 ```
 
-New values are added to the end of the vector.\
-You can also create an initialized vector using the `vec!` macro, if you know the values at creation time:
+Нові значення додаються в кінець вектора.\
+Якщо значення відомі вже на момент створення, можна одразу створити ініціалізований вектор за допомогою
+макросу `vec!`:
 
 ```rust
 let numbers = vec![1, 2, 3];
 ```
 
-## Accessing elements
+## Доступ до елементів
 
-The syntax for accessing elements is the same as with arrays:
+Синтаксис доступу до елементів такий самий, як і в масивів:
 
 ```rust
 let numbers = vec![1, 2, 3];
@@ -55,25 +57,25 @@ let second = numbers[1];
 let third = numbers[2];
 ```
 
-The index must be of type `usize`.\
-You can also use the `get` method, which returns an `Option<&T>`:
+Індекс має бути типу `usize`.\
+Також можна скористатися методом `get`, який повертає `Option<&T>`:
 
 ```rust
 let numbers = vec![1, 2, 3];
 assert_eq!(numbers.get(0), Some(&1));
-// You get a `None` if you try to access an out-of-bounds index
-// rather than a panic.
+// Якщо звернутися за індексом, що виходить за межі,
+// ви отримаєте `None`, а не паніку.
 assert_eq!(numbers.get(3), None);
 ```
 
-Access is bounds-checked, just like element access with arrays. It has O(1) complexity.
+Як і під час доступу до елементів масиву, межі перевіряються. Складність доступу — O(1).
 
-## Memory layout
+## Розміщення в пам'яті
 
-`Vec` is a heap-allocated data structure.\
-When you create a `Vec`, it allocates memory on the heap to store the elements.
+`Vec` — це структура даних, пам'ять для якої виділяється в купі.\
+Коли ви створюєте `Vec`, він виділяє в купі пам'ять для зберігання елементів.
 
-If you run the following code:
+Якщо виконати такий код:
 
 ```rust
 let mut numbers = Vec::with_capacity(3);
@@ -81,7 +83,7 @@ numbers.push(1);
 numbers.push(2);
 ```
 
-you'll get the following memory layout:
+ви отримаєте таке розміщення в пам'яті:
 
 ```text
       +---------+--------+----------+
@@ -96,14 +98,14 @@ Heap:  | 1 | 2 | ? |
        +---+---+---+
 ```
 
-`Vec` keeps track of three things:
+`Vec` відстежує три речі:
 
-- The **pointer** to the heap region you reserved.
-- The **length** of the vector, i.e. how many elements are in the vector.
-- The **capacity** of the vector, i.e. the number of elements that can fit in the space reserved on the heap.
+- **Вказівник** (pointer) на зарезервовану ділянку купи.
+- **Довжину** (length) вектора, тобто кількість елементів у ньому.
+- **Ємність** (capacity) вектора, тобто кількість елементів, що вміщуються в зарезервованому в купі просторі.
 
-This layout should look familiar: it's exactly the same as `String`!\
-That's not a coincidence: `String` is defined as a vector of bytes, `Vec<u8>`, under the hood:
+Таке розміщення має здатися вам знайомим: воно точнісінько таке саме, як у `String`!\
+І це не збіг: «під капотом» `String` визначено як вектор байтів, `Vec<u8>`:
 
 ```rust
 pub struct String {

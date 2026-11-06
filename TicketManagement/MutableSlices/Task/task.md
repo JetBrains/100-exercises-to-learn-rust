@@ -1,2 +1,2 @@
-This task is to define a `squared` function that raises all i32s in a slice to the power of 2, modifying the slice in place.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно визначити функцію `squared`, яка підносить до квадрата (до степеня 2) усі значення i32 у зрізі, змінюючи зріз на місці.
+Виконайте вказівки з коментарів `TODO` у коді.

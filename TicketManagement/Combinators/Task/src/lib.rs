@@ -1,5 +1,5 @@
-// TODO: Implement the `to_dos` method. It must return a `Vec` of references to the tickets
-//  in `TicketStore` with status set to `Status::ToDo`.
+// TODO: Реалізуйте метод `to_dos`. Він має повертати `Vec` посилань на ті тікети
+//  у `TicketStore`, статус яких — `Status::ToDo`.
 use ticket_fields::{TicketDescription, TicketTitle};
 
 #[derive(Clone)]

@@ -1,16 +1,16 @@
 ## `HashMap`
 
-Our implementation of `Index`/`IndexMut` is not ideal: we need to iterate over the entire
-`Vec` to retrieve a ticket by id; the algorithmic complexity is `O(n)`, where
-`n` is the number of tickets in the store.
+Наша реалізація `Index`/`IndexMut` не ідеальна: щоб отримати тікет за id, доводиться перебирати весь
+`Vec`; алгоритмічна складність становить `O(n)`, де
+`n` — кількість тікетів у сховищі.
 
-We can do better by using a different data structure for storing tickets: a `HashMap<K, V>`.
+Можна зробити краще, якщо зберігати тікети в іншій структурі даних — `HashMap<K, V>`.
 
 ```rust
 use std::collections::HashMap;
 
-// Type inference lets us omit an explicit type signature (which
-// would be `HashMap<String, String>` in this example).
+// Завдяки виведенню типів можна не писати явну сигнатуру типу (яка
+// в цьому прикладі мала б вигляд `HashMap<String, String>`).
 let mut book_reviews = HashMap::new();
 
 book_reviews.insert(
@@ -19,19 +19,19 @@ book_reviews.insert(
 );
 ```
 
-`HashMap` works with key-value pairs. It's generic over both: `K` is the generic
-parameter for the key type, while `V` is the one for the value type.
+`HashMap` працює з парами «ключ — значення» і є узагальненим (generic) типом щодо обох: `K` — узагальнений
+параметр для типу ключа, а `V` — для типу значення.
 
-The expected cost of insertions, retrievals and removals is **constant**, `O(1)`.
-That sounds perfect for our usecase, doesn't it?
+Очікувана вартість вставлення, отримання та видалення — **стала**, `O(1)`.
+Здається, це ідеально підходить для нашого випадку, чи не так?
 
-## Key requirements
+## Вимоги до ключа
 
-There are no trait bounds on `HashMap`'s struct definition, but you'll find some
-on its methods. Let's look at `insert`, for example:
+У визначенні структури `HashMap` немає обмежень трейтів (trait bounds), але деякі з них
+трапляються в методах. Погляньмо, наприклад, на `insert`:
 
 ```rust
-// Slightly simplified
+// Трохи спрощено
 impl<K, V> HashMap<K, V>
 where
     K: Eq + Hash,
@@ -42,31 +42,31 @@ where
 }
 ```
 
-The key type must implement the `Eq` and `Hash` traits.\
-Let's dig into those two.
+Тип ключа має реалізовувати трейти `Eq` і `Hash`.\
+Розгляньмо обидва детальніше.
 
 ## `Hash`
 
-A hashing function (or hasher) maps a potentially infinite set of a values (e.g.
-all possible strings) to a bounded range (e.g. a `u64` value).\
-There are many different hashing functions around, each with different properties
-(speed, collision risk, reversibility, etc.).
+Геш-функція (hashing function, або hasher) відображає потенційно нескінченну множину значень (наприклад,
+усі можливі рядки) на обмежений діапазон (наприклад, значення `u64`).\
+Існує безліч різних геш-функцій, і кожна має свої властивості
+(швидкість, ризик колізій, оборотність тощо).
 
-A `HashMap`, as the name suggests, uses a hashing function behind the scene.
-It hashes your key and then uses that hash to store/retrieve the associated value.
-This strategy requires the key type must be hashable, hence the `Hash` trait bound on `K`.
+`HashMap`, як випливає з назви, «під капотом» використовує геш-функцію:
+обчислює геш вашого ключа, а потім за цим гешем зберігає або отримує пов'язане з ключем значення.
+Така стратегія вимагає, щоб тип ключа можна було гешувати, — звідси обмеження трейту `Hash` для `K`.
 
-You can find the `Hash` trait in the `std::hash` module:
+Трейт `Hash` міститься в модулі `std::hash`:
 
 ```rust
 pub trait Hash {
-    // Required method
+    // Обов'язковий метод
     fn hash<H>(&self, state: &mut H)
        where H: Hasher;
 }
 ```
 
-You will rarely implement `Hash` manually. Most of the times you'll derive it:
+Реалізовувати `Hash` вручну вам доведеться рідко. Здебільшого ви використовуватимете derive-макрос:
 
 ```rust
 #[derive(Hash)]
@@ -78,28 +78,28 @@ struct Person {
 
 ## `Eq`
 
-`HashMap` must be able to compare keys for equality. This is particularly important
-when dealing with hash collisions—i.e. when two different keys hash to the same value.
+`HashMap` має вміти порівнювати ключі на рівність. Це особливо важливо
+у разі геш-колізій — тобто коли два різні ключі мають однаковий геш.
 
-You may wonder: isn't that what the `PartialEq` trait is for? Almost!\
-`PartialEq` is not enough for `HashMap` because it doesn't guarantee reflexivity, i.e. `a == a` is always `true`.\
-For example, floating point numbers (`f32` and `f64`) implement `PartialEq`,
-but they don't satisfy the reflexivity property: `f32::NAN == f32::NAN` is `false`.\
-Reflexivity is crucial for `HashMap` to work correctly: without it, you wouldn't be able to retrieve a value
-from the map using the same key you used to insert it.
+Можливо, ви спитаєте: хіба не для цього існує трейт `PartialEq`? Майже!\
+Для `HashMap` трейту `PartialEq` недостатньо, бо він не гарантує рефлексивності, тобто того, що `a == a` завжди дає `true`.\
+Наприклад, числа з рухомою комою (`f32` і `f64`) реалізують `PartialEq`,
+але не мають властивості рефлексивності: `f32::NAN == f32::NAN` дає `false`.\
+Рефлексивність критично важлива для правильної роботи `HashMap`: без неї ви не змогли б отримати значення
+з геш-таблиці за тим самим ключем, з яким його вставили.
 
-The `Eq` trait extends `PartialEq` with the reflexivity property:
+Трейт `Eq` доповнює `PartialEq` властивістю рефлексивності:
 
 ```rust
 pub trait Eq: PartialEq {
-    // No additional methods
+    // Жодних додаткових методів
 }
 ```
 
-It's a marker trait: it doesn't add any new methods, it's just a way for you to say to the compiler
-that the equality logic implemented in `PartialEq` is reflexive.
+Це маркерний трейт (marker trait): він не додає нових методів, а лише дає вам змогу повідомити компілятору,
+що логіка порівняння на рівність, реалізована в `PartialEq`, рефлексивна.
 
-You can derive `Eq` automatically when you derive `PartialEq`:
+`Eq` можна реалізувати автоматично через derive-макрос разом із `PartialEq`:
 
 ```rust
 #[derive(PartialEq, Eq)]
@@ -109,8 +109,8 @@ struct Person {
 }
 ```
 
-## `Eq` and `Hash` are linked
+## `Eq` і `Hash` пов'язані
 
-There is an implicit contract between `Eq` and `Hash`: if two keys are equal, their hashes must be equal too.
-This is crucial for `HashMap` to work correctly. If you break this contract, you'll get nonsensical results
-when using `HashMap`.
+Між `Eq` і `Hash` існує неявний контракт: якщо два ключі рівні, їхні геші теж мають бути рівні.
+Це критично важливо для правильної роботи `HashMap`. Якщо порушити цей контракт, то, працюючи з `HashMap`,
+ви отримуватимете безглузді результати.

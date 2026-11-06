@@ -1,14 +1,14 @@
-## Lifetimes
+## Часи життя
 
-Let's try to complete the previous exercise by adding an implementation of `IntoIterator` for `&TicketStore`, for
-maximum convenience in `for` loops.
+Спробуймо доповнити попередню вправу реалізацією `IntoIterator` для `&TicketStore`, щоб цикли `for` були
+максимально зручними.
 
-Let's start by filling in the most "obvious" parts of the implementation:
+Почнімо із заповнення найбільш «очевидних» частин реалізації:
 
 ```rust
 impl IntoIterator for &TicketStore {
     type Item = &Ticket;
-    type IntoIter = // What goes here?
+    type IntoIter = // Що тут має бути?
 
     fn into_iter(self) -> Self::IntoIter {
         self.tickets.iter()
@@ -16,51 +16,55 @@ impl IntoIterator for &TicketStore {
 }
 ```
 
-What should `type IntoIter` be set to?\
-Intuitively, it should be the type returned by `self.tickets.iter()`, i.e. the type returned by `Vec::iter()`.\
-If you check the standard library documentation, you'll find that `Vec::iter()` returns an `std::slice::Iter`.
-The definition of `Iter` is:
+Яким має бути `type IntoIter`?\
+Інтуїтивно це має бути тип, який повертає `self.tickets.iter()`, тобто тип, який повертає `Vec::iter()`.\
+Зазирнувши в документацію стандартної бібліотеки, ви побачите, що `Vec::iter()` повертає `std::slice::Iter`.
+Ось визначення `Iter`:
 
 ```rust
-pub struct Iter<'a, T> { /* fields omitted */ }
+pub struct Iter<'a, T> { /* поля пропущено */ }
 ```
 
-`'a` is a **lifetime parameter**.
+`'a` — це **параметр часу життя** (lifetime parameter).
 
-## Lifetime parameters
+## Параметри часу життя
 
-Lifetimes are **labels** used by the Rust compiler to keep track of how long a reference (either mutable or
-immutable) is valid.\
-The lifetime of a reference is constrained by the scope of the value it refers to. Rust always makes sure, at compile-time,
-that references are not used after the value they refer to has been dropped, to avoid dangling pointers and use-after-free bugs.
+Часи життя (lifetimes) — це **мітки**, за якими компілятор Rust відстежує, як довго посилання (змінюване
+чи незмінюване) залишається дійсним.\
+Час життя посилання обмежений областю видимості значення, на яке воно посилається. Rust завжди ще під час
+компіляції перевіряє, що посилання не використовуються після того, як значення, на яке вони посилаються, було
+знищено (drop), — так він запобігає висячим вказівникам (dangling pointers) і помилкам використання пам'яті
+після звільнення (use-after-free).
 
-This should sound familiar: we've already seen these concepts in action when we discussed ownership and borrowing.
-Lifetimes are just a way to **name** how long a specific reference is valid.
+Це вам має бути знайомо: ми вже бачили ці концепції в дії, коли обговорювали володіння й запозичення.
+Часи життя — це просто спосіб **назвати** проміжок, протягом якого певне посилання дійсне.
 
-Naming becomes important when you have multiple references and you need to clarify how they **relate to each other**.
-Let's look at the signature of `Vec::iter()`:
+Назви стають важливими, коли у вас є кілька посилань і потрібно пояснити, як вони **пов'язані між собою**.
+Погляньмо на сигнатуру `Vec::iter()`:
 
 ```rust
 impl <T> Vec<T> {
-    // Slightly simplified
+    // Трохи спрощено
     pub fn iter<'a>(&'a self) -> Iter<'a, T> {
         // [...]
     }
 }
 ```
 
-`Vec::iter()` is generic over a lifetime parameter, named `'a`.\
-`'a` is used to **tie together** the lifetime of the `Vec` and the lifetime of the `Iter` returned by `iter()`.
-In plain English: the `Iter` returned by `iter()` cannot outlive the `Vec` reference (`&self`) it was created from.
+`Vec::iter()` — узагальнений (generic) за параметром часу життя з назвою `'a`.\
+`'a` використовується, щоб **пов'язати** час життя `Vec` із часом життя `Iter`, який повертає `iter()`.
+Простими словами: `Iter`, який повертає `iter()`, не може жити довше, ніж посилання на `Vec` (`&self`), з якого
+його створено.
 
-This is important because `Vec::iter`, as we discussed, returns an iterator over **references** to the `Vec`'s elements.
-If the `Vec` is dropped, the references returned by the iterator would be invalid. Rust must make sure this doesn't happen,
-and lifetimes are the tool it uses to enforce this rule.
+Це важливо, бо, як ми вже обговорювали, `Vec::iter` повертає ітератор по **посиланнях** на елементи `Vec`.
+Якщо `Vec` знищити, посилання, які повертає ітератор, стануть недійсними. Rust має гарантувати, що цього не
+станеться, і часи життя — це інструмент, за допомогою якого він забезпечує дотримання цього правила.
 
-## Lifetime elision
+## Пропуск часів життя
 
-Rust has a set of rules, called **lifetime elision rules**, that allow you to omit explicit lifetime annotations in many cases.
-For example, `Vec::iter`'s definition looks like this in `std`'s source code:
+У Rust є набір правил — **правила пропуску часів життя** (lifetime elision rules), — які в багатьох випадках
+дають змогу не писати явні анотації часів життя.
+Наприклад, у вихідному коді `std` визначення `Vec::iter` має такий вигляд:
 
 ```rust
 impl <T> Vec<T> {
@@ -70,15 +74,15 @@ impl <T> Vec<T> {
 }
 ```
 
-No explicit lifetime parameter is present in the signature of `Vec::iter()`.
-Elision rules imply that the lifetime of the `Iter` returned by `iter()` is tied to the lifetime of the `&self` reference.
-You can think of `'_` as a **placeholder** for the lifetime of the `&self` reference.
+У сигнатурі `Vec::iter()` немає явного параметра часу життя.
+З правил пропуску випливає, що час життя `Iter`, який повертає `iter()`, прив'язаний до часу життя посилання `&self`.
+`'_` можна вважати **заповнювачем** (placeholder) для часу життя посилання `&self`.
 
-See the [References](#references) section for a link to the official documentation on lifetime elision.\
-In most cases, you can rely on the compiler telling you when you need to add explicit lifetime annotations.
+Офіційну документацію щодо пропуску часів життя ви знайдете в розділі [Додаткові матеріали](#references).\
+У більшості випадків можна покластися на компілятор: він сам підкаже, коли потрібно додати явні анотації часів життя.
 
-## References
+## Додаткові матеріали
 
 - [std::vec::Vec::iter](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.iter)
 - [std::slice::Iter](https://doc.rust-lang.org/std/slice/struct.Iter.html)
-- [Lifetime elision rules](https://doc.rust-lang.org/reference/lifetime-elision.html)
+- [Правила пропуску часів життя](https://doc.rust-lang.org/reference/lifetime-elision.html)

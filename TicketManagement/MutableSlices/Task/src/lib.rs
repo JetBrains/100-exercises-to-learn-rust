@@ -1,5 +1,5 @@
-// TODO: Define a function named `squared` that raises all `i32`s within a slice to the power of 2.
-//  The slice should be modified in place.
+// TODO: Визначте функцію з назвою `squared`, яка підносить до квадрата (до степеня 2) усі значення `i32` у зрізі.
+//  Зріз має змінюватися на місці.
 
 pub fn squared(slice: &mut [i32]) {
     for i in slice.iter_mut() {

@@ -1,57 +1,57 @@
-## Combinators
+## Комбінатори
 
-Iterators can do so much more than `for` loops!\
-If you look at the documentation for the `Iterator` trait, you'll find a **vast** collection of
-methods that you can leverage to transform, filter, and combine iterators in various ways.
+Ітератори здатні на значно більше, ніж цикли `for`!\
+Зазирнувши в документацію трейту `Iterator`, ви знайдете **величезний** набір
+методів, за допомогою яких можна по-різному перетворювати, фільтрувати й комбінувати ітератори.
 
-Let's mention the most common ones:
+Згадаймо найпоширеніші з них:
 
-- `map` applies a function to each element of the iterator.
-- `filter` keeps only the elements that satisfy a predicate.
-- `filter_map` combines `filter` and `map` in one step.
-- `cloned` converts an iterator of references into an iterator of values, cloning each element.
-- `enumerate` returns a new iterator that yields `(index, value)` pairs.
-- `skip` skips the first `n` elements of the iterator.
-- `take` stops the iterator after `n` elements.
-- `chain` combines two iterators into one.
+- `map` застосовує функцію до кожного елемента ітератора.
+- `filter` залишає лише елементи, які задовольняють предикат.
+- `filter_map` поєднує `filter` і `map` за один крок.
+- `cloned` перетворює ітератор посилань на ітератор значень, клонуючи кожен елемент.
+- `enumerate` повертає новий ітератор, що видає пари `(index, value)`.
+- `skip` пропускає перші `n` елементів ітератора.
+- `take` зупиняє ітератор після `n` елементів.
+- `chain` об'єднує два ітератори в один.
 
-These methods are called **combinators**.\
-They are usually **chained** together to create complex transformations in a concise and readable way:
+Ці методи називають **комбінаторами**.\
+Зазвичай їх **об'єднують у ланцюжки**, щоб стисло й зрозуміло описувати складні перетворення:
 
 ```rust
 let numbers = vec![1, 2, 3, 4, 5];
-// The sum of the squares of the even numbers
+// Сума квадратів парних чисел
 let outcome: u32 = numbers.iter()
     .filter(|&n| n % 2 == 0)
     .map(|&n| n * n)
     .sum();
 ```
 
-## Closures
+## Замикання
 
-What's going on with the `filter` and `map` methods above?\
-They take **closures** as arguments.
+Що відбувається з методами `filter` і `map` у прикладі вище?\
+Вони приймають як аргументи **замикання** (closures).
 
-Closures are **anonymous functions**, i.e. functions that are not defined using the `fn` syntax we are used to.\
-They are defined using the `|args| body` syntax, where `args` are the arguments and `body` is the function body.
-`body` can be a block of code or a single expression.
-For example:
+Замикання — це **анонімні функції**, тобто функції, які визначаються не за допомогою звичного нам синтаксису `fn`.\
+Їх визначають за допомогою синтаксису `|args| body`, де `args` — це аргументи, а `body` — тіло функції.
+`body` може бути блоком коду або одним виразом.
+Наприклад:
 
 ```rust
-// An anonymous function that adds 1 to its argument
+// Анонімна функція, яка додає 1 до свого аргументу
 let add_one = |x| x + 1;
-// Could be written with a block too:
+// Її можна записати і з блоком:
 let add_one = |x| { x + 1 };
 ```
 
-Closures can take more than one argument:
+Замикання можуть приймати більше одного аргументу:
 
 ```rust
 let add = |x, y| x + y;
 let sum = add(1, 2);
 ```
 
-They can also capture variables from their environment:
+Вони також можуть захоплювати змінні зі свого оточення:
 
 ```rust
 let x = 42;
@@ -59,24 +59,24 @@ let add_x = |y| x + y;
 let sum = add_x(1);
 ```
 
-If necessary, you can specify the types of the arguments and/or the return type:
+За потреби можна вказати типи аргументів і/або тип повернення:
 
 ```rust
-// Just the input type
+// Лише тип аргументу
 let add_one = |x: i32| x + 1;
-// Or both input and output types, using the `fn` syntax
+// Або і тип аргументу, і тип результату, за допомогою синтаксису `fn`
 let add_one: fn(i32) -> i32 = |x| x + 1;
 ```
 
 ## `collect`
 
-What happens when you're done transforming an iterator using combinators?\
-You either iterate over the transformed values using a `for` loop, or you collect them into a collection.
+Що робити, коли ви закінчили перетворювати ітератор за допомогою комбінаторів?\
+Можна або перебрати перетворені значення в циклі `for`, або зібрати їх у колекцію.
 
-The latter is done using the `collect` method.\
-`collect` consumes the iterator and collects its elements into a collection of your choice.
+Друге можна зробити за допомогою методу `collect`.\
+`collect` поглинає ітератор і збирає його елементи в колекцію на ваш вибір.
 
-For example, you can collect the squares of the even numbers into a `Vec`:
+Наприклад, можна зібрати квадрати парних чисел у `Vec`:
 
 ```rust
 let numbers = vec![1, 2, 3, 4, 5];
@@ -86,22 +86,22 @@ let squares_of_evens: Vec<u32> = numbers.iter()
     .collect();
 ```
 
-`collect` is generic over its **return type**.\
-Therefore you usually need to provide a type hint to help the compiler infer the correct type.
-In the example above, we annotated the type of `squares_of_evens` to be `Vec<u32>`.
-Alternatively, you can use the **turbofish syntax** to specify the type:
+`collect` — узагальнений (generic) за **типом повернення**.\
+Тому зазвичай компілятору потрібна підказка, щоб він зміг вивести правильний тип.
+У прикладі вище ми явно вказали, що `squares_of_evens` має тип `Vec<u32>`.
+Інший спосіб — вказати тип за допомогою **синтаксису turbofish** («турборибка»):
 
 ```rust
 let squares_of_evens = numbers.iter()
     .filter(|&n| n % 2 == 0)
     .map(|&n| n * n)
-    // Turbofish syntax: `<method_name>::<type>()`
-    // It's called turbofish because `::<>` looks like a fish
+    // Синтаксис turbofish: `<method_name>::<type>()`
+    // Він так називається, бо `::<>` схоже на рибу
     .collect::<Vec<u32>>();
 ```
 
-## Further reading
+## Додаткові матеріали
 
-- [`Iterator`'s documentation](https://doc.rust-lang.org/std/iter/trait.Iterator.html) gives you an
-  overview of the methods available for iterators in `std`.
-- [The `itertools` crate](https://docs.rs/itertools/) defines even **more** combinators for iterators.
+- [Документація `Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) містить огляд методів,
+  доступних для ітераторів у `std`.
+- [Крейт `itertools`](https://docs.rs/itertools/) визначає ще **більше** комбінаторів для ітераторів.
