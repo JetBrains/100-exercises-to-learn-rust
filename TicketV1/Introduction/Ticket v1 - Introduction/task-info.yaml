@@ -1,11 +1,12 @@
 type: edu
+custom_name: Тікет v1 — вступ
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
       - offset: 51
         length: 34
-        placeholder_text: insert here missing part
+        placeholder_text: "вставте тут пропущену частину"
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

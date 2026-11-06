@@ -1,9 +1,10 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 478
+      - offset: 508
         length: 101
         placeholder_text: |-
           // TODO:
@@ -22,22 +23,22 @@ files:
                   if status != "To-Do" && status != "In Progress" && status != "Done" {
                       panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
                   }
-      - offset: 889
+      - offset: 919
         length: 110
         placeholder_text: "/* TODO: set_title */"
-      - offset: 1005
+      - offset: 1035
         length: 146
         placeholder_text: "/* TODO: set_description */"
-      - offset: 1157
+      - offset: 1187
         length: 116
         placeholder_text: "/* TODO: set_status */"
-      - offset: 1317
+      - offset: 1347
         length: 156
         placeholder_text: /* TODO */
-      - offset: 1529
+      - offset: 1559
         length: 182
         placeholder_text: /* TODO */
-      - offset: 1757
+      - offset: 1787
         length: 155
         placeholder_text: /* TODO */
   - name: Cargo.toml

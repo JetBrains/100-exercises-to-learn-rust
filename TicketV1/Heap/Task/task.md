@@ -1,2 +1,2 @@
-In this task you'll need to determine the stack size (in bytes) for two specific types: `String` and the custom `Ticket` `struct`. 
-The `TODO` comments directly within the test code will guide you on where to place the correct byte values.
+У цьому завданні потрібно визначити розмір у стеку (у байтах) для двох типів: `String` і нашої власної структури `Ticket` (`struct`).
+Коментарі `TODO` прямо в коді тестів підкажуть, куди вписати правильні значення в байтах.

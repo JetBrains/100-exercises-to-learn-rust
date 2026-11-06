@@ -1,6 +1,6 @@
 mod helpers {
-    // TODO: Make this code compile, either by adding a `use` statement or by using
-    //  the appropriate path to refer to the `Ticket` struct.
+    // TODO: Зробіть так, щоб цей код компілювався: або додайте інструкцію `use`, або використайте
+    //  відповідний шлях, щоб звернутися до структури `Ticket`.
 
     use super::Ticket;
 

@@ -1,3 +1,3 @@
-This task is to define a new `Order` `struct`. \
-Implement its fields, validation rules (for product_name, quantity, unit_price), and a total method, along with setters and getters for each field.\
-All requirements are detailed in the `TODO` comments within the code.
+У цьому завданні потрібно визначити нову структуру `Order` (`struct`). \
+Реалізуйте її поля, правила валідації (для product_name, quantity, unit_price), метод total, а також сетери й гетери для кожного поля.\
+Усі вимоги детально описано в коментарях `TODO` у коді.

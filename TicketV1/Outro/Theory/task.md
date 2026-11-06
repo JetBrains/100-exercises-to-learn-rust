@@ -1,6 +1,6 @@
-## Wrapping up
+## Підсумки
 ##
 
-We've covered a lot of foundational Rust concepts in this chapter.\
-Before moving on, let's go through one last exercise to consolidate what we've learned.
-You'll have minimal guidance this time—just the exercise description and the tests to guide you.
+У цьому розділі ми розглянули чимало базових концепцій Rust.\
+Перш ніж рухатися далі, виконаймо останню вправу, щоб закріпити вивчене.
+Цього разу підказок буде мінімум — лише опис вправи й тести.

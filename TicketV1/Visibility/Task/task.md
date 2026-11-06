@@ -1,2 +1,2 @@
-This task involves modifying existing Rust code across two different modules within the project. 
-You'll need to carefully read and follow the `TODO` comments provided in both the `ticket` module (which defines the `Ticket` struct) and the `tests` module.
+У цьому завданні потрібно змінити наявний код на Rust у двох різних модулях проєкту.
+Уважно прочитайте коментарі `TODO` і виконайте їхні інструкції — як у модулі `ticket` (де визначено структуру `Ticket`), так і в модулі `tests`.

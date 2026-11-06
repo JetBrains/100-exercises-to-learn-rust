@@ -1,3 +1,3 @@
-This task requires you to add mutable `setter` methods `&mut self` for each field (title, description, status) of the `Ticket` struct. 
-You must also ensure these setters enforce the same validation rules as the `Ticket::new` function. 
-As suggested by the `TODO` comment, consider refactoring the validation logic into reusable private functions or static methods.
+У цьому завданні потрібно додати до структури `Ticket` сетери (`setter`-методи), що приймають `&mut self`, — по одному для кожного поля (title, description, status).
+Сетери мають застосовувати ті самі правила валідації, що й функція `Ticket::new`.
+Як радить коментар `TODO`, варто винести логіку валідації в приватні функції або статичні методи, щоб використовувати її повторно.

@@ -30,10 +30,10 @@ pub mod ticket {
             }
         }
 
-        // TODO: Add three public methods to the `Ticket` struct:
-        //  - `title` that returns the `title` field.
-        //  - `description` that returns the `description` field.
-        //  - `status` that returns the `status` field.
+        // TODO: Додайте до структури `Ticket` три публічні методи:
+        //  - `title`, який повертає поле `title`.
+        //  - `description`, який повертає поле `description`.
+        //  - `status`, який повертає поле `status`.
 
         pub fn title(self) -> String {
             self.title

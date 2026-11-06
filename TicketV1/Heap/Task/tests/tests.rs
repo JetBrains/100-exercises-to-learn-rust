@@ -4,8 +4,8 @@ pub struct Ticket {
     status: String,
 }
 
-// TODO: based on what you learned in Heap lesson, replace `TODO` with
-//  the correct **stack size** for the respective type.
+// TODO: спираючись на вивчене в уроці «Купа», замініть `TODO`
+//  правильним **розміром у стеку** для відповідного типу.
 #[cfg(test)]
 mod tests {
     use super::Ticket;
@@ -18,11 +18,11 @@ mod tests {
 
     #[test]
     fn ticket_size() {
-        // This is a tricky question!
-        // The "intuitive" answer happens to be the correct answer this time,
-        // but, in general, the memory layout of structs is a more complex topic.
-        // If you're curious, check out the "Data layout" section of the Rustonomicon
-        // https://doc.rust-lang.org/nomicon/data.html for more information.
+        // Це питання з підступом!
+        // Цього разу «інтуїтивна» відповідь виявляється правильною,
+        // але загалом розміщення структур у пам'яті — складніша тема.
+        // Якщо цікаво, докладніше читайте в розділі «Data layout» книги Rustonomicon:
+        // https://doc.rust-lang.org/nomicon/data.html
         assert_eq!(size_of::<Ticket>(), 72);
     }
 }

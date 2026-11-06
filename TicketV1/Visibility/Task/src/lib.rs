@@ -1,5 +1,5 @@
-// TODO: **Exceptionally**, you'll be modifying both the `ticket` module and the `tests` module
-//  in this exercise.
+// TODO: **Як виняток**, у цій вправі ви змінюватимете і модуль `ticket`,
+//  і модуль `tests`.
 pub mod ticket {
     pub struct Ticket {
         title: String,

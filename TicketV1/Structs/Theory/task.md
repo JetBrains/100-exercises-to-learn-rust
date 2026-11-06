@@ -1,20 +1,20 @@
-## Structs
+## Структури
 
-We need to keep track of three pieces of information for each ticket:
+Для кожного тікета нам потрібно зберігати три елементи інформації:
 
-- A title
-- A description
-- A status
+- Назву
+- Опис
+- Статус
 
-We can start by using a [`String`](https://doc.rust-lang.org/std/string/struct.String.html)
-to represent them. `String` is the type defined in Rust's standard library to represent
-[UTF-8 encoded](https://en.wikipedia.org/wiki/UTF-8) text.
+Для початку представимо їх за допомогою [`String`](https://doc.rust-lang.org/std/string/struct.String.html).
+`String` — це тип зі стандартної бібліотеки Rust, призначений для представлення тексту
+[у кодуванні UTF-8](https://en.wikipedia.org/wiki/UTF-8).
 
-But how do we **combine** these three pieces of information into a single entity?
+Але як **об'єднати** ці три елементи інформації в одну сутність?
 
-## Defining a `struct`
+## Визначення `struct`
 
-A `struct` defines a **new Rust type**.
+`struct` (структура) визначає **новий тип Rust**.
 
 ```rust
 struct Ticket {
@@ -24,14 +24,14 @@ struct Ticket {
 }
 ```
 
-A struct is quite similar to what you would call a class or an object in other programming languages.
+Структура доволі схожа на те, що в інших мовах програмування називають класом або об'єктом.
 
-## Defining fields
+## Визначення полів
 
-The new type is built by combining other types as **fields**.\
-Each field must have a name and a type, separated by a colon, `:`. If there are multiple fields, they are separated by a comma, `,`.
+Новий тип утворюється з інших типів, які стають його **полями**.\
+Кожне поле повинно мати ім'я та тип, розділені двокрапкою `:`. Якщо полів кілька, їх розділяють комою `,`.
 
-Fields don't have to be of the same type, as you can see in the `Configuration` struct below:
+Поля не обов'язково мають бути одного типу — як видно на прикладі структури `Configuration` нижче:
 
 ```rust
 struct Configuration {
@@ -40,12 +40,12 @@ struct Configuration {
 }
 ```
 
-## Instantiation
+## Створення екземпляра
 
-You can create an instance of a struct by specifying the values for each field:
+Щоб створити екземпляр структури, вкажіть значення для кожного поля:
 
 ```rust
-// Syntax: <StructName> { <field_name>: <value>, ... }
+// Синтаксис: <StructName> { <field_name>: <value>, ... }
 let ticket = Ticket {
     title: "Build a ticket system".into(),
     description: "A Kanban board".into(),
@@ -53,19 +53,19 @@ let ticket = Ticket {
 };
 ```
 
-## Accessing fields
+## Доступ до полів
 
-You can access the fields of a struct using the `.` operator:
+До полів структури можна звертатися за допомогою оператора `.`:
 
 ```rust
-// Field access
+// Доступ до поля
 let x = ticket.description;
 ```
 
-## Methods
+## Методи
 
-We can attach behaviour to our structs by defining **methods**.\
-Using the `Ticket` struct as an example:
+Ми можемо додати своїм структурам поведінку, визначивши **методи**.\
+Ось приклад на основі структури `Ticket`:
 
 ```rust
 impl Ticket {
@@ -74,35 +74,35 @@ impl Ticket {
     }
 }
 
-// Syntax:
+// Синтаксис:
 // impl <StructName> {
 //    fn <method_name>(<parameters>) -> <return_type> {
-//        // Method body
+//        // Тіло методу
 //    }
 // }
 ```
 
-Methods are pretty similar to functions, with two key differences:
+Методи дуже схожі на функції, але мають дві ключові відмінності:
 
-1. methods must be defined inside an **`impl` block**
-2. methods may use `self` as their first parameter.
-   `self` is a keyword and represents the instance of the struct the method is being called on.
+1. методи потрібно визначати всередині **блоку `impl`**
+2. методи можуть приймати `self` як перший параметр.
+   `self` — це ключове слово, яке позначає екземпляр структури, на якому викликають метод.
 
 ### `self`
 
-If a method takes `self` as its first parameter, it can be called using the **method call syntax**:
+Якщо метод приймає `self` як перший параметр, його можна викликати за допомогою **синтаксису виклику методу**:
 
 ```rust
-// Method call syntax: <instance>.<method_name>(<parameters>)
+// Синтаксис виклику методу: <instance>.<method_name>(<parameters>)
 let is_open = ticket.is_open();
 ```
 
-This is the same calling syntax you used to perform saturating arithmetic operations on `u32` values
-in [the previous chapter](../../../ABasicCalculator/SaturatingArithmetic/Theory/task.md).
+Саме такий синтаксис виклику ви використовували для арифметичних операцій з насиченням над значеннями `u32`
+у [попередньому розділі](../../../ABasicCalculator/SaturatingArithmetic/Theory/task.md).
 
-### Static methods
+### Статичні методи
 
-If a method doesn't take `self` as its first parameter, it's a **static method**.
+Якщо метод не приймає `self` як перший параметр, це **статичний метод**.
 
 ```rust
 struct Configuration {
@@ -111,29 +111,29 @@ struct Configuration {
 }
 
 impl Configuration {
-    // `default` is a static method on `Configuration`
+    // `default` — статичний метод структури `Configuration`
     fn default() -> Configuration {
         Configuration { version: 0, active: false }
     }
 }
 ```
 
-The only way to call a static method is by using the **function call syntax**:
+Викликати статичний метод можна лише за допомогою **синтаксису виклику функції**:
 
 ```rust
-// Function call syntax: <StructName>::<method_name>(<parameters>)
+// Синтаксис виклику функції: <StructName>::<method_name>(<parameters>)
 let default_config = Configuration::default();
 ```
 
-### Equivalence
+### Еквівалентність
 
-You can use the function call syntax even for methods that take `self` as their first parameter:
+Синтаксис виклику функції можна використовувати навіть для методів, які приймають `self` як перший параметр:
 
 ```rust
-// Function call syntax:
+// Синтаксис виклику функції:
 //   <StructName>::<method_name>(<instance>, <parameters>)
 let is_open = Ticket::is_open(ticket);
 ```
 
-The function call syntax makes it quite clear that `ticket` is being used as `self`, the first parameter of the method,
-but it's definitely more verbose. Prefer the method call syntax when possible.
+Синтаксис виклику функції чітко показує, що `ticket` передається як `self` — перший параметр методу,
+але він, безумовно, багатослівніший. Тож за можливості віддавайте перевагу синтаксису виклику методу.

@@ -1,15 +1,16 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 118
+      - offset: 96
         length: 3
         placeholder_text: /* TODO */
-      - offset: 139
+      - offset: 117
         length: 3
         placeholder_text: /* TODO */
-      - offset: 268
+      - offset: 246
         length: 3
         placeholder_text: /* TODO */
   - name: Cargo.toml
@@ -17,10 +18,10 @@ files:
   - name: tests/tests.rs
     visible: true
     placeholders:
-      - offset: 1155
+      - offset: 1137
         length: 51
         placeholder_text: "assert_eq!(ticket.description, \"A description\");"
-      - offset: 1863
+      - offset: 1816
         length: 169
         placeholder_text: "let ticket = Ticket {  \n\t\t\t title: \"A title\".into(),\n\
       \t\t\t description: \"A description\".into(),\n\t\t\t status: \"To-Do\".into()\

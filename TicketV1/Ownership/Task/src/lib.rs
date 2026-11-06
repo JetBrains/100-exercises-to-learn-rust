@@ -1,7 +1,7 @@
-// TODO: based on what we just learned about ownership, it sounds like immutable references
-//   are a good fit for our accessor methods.
-//   Change the existing implementation of `Ticket`'s accessor methods to take a reference
-//   to `self` as an argument, rather than taking ownership of it.
+// TODO: з огляду на те, що ми щойно дізналися про володіння, незмінювані посилання, схоже,
+//   чудово підходять для наших методів доступу.
+//   Змініть наявну реалізацію методів доступу `Ticket` так, щоб вони приймали як аргумент посилання
+//   на `self`, а не брали його у володіння.
 
 pub struct Ticket {
     title: String,

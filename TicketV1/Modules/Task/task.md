@@ -1,1 +1,1 @@
-This task is to make code compile, check instructions in the code's comments.
+У цьому завданні потрібно домогтися, щоб код скомпілювався. Інструкції — у коментарях до коду.

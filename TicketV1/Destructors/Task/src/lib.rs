@@ -1,6 +1,6 @@
-// We need some more machinery to write a proper exercise for destructors.
-// We'll pick the concept up again in a later chapter after covering traits and
-// interior mutability.
+// Щоб написати повноцінну вправу на деструктори, нам знадобиться більше інструментів.
+// Ми повернемося до цієї теми в одному з наступних розділів, коли розглянемо трейти та
+// внутрішню змінюваність.
 pub fn outro() -> &'static str {
     "I have a basic understanding of destructors!"
 }

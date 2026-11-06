@@ -1,16 +1,16 @@
-// TODO: Define a new `Order` type.
-//   It should keep track of three pieces of information: `product_name`, `quantity`, and `unit_price`.
-//   The product name can't be empty and it can't be longer than 300 bytes.
-//   The quantity must be strictly greater than zero.
-//   The unit price is in cents and must be strictly greater than zero.
-//   Order must include a method named `total` that returns the total price of the order.
-//   Order must provide setters and getters for each field.
+// TODO: Визначте новий тип `Order`.
+//   Він має зберігати три значення: `product_name`, `quantity` і `unit_price`.
+//   Назва товару (product name) не може бути порожньою чи довшою за 300 байтів.
+//   Кількість (quantity) має бути строго більшою за нуль.
+//   Ціна за одиницю (unit price) вказується в центах і має бути строго більшою за нуль.
+//   Order повинен мати метод `total`, який повертає загальну вартість замовлення.
+//   Order повинен надавати сетери й гетери для кожного поля.
 //
-// Tests are located in `tests` folder.
-// The `tests` folder is a special location for `cargo`. It's where it looks for **integration tests**.
-// Integration here has a very specific meaning: they test **the public API** of your project.
-// You'll need to pay attention to the visibility of your types and methods; integration
-// tests can't access private or `pub(crate)` items.
+// Тести розташовано в теці `tests`.
+// Тека `tests` — особливе місце для `cargo`: саме там він шукає **інтеграційні тести**.
+// «Інтеграційні» тут має цілком конкретне значення: такі тести перевіряють **публічний API** вашого проєкту.
+// Вам доведеться стежити за видимістю своїх типів і методів: інтеграційні
+// тести не мають доступу до приватних елементів чи елементів з `pub(crate)`.
 
 pub struct Order {
     product_name: String,

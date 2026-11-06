@@ -1,23 +1,24 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 1147
+      - offset: 1138
         length: 59
         placeholder_text: |-
           // TODO:
               pub fn title(self) -> String {
                   self.title
               }
-      - offset: 1211
+      - offset: 1202
         length: 71
         placeholder_text: |-
           // TODO:
               pub fn description(self) -> String {
                   self.description
               }
-      - offset: 1287
+      - offset: 1278
         length: 61
         placeholder_text: |-
           // TODO:

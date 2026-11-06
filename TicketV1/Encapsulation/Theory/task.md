@@ -1,10 +1,10 @@
-## Encapsulation
+## Інкапсуляція
 
-Now that we have a basic understanding of modules and visibility, let's circle back to **encapsulation**.\
-Encapsulation is the practice of hiding the internal representation of an object. It is most commonly
-used to enforce some **invariants** on the object's state.
+Тепер, коли ми маємо базове уявлення про модулі та видимість, повернімося до **інкапсуляції**.\
+Інкапсуляція — це практика приховування внутрішнього представлення об'єкта. Найчастіше
+її використовують, щоб забезпечити дотримання певних **інваріантів** стану об'єкта.
 
-Going back to our `Ticket` struct:
+Повернімося до нашої структури `Ticket`:
 
 ```rust
 struct Ticket {
@@ -14,20 +14,20 @@ struct Ticket {
 }
 ```
 
-If all fields are made public, there is no encapsulation.\
-You must assume that the fields can be modified at any time, set to any value that's allowed by
-their type. You can't rule out that a ticket might have an empty title or a status
-that doesn't make sense.
+Якщо всі поля зробити публічними, ні про яку інкапсуляцію не йдеться.\
+Доводиться припускати, що поля можна будь-коли змінити й записати в них будь-яке значення, яке допускає
+їхній тип. Не можна виключити, що тікет матиме порожню назву або статус,
+який не має сенсу.
 
-To enforce stricter rules, we must keep the fields private (or refine their type, a technique we'll explore [later on](../../../TicketV2/Outro/Theory/task.md)).
-We can then provide public methods to interact with a `Ticket` instance.
-Those public methods will have the responsibility of upholding our invariants (e.g. a title must not be empty).
+Щоб забезпечити дотримання суворіших правил, ми мусимо залишити поля приватними (або уточнити їхній тип — цю техніку ми розглянемо [пізніше](../../../TicketV2/Outro/Theory/task.md)).
+Тоді ми можемо надати публічні методи для взаємодії з екземпляром `Ticket`.
+Саме ці публічні методи відповідатимуть за дотримання наших інваріантів (наприклад, назва не може бути порожньою).
 
-If at least one field is private it is no longer possible to create a `Ticket` instance directly using the struct
-instantiation syntax:
+Якщо хоча б одне поле приватне, створити екземпляр `Ticket` напряму за допомогою синтаксису
+створення екземпляра структури вже неможливо:
 
 ```rust
-// This won't work!
+// Так не вийде!
 let ticket = Ticket {
     title: "Build a ticket system".into(),
     description: "A Kanban board".into(),
@@ -35,23 +35,23 @@ let ticket = Ticket {
 };
 ```
 
-You've seen this in action in the previous exercise on visibility.\
-We now need to provide one or more public **constructors**—i.e. static methods or functions that can be used
-from outside the module to create a new instance of the struct.\
-Luckily enough we already have one: `Ticket::new`, as implemented in [a Validation lesson](../../../TicketV1/Validation/Theory/task.md).
+Ви вже бачили це в дії в попередній вправі про видимість.\
+Тепер нам потрібно надати один або кілька публічних **конструкторів** — тобто статичних методів або функцій, якими можна
+скористатися поза модулем, щоб створити новий екземпляр структури.\
+На щастя, один такий у нас уже є: `Ticket::new`, який ми реалізували [в уроці «Валідація»](../../../TicketV1/Validation/Theory/task.md).
 
-## Accessor methods
+## Методи доступу
 
-In summary:
+Отже, підсумуймо:
 
-- All `Ticket` fields are private
-- We provide a public constructor, `Ticket::new`, that enforces our validation rules on creation
+- Усі поля `Ticket` приватні
+- Ми надаємо публічний конструктор `Ticket::new`, який під час створення забезпечує дотримання наших правил валідації
 
-That's a good start, but it's not enough: apart from creating a `Ticket`, we also need to interact with it.
-But how can we access the fields if they're private?
+Це добрий початок, але цього недостатньо: окрім створення `Ticket`, нам також потрібно з ним взаємодіяти.
+Але як звертатися до полів, якщо вони приватні?
 
-We need to provide **accessor methods**.\
-Accessor methods are public methods that allow you to read the value of a private field (or fields) of a struct.
+Нам потрібно надати **методи доступу** (accessor methods).\
+Методи доступу — це публічні методи, які дають змогу прочитати значення приватного поля (або полів) структури.
 
-Rust doesn't have a built-in way to generate accessor methods for you, like some other languages do.
-You have to write them yourself—they're just regular methods.
+У Rust, на відміну від деяких інших мов, немає вбудованого способу автоматично згенерувати методи доступу.
+Їх доводиться писати самостійно — це звичайні методи.

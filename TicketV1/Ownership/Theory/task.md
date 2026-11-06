@@ -1,7 +1,7 @@
-## Ownership
+## Володіння
 
-If you solved the previous exercise using what this course has taught you so far,
-your accessor methods probably look like this:
+Якщо ви розв'язали попередню вправу, спираючись лише на те, чого курс навчив вас досі,
+ваші методи доступу, найімовірніше, мають такий вигляд:
 
 ```rust
 impl Ticket {
@@ -19,19 +19,19 @@ impl Ticket {
 }
 ```
 
-Those methods compile and are enough to get tests to pass, but in a real-world scenario they won't get you very far.
-Consider this snippet:
+Ці методи компілюються, і їх достатньо, щоб тести пройшли, але в реальних умовах із ними далеко не заїдете.
+Розгляньмо такий фрагмент:
 
 ```rust
 if ticket.status() == "To-Do" {
-    // We haven't covered the `println!` macro yet,
-    // but for now it's enough to know that it prints 
-    // a (templated) message to the console
+    // Макрос `println!` ми ще не розглядали,
+    // але поки що досить знати, що він виводить
+    // (шаблонне) повідомлення в консоль
     println!("Your next task is: {}", ticket.title());
 }
 ```
 
-If you try to compile it, you'll get an error:
+Якщо спробувати його скомпілювати, ви отримаєте помилку:
 
 ```text
 error[E0382]: use of moved value: `ticket`
@@ -55,57 +55,57 @@ note: `Ticket::status` takes ownership of the receiver `self`,
    |                       ^^^^
 ```
 
-Congrats, this is your first borrow-checker error!
+Вітаємо, це ваша перша помилка від borrow checker (механізму перевірки запозичень)!
 
-## The perks of Rust's ownership system
+## Переваги системи володіння Rust
 
-Rust's ownership system is designed to ensure that:
+Систему володіння Rust спроєктовано так, щоб гарантувати, що:
 
-- Data is never mutated while it's being read
-- Data is never read while it's being mutated
-- Data is never accessed after it has been destroyed
+- Дані ніколи не змінюються, поки їх читають
+- Дані ніколи не читаються, поки їх змінюють
+- До даних ніколи не звертаються після того, як їх знищено
 
-These constraints are enforced by the **borrow checker**, a subsystem of the Rust compiler,
-often the subject of jokes and memes in the Rust community.
+За дотриманням цих обмежень стежить **borrow checker** — підсистема компілятора Rust,
+що часто стає героєм жартів і мемів у спільноті Rust.
 
-Ownership is a key concept in Rust, and it's what makes the language unique.
-Ownership enables Rust to provide **memory safety without compromising performance**.
-All these things are true at the same time for Rust:
+Володіння — ключова концепція Rust, і саме вона робить мову унікальною.
+Завдяки володінню Rust забезпечує **безпеку пам'яті без шкоди для продуктивності**.
+Для Rust одночасно справджується все наведене нижче:
 
-1. There is no runtime garbage collector
-2. As a developer, you rarely have to manage memory directly
-3. You can't cause dangling pointers, double frees, and other memory-related bugs
+1. Немає збирача сміття, який працює під час виконання програми
+2. Вам як розробникові рідко доводиться керувати пам'яттю напряму
+3. Неможливо спричинити висячі вказівники, подвійне звільнення пам'яті та інші помилки, пов'язані з пам'яттю
 
-Languages like Python, JavaScript, and Java give you 2. and 3., but not 1.\
-Language like C or C++ give you 1., but neither 2. nor 3.
+Мови на кшталт Python, JavaScript і Java дають вам 2. і 3., але не 1.\
+Мови на кшталт C чи C++ дають вам 1., але ні 2., ні 3.
 
-Depending on your background, 3. might sound a bit arcane: what is a "dangling pointer"?
-What is a "double free"? Why are they dangerous?\
-Don't worry: we'll cover these concepts in more details during the rest of the course.
+Залежно від вашого досвіду, пункт 3 може звучати дещо загадково: що таке «висячий вказівник» (dangling pointer)?
+Що таке «подвійне звільнення» (double free)? Чим вони небезпечні?\
+Не хвилюйтеся: ми детальніше розглянемо ці поняття далі в курсі.
 
-For now, though, let's focus on learning how to work within Rust's ownership system.
+А поки що зосередьмося на тому, як працювати в межах системи володіння Rust.
 
-## The owner
+## Власник
 
-In Rust, each value has an **owner**, statically determined at compile-time.
-There is only one owner for each value at any given time.
+У Rust кожне значення має **власника** (owner), якого визначено статично, на етапі компіляції.
+У будь-який момент часу кожне значення має лише одного власника.
 
-## Move semantics
+## Семантика переміщення
 
-Ownership can be transferred.
+Володіння можна передавати.
 
-If you own a value, for example, you can transfer ownership to another variable:
+Наприклад, якщо ви володієте значенням, то можете передати володіння ним іншій змінній:
 
 ```rust
-let a = "hello, world".to_string(); // <- `a` is the owner of the String
-let b = a;  // <- `b` is now the owner of the String
+let a = "hello, world".to_string(); // <- `a` — власник цього String
+let b = a;  // <- тепер власник цього String — `b`
 ```
 
-Rust's ownership system is baked into the type system: each function has to declare in its signature
-_how_ it wants to interact with its arguments.
+Система володіння Rust вбудована в систему типів: кожна функція має оголосити у своїй сигнатурі,
+_як_ вона збирається взаємодіяти зі своїми аргументами.
 
-So far, all our methods and functions have **consumed** their arguments: they've taken ownership of them.
-For example:
+Досі всі наші методи й функції **поглинали** (consume) свої аргументи: вони брали їх у володіння.
+Наприклад:
 
 ```rust
 impl Ticket {
@@ -115,11 +115,11 @@ impl Ticket {
 }
 ```
 
-`Ticket::description` takes ownership of the `Ticket` instance it's called on.\
-This is known as **move semantics**: ownership of the value (`self`) is **moved** from the caller to
-the callee, and the caller can't use it anymore.
+`Ticket::description` бере у володіння екземпляр `Ticket`, на якому його викликають.\
+Це називається **семантикою переміщення** (move semantics): володіння значенням (`self`) **переміщується** від коду,
+що викликає метод, до самого методу, і код, що викликав метод, більше не може використовувати це значення.
 
-That's exactly the language used by the compiler in the error message we saw earlier:
+Саме цими термінами послуговується компілятор у повідомленні про помилку, яке ми бачили раніше:
 
 ```text
 error[E0382]: use of moved value: `ticket`
@@ -143,58 +143,58 @@ note: `Ticket::status` takes ownership of the receiver `self`,
    |                       ^^^^
 ```
 
-In particular, this is the sequence of events that unfold when we call `ticket.status()`:
+Зокрема, коли ми викликаємо `ticket.status()`, відбувається така послідовність подій:
 
-- `Ticket::status` takes ownership of the `Ticket` instance
-- `Ticket::status` extracts `status` from `self` and transfers ownership of `status` back to the caller
-- The rest of the `Ticket` instance is discarded (`title` and `description`)
+- `Ticket::status` бере у володіння екземпляр `Ticket`
+- `Ticket::status` витягує `status` із `self` і передає володіння `status` назад коду, що викликав метод
+- Решта екземпляра `Ticket` (`title` і `description`) відкидається
 
-When we try to use `ticket` again via `ticket.title()`, the compiler complains: the `ticket` value is gone now,
-we no longer own it, therefore we can't use it anymore.
+Коли ми намагаємося знову використати `ticket` через `ticket.title()`, компілятор скаржиться: значення `ticket` уже немає,
+ми ним більше не володіємо, а отже, не можемо його використовувати.
 
-To build _useful_ accessor methods we need to start working with **references**.
+Щоб створити _корисні_ методи доступу, нам потрібно почати працювати з **посиланнями**.
 
-## Borrowing
+## Запозичення
 
-It is desirable to have methods that can read the value of a variable without taking ownership of it.\
-Programming would be quite limited otherwise. In Rust, that's done via **borrowing**.
+Бажано мати методи, які можуть читати значення змінної, не беручи його у володіння.\
+Інакше можливості програмування були б досить обмеженими. У Rust для цього існує **запозичення** (borrowing).
 
-Whenever you borrow a value, you get a **reference** to it.\
-References are tagged with their privileges:
+Щоразу, коли ви позичаєте значення, ви отримуєте **посилання** (reference) на нього.\
+Посилання бувають двох видів залежно від привілеїв:
 
-- Immutable references (`&`) allow you to read the value, but not to mutate it
-- Mutable references (`&mut`) allow you to read and mutate the value
+- Незмінювані посилання (`&`) дають змогу читати значення, але не змінювати його
+- Змінювані посилання (`&mut`) дають змогу і читати, і змінювати значення
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> This is a great mental model to start out, but it doesn't capture the _full_ picture.
-> We'll refine our understanding of references [later in the course](../../../Threads/InteriorMutability/Theory/task.md).
+> Це чудова ментальна модель для початку, але вона не відображає _повної_ картини.
+> Ми уточнимо наше розуміння посилань [далі в курсі](../../../Threads/InteriorMutability/Theory/task.md).
 
-Going back to the goals of Rust's ownership system:
+Повернімося до цілей системи володіння Rust:
 
-- Data is never mutated while it's being read
-- Data is never read while it's being mutated
+- Дані ніколи не змінюються, поки їх читають
+- Дані ніколи не читаються, поки їх змінюють
 
-To ensure these two properties, Rust has to introduce some restrictions on references:
+Щоб гарантувати ці дві властивості, Rust мусить запровадити певні обмеження на посилання:
 
-- You can't have a mutable reference and an immutable reference to the same value at the same time
-- You can't have more than one mutable reference to the same value at the same time
-- The owner can't mutate the value while it's being borrowed
-- You can have as many immutable references as you want, as long as there are no mutable references
+- Не можна одночасно мати змінюване й незмінюване посилання на те саме значення
+- Не можна одночасно мати більше ніж одне змінюване посилання на те саме значення
+- Власник не може змінювати значення, поки воно позичене
+- Незмінюваних посилань може бути скільки завгодно, доки немає жодного змінюваного
 
-In a way, you can think of an immutable reference as a "read-only" lock on the value,
-while a mutable reference is like a "read-write" lock.
+У певному сенсі незмінюване посилання можна уявляти як блокування значення «лише для читання»,
+а змінюване посилання — як блокування «для читання й запису».
 
-All these restrictions are enforced at compile-time by the borrow checker.
+Дотримання всіх цих обмежень перевіряє borrow checker на етапі компіляції.
 
-### Syntax
+### Синтаксис
 
-How do you borrow a value, in practice?\
-By adding `&` or `&mut` **in front a variable**, you're borrowing its value.
-Careful though! The same symbols (`&` and `&mut`) in **front of a type** have a different meaning:
-they denote a different type, a reference to the original type.
+Як же на практиці позичити значення?\
+Додаючи `&` або `&mut` **перед змінною**, ви позичаєте її значення.
+Але будьте уважні! Ті самі символи (`&` і `&mut`) **перед типом** мають інше значення:
+вони позначають інший тип — посилання на вихідний тип.
 
-For example:
+Наприклад:
 
 ```rust
 struct Configuration {
@@ -207,35 +207,35 @@ fn main() {
         version: 1,
         active: true,
     };
-    // `b` is a reference to the `version` field of `config`.
-    // The type of `b` is `&u32`, since it contains a reference to 
-    // a `u32` value.
-    // We create a reference by borrowing `config.version`, using 
-    // the `&` operator.
-    // Same symbol (`&`), different meaning depending on the context!
+    // `b` — це посилання на поле `version` змінної `config`.
+    // Тип `b` — `&u32`, оскільки `b` містить посилання на
+    // значення типу `u32`.
+    // Ми створюємо посилання, позичаючи `config.version` за допомогою
+    // оператора `&`.
+    // Той самий символ (`&`), але інше значення залежно від контексту!
     let b: &u32 = &config.version;
-    //     ^ The type annotation is not necessary, 
-    //       it's just there to clarify what's going on
+    //     ^ Анотація типу тут не обов'язкова,
+    //       вона лише пояснює, що відбувається
 }
 ```
 
-The same concept applies to function arguments and return types:
+Те саме стосується аргументів функцій і типів значень, які вони повертають:
 
 ```rust
-// `f` takes a mutable reference to a `u32` as an argument, 
-// bound to the name `number`
+// `f` приймає як аргумент змінюване посилання на `u32`,
+// прив'язане до імені `number`
 fn f(number: &mut u32) -> &u32 {
     // [...]
 }
 ```
 
-## Breathe in, breathe out
+## Вдихніть і видихніть
 
-Rust's ownership system can be a bit overwhelming at first.\
-But don't worry: it'll become second nature with practice.\
-And you're going to get a lot of practice over the rest of this chapter, as well as the rest of the course!
-We'll revisit each concept multiple times to make sure you get familiar with them
-and truly understand how they work.
+Спочатку система володіння Rust може трохи приголомшити.\
+Але не хвилюйтеся: з практикою вона стане для вас чимось природним.\
+А практики вистачить — і до кінця цього розділу, і впродовж решти курсу!
+Ми повертатимемося до кожної концепції кілька разів, щоб ви з ними освоїлися
+й по-справжньому зрозуміли, як вони працюють.
 
-Towards the end of this chapter we'll explain _why_ Rust's ownership system is designed the way it is.
-For the time being, focus on understanding the _how_. Take each compiler error as a learning opportunity!
+Ближче до кінця розділу ми пояснимо, _чому_ систему володіння Rust влаштовано саме так.
+А поки що зосередьтеся на тому, _як_ вона працює. Сприймайте кожну помилку компіляції як нагоду чогось навчитися!

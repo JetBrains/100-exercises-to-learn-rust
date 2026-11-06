@@ -1,2 +1,3 @@
-This task is to implement the `new` function for the `Ticket` struct. 
-All the requirements, including input validation rules for `title`, `description`, and `status`, and the specific panic messages for invalid inputs, are detailed in the comments within the `TODO:` section of the code.
+У цьому завданні потрібно реалізувати функцію `new` для структури `Ticket`.
+Усі вимоги, зокрема правила валідації вхідних даних для `title`, `description` і `status`, а також конкретні повідомлення паніки для некоректних вхідних даних, детально описано в коментарях розділу `TODO:` у коді.
+Повідомлення паніки лишаємо англійською — саме їх перевіряють тести.

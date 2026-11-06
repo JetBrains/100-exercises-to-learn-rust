@@ -1,8 +1,8 @@
 use task_ticket_v1_outro::Order;
 
-// Files inside the `tests` directory are only compiled when you run tests.
-// As a consequence, we don't need the `#[cfg(test)]` attribute for conditional compilation—it's
-// implied.
+// Файли в теці `tests` компілюються лише тоді, коли ви запускаєте тести.
+// Тому атрибут `#[cfg(test)]` для умовної компіляції тут не потрібен — він
+// діє неявно.
 
 #[test]
 fn test_order() {
@@ -23,7 +23,7 @@ fn test_order() {
     assert_eq!(order.total(), 7998);
 }
 
-// Validation tests
+// Тести валідації
 #[test]
 #[should_panic]
 fn test_empty_product_name() {

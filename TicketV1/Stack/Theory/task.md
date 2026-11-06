@@ -1,28 +1,28 @@
-## Memory layout
+## Розміщення в пам'яті
 
-We've looked at ownership and references from an operational point of view—what you can and can't do with them.
-Now it's a good time to take a look under the hood: let's talk about **memory**.
+Досі ми розглядали володіння та посилання з практичного погляду — що з ними можна робити, а чого не можна.
+Тепер саме час зазирнути під капот: поговорімо про **пам'ять**.
 
-## Stack and heap
+## Стек і купа
 
-When discussing memory, you'll often hear people talk about the **stack** and the **heap**.\
-These are two different memory regions used by programs to store data.
+Коли йдеться про пам'ять, ви часто чутимете про **стек** (stack) і **купу** (heap).\
+Це дві різні ділянки пам'яті, у яких програми зберігають дані.
 
-Let's start with the stack.
+Почнімо зі стека.
 
-## Stack
+## Стек
 
-The **stack** is a **LIFO** (Last In, First Out) data structure.\
-When you call a function, a new **stack frame** is added on top of the stack. That stack frame stores
-the function's arguments, local variables and a few "bookkeeping" values.\
-When the function returns, the stack frame is popped off the stack.
+**Стек** — це структура даних, що працює за принципом **LIFO** (Last In, First Out — «останнім прийшов, першим вийшов»).\
+Коли ви викликаєте функцію, на вершину стека додається новий **кадр стека** (stack frame). У цьому кадрі зберігаються
+аргументи функції, її локальні змінні та кілька «службових» значень.\
+Коли функція завершується, її кадр знімається зі стека.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> If you have nested function calls, each function pushes its data onto the stack when it's called but
-> it doesn't pop it off until the innermost function returns.
-> If you have too many nested function calls, you can run out of stack space—the stack is not infinite!
-> That's called a [**stack overflow**](https://en.wikipedia.org/wiki/Stack_overflow).
+> Якщо у вас є вкладені виклики функцій, кожна функція під час виклику кладе свої дані в стек,
+> але не знімає їх, доки не завершиться найглибше вкладена функція.
+> Якщо вкладених викликів забагато, місце в стеку може скінчитися — стек не безмежний!
+> Це називається [**переповненням стека**](https://en.wikipedia.org/wiki/Stack_overflow) (stack overflow).
 
 ```text
 +-----------------+
@@ -46,29 +46,29 @@ When the function returns, the stack frame is popped off the stack.
 +-----------------+
 ```
 
-From an operational point of view, stack allocation/de-allocation is **very fast**.\
-We are always pushing and popping data from the top of the stack, so we don't need to search for free memory.
-We also don't have to worry about fragmentation: the stack is a single contiguous block of memory.
+З практичного погляду виділення та звільнення пам'яті в стеку — **дуже швидкі** операції.\
+Ми завжди кладемо дані на вершину стека й знімаємо їх звідти, тож шукати вільну пам'ять не потрібно.
+Також не треба перейматися фрагментацією: стек — це один суцільний блок пам'яті.
 
 ### Rust
 
-Rust will often allocate data on the stack.\
-You have a `u32` input argument in a function? Those 32 bits will be on the stack.\
-You define a local variable of type `i64`? Those 64 bits will be on the stack.\
-It all works quite nicely because the size of those integers is known at compile time, therefore
-the compiled program knows how much space it needs to reserve on the stack for them.
+Rust часто розміщує дані в стеку.\
+У функції є вхідний аргумент типу `u32`? Ці 32 біти будуть у стеку.\
+Ви оголошуєте локальну змінну типу `i64`? Ці 64 біти будуть у стеку.\
+Усе це чудово працює, бо розмір цих цілих чисел відомий під час компіляції, отже
+скомпільована програма знає, скільки місця для них треба зарезервувати в стеку.
 
 ### `std::mem::size_of`
 
-You can verify how much space a type would take on the stack
-using the [`std::mem::size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) function.
+Перевірити, скільки місця тип займав би в стеку, можна
+за допомогою функції [`std::mem::size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html).
 
-For a `u8`, for example:
+Наприклад, для `u8`:
 
 ```rust
-// We'll explain this funny-looking syntax (`::<u8>`) later on.
-// Ignore it for now.
+// Цей кумедний синтаксис (`::<u8>`) ми пояснимо пізніше.
+// Поки що не зважайте на нього.
 assert_eq!(std::mem::size_of::<u8>(), 1);
 ```
 
-1 makes sense, because a `u8` is 8 bits long, or 1 byte.
+Значення 1 цілком логічне: `u8` має довжину 8 бітів, тобто 1 байт.

@@ -1,3 +1,3 @@
-This task requires you to determine the stack size in bytes for various primitive Rust types. 
-You'll need to replace the `TODO` placeholders with the correct byte size for `u16`, `i32`, and `bool`, based on your understanding of Rust's data types. 
-The `std::mem::size_of` function is used in the tests to verify these sizes.
+У цьому завданні потрібно визначити розмір у стеку (у байтах) для кількох примітивних типів Rust.
+Замініть заповнювачі `TODO` правильним розміром у байтах для `u16`, `i32` і `bool`, спираючись на те, що ви знаєте про типи даних Rust.
+Тести перевіряють ці розміри за допомогою функції `std::mem::size_of`.

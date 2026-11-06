@@ -1,3 +1,3 @@
-This task is to read code's comments and complete the `outro` function.
+У цьому завданні потрібно прочитати коментарі в коді й завершити функцію `outro`.
 
-The function should return the string: ***I have a basic understanding of destructors!***
+Функція має повернути рядок: ***I have a basic understanding of destructors!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

@@ -1,6 +1,6 @@
-## Mutable references
+## Змінювані посилання
 
-Your accessor methods should look like this now:
+Тепер ваші методи доступу мають виглядати так:
 
 ```rust
 impl Ticket {
@@ -18,36 +18,36 @@ impl Ticket {
 }
 ```
 
-A sprinkle of `&` here and there did the trick!\
-We now have a way to access the fields of a `Ticket` instance without consuming it in the process.
-Let's see how we can enhance our `Ticket` struct with **setter methods** next.
+Кілька `&` тут і там — і справу зроблено!\
+Тепер ми можемо звертатися до полів екземпляра `Ticket`, не поглинаючи (consume) його.
+Далі подивімося, як доповнити нашу структуру `Ticket` **методами-сетерами** (setter methods).
 
-## Setters
+## Сетери
 
-Setter methods allow users to change the values of `Ticket`'s private fields while making sure that its invariants
-are respected (i.e. you can't set a `Ticket`'s title to an empty string).
+Методи-сетери дають користувачам змогу змінювати значення приватних полів `Ticket` і водночас гарантують
+дотримання його інваріантів (тобто не можна зробити заголовок `Ticket` порожнім рядком).
 
-There are two common ways to implement setters in Rust:
+У Rust є два поширені способи реалізувати сетери:
 
-- Taking `self` as input.
-- Taking `&mut self` as input.
+- приймати на вхід `self`;
+- приймати на вхід `&mut self`.
 
-### Taking `self` as input
+### Приймаємо на вхід `self`
 
-The first approach looks like this:
+Перший підхід виглядає так:
 
 ```rust
 impl Ticket {
     pub fn set_title(mut self, new_title: String) -> Self {
-        // Validate the new title [...]
+        // Перевіряємо новий заголовок [...]
         self.title = new_title;
         self
     }
 }
 ```
 
-It takes ownership of `self`, changes the title, and returns the modified `Ticket` instance.\
-This is how you'd use it:
+Метод бере `self` у володіння, змінює заголовок і повертає змінений екземпляр `Ticket`.\
+Використовувати його можна так:
 
 ```rust
 let ticket = Ticket::new(
@@ -58,12 +58,12 @@ let ticket = Ticket::new(
 let ticket = ticket.set_title("New title".into());
 ```
 
-Since `set_title` takes ownership of `self` (i.e. it **consumes it**), we need to reassign the result to a variable.
-In the example above we take advantage of **variable shadowing** to reuse the same variable name: when
-you declare a new variable with the same name as an existing one, the new variable **shadows** the old one. This
-is a common pattern in Rust code.
+Оскільки `set_title` бере `self` у володіння (тобто **поглинає його**), результат треба знову присвоїти змінній.
+У прикладі вище ми скористалися **затіненням змінних** (variable shadowing), щоб повторно використати те саме ім'я змінної:
+коли ви оголошуєте нову змінну з тим самим ім'ям, що й наявна, нова змінна **затіняє** (shadows) стару.
+Це поширений патерн у коді на Rust.
 
-`self`-setters work quite nicely when you need to change multiple fields at once: you can chain multiple calls together!
+`self`-сетери дуже зручні, коли потрібно змінити кілька полів одразу: виклики можна об'єднати в ланцюжок!
 
 ```rust
 let ticket = ticket
@@ -72,24 +72,24 @@ let ticket = ticket
     .set_status("In Progress".into());
 ```
 
-### Taking `&mut self` as input
+### Приймаємо на вхід `&mut self`
 
-The second approach to setters, using `&mut self`, looks like this instead:
+Другий підхід до сетерів — з `&mut self` — натомість виглядає так:
 
 ```rust
 impl Ticket {
     pub fn set_title(&mut self, new_title: String) {
-        // Validate the new title [...]
+        // Перевіряємо новий заголовок [...]
         
         self.title = new_title;
     }
 }
 ```
 
-This time the method takes a mutable reference to `self` as input, changes the title, and that's it.
-Nothing is returned.
+Цього разу метод приймає на вхід змінюване посилання на `self`, змінює заголовок — і все.
+Нічого не повертається.
 
-You'd use it like this:
+Використовувати його можна так:
 
 ```rust
 let mut ticket = Ticket::new(
@@ -99,15 +99,15 @@ let mut ticket = Ticket::new(
 );
 ticket.set_title("New title".into());
 
-// Use the modified ticket
+// Використовуємо змінений тікет
 ```
 
-Ownership stays with the caller, so the original `ticket` variable is still valid. We don't need to reassign the result.
-We need to mark `ticket` as mutable though, because we're taking a mutable reference to it.
+Володіння лишається за кодом, що викликає метод, тож початкова змінна `ticket` і далі дійсна. Знову присвоювати результат не потрібно.
+Утім, `ticket` треба позначити як змінювану, бо ми беремо на неї змінюване посилання.
 
-`&mut`-setters have a downside: you can't chain multiple calls together.
-Since they don't return the modified `Ticket` instance, you can't call another setter on the result of the first one.
-You have to call each setter separately:
+`&mut`-сетери мають недолік: їхні виклики не можна об'єднати в ланцюжок.
+Оскільки вони не повертають змінений екземпляр `Ticket`, не можна викликати наступний сетер для результату першого.
+Кожен сетер доводиться викликати окремо:
 
 ```rust
 ticket.set_title("New title".into());

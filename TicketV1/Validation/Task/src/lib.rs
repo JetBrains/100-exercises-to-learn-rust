@@ -5,20 +5,20 @@ pub struct Ticket {
 }
 
 impl Ticket {
-    // TODO: implement the `new` function.
-    //  The following requirements should be met:
-    //   - Only `To-Do`, `In Progress`, and `Done` statuses are allowed.
-    //   - The `title` and `description` fields should not be empty.
-    //   - the `title` should be at most 50 bytes long.
-    //   - the `description` should be at most 500 bytes long.
-    //  The method should panic if any of the requirements are not met.
-    //  Panic messages: "Only `To-Do`, `In Progress`, and `Done` statuses are allowed",
+    // TODO: реалізуйте функцію `new`.
+    //  Мають виконуватися такі вимоги:
+    //   - Дозволено лише статуси `To-Do`, `In Progress` і `Done`.
+    //   - Поля `title` і `description` не можуть бути порожніми.
+    //   - `title` має бути завдовжки не більше 50 байтів.
+    //   - `description` має бути завдовжки не більше 500 байтів.
+    //  Метод має панікувати, якщо будь-яку з вимог не виконано.
+    //  Повідомлення паніки (саме такі, англійською — їх перевіряють тести): "Only `To-Do`, `In Progress`, and `Done` statuses are allowed",
     //  "Title cannot be empty", "Description cannot be empty", "Title cannot be longer than 50 bytes",
     //  "Description cannot be longer than 500 bytes"
     //
-    // You'll have to use what you learned in the previous exercises,
-    // as well as some `String` methods. Use the documentation of Rust's standard library
-    // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
+    // Вам знадобиться те, що ви вивчили в попередніх вправах,
+    // а також деякі методи `String`. Скористайтеся документацією стандартної бібліотеки Rust,
+    // щоб знайти найвідповідніші варіанти -> https://doc.rust-lang.org/std/string/struct.String.html
     pub fn new(title: String, description: String, status: String) -> Self {
         if title.is_empty() {
             panic!("Title cannot be empty");

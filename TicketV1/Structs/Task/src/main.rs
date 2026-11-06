@@ -1,9 +1,9 @@
-// Define a struct named `Order` with the following fields:
-// - `price`, an unsigned integer
-// - `quantity`, an unsigned integer
+// Визначте структуру з назвою `Order` і такими полями:
+// - `price` — беззнакове ціле число
+// - `quantity` — беззнакове ціле число
 //
-// It should also have a method named `is_available` that returns a `true` if the quantity is
-// greater than 0, otherwise `false`.
+// Вона також повинна мати метод `is_available`, який повертає `true`, якщо кількість (`quantity`)
+// більша за 0, і `false` в іншому разі.
 
 struct Order {
     price: u32,

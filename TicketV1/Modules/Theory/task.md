@@ -1,17 +1,17 @@
-## Modules
+## Модулі
 
-The `new` method you've just defined is trying to enforce some **constraints** on the field values for `Ticket`.
-But are those invariants really enforced? What prevents a developer from creating a `Ticket`
-without going through `Ticket::new`?
+Метод `new`, який ви щойно визначили, намагається забезпечити дотримання певних **обмежень** для значень полів `Ticket`.
+Але чи справді ці інваріанти гарантовано виконуються? Що завадить розробникові створити `Ticket`
+в обхід `Ticket::new`?
 
-To get proper **encapsulation** you need to become familiar with two new concepts: **visibility** and **modules**.
-Let's start with modules.
+Щоб досягти справжньої **інкапсуляції**, вам потрібно ознайомитися з двома новими концепціями: **видимістю** та **модулями**.
+Почнімо з модулів.
 
-## What is a module?
+## Що таке модуль?
 
-In Rust a **module** is a way to group related code together, under a common namespace (i.e. the module's name).\
-You've already seen modules in action: the unit tests that verify the correctness of your code are defined in a
-different module, named `tests`.
+У Rust **модуль** — це спосіб згрупувати пов'язаний код у спільному просторі імен (тобто під іменем модуля).\
+Ви вже бачили модулі в дії: модульні тести, які перевіряють правильність вашого коду, визначено в
+окремому модулі з назвою `tests`.
 
 ```rust
 #[cfg(test)]
@@ -20,105 +20,105 @@ mod tests {
 }
 ```
 
-## Inline modules
+## Вбудовані модулі
 
-The `tests` module above is an example of an **inline module**: the module declaration (`mod tests`) and the module
-contents (the stuff inside `{ ... }`) are next to each other.
+Модуль `tests` вище — приклад **вбудованого модуля** (inline module): оголошення модуля (`mod tests`) і його
+вміст (усе, що всередині `{ ... }`) розташовані поруч.
 
-## Module tree
+## Дерево модулів
 
-Modules can be nested, forming a **tree** structure.\
-The root of the tree is the **crate** itself, which is the top-level module that contains all the other modules.
-For a library crate, the root module is usually `src/lib.rs` (unless its location has been customized).
-The root module is also known as the **crate root**.
+Модулі можуть бути вкладеними й утворювати **деревоподібну** структуру.\
+Коренем дерева є сам **крейт** (crate) — модуль верхнього рівня, що містить усі інші модулі.
+Для бібліотечного крейта кореневим модулем зазвичай є `src/lib.rs` (якщо його розташування не змінено в налаштуваннях).
+Кореневий модуль також називають **коренем крейта** (crate root).
 
-The crate root can have submodules, which in turn can have their own submodules, and so on.
+Корінь крейта може мати підмодулі, які, своєю чергою, можуть мати власні підмодулі, і так далі.
 
-## External modules and the filesystem
+## Зовнішні модулі та файлова система
 
-Inline modules are useful for small pieces of code, but as your project grows you'll want to split your code into
-multiple files. In the parent module, you declare the existence of a submodule using the `mod` keyword.
+Вбудовані модулі зручні для невеликих фрагментів коду, але коли проєкт розростеться, вам захочеться розділити код на
+кілька файлів. У батьківському модулі існування підмодуля оголошують за допомогою ключового слова `mod`.
 
 ```rust
 mod dog;
 ```
 
-`cargo`, Rust's build tool, is then in charge of finding the file that contains
-the module implementation.\
-If your module is declared in the root of your crate (e.g. `src/lib.rs` or `src/main.rs`),
-`cargo` expects the file to be named either:
+Далі `cargo`, інструмент збирання Rust, сам шукає файл, що містить
+реалізацію модуля.\
+Якщо ваш модуль оголошено в корені крейта (наприклад, у `src/lib.rs` або `src/main.rs`),
+`cargo` очікує, що файл матиме одну з таких назв:
 
 - `src/<module_name>.rs`
 - `src/<module_name>/mod.rs`
 
-If your module is a submodule of another module, the file should be named:
+Якщо ваш модуль є підмодулем іншого модуля, файл повинен мати одну з таких назв:
 
 - `[..]/<parent_module>/<module_name>.rs`
 - `[..]/<parent_module>/<module_name>/mod.rs`
 
-E.g. `src/animals/dog.rs` or `src/animals/dog/mod.rs` if `dog` is a submodule of `animals`.
+Наприклад, `src/animals/dog.rs` або `src/animals/dog/mod.rs`, якщо `dog` — підмодуль `animals`.
 
-Your IDE might help you create these files automatically when you declare a new module using the `mod` keyword.
+Ваша IDE може допомогти автоматично створити ці файли, коли ви оголошуєте новий модуль за допомогою ключового слова `mod`.
 
-## Item paths and `use` statements
+## Шляхи до елементів та інструкції `use`
 
-You can access items defined in the same module without any special syntax. You just use their name.
+До елементів, визначених у тому самому модулі, можна звертатися без жодного спеціального синтаксису — просто за їхнім іменем.
 
 ```rust
 struct Ticket {
     // [...]
 }
 
-// No need to qualify `Ticket` in any way here
-// because we're in the same module
+// Тут не потрібно жодним чином уточнювати шлях до `Ticket`,
+// бо ми перебуваємо в тому самому модулі
 fn mark_ticket_as_done(ticket: Ticket) {
     // [...]
 }
 ```
 
-That's not the case if you want to access an entity from a different module.\
-You have to use a **path** pointing to the entity you want to access.
+Інша річ, якщо ви хочете звернутися до сутності з іншого модуля.\
+Тоді потрібно використати **шлях**, що вказує на потрібну сутність.
 
-You can compose the path in various ways:
+Шлях можна побудувати по-різному:
 
-- starting from the root of the current crate, e.g. `crate::module_1::MyStruct`
-- starting from the parent module, e.g. `super::my_function`
-- starting from the current module, e.g. `sub_module_1::MyStruct`
+- від кореня поточного крейта, наприклад `crate::module_1::MyStruct`
+- від батьківського модуля, наприклад `super::my_function`
+- від поточного модуля, наприклад `sub_module_1::MyStruct`
 
-Both `crate` and `super` are **keywords**.\
-`crate` refers to the root of the current crate, while `super` refers to the parent of the current module.
+І `crate`, і `super` — **ключові слова**.\
+`crate` позначає корінь поточного крейта, а `super` — батьківський модуль поточного модуля.
 
-Having to write the full path every time you want to refer to a type can be cumbersome.
-To make your life easier, you can introduce a `use` statement to bring the entity into scope.
+Писати повний шлях щоразу, коли треба звернутися до типу, буває незручно.
+Щоб спростити собі життя, можна додати інструкцію `use`, яка введе сутність в область видимості.
 
 ```rust
-// Bring `MyStruct` into scope
+// Вводимо `MyStruct` в область видимості
 use crate::module_1::module_2::MyStruct;
 
-// Now you can refer to `MyStruct` directly
+// Тепер до `MyStruct` можна звертатися напряму
 fn a_function(s: MyStruct) {
      // [...]
 }
 ```
 
-### Star imports
+### Імпорт із зірочкою
 
-You can also import all the items from a module with a single `use` statement.
+Також можна імпортувати всі елементи модуля однією інструкцією `use`.
 
 ```rust
 use crate::module_1::module_2::*;
 ```
 
-This is known as a **star import**.\
-It is generally discouraged because it can pollute the current namespace, making it hard to understand
-where each name comes from and potentially introducing name conflicts.\
-Nonetheless, it can be useful in some cases, like when writing unit tests. You might have noticed
-that most of our test modules start with a `use super::*;` statement to bring all the items from the parent module
-(the one being tested) into scope.
+Це називається **імпортом із зірочкою** (star import).\
+Зазвичай так робити не радять, бо це може засмічувати поточний простір імен: стає важко зрозуміти,
+звідки взялося кожне ім'я, а ще можуть виникати конфлікти імен.\
+Утім, у деяких випадках такий імпорт корисний, наприклад під час написання модульних тестів. Можливо, ви помітили,
+що більшість наших тестових модулів починається з інструкції `use super::*;`, яка вводить в область видимості всі елементи
+батьківського модуля (того, який тестують).
 
-## Visualizing the module tree
+## Візуалізація дерева модулів
 
-If you're struggling to picture the module tree of your project, you can try using
-[`cargo-modules`](https://crates.io/crates/cargo-modules) to visualize it!
+Якщо вам важко уявити дерево модулів свого проєкту, спробуйте візуалізувати його за допомогою
+[`cargo-modules`](https://crates.io/crates/cargo-modules)!
 
-Refer to their documentation for installation instructions and usage examples.
+Інструкції зі встановлення та приклади використання шукайте в документації цього інструмента.

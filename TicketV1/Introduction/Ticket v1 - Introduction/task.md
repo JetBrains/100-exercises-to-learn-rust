@@ -1,25 +1,25 @@
-## Modelling A Ticket
+## Моделюємо тікет
 ##
 
-The first chapter should have given you a good grasp over some of Rust's primitive types, operators and
-basic control flow constructs.\
-In this chapter we'll go one step further and cover what makes Rust truly unique: **ownership**.\
-Ownership is what enables Rust to be both memory-safe and performant, with no garbage collector.
+Перший розділ мав дати вам добре уявлення про деякі примітивні типи Rust, оператори та
+базові конструкції керування потоком виконання.\
+У цьому розділі ми зробимо крок далі й розглянемо те, що робить Rust справді унікальним: **володіння** (ownership).\
+Саме володіння дає Rust змогу бути водночас безпечним щодо пам'яті та продуктивним — і все це без збирача сміття.
 
-As our running example, we'll use a ticket, the kind you'd use to track bugs, features, or tasks in
-a software project.\
-We'll take a stab at modeling it in Rust. It'll be the first iteration—it won't be perfect nor very idiomatic
-by the end of the chapter. It'll be enough of a challenge though!\
-To move forward you'll have to pick up several new Rust concepts, such as:
+Як наскрізний приклад ми використаємо тікет — такий, яким у програмному проєкті відстежують баги, нові функції
+чи задачі.\
+Ми спробуємо змоделювати його на Rust. Це буде лише перша ітерація: навіть наприкінці розділу наш тікет не буде
+ні досконалим, ні надто ідіоматичним. Утім, і це буде неабияким викликом!\
+Щоб рухатися далі, вам доведеться опанувати кілька нових концепцій Rust, зокрема:
 
-- `struct`, one of Rust's ways to define custom types
-- Ownership, references and borrowing
-- Memory management: stack, heap, pointers, data layout, destructors
-- Modules and visibility
-- Strings
+- `struct` — один зі способів визначати власні типи в Rust
+- Володіння, посилання та запозичення
+- Керування пам'яттю: стек, купа, вказівники, розміщення даних у пам'яті, деструктори
+- Модулі та видимість
+- Рядки
 
 <br/>
 
-## Task
-Introduction task is to complete the `intro` function.
-The function should return the string: ***I'm ready to start modelling a software ticket!***
+## Завдання
+У цьому вступному завданні потрібно доповнити функцію `intro`.
+Функція має повернути рядок: ***I'm ready to start modelling a software ticket!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

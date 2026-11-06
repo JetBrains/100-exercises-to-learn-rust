@@ -1,53 +1,53 @@
-## Destructors
+## Деструктори
 
-When introducing the heap, we mentioned that you're responsible for freeing the memory you allocate.\
-When introducing the borrow-checker, we also stated that you rarely have to manage memory directly in Rust.
+Розповідаючи про купу, ми згадували, що ви відповідаєте за звільнення пам'яті, яку виділяєте.\
+Розповідаючи про borrow checker, ми також стверджували, що в Rust вам рідко доводиться керувати пам'яттю безпосередньо.
 
-These two statements might seem contradictory at first.
-Let's see how they fit together by introducing **scopes** and **destructors**.
+На перший погляд ці два твердження можуть здатися суперечливими.
+Подивімося, як вони узгоджуються між собою, познайомившись з **областями видимості** (scopes) і **деструкторами** (destructors).
 
-## Scopes
+## Області видимості
 
-The **scope** of a variable is the region of Rust code where that variable is valid, or **alive**.
+**Область видимості** (scope) змінної — це ділянка коду на Rust, у якій ця змінна дійсна, або **жива**.
 
-The scope of a variable starts with its declaration.
-It ends when one of the following happens:
+Область видимості змінної починається з її оголошення.
+Вона закінчується, коли стається одне з двох:
 
-1. the block (i.e. the code between `{}`) where the variable was declared ends
+1. закінчується блок (тобто код між `{}`), у якому змінну оголошено
    ```rust
    fn main() {
-      // `x` is not yet in scope here
+      // тут `x` ще поза областю видимості
       let y = "Hello".to_string();
-      let x = "World".to_string(); // <-- x's scope starts here...
+      let x = "World".to_string(); // <-- тут починається область видимості x...
       let h = "!".to_string(); //   |
-   } //  <-------------- ...and ends here
+   } //  <-------------- ...і тут закінчується
    ```
-2. ownership of the variable is transferred to someone else (e.g. a function or another variable)
+2. володіння змінною передається комусь іншому (наприклад, функції чи іншій змінній)
    ```rust
    fn compute(t: String) {
-      // Do something [...]
+      // Робимо щось [...]
    }
 
    fn main() {
-       let s = "Hello".to_string(); // <-- s's scope starts here...
+       let s = "Hello".to_string(); // <-- тут починається область видимості s...
                    //                    | 
-       compute(s); // <------------------- ..and ends here
-                   //   because `s` is moved into `compute`
+       compute(s); // <------------------- ..і тут закінчується,
+                   //   бо `s` переміщено в `compute`
    }
    ```
 
-## Destructors
+## Деструктори
 
-When the owner of a value goes out of scope, Rust invokes its **destructor**.\
-The destructor tries to clean up the resources used by that value—in particular, whatever memory it allocated.
+Коли власник значення виходить з області видимості, Rust викликає **деструктор** цього значення.\
+Деструктор намагається прибрати ресурси, які використовувало значення, — зокрема звільнити всю пам'ять, яку воно виділило.
 
-You can manually invoke the destructor of a value by passing it to `std::mem::drop`.\
-That's why you'll often hear Rust developers saying "that value has been **dropped**" as a way to state that a value
-has gone out of scope and its destructor has been invoked.
+Деструктор значення можна викликати вручну, передавши значення в `std::mem::drop`.\
+Тому ви часто чутимете, як розробники на Rust кажуть, що значення «**знищено**» (dropped), маючи на увазі, що воно
+вийшло з області видимості і його деструктор було викликано.
 
-### Visualizing drop points
+### Унаочнюємо точки знищення
 
-We can insert explicit calls to `drop` to "spell out" what the compiler does for us. Going back to the previous example:
+Ми можемо вставити явні виклики `drop`, щоб «розписати» те, що компілятор робить за нас. Повернімося до попереднього прикладу:
 
 ```rust
 fn main() {
@@ -57,25 +57,25 @@ fn main() {
 }
 ```
 
-It's equivalent to:
+Він еквівалентний такому коду:
 
 ```rust
 fn main() {
    let y = "Hello".to_string();
    let x = "World".to_string();
    let h = "!".to_string();
-   // Variables are dropped in reverse order of declaration
+   // Змінні знищуються в порядку, зворотному до порядку їх оголошення
    drop(h);
    drop(x);
    drop(y);
 }
 ```
 
-Let's look at the second example instead, where `s`'s ownership is transferred to `compute`:
+Тепер розгляньмо другий приклад, де володіння `s` передається в `compute`:
 
 ```rust
 fn compute(s: String) {
-   // Do something [...]
+   // Робимо щось [...]
 }
 
 fn main() {
@@ -84,14 +84,14 @@ fn main() {
 }
 ```
 
-It's equivalent to this:
+Він еквівалентний такому коду:
 
 ```rust
 fn compute(t: String) {
-    // Do something [...]
-    drop(t); // <-- Assuming `t` wasn't dropped or moved 
-             //     before this point, the compiler will call 
-             //     `drop` here, when it goes out of scope
+    // Робимо щось [...]
+    drop(t); // <-- Якщо `t` не було знищено чи переміщено
+             //     раніше, компілятор викличе
+             //     `drop` тут, коли `t` вийде з області видимості
 }
 
 fn main() {
@@ -100,21 +100,21 @@ fn main() {
 }
 ```
 
-Notice the difference: even though `s` is no longer valid after `compute` is called in `main`, there is no `drop(s)`
-in `main`.
-When you transfer ownership of a value to a function, you're also **transferring the responsibility of cleaning it up**.
+Зверніть увагу на різницю: хоча після виклику `compute` у `main` змінна `s` уже недійсна, `drop(s)`
+у `main` немає.
+Передаючи функції володіння значенням, ви також **передаєте їй відповідальність за його прибирання**.
 
-This ensures that the destructor for a value is called **at most once**, preventing
-[double free bugs](https://owasp.org/www-community/vulnerabilities/Doubly_freeing_memory) by design.
+Це гарантує, що деструктор значення буде викликано **щонайбільше один раз**, тож
+[помилки подвійного звільнення](https://owasp.org/www-community/vulnerabilities/Doubly_freeing_memory) (double free) неможливі за самою побудовою мови.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> Rust doesn't guarantee that destructors will run. They won't, for example, if
-> you explicitly choose to [leak memory](../../../Threads/LeakingMemory/Theory/task.md).
+> Rust не гарантує, що деструктори буде виконано. Наприклад, вони не виконаються, якщо
+> ви свідомо вирішите [допустити витік пам'яті](../../../Threads/LeakingMemory/Theory/task.md).
 
-### Use after drop
+### Використання після знищення
 
-What happens if you try to use a value after it's been dropped?
+Що станеться, якщо спробувати використати значення після того, як його знищено?
 
 ```rust
 let x = "Hello".to_string();
@@ -122,7 +122,7 @@ drop(x);
 println!("{}", x);
 ```
 
-If you try to compile this code, you'll get an error:
+Якщо спробувати скомпілювати цей код, ви отримаєте помилку:
 
 ```rust
 error[E0382]: use of moved value: `x`
@@ -134,13 +134,13 @@ error[E0382]: use of moved value: `x`
   |                    ^ value used here after move
 ```
 
-Drop **consumes** the value it's called on, meaning that the value is no longer valid after the call.\
-The compiler will therefore prevent you from using it, avoiding [use-after-free bugs](https://owasp.org/www-community/vulnerabilities/Using_freed_memory).
+Виклик drop **поглинає** (consumes) значення, до якого його застосовано, тобто після виклику це значення стає недійсним.\
+Тож компілятор не дасть вам ним скористатися, запобігаючи [помилкам використання після звільнення](https://owasp.org/www-community/vulnerabilities/Using_freed_memory) (use-after-free).
 
-### Dropping references
+### Знищення посилань
 
-What if a variable contains a reference?\
-For example:
+А якщо змінна містить посилання?\
+Наприклад:
 
 ```rust
 let x = 42i32;
@@ -148,8 +148,8 @@ let y = &x;
 drop(y);
 ```
 
-When you call `drop(y)`... nothing happens.\
-If you actually try to compile this code, you'll get a warning:
+Коли ви викликаєте `drop(y)`... нічого не відбувається.\
+Якщо ж справді спробувати скомпілювати цей код, ви отримаєте попередження:
 
 ```text
 warning: calls to `std::mem::drop` with a reference 
@@ -163,9 +163,9 @@ warning: calls to `std::mem::drop` with a reference
   |
 ```
 
-It goes back to what we said earlier: we only want to call the destructor once.\
-You can have multiple references to the same value—if we called the destructor for the value they point at
-when one of them goes out of scope, what would happen to the others?
-They would refer to a memory location that's no longer valid: a so-called [**dangling pointer**](https://en.wikipedia.org/wiki/Dangling_pointer),
-a close relative of [**use-after-free bugs**](https://owasp.org/www-community/vulnerabilities/Using_freed_memory).
-Rust's ownership system rules out these kinds of bugs by design.
+Це повертає нас до сказаного раніше: деструктор потрібно викликати лише один раз.\
+На одне значення може бути кілька посилань — якби ми викликали деструктор значення, на яке вони вказують,
+щойно одне з них вийде з області видимості, що сталося б з рештою?
+Вони вказували б на місце в пам'яті, яке вже недійсне: це так званий [**висячий вказівник**](https://en.wikipedia.org/wiki/Dangling_pointer) (dangling pointer),
+близький родич [**помилок використання після звільнення**](https://owasp.org/www-community/vulnerabilities/Using_freed_memory) (use-after-free).
+Система володіння в Rust за самою своєю побудовою виключає такі помилки.

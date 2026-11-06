@@ -1,26 +1,26 @@
-## References
+## Посилання
 
-What about references, like `&String` or `&mut String`? How are they represented in memory?
+А як щодо посилань, наприклад `&String` чи `&mut String`? Як вони представлені в пам'яті?
 
-Most references in Rust are represented, in memory, as a pointer to a memory location.\
-It follows that their size is the same as the size of a pointer, a `usize`.
+Більшість посилань у Rust представлені в пам'яті як вказівник на певне місце в пам'яті.\
+Звідси випливає, що їхній розмір дорівнює розміру вказівника, тобто `usize`.
 
-You can verify this using `std::mem::size_of`:
+Перевірити це можна за допомогою `std::mem::size_of`:
 
 ```rust
 assert_eq!(std::mem::size_of::<&String>(), 8);
 assert_eq!(std::mem::size_of::<&mut String>(), 8);
 ```
 
-A `&String`, in particular, is a pointer to the memory location where the `String`'s metadata is stored.\
-If you run this snippet:
+Зокрема, `&String` — це вказівник на місце в пам'яті, де зберігаються метадані `String`.\
+Якщо виконати такий фрагмент коду:
 
 ```rust
 let s = String::from("Hey");
 let r = &s;
 ```
 
-you'll get something like this in memory:
+у пам'яті ви отримаєте приблизно таку картину:
 
 ```
            --------------------------------------
@@ -37,16 +37,16 @@ Heap   | H | e | y | ? | ? |
        +---+---+---+---+---+
 ```
 
-It's a pointer to a pointer to the heap-allocated data, if you will.
-The same goes for `&mut String`.
+Це, так би мовити, вказівник на вказівник на дані в купі.
+Те саме стосується `&mut String`.
 
-## Not all pointers point to the heap
+## Не всі вказівники вказують на купу
 
-The example above should clarify one thing: not all pointers point to the heap.\
-They just point to a memory location, which _may_ be on the heap, but doesn't have to be.
+Приклад вище має прояснити одну річ: не всі вказівники вказують на купу.\
+Вони просто вказують на місце в пам'яті, яке _може_ бути в купі, але не обов'язково.
 
-> 💡 **Note**
+> 💡 **Примітка**
 >
-> [Later in the course](../../../Traits/StringSlices/Theory/task.md) we'll talk about **fat pointers**,
-> i.e. pointers with additional metadata. As the name implies, they are larger than
-> the pointers we discussed in this chapter, also known as **thin pointers**.
+> [Далі в курсі](../../../Traits/StringSlices/Theory/task.md) ми поговоримо про **«товсті» вказівники** (fat pointers),
+> тобто вказівники з додатковими метаданими. Як випливає з назви, вони більші за
+> вказівники, які ми розглядали в цьому розділі, — їх також називають **«тонкими» вказівниками** (thin pointers).
