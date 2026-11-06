@@ -6,7 +6,7 @@ files:
     placeholders:
       - offset: 92
         length: 32
-        placeholder_text: "/* TODO: використайте wrapping_mul, щоб у разі переповнення результат множення переходив по колу */"
+        placeholder_text: "/* TODO: використайте wrapping_mul, щоб у разі overflow результат множення переходив по колу */"
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

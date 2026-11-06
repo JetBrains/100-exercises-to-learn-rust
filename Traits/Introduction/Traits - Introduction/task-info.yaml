@@ -1,5 +1,5 @@
 type: edu
-custom_name: Трейти — вступ
+custom_name: Traits — вступ
 files:
   - name: src/lib.rs
     visible: true

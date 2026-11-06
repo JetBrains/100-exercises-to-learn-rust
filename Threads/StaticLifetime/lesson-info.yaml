@@ -1,4 +1,4 @@
-custom_name: Час життя 'static
+custom_name: "'static lifetime"
 content:
   - Theory
   - Task

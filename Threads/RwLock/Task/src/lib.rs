@@ -1,5 +1,5 @@
-// TODO: Замініть `Mutex` на `RwLock` у структурі `TicketStore` і
-//  в усіх інших відповідних місцях, щоб кілька читачів могли одночасно звертатися до сховища тікетів.
+// TODO: Замініть `Mutex` на `RwLock` у struct `TicketStore` і
+//  в усіх інших відповідних місцях, щоб кілька readers могли одночасно звертатися до сховища тікетів.
 use std::sync::mpsc::{sync_channel, Receiver, SyncSender};
 use std::sync::{Arc, Mutex, RwLock};
 
@@ -78,7 +78,7 @@ pub fn server(receiver: Receiver<Command>) {
                 let _ = response_channel.send(ticket);
             }
             Err(_) => {
-                // Відправників більше немає, тож можна безпечно вийти з циклу
+                // Senders більше немає, тож можна безпечно вийти з циклу
                 // і зупинити сервер.
                 break;
             }

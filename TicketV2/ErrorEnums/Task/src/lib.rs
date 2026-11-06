@@ -8,7 +8,7 @@ enum TicketNewError {
 }
 
 // TODO: якщо заголовок некоректний, `easy_ticket` має панікувати з повідомленням про помилку,
-//   що зберігається у відповідному варіанті переліку `TicketNewError`.
+//   що зберігається у відповідному варіанті enum `TicketNewError`.
 //   Якщо ж некоректний опис, функція має використати опис за замовчуванням:
 //   "Description not provided".
 pub fn easy_ticket(title: String, description: String, status: Status) -> Ticket {

@@ -30,7 +30,7 @@ pub mod ticket {
             }
         }
 
-        // TODO: Додайте до структури `Ticket` три публічні методи:
+        // TODO: Додайте до struct `Ticket` три публічні методи:
         //  - `title`, який повертає поле `title`.
         //  - `description`, який повертає поле `description`.
         //  - `status`, який повертає поле `status`.

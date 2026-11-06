@@ -6,25 +6,25 @@ files:
     placeholders:
       - offset: 448
         length: 216
-        placeholder_text: "/* TODO: імпортуйте в область видимості все потрібне з крейтів (axum, serde, tokio) і з std */"
+        placeholder_text: "/* TODO: імпортуйте в scope все потрібне з crates (axum, serde, tokio) і з std */"
       - offset: 666
         length: 502
         placeholder_text: "/* TODO: визначте типи `Ticket` і `Status`, а також типи для тіл запитів */"
       - offset: 1170
         length: 293
-        placeholder_text: "/* TODO: визначте спільний стан застосунку (сховище, захищене блокуванням) */"
+        placeholder_text: "/* TODO: визначте спільний стан застосунку (сховище під захистом lock) */"
       - offset: 1465
         length: 1543
-        placeholder_text: "/* TODO: реалізуйте обробники create / list / get / patch */"
+        placeholder_text: "/* TODO: реалізуйте handlers create / list / get / patch */"
   - name: src/main.rs
     visible: true
     placeholders:
       - offset: 0
         length: 157
-        placeholder_text: "/* TODO: імпортуйте в область видимості допоміжні засоби маршрутизатора, обгортку для спільного стану та ваші обробники */"
+        placeholder_text: "/* TODO: імпортуйте в scope допоміжні засоби router, обгортку для спільного стану та ваші handlers */"
       - offset: 159
         length: 557
-        placeholder_text: "/* TODO: визначте асинхронну точку входу: створіть маршрутизатор, під'єднайте спільний стан, прив'яжіть TcpListener і запустіть застосунок */"
+        placeholder_text: "/* TODO: визначте асинхронну точку входу: створіть router, під'єднайте спільний стан, прив'яжіть TcpListener і запустіть застосунок */"
   - name: Cargo.toml
     visible: true
     placeholders:

@@ -1,4 +1,4 @@
-custom_name: Переповнення та антипереповнення
+custom_name: Overflow та underflow
 content:
   - Theory
   - Experiment

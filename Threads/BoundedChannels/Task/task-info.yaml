@@ -4,40 +4,40 @@ files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 270
+      - offset: 271
         length: 19
         placeholder_text: todo!()
-      - offset: 384
+      - offset: 385
         length: 15
         placeholder_text: todo!()
-      - offset: 411
+      - offset: 412
         length: 315
         placeholder_text: todo!()
-      - offset: 796
+      - offset: 797
         length: 15
         placeholder_text: todo!()
-      - offset: 823
+      - offset: 824
         length: 309
         placeholder_text: todo!()
-      - offset: 1142
+      - offset: 1143
         length: 98
         placeholder_text: /* TODO */
-      - offset: 1300
+      - offset: 1301
         length: 65
         placeholder_text: /* TODO */
-      - offset: 1420
+      - offset: 1421
         length: 28
         placeholder_text: /* TODO */
-      - offset: 1534
+      - offset: 1535
         length: 20
         placeholder_text: todo!()
-      - offset: 1621
+      - offset: 1622
         length: 26
         placeholder_text: todo!()
-      - offset: 1959
+      - offset: 1960
         length: 34
         placeholder_text: todo!()
-      - offset: 2172
+      - offset: 2173
         length: 47
         placeholder_text: todo!()
   - name: Cargo.toml

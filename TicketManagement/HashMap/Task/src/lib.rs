@@ -1,5 +1,5 @@
 // TODO: Замініть усі `todo!()` правильною реалізацією.
-//  За потреби реалізуйте додаткові трейти для `TicketId`.
+//  За потреби реалізуйте додаткові traits для `TicketId`.
 
 use std::collections::HashMap;
 use std::ops::{Index, IndexMut};

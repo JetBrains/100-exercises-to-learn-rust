@@ -1,4 +1,4 @@
-custom_name: Арифметика з насиченням
+custom_name: Saturating arithmetic
 content:
   - Theory
   - Task

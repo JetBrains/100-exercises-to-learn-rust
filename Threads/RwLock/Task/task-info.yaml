@@ -4,11 +4,11 @@ files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 891
+      - offset: 888
         length: 89
         placeholder_text: "pub fn get(&self, id: TicketId) -> Result<Option<Arc<Mutex<Ticket>>>,\
       \ OverloadedError> { // TODO"
-      - offset: 1735
+      - offset: 1732
         length: 58
         placeholder_text: "response_channel: SyncSender<Option<Arc<Mutex<Ticket>>>>, //\
       \ TODO"
@@ -26,7 +26,7 @@ files:
       - offset: 790
         length: 30
         placeholder_text: Arc::new(Mutex::new(ticket)); // TODO
-      - offset: 1055
+      - offset: 1042
         length: 29
         placeholder_text: "Option<Arc<Mutex<Ticket>>> { // TODO"
   - name: src/data.rs

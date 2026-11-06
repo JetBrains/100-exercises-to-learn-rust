@@ -11,7 +11,7 @@ files:
       - offset: 360
         length: 2
         placeholder_text: /* TODO */
-      - offset: 766
+      - offset: 765
         length: 2
         placeholder_text: /* TODO */
     propagatable: false

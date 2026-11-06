@@ -49,7 +49,7 @@ impl Ticket {
             return Err(TicketNewError::DescriptionTooLong);
         }
 
-        // TODO: розберіть рядок статусу, щоб отримати значення переліку `Status`.
+        // TODO: розберіть рядок статусу, щоб отримати значення enum `Status`.
         let status = Status::try_from(status)?;
 
         Ok(Ticket {

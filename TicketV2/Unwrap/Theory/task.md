@@ -31,7 +31,7 @@ let number = parse_int("42") + 2;
   // `expect` дає змогу задати власне повідомлення паніки.
   let number = parse_int("42").expect("Failed to parse integer");
   ```
-- Деструктурувати `Result` за допомогою виразу `match`, щоб явно обробити випадок помилки.
+- Деструктуризувати `Result` за допомогою виразу `match`, щоб явно обробити випадок помилки.
   ```rust
   match parse_int("42") {
       Ok(number) => println!("Parsed number: {}", number),

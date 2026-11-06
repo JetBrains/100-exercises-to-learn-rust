@@ -33,7 +33,7 @@ impl TicketStore {
         id
     }
 
-    // Метод `get` має повертати дескриптор (handle) тікета,
+    // Метод `get` має повертати handle тікета,
     // через який код, що викликає метод, може читати або змінювати тікет.
     pub fn get(&self, id: TicketId) -> Option<Arc<RwLock<Ticket>>> {
         self.tickets.get(&id).cloned()

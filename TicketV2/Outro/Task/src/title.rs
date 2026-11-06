@@ -1,6 +1,6 @@
 // TODO: реалізуйте `TryFrom<String>` і `TryFrom<&str>` для типу `TicketTitle`,
 //   гарантуючи, що заголовок не порожній і не довший за 50 байтів.
-//   Також реалізуйте трейти, потрібні для проходження тестів.
+//   Також реалізуйте traits, потрібні для проходження тестів.
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct TicketTitle(String);

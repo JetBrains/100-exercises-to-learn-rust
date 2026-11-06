@@ -1,2 +1,2 @@
-У цьому завданні потрібно реалізувати трейт `Error` для переліку `TicketNewError` за допомогою крейта `thiserror`.
+У цьому завданні потрібно реалізувати trait `Error` для enum `TicketNewError` за допомогою crate `thiserror`.
 Перегляньте коментар `TODO` у коді.

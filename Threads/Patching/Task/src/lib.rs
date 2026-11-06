@@ -108,7 +108,7 @@ pub fn server(receiver: Receiver<Command>) {
                 let _ = response_channel.send(());
             }
             Err(_) => {
-                // Відправників більше немає, тож можна безпечно вийти з циклу
+                // Senders більше немає, тож можна безпечно вийти з циклу
                 // і зупинити сервер.
                 break;
             }

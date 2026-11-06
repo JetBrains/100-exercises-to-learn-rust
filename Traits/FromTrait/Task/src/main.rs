@@ -1,4 +1,4 @@
-// TODO: Реалізуйте трейт `From` для типу `WrappingU32`, щоб функція `example` скомпілювалася.
+// TODO: Реалізуйте trait `From` для типу `WrappingU32`, щоб функція `example` скомпілювалася.
 
 struct WrappingU32 {
     value: u32,

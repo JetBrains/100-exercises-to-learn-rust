@@ -4,21 +4,21 @@ files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 129
+      - offset: 126
         length: 30
         placeholder_text: /* TODO */
-      - offset: 337
+      - offset: 334
         length: 65
         placeholder_text: /* TODO */
-      - offset: 483
+      - offset: 480
         length: 65
         placeholder_text: /* TODO */
-      - offset: 636
+      - offset: 633
         length: 86
         placeholder_text: /* TODO */
-      - offset: 732
+      - offset: 729
         length: 284
-        placeholder_text: "/* TODO: Створіть функцію weekday2index, яка перетворює варіант переліку Weekday на відповідний індекс (з відліком від нуля). */"
+        placeholder_text: "/* TODO: Створіть функцію weekday2index, яка перетворює варіант enum (переліку) Weekday на відповідний індекс (з відліком від нуля). */"
   - name: Cargo.toml
     visible: false
   - name: tests/tests.rs

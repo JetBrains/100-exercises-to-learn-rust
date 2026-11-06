@@ -20,10 +20,10 @@ files:
   - name: src/status.rs
     visible: true
     placeholders:
-      - offset: 130
+      - offset: 137
         length: 34
         placeholder_text: /* TODO */
-      - offset: 222
+      - offset: 229
         length: 811
         placeholder_text: /* TODO */
   - name: src/title.rs

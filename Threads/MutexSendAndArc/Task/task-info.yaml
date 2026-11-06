@@ -14,10 +14,10 @@ files:
       - offset: 768
         length: 54
         placeholder_text: /* TODO */
-      - offset: 1023
+      - offset: 1010
         length: 18
         placeholder_text: /* TODO */
-      - offset: 1053
+      - offset: 1040
         length: 30
         placeholder_text: /* TODO */
   - name: src/data.rs

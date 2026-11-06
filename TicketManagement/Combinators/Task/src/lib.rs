@@ -1,4 +1,4 @@
-// TODO: Реалізуйте метод `to_dos`. Він має повертати `Vec` посилань на ті тікети
+// TODO: Реалізуйте метод `to_dos`. Він має повертати `Vec` із references на ті тікети
 //  у `TicketStore`, статус яких — `Status::ToDo`.
 use ticket_fields::{TicketDescription, TicketTitle};
 

@@ -1,4 +1,4 @@
-// TODO: реалізуйте `Debug`, `Display` і `Error` для переліку `TicketNewError`.
+// TODO: реалізуйте `Debug`, `Display` і `Error` для enum `TicketNewError`.
 //  Для реалізації `Display` вам, імовірно, знадобиться макрос `write!` зі стандартної бібліотеки Rust.
 //  Почати варто з документації модуля `std::fmt` — там є й приклади:
 //  https://doc.rust-lang.org/std/fmt/index.html#write
@@ -21,7 +21,7 @@ impl std::fmt::Display for TicketNewError {
 impl std::error::Error for TicketNewError {}
 
 // TODO: якщо заголовок некоректний, `easy_ticket` має панікувати з повідомленням про помилку,
-//   що зберігається у відповідному варіанті переліку `TicketNewError`.
+//   що зберігається у відповідному варіанті enum `TicketNewError`.
 //   Якщо ж некоректний опис, функція має використати опис за замовчуванням:
 //   "Description not provided".
 pub fn easy_ticket(title: String, description: String, status: Status) -> Ticket {

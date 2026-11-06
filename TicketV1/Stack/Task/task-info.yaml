@@ -8,13 +8,13 @@ files:
   - name: tests/tests.rs
     visible: true
     placeholders:
-      - offset: 244
+      - offset: 245
         length: 1
         placeholder_text: /* TODO */
-      - offset: 324
+      - offset: 325
         length: 1
         placeholder_text: /* TODO */
-      - offset: 406
+      - offset: 407
         length: 1
         placeholder_text: /* TODO */
     propagatable: false

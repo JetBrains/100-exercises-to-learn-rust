@@ -1,7 +1,7 @@
 // TODO: Замініть усі `todo!()` правильною реалізацією.
-//  Реалізуйте `IntoIterator` для `&TicketStore`. Ітератор має видавати незмінювані
-//  посилання на тікети, упорядковані за їхнім `TicketId`.
-//  За потреби реалізуйте додаткові трейти для `TicketId`.
+//  Реалізуйте `IntoIterator` для `&TicketStore`. Ітератор має видавати immutable
+//  references (незмінювані посилання) на тікети, упорядковані за їхнім `TicketId`.
+//  За потреби реалізуйте додаткові traits для `TicketId`.
 
 use std::collections::BTreeMap;
 use std::ops::{Index, IndexMut};

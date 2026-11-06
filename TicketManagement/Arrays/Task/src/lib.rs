@@ -1,4 +1,4 @@
-// TODO: Доповніть структуру `WeekTemperatures` і реалізації її методів, щоб тести проходили.
+// TODO: Доповніть struct `WeekTemperatures` і реалізації її методів, щоб тести проходили.
 
 pub struct WeekTemperatures {
     temperatures: [Option<i32>; 7],

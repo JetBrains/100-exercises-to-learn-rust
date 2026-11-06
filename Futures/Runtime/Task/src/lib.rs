@@ -8,7 +8,7 @@ use tokio::net::TcpListener;
 
 pub async fn fixed_reply<T>(first: TcpListener, second: TcpListener, reply: T)
 where
-    // `T` не можна клонувати. Як спільно використовувати його у двох серверних задачах?
+    // `T` не можна клонувати. Як спільно використовувати його у двох серверних tasks?
     T: Display + Send + Sync + 'static,
 {
     let reply = Arc::new(reply);

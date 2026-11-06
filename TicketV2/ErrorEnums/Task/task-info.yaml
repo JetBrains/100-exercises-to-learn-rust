@@ -10,25 +10,25 @@ files:
       - offset: 262
         length: 49
         placeholder_text: /* TODO */
-      - offset: 678
+      - offset: 674
         length: 321
         placeholder_text: /* TODO */
-      - offset: 1430
+      - offset: 1426
         length: 108
         placeholder_text: |-
           /* TODO */
                     return Err("Title cannot be empty".to_string());
-      - offset: 1590
+      - offset: 1586
         length: 123
         placeholder_text: |-
           /* TODO */
                     return Err("Title cannot be longer than 50 bytes".to_string());
-      - offset: 1771
+      - offset: 1767
         length: 120
         placeholder_text: |-
           /* TODO */
                     return Err("Description cannot be empty".to_string());
-      - offset: 1950
+      - offset: 1946
         length: 136
         placeholder_text: |-
           /* TODO */

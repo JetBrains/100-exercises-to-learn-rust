@@ -18,7 +18,7 @@ pub struct Ticket {
 ## Уточнюємо модель
 
 Де зберігати id?\
-Можна додати нове поле до структури `Ticket`:
+Можна додати нове поле до struct (структури) `Ticket`:
 
 ```rust
 pub struct Ticket {

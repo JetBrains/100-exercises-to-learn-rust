@@ -1,4 +1,4 @@
-// TODO: реалізуйте `TryFrom<String>` і `TryFrom<&str>` для переліку `Status`.
+// TODO: реалізуйте `TryFrom<String>` і `TryFrom<&str>` для enum (переліку) `Status`.
 //  Розбір рядка має бути нечутливим до регістру.
 
 #[derive(Debug, PartialEq, Clone)]
