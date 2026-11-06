@@ -1,6 +1,6 @@
-## Spawning tasks
+## Запуск задач
 
-Your solution to the previous exercise should look something like this:
+Ваш розв'язок попередньої вправи має виглядати приблизно так:
 
 ```rust
 pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
@@ -12,24 +12,24 @@ pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
 }
 ```
 
-This is not bad!\
-If a long time passes between two incoming connections, the `echo` function will be idle
-(since `TcpListener::accept` is an asynchronous function), thus allowing the executor
-to run other tasks in the meantime.
+Непогано!\
+Якщо між двома вхідними з'єднаннями мине багато часу, функція `echo` простоюватиме
+(адже `TcpListener::accept` — асинхронна функція), і виконавець тим часом
+зможе запускати інші задачі.
 
-But how can we actually have multiple tasks running concurrently?\
-If we always run our asynchronous functions until completion (by using `.await`), we'll never
-have more than one task running at a time.
+Але як насправді домогтися, щоб кілька задач виконувалися конкурентно?\
+Якщо ми завжди виконуємо наші асинхронні функції до кінця (за допомогою `.await`), то
+одночасно ніколи не виконуватиметься більше ніж одна задача.
 
-This is where the `tokio::spawn` function comes in.
+Тут на допомогу приходить функція `tokio::spawn`.
 
 ## `tokio::spawn`
 
-`tokio::spawn` allows you to hand off a task to the executor, **without waiting for it to complete**.\
-Whenever you invoke `tokio::spawn`, you're telling `tokio` to continue running
-the spawned task, in the background, **concurrently** with the task that spawned it.
+`tokio::spawn` дає змогу передати задачу виконавцю, **не чекаючи її завершення**.\
+Щоразу, коли ви викликаєте `tokio::spawn`, ви кажете `tokio` виконувати
+запущену задачу далі у фоні, **конкурентно** із задачею, яка її запустила.
 
-Here's how you can use it to process multiple connections concurrently:
+Ось як за її допомогою можна конкурентно обробляти кілька з'єднань:
 
 ```rust
 use tokio::net::TcpListener;
@@ -37,9 +37,9 @@ use tokio::net::TcpListener;
 pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
     loop {
         let (mut socket, _) = listener.accept().await?;
-        // Spawn a background task to handle the connection
-        // thus allowing the main task to immediately start 
-        // accepting new connections
+        // Запускаємо фонову задачу, яка обробить з'єднання,
+        // завдяки чому головна задача може одразу почати
+        // приймати нові з'єднання
         tokio::spawn(async move {
             let (mut reader, mut writer) = socket.split();
             tokio::io::copy(&mut reader, &mut writer).await?;
@@ -48,27 +48,27 @@ pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
 }
 ```
 
-### Asynchronous blocks
+### Асинхронні блоки
 
-In this example, we've passed an **asynchronous block** to `tokio::spawn`: `async move { /* */ }`
-Asynchronous blocks are a quick way to mark a region of code as asynchronous without having
-to define a separate async function.
+У цьому прикладі ми передали в `tokio::spawn` **асинхронний блок**: `async move { /* */ }`.
+Асинхронні блоки — це швидкий спосіб позначити ділянку коду як асинхронну, не визначаючи
+для цього окрему асинхронну функцію.
 
 ### `JoinHandle`
 
-`tokio::spawn` returns a `JoinHandle`.\
-You can use `JoinHandle` to `.await` the background task, in the same way
-we used `join` for spawned threads.
+`tokio::spawn` повертає `JoinHandle`.\
+За допомогою `JoinHandle` можна дочекатися (`.await`) фонової задачі — так само,
+як ми використовували `join` для запущених потоків.
 
 ```rust
 pub async fn run() {
-    // Spawn a background task to ship telemetry data
-    // to a remote server
+    // Запускаємо фонову задачу, яка надсилає дані телеметрії
+    // на віддалений сервер
     let handle = tokio::spawn(emit_telemetry());
-    // In the meantime, do some other useful work
+    // Тим часом виконуємо іншу корисну роботу
     do_work().await;
-    // But don't return to the caller until 
-    // the telemetry data has been successfully delivered
+    // Але не повертаємо керування тому, хто викликав, доки
+    // дані телеметрії не буде успішно доставлено
     handle.await;
 }
 
@@ -81,14 +81,14 @@ pub async fn do_work() {
 }
 ```
 
-### Panic boundary
+### Межа паніки
 
-If a task spawned with `tokio::spawn` panics, the panic will be caught by the executor.\
-If you don't `.await` the corresponding `JoinHandle`, the panic won't be propagated to the spawner.
-Even if you do `.await` the `JoinHandle`, the panic won't be propagated automatically.
-Awaiting a `JoinHandle` returns a `Result`, with [`JoinError`](https://docs.rs/tokio/latest/tokio/task/struct.JoinError.html)
-as its error type. You can then check if the task panicked by calling `JoinError::is_panic` and
-choose what to do with the panic—either log it, ignore it, or propagate it.
+Якщо задача, запущена через `tokio::spawn`, панікує, паніку перехоплює виконавець.\
+Якщо ви не робите `.await` для відповідного `JoinHandle`, паніка не пошириться на того, хто запустив задачу.
+Навіть якщо ви робите `.await` для `JoinHandle`, паніка не пошириться автоматично.
+Очікування `JoinHandle` повертає `Result`, у якого типом помилки є [`JoinError`](https://docs.rs/tokio/latest/tokio/task/struct.JoinError.html).
+Далі можна перевірити, чи задача запанікувала, викликавши `JoinError::is_panic`, і
+вирішити, що робити з панікою: записати її в журнал, проігнорувати чи поширити далі.
 
 ```rust
 use tokio::task::JoinError;
@@ -97,9 +97,9 @@ pub async fn run() {
     let handle = tokio::spawn(work());
     if let Err(e) = handle.await {
         if let Ok(reason) = e.try_into_panic() {
-            // The task has panicked
-            // We resume unwinding the panic,
-            // thus propagating it to the current task
+            // Задача запанікувала
+            // Відновлюємо розкручування стека (unwinding) для цієї паніки,
+            // тим самим поширюючи її на поточну задачу
             panic::resume_unwind(reason);
         }
     }
@@ -110,13 +110,13 @@ pub async fn work() {
 }
 ```
 
-### `std::thread::spawn` vs `tokio::spawn`
+### `std::thread::spawn` проти `tokio::spawn`
 
-You can think of `tokio::spawn` as the asynchronous sibling of `std::thread::spawn`.
+`tokio::spawn` можна вважати асинхронним родичем `std::thread::spawn`.
 
-Notice a key difference: with `std::thread::spawn`, you're delegating control to the OS scheduler.
-You're not in control of how threads are scheduled.
+Зверніть увагу на ключову відмінність: з `std::thread::spawn` ви делегуєте керування планувальнику ОС.
+Ви не контролюєте, як плануються потоки.
 
-With `tokio::spawn`, you're delegating to an async executor that runs entirely in
-user space. The underlying OS scheduler is not involved in the decision of which task
-to run next. We're in charge of that decision now, via the executor we chose to use.
+З `tokio::spawn` ви делегуєте керування асинхронному виконавцю, який працює повністю
+в просторі користувача (user space). Планувальник ОС не бере участі в рішенні, яку задачу
+запускати наступною. Тепер це рішення ухвалюємо ми — через виконавця, якого обрали.

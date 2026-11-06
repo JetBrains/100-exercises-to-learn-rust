@@ -1,4 +1,4 @@
-This task is to implement the `async` `fixed_reply` function. 
-Concurrently accept TCP connections on two listeners and reply with the Display representation of reply.
+У цьому завданні потрібно реалізувати `async`-функцію `fixed_reply`.
+Вона має конкурентно приймати TCP-з'єднання на двох слухачах (listeners) і відповідати клієнтам представленням значення reply, отриманим через Display.
 
-Follow the `TODO` comments in the code.
+Дотримуйтеся коментарів `TODO` у коді.

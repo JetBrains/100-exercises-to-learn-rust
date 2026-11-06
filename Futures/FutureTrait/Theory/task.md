@@ -1,8 +1,8 @@
-## The `Future` trait
+## Трейт `Future`
 
-### The local `Rc` problem
+### Проблема локального `Rc`
 
-Let's go back to `tokio::spawn`'s signature:
+Повернімося до сигнатури `tokio::spawn`:
 
 ```rust
 pub fn spawn<F>(future: F) -> JoinHandle<F::Output>
@@ -12,12 +12,12 @@ pub fn spawn<F>(future: F) -> JoinHandle<F::Output>
 { /* */ }
 ```
 
-What does it _actually_ mean for `F` to be `Send`?\
-It implies, as we saw in the previous section, that whatever value it captures from the
-spawning environment has to be `Send`. But it goes further than that.
+Що _насправді_ означає, що `F` має бути `Send`?\
+Як ми бачили в попередньому уроці, це означає, що будь-яке значення, яке future захоплює із
+середовища, де його запускають, має бути `Send`. Але цим справа не обмежується.
 
-Any value that's _held across a .await point_ has to be `Send`.\
-Let's look at an example:
+Будь-яке значення, яке _утримується під час очікування в точці .await_, має бути `Send`.\
+Розгляньмо приклад:
 
 ```rust
 use std::rc::Rc;
@@ -28,20 +28,20 @@ fn spawner() {
 }
 
 async fn example() {
-    // A value that's not `Send`,
-    // created _inside_ the async function
+    // Значення, яке не є `Send`,
+    // створене _всередині_ асинхронної функції
     let non_send = Rc::new(1);
     
-    // A `.await` point that does nothing
+    // Точка `.await`, яка нічого не робить
     yield_now().await;
 
-    // The local non-`Send` value is still needed
-    // after the `.await`
+    // Локальне значення, що не є `Send`, досі потрібне
+    // після `.await`
     println!("{}", non_send);
 }
 ```
 
-The compiler will reject this code:
+Компілятор відхилить цей код:
 
 ```text
 error: future cannot be sent between threads safely
@@ -67,25 +67,25 @@ note: required by a bound in `tokio::spawn`
     |                     ^^^^ required by this bound in `spawn`
 ```
 
-To understand why that's the case, we need to refine our understanding of
-Rust's asynchronous model.
+Щоб зрозуміти, чому так, нам потрібно уточнити своє розуміння
+асинхронної моделі Rust.
 
-## The `Future` trait
+## Трейт `Future`
 
-We stated early on that `async` functions return **futures**, types that implement
-the `Future` trait. You can think of a future as a **state machine**.
-It's in one of two states:
+Ми вже казали, що `async`-функції повертають **futures** — типи, які реалізують
+трейт `Future`. Future можна уявляти собі як **скінченний автомат** (state machine).
+Він перебуває в одному з двох станів:
 
-- **pending**: the computation has not finished yet.
-- **ready**: the computation has finished, here's the output.
+- **pending** (в очікуванні): обчислення ще не завершилося.
+- **ready** (готово): обчислення завершилося, ось результат.
 
-This is encoded in the trait definition:
+Це закодовано у визначенні трейту:
 
 ```rust
 trait Future {
     type Output;
     
-    // Ignore `Pin` and `Context` for now
+    // Поки що не зважайте на `Pin` і `Context`
     fn poll(
       self: Pin<&mut Self>, 
       cx: &mut Context<'_>
@@ -95,36 +95,36 @@ trait Future {
 
 ### `poll`
 
-The `poll` method is the heart of the `Future` trait.\
-A future on its own doesn't do anything. It needs to be **polled** to make progress.\
-When you call `poll`, you're asking the future to do some work.
-`poll` tries to make progress, and then returns one of the following:
+Метод `poll` — серце трейту `Future`.\
+Сам по собі future нічого не робить. Щоб він просувався вперед, його потрібно **опитувати** (poll).\
+Викликаючи `poll`, ви просите future виконати певну роботу.
+`poll` намагається просунутися вперед, а тоді повертає один із таких варіантів:
 
-- `Poll::Pending`: the future is not ready yet. You need to call `poll` again later.
-- `Poll::Ready(value)`: the future has finished. `value` is the result of the computation,
-  of type `Self::Output`.
+- `Poll::Pending`: future ще не готовий. Потрібно викликати `poll` знову пізніше.
+- `Poll::Ready(value)`: future завершився. `value` — результат обчислення,
+  що має тип `Self::Output`.
 
-Once `Future::poll` returns `Poll::Ready`, it should not be polled again: the future has
-completed, there's nothing left to do.
+Щойно `Future::poll` повернув `Poll::Ready`, future більше не слід опитувати: він
+завершився, робити більше нічого.
 
-### The role of the runtime
+### Роль середовища виконання
 
-You'll rarely, if ever, be calling poll directly.\
-That's the job of your async runtime: it has all the required information (the `Context`
-in `poll`'s signature) to ensure that your futures are making progress whenever they can.
+Вам рідко (якщо взагалі колись) доведеться викликати poll безпосередньо.\
+Це робота вашого асинхронного середовища виконання: воно має всю потрібну інформацію (`Context`
+у сигнатурі `poll`), щоб ваші futures просувалися вперед щоразу, коли це можливо.
 
-## `async fn` and futures
+## `async fn` і futures
 
-We've worked with the high-level interface, asynchronous functions.\
-We've now looked at the low-level primitive, the `Future trait`.
+Ми вже працювали з високорівневим інтерфейсом — асинхронними функціями.\
+А тепер розглянули низькорівневий примітив — `Future trait`.
 
-How are they related?
+Як вони пов'язані?
 
-Every time you mark a function as asynchronous, that function will return a future.
-The compiler will transform the body of your asynchronous function into a **state machine**:
-one state for each `.await` point.
+Щоразу, коли ви позначаєте функцію як асинхронну, вона повертатиме future.
+Компілятор перетворить тіло вашої асинхронної функції на **скінченний автомат**:
+по одному стану на кожну точку `.await`.
 
-Going back to our `Rc` example:
+Повернімося до нашого прикладу з `Rc`:
 
 ```rust
 use std::rc::Rc;
@@ -137,7 +137,7 @@ async fn example() {
 }
 ```
 
-The compiler would transform it into an enum that looks somewhat like this:
+Компілятор перетворив би його на перелік (enum), який виглядає приблизно так:
 
 ```rust
 pub enum ExampleFuture {
@@ -147,24 +147,24 @@ pub enum ExampleFuture {
 }
 ```
 
-When `example` is called, it returns `ExampleFuture::NotStarted`. The future has never
-been polled yet, so nothing has happened.\
-When the runtime polls it the first time, `ExampleFuture` will advance until the next
-`.await` point: it'll stop at the `ExampleFuture::YieldNow(Rc<i32>)` stage of the state
-machine, returning `Poll::Pending`.\
-When it's polled again, it'll execute the remaining code (`println!`) and
-return `Poll::Ready(())`.
+Коли викликають `example`, вона повертає `ExampleFuture::NotStarted`. Future ще жодного разу
+не опитували, тож нічого не відбулося.\
+Коли середовище виконання вперше опитає його, `ExampleFuture` просунеться до наступної
+точки `.await`: він зупиниться на стані `ExampleFuture::YieldNow(Rc<i32>)` скінченного
+автомата й поверне `Poll::Pending`.\
+Коли його опитають знову, він виконає решту коду (`println!`) і
+поверне `Poll::Ready(())`.
 
-When you look at its state machine representation, `ExampleFuture`,
-it is now clear why `example` is not `Send`: it holds an `Rc`, therefore
-it cannot be `Send`.
+Якщо подивитися на його представлення у вигляді скінченного автомата (`ExampleFuture`),
+стає зрозуміло, чому `example` не є `Send`: автомат утримує `Rc`, а отже,
+не може бути `Send`.
 
-## Yield points
+## Точки призупинення
 
-As you've just seen with `example`, every `.await` point creates a new intermediate
-state in the lifecycle of a future.\
-That's why `.await` points are also known as **yield points**: your future _yields control_
-back to the runtime that was polling it, allowing the runtime to pause it and (if necessary)
-schedule another task for execution, thus making progress on multiple fronts concurrently.
+Як ви щойно побачили на прикладі `example`, кожна точка `.await` створює новий проміжний
+стан у життєвому циклі future.\
+Тому точки `.await` також називають **точками призупинення** (yield points): ваш future _віддає керування_
+назад середовищу виконання, яке його опитувало, і те може призупинити його та (за потреби)
+запланувати до виконання іншу задачу, просуваючись таким чином на кількох фронтах конкурентно.
 
-We'll come back to the importance of yielding in a later section.
+До того, чому так важливо віддавати керування, ми повернемося в одному з наступних уроків.

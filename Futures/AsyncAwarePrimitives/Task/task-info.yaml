@@ -1,18 +1,19 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 292
+      - offset: 331
         length: 22
         placeholder_text: use std::sync::mpsc; // TODO
-      - offset: 875
+      - offset: 919
         length: 42
         placeholder_text: "if let Ok(msg) = receiver.recv() { // TODO"
-      - offset: 1029
+      - offset: 1073
         length: 1
         placeholder_text: /* TODO */
-      - offset: 1223
+      - offset: 1267
         length: 6
         placeholder_text: /* TODO */
   - name: Cargo.toml

@@ -1,3 +1,3 @@
-This task is to rewrite the provided code to use `tokio`'s asynchronous channels, replacing the `std::sync::mpsc` implementation.
+У цьому завданні потрібно переписати наданий код так, щоб він використовував асинхронні канали `tokio` замість реалізації на основі `std::sync::mpsc`.
 
-Follow the `TODO` comments in the code.
+Дотримуйтеся коментарів `TODO` у коді.

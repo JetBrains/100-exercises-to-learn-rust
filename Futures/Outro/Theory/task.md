@@ -1,35 +1,33 @@
-## Outro
+## Підсумок
 ##
 
-Rust's asynchronous model is quite powerful, but it does introduce additional
-complexity. Take time to know your tools: dive deep into `tokio`'s documentation
-and get familiar with its primitives to make the most out of it.
+Асинхронна модель Rust доволі потужна, але вона додає
+складності. Приділіть час тому, щоб як слід вивчити свої інструменти: заглибтеся в документацію `tokio`
+й ознайомтеся з його примітивами, щоб використовувати його на повну.
 
-Keep in mind, as well, that there is ongoing work at the language and `std` level
-to streamline and "complete" Rust's asynchronous story. You may experience some
-rough edges in your day-to-day work due to some of these missing pieces.
+Також пам'ятайте, що на рівні мови та `std` триває робота над тим,
+щоб спростити й «завершити» підтримку асинхронності в Rust. Оскільки деяких частин іще бракує,
+у повсякденній роботі ви можете натрапляти на певні шорсткості.
 
-A few recommendations for a mostly-pain-free async experience:
+Кілька порад, щоб робота з async була переважно безболісною:
 
-- **Pick a runtime and stick to it.**\
-  Some primitives (e.g. timers, I/O) are not portable across runtimes. Trying to
-  mix runtimes is likely to cause you pain. Trying to write code that's runtime
-  agnostic can significantly increase the complexity of your codebase. Avoid it
-  if you can.
-- **There is no stable `Stream`/`AsyncIterator` interface yet.**\
-  An `AsyncIterator` is, conceptually, an iterator that yields new items
-  asynchronously. There is ongoing design work, but no consensus (yet).
-  If you're using `tokio`, refer to [`tokio_stream`](https://docs.rs/tokio-stream/latest/tokio_stream/)
-  as your go-to interface.
-- **Be careful with buffering.**\
-  It is often the cause of subtle bugs. Check out
-  ["Barbara battles buffered streams"](https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/barbara_battles_buffered_streams.html)
-  for more details.
-- **There is no equivalent of scoped threads for asynchronous tasks**.\
-  Check out ["The scoped task trilemma"](https://without.boats/blog/the-scoped-task-trilemma/)
-  for more details.
+- **Оберіть одне середовище виконання й дотримуйтеся його.**\
+  Деякі примітиви (наприклад, таймери, введення-виведення) не переносяться між середовищами виконання.
+  Спроби змішувати середовища виконання, найімовірніше, завдадуть вам болю. Спроби писати код,
+  незалежний від середовища виконання, можуть суттєво ускладнити вашу кодову базу. Уникайте цього,
+  якщо можете.
+- **Стабільного інтерфейсу `Stream`/`AsyncIterator` поки немає.**\
+  Концептуально `AsyncIterator` — це ітератор, який видає нові елементи
+  асинхронно. Робота над його дизайном триває, але консенсусу (поки) немає.
+  Якщо ви використовуєте `tokio`, звертайтеся до [`tokio_stream`](https://docs.rs/tokio-stream/latest/tokio_stream/)
+  як до основного інтерфейсу.
+- **Будьте обережні з буферизацією.**\
+  Вона часто спричиняє малопомітні помилки. Докладніше читайте в історії
+  [«Barbara battles buffered streams»](https://rust-lang.github.io/wg-async/vision/submitted_stories/status_quo/barbara_battles_buffered_streams.html).
+- **Для асинхронних задач немає відповідника scoped-потоків**.\
+  Докладніше читайте в статті [«The scoped task trilemma»](https://without.boats/blog/the-scoped-task-trilemma/).
 
-Don't let these caveats scare you: asynchronous Rust is being used effectively
-at _massive_ scale (e.g. AWS, Meta) to power foundational services.\
-You will have to master it if you're planning building networked applications
-in Rust.
+Нехай ці застереження вас не лякають: асинхронний Rust ефективно використовують
+у _величезних_ масштабах (наприклад, в AWS і Meta) для роботи фундаментальних сервісів.\
+Вам доведеться його опанувати, якщо ви плануєте створювати мережеві застосунки
+на Rust.

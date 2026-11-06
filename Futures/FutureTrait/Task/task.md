@@ -1,2 +1,2 @@
-This task is to re-order the statements within the `example` function to fix a compilation error.
-Refer to the `TODO` comment in the code.
+У цьому завданні потрібно змінити порядок інструкцій у функції `example`, щоб виправити помилку компіляції.
+Перегляньте коментар `TODO` у коді.

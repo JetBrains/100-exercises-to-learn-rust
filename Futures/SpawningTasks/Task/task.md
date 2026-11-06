@@ -1,4 +1,4 @@
-This task is to implement an `async` **echo server** that concurrently handles TCP connections from two listeners. 
-Process multiple connections in parallel, echoing data back.
+У цьому завданні потрібно реалізувати `async` **ехо-сервер**, який конкурентно обробляє TCP-з'єднання з двох слухачів (listeners).
+Обробляйте кілька з'єднань паралельно, надсилаючи отримані дані назад.
 
-Follow the `TODO` comments in the code.
+Дотримуйтеся коментарів `TODO` у коді.

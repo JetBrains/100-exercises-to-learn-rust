@@ -1,8 +1,8 @@
 use tokio::net::TcpListener;
 
-// TODO: write an echo server that accepts TCP connections on two listeners, concurrently.
-//  Multiple connections (on the same listeners) should be processed concurrently.
-//  The received data should be echoed back to the client.
+// TODO: напишіть ехо-сервер, який конкурентно приймає TCP-з'єднання на двох слухачах (listeners).
+//  Кілька з'єднань (на тих самих слухачах) мають оброблятися конкурентно.
+//  Отримані дані слід надсилати клієнту назад.
 pub async fn echoes(first: TcpListener, second: TcpListener) -> Result<(), anyhow::Error> {
     let handle1 = tokio::spawn(echo(first));
     let handle2 = tokio::spawn(echo(second));

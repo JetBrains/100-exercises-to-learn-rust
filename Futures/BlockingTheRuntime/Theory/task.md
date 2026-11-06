@@ -1,59 +1,59 @@
-## Don't block the runtime
+## Не блокуйте середовище виконання
 
-Let's circle back to yield points.\
-Unlike threads, **Rust tasks cannot be preempted**.
+Повернімося до точок призупинення.\
+На відміну від потоків, **задачі в Rust не можна витіснити** (preempt).
 
-`tokio` cannot, on its own, decide to pause a task and run another one in its place.
-The control goes back to the executor **exclusively** when the task yields—i.e.
-when `Future::poll` returns `Poll::Pending` or, in the case of `async fn`, when
-you `.await` a future.
+`tokio` не може самостійно вирішити призупинити задачу й запустити замість неї іншу.
+Керування повертається до виконавця **лише** тоді, коли задача сама його віддає (yields), тобто
+коли `Future::poll` повертає `Poll::Pending` або, у випадку `async fn`, коли
+ви робите `.await` для future.
 
-This exposes the runtime to a risk: if a task never yields, the runtime will never
-be able to run another task. This is called **blocking the runtime**.
+Через це середовище виконання наражається на ризик: якщо задача ніколи не віддає керування,
+середовище виконання ніколи не зможе запустити іншу задачу. Це називається **блокуванням середовища виконання** (blocking the runtime).
 
-## What is blocking?
+## Що таке блокування?
 
-How long is too long? How much time can a task spend without yielding before it
-becomes a problem?  
+Скільки — це вже забагато? Скільки часу задача може працювати, не віддаючи керування, перш ніж
+це стане проблемою?  
 
-It depends on the runtime, the application, the number of in-flight tasks, and
-many other factors. But, as a general rule of thumb, try to spend less than 100
-microseconds between yield points.
+Це залежить від середовища виконання, застосунку, кількості задач, що виконуються, і
+багатьох інших чинників. Але загальне емпіричне правило таке: намагайтеся витрачати менш ніж 100
+мікросекунд між точками призупинення.
 
-## Consequences
+## Наслідки
 
-Blocking the runtime can lead to:
+Блокування середовища виконання може призвести до:
 
-- **Deadlocks**: if the task that's not yielding is waiting for another task to
-  complete, and that task is waiting for the first one to yield, you have a deadlock.
-  No progress can be made, unless the runtime is able to schedule the other task on
-  a different thread.
-- **Starvation**: other tasks might not be able to run, or might run after a long
-  delay, which can lead to poor performances (e.g. high tail latencies).
+- **Взаємних блокувань** (deadlocks): якщо задача, яка не віддає керування, чекає на завершення
+  іншої задачі, а та чекає, поки перша віддасть керування, виникає взаємне блокування.
+  Жодного поступу не буде, якщо тільки середовище виконання не зможе запланувати іншу задачу
+  в іншому потоці.
+- **Голодування** (starvation): інші задачі можуть узагалі не отримати змоги виконатися або виконатися
+  з великою затримкою, що може призвести до низької продуктивності (наприклад, високих хвостових затримок).
 
-## Blocking is not always obvious
+## Блокування не завжди очевидне
 
-Some types of operations should generally be avoided in async code, like:
+Деяких типів операцій в асинхронному коді загалом варто уникати, як-от:
 
-- Synchronous I/O. You can't predict how long it will take, and it's likely to be
-  longer than 100 microseconds.
-- Expensive CPU-bound computations.
+- Синхронного введення-виведення (I/O). Неможливо передбачити, скільки воно триватиме, і, найімовірніше,
+  це буде довше за 100 мікросекунд.
+- Ресурсоємних обчислень, що навантажують процесор (CPU-bound).
 
-The latter category is not always obvious though. For example, sorting a vector with
-a few elements is not a problem; that evaluation changes if the vector has billions
-of entries.
+Однак друга категорія не завжди очевидна. Наприклад, сортування вектора з
+кількох елементів — не проблема; але оцінка змінюється, якщо у векторі мільярди
+елементів.
 
-## How to avoid blocking
+## Як уникнути блокування
 
-OK, so how do you avoid blocking the runtime assuming you _must_ perform an operation
-that qualifies or risks qualifying as blocking?\
-You need to move the work to a different thread. You don't want to use the so-called
-runtime threads, the ones used by `tokio` to run tasks.
+Гаразд, то як уникнути блокування середовища виконання, якщо ви _мусите_ виконати операцію,
+яка є блокувальною або ризикує такою виявитися?\
+Потрібно перенести роботу в інший потік. При цьому не варто використовувати так звані
+потоки середовища виконання (runtime threads) — ті, у яких `tokio` виконує задачі.
 
-`tokio` provides a dedicated threadpool for this purpose, called the **blocking pool**.
-You can spawn a synchronous operation on the blocking pool using the
-`tokio::task::spawn_blocking` function. `spawn_blocking` returns a future that resolves
-to the result of the operation when it completes.
+Для цього `tokio` надає окремий пул потоків, який називається **блокувальним пулом** (blocking pool).
+Запустити синхронну операцію в блокувальному пулі можна за допомогою функції
+`tokio::task::spawn_blocking`. `spawn_blocking` повертає future, який після завершення операції
+дає її результат.
 
 ```rust
 use tokio::task;
@@ -64,16 +64,16 @@ fn expensive_computation() -> u64 {
 
 async fn run() {
     let handle = task::spawn_blocking(expensive_computation);
-    // Do other stuff in the meantime
+    // Тим часом робимо щось інше
     let result = handle.await.unwrap();
 }
 ```
 
-The blocking pool is long-lived. `spawn_blocking` should be faster
-than creating a new thread directly via `std::thread::spawn`
-because the cost of thread initialization is amortized over multiple calls.
+Блокувальний пул живе довго. `spawn_blocking` має працювати швидше,
+ніж безпосереднє створення нового потоку через `std::thread::spawn`,
+бо вартість ініціалізації потоку амортизується на багато викликів.
 
-## Further reading
+## Додаткові матеріали
 
-- Check out [Alice Ryhl's blog post](https://ryhl.io/blog/async-what-is-blocking/)
-  on the topic.
+- Прочитайте [допис у блозі Alice Ryhl](https://ryhl.io/blog/async-what-is-blocking/)
+  на цю тему.

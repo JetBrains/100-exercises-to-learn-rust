@@ -1,2 +1,2 @@
-This task is to resolve a deadlock issue in the `echo` server, which currently uses non-async primitives.
-Follow the `TODO` comments in the code.
+У цьому завданні потрібно усунути взаємне блокування (deadlock) у сервері `echo`, який зараз використовує неасинхронні примітиви.
+Дотримуйтеся коментарів `TODO` у коді.

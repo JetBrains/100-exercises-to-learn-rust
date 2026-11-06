@@ -1,58 +1,58 @@
-## Asynchronous functions
+## Асинхронні функції
 
-All the functions and methods you've written so far were eager.\
-Nothing happened until you invoked them. But once you did, they ran to
-completion: they did **all** their work, and then returned their output.
+Усі функції та методи, які ви досі писали, були енергійними (eager).\
+Нічого не відбувалося, доки ви їх не викликали. Але щойно ви це робили, вони виконувалися
+до кінця: робили **всю** свою роботу, а тоді повертали результат.
 
-Sometimes that's undesirable.\
-For example, if you're writing an HTTP server, there might be a lot of
-**waiting**: waiting for the request body to arrive, waiting for the
-database to respond, waiting for a downstream service to reply, etc.
+Іноді це небажано.\
+Наприклад, якщо ви пишете HTTP-сервер, у ньому може бути багато
+**очікування**: очікування, поки надійде тіло запиту, поки відповість
+база даних, поки відповість сервіс нижчого рівня (downstream service) тощо.
 
-What if you could do something else while you're waiting?\
-What if you could choose to give up midway through a computation?\
-What if you could choose to prioritise another task over the current one?
+А що, якби під час очікування ви могли робити щось інше?\
+А що, якби ви могли відмовитися від обчислення на півдорозі?\
+А що, якби ви могли надати іншій задачі вищий пріоритет, ніж поточній?
 
-That's where **asynchronous functions** come in.
+Саме тут на допомогу приходять **асинхронні функції**.
 
 ## `async fn`
 
-You use the `async` keyword to define an asynchronous function:
+Асинхронну функцію визначають за допомогою ключового слова `async`:
 
 ```rust
 use tokio::net::TcpListener;
 
-// This function is asynchronous
+// Ця функція асинхронна
 async fn bind_random() -> TcpListener {
     // [...]
 }
 ```
 
-What happens if you call `bind_random` as you would a regular function?
+Що станеться, якщо викликати `bind_random` так само, як звичайну функцію?
 
 ```rust
 fn run() {
-    // Invoke `bind_random`
+    // Викликаємо `bind_random`
     let listener = bind_random();
-    // Now what?
+    // І що тепер?
 }
 ```
 
-Nothing happens!\
-Rust doesn't start executing `bind_random` when you call it,
-not even as a background task (as you might expect based on your experience
-with other languages).
-Asynchronous functions in Rust are **lazy**: they don't do any work until you
-explicitly ask them to.
-Using Rust's terminology, we say that `bind_random` returns a **future**, a type
-that represents a computation that may complete later. They're called futures
-because they implement the `Future` trait, an interface that we'll examine in
-detail later on in this chapter.
+Нічого не станеться!\
+Rust не починає виконувати `bind_random`, коли ви її викликаєте, —
+навіть як фонову задачу (чого ви могли б очікувати з досвіду роботи
+з іншими мовами).
+Асинхронні функції в Rust **ліниві** (lazy): вони не виконують жодної роботи, доки ви
+явно не попросите їх про це.
+У термінах Rust кажуть, що `bind_random` повертає **future** — тип,
+який представляє обчислення, що може завершитися пізніше. Їх називають futures,
+бо вони реалізують трейт `Future` — інтерфейс, який ми детально розглянемо
+далі в цьому розділі.
 
 ## `.await`
 
-The most common way to ask an asynchronous function to do some work is to use
-the `.await` keyword:
+Найпоширеніший спосіб попросити асинхронну функцію виконати роботу — використати
+ключове слово `.await`:
 
 ```rust
 use tokio::net::TcpListener;
@@ -62,67 +62,67 @@ async fn bind_random() -> TcpListener {
 }
 
 async fn run() {
-    // Invoke `bind_random` and wait for it to complete
+    // Викликаємо `bind_random` і чекаємо, поки вона завершиться
     let listener = bind_random().await;
-    // Now `listener` is ready
+    // Тепер `listener` готовий
 }
 ```
 
-`.await` doesn't return control to the caller until the asynchronous function
-has run to completion—e.g. until the `TcpListener` has been created in the example above.
+`.await` не повертає керування тому, хто викликає, доки асинхронна функція
+не виконається до кінця — у прикладі вище це означає, доки не буде створено `TcpListener`.
 
-## Runtimes
+## Середовища виконання
 
-If you're puzzled, you're right to be!\
-We've just said that the perk of asynchronous functions
-is that they don't do **all** their work at once. We then introduced `.await`, which
-doesn't return until the asynchronous function has run to completion. Haven't we
-just re-introduced the problem we were trying to solve? What's the point?
+Якщо вас це спантеличило, то не дарма!\
+Ми щойно сказали, що перевага асинхронних функцій
+у тому, що вони не виконують **всю** свою роботу одразу. Потім ми познайомили вас із `.await`, який
+не повертає керування, доки асинхронна функція не виконається до кінця. Хіба ми щойно
+не повернули ту саму проблему, яку намагалися розв'язати? У чому сенс?
 
-Not quite! A lot happens behind the scenes when you call `.await`!\
-You're yielding control to an **async runtime**, also known as an **async executor**.
-Executors are where the magic happens: they are in charge of managing all your
-ongoing asynchronous **tasks**. In particular, they balance two different goals:
+Не зовсім так! Коли ви викликаєте `.await`, за лаштунками відбувається багато всього!\
+Ви передаєте керування **асинхронному середовищу виконання** (async runtime), яке також називають **асинхронним виконавцем** (async executor).
+Саме у виконавцях і відбувається вся магія: вони керують усіма вашими
+поточними асинхронними **задачами** (tasks). Зокрема, вони шукають баланс між двома різними цілями:
 
-- **Progress**: they make sure that tasks make progress whenever they can.
-- **Efficiency**: if a task is waiting for something, they try to make sure that
-  another task can run in the meantime, fully utilising the available resources.
+- **Поступ** (progress): вони стежать, щоб задачі просувалися вперед, щойно це можливо.
+- **Ефективність** (efficiency): якщо задача на щось чекає, вони намагаються зробити так, щоб
+  тим часом могла виконуватися інша задача, повністю використовуючи наявні ресурси.
 
-### No default runtime
+### Немає середовища виконання за замовчуванням
 
-Rust is fairly unique in its approach to asynchronous programing: there is
-no default runtime. The standard library doesn't ship with one. You need to
-bring your own!
+Підхід Rust до асинхронного програмування доволі унікальний: тут
+немає середовища виконання за замовчуванням. Стандартна бібліотека його не містить. Його потрібно
+підключити самостійно!
 
-In most cases, you'll choose one of the options available in the ecosystem.
-Some runtimes are designed to be broadly applicable, a solid option for most applications.
-`tokio` and `async-std` belong to this category. Other runtimes are optimised for
-specific use cases—e.g. `embassy` for embedded systems.
+Здебільшого ви обиратимете один із варіантів, доступних в екосистемі.
+Деякі середовища виконання розроблено для широкого застосування — це надійний вибір для більшості застосунків.
+До цієї категорії належать `tokio` та `async-std`. Інші середовища виконання оптимізовано для
+конкретних сценаріїв — наприклад, `embassy` для вбудованих систем.
 
-Throughout this course we'll rely on `tokio`, the most popular runtime for general-purpose
-asynchronous programming in Rust.
+У цьому курсі ми використовуватимемо `tokio` — найпопулярніше середовище виконання
+для асинхронного програмування загального призначення в Rust.
 
 ### `#[tokio::main]`
 
-The entrypoint of your executable, the `main` function, must be a synchronous function.
-That's where you're supposed to set up and launch your chosen async runtime.
+Точка входу вашого виконуваного файлу, функція `main`, має бути синхронною.
+Саме в ній потрібно налаштувати й запустити обране асинхронне середовище виконання.
 
-Most runtimes provide a macro to make this easier. For `tokio`, it's `tokio::main`:
+Більшість середовищ виконання надають макрос, який це спрощує. У `tokio` це `tokio::main`:
 
 ```rust
 #[tokio::main]
 async fn main() {
-    // Your async code goes here
+    // Тут ваш асинхронний код
 }
 ```
 
-which expands to:
+який розгортається в такий код:
 
 ```rust
 fn main() {
     let rt = tokio::runtime::Runtime::new().unwrap();
     rt.block_on(
-        // Your async function goes here
+        // Тут ваша асинхронна функція
         // [...]
     );
 }
@@ -130,15 +130,15 @@ fn main() {
 
 ### `#[tokio::test]`
 
-The same goes for tests: they must be synchronous functions.\
-Each test function is run in its own thread, and you're responsible for
-setting up and launching an async runtime if you need to run async code
-in your tests.\
-`tokio` provides a `#[tokio::test]` macro to make this easier:
+Те саме стосується тестів: вони мають бути синхронними функціями.\
+Кожна тестова функція виконується у власному потоці, і якщо вам потрібно запускати
+в тестах асинхронний код, налаштувати й запустити асинхронне середовище виконання
+маєте ви самі.\
+`tokio` надає макрос `#[tokio::test]`, який це спрощує:
 
 ```rust
 #[tokio::test]
 async fn my_test() {
-    // Your async test code goes here
+    // Тут код вашого асинхронного тесту
 }
 ```

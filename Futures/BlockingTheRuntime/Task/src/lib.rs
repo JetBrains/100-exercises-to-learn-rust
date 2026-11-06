@@ -1,7 +1,7 @@
-// TODO: the `echo` server uses non-async primitives.
-//  When running the tests, you should observe that it hangs, due to a
-//  deadlock between the caller and the server.
-//  Use `spawn_blocking` inside `echo` to resolve the issue.
+// TODO: сервер `echo` використовує неасинхронні примітиви.
+//  Запустивши тести, ви побачите, що він зависає через
+//  взаємне блокування (deadlock) між тим, хто викликає, і сервером.
+//  Використайте `spawn_blocking` всередині `echo`, щоб розв'язати проблему.
 use std::io::{Read, Write};
 use tokio::net::TcpListener;
 use tokio::task::spawn_blocking;

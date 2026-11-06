@@ -1,17 +1,17 @@
-## Async Rust
+## Асинхронний Rust
 ##
-Threads are not the only way to write concurrent programs in Rust.\
-In this chapter we'll explore another approach: **asynchronous programming**.
+Потоки — не єдиний спосіб писати конкурентні програми на Rust.\
+У цьому розділі ми розглянемо інший підхід — **асинхронне програмування**.
 
-In particular, you'll get an introduction to:
+Зокрема, ви ознайомитеся з:
 
-- The `async`/`.await` keywords, to write asynchronous code effortlessly
-- The `Future` trait, to represent computations that may not be complete yet
-- `tokio`, the most popular runtime for running asynchronous code
-- The cooperative nature of Rust asynchronous model, and how this affects your code
+- ключовими словами `async`/`.await`, які дають змогу без зусиль писати асинхронний код;
+- трейтом `Future`, що представляє обчислення, які, можливо, ще не завершилися;
+- `tokio` — найпопулярнішим середовищем виконання (runtime) для запуску асинхронного коду;
+- кооперативною природою асинхронної моделі Rust і тим, як вона впливає на ваш код.
 
 <br/>
 
-## Task
-Introduction task is to complete the `intro` function.
-The function should return the string: ***I'm ready to learn about futures!***
+## Завдання
+У цьому вступному завданні потрібно доповнити функцію `intro`.
+Функція має повернути рядок: ***I'm ready to learn about futures!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

@@ -1,4 +1,5 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
@@ -7,7 +8,7 @@ files:
   - name: tests/tests.rs
     visible: true
     placeholders:
-      - offset: 1295
+      - offset: 1284
         length: 33
         placeholder_text: "assert_eq!(buffered, \"\"); // TODO"
     propagatable: false

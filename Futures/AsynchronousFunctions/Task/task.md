@@ -1,3 +1,3 @@
-This task is to implement an `async` **echo server** using `tokio`. Server should continuously accept TCP connections and echo data back.
+У цьому завданні потрібно реалізувати `async` **ехо-сервер** (echo server) за допомогою `tokio`. Сервер має безперервно приймати TCP-з'єднання й надсилати отримані дані назад.
 
-Follow the `TODO` comments in the code and hints.
+Дотримуйтеся коментарів `TODO` у коді та підказок.

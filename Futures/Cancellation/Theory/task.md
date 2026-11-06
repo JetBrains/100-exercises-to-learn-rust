@@ -1,11 +1,11 @@
-## Cancellation
+## Скасування
 
-What happens when a pending future is dropped?\
-The runtime will no longer poll it, therefore it won't make any further progress.
-In other words, its execution has been **cancelled**.
+Що відбувається, коли незавершений future знищують (drop)?\
+Середовище виконання більше не опитуватиме його, тож він уже не просуватиметься вперед.
+Іншими словами, його виконання **скасовано**.
 
-In the wild, this often happens when working with timeouts.
-For example:
+На практиці це часто трапляється під час роботи з тайм-аутами.
+Наприклад:
 
 ```rust
 use tokio::time::timeout;
@@ -17,7 +17,7 @@ async fn http_call() {
 }
 
 async fn run() {
-    // Wrap the future with a `Timeout` set to expire in 10 milliseconds.
+    // Обгортаємо future у `Timeout`, який спливає через 10 мілісекунд.
     let duration = Duration::from_millis(10);
     if let Err(_) = timeout(duration, http_call()).await {
         println!("Didn't receive a value within 10 ms");
@@ -25,8 +25,8 @@ async fn run() {
 }
 ```
 
-When the timeout expires, the future returned by `http_call` will be cancelled.
-Let's imagine that this is `http_call`'s body:
+Коли тайм-аут спливе, future, який повернула `http_call`, буде скасовано.
+Уявімо, що тіло `http_call` таке:
 
 ```rust
 use std::net::TcpStream;
@@ -38,23 +38,23 @@ async fn http_call() {
 }
 ```
 
-Each yield point becomes a **cancellation point**.\
-`http_call` can't be preempted by the runtime, so it can only be discarded after
-it has yielded control back to the executor via `.await`.
-This applies recursively—e.g. `stream.write_all(&request)` is likely to have multiple
-yield points in its implementation. It is perfectly possible to see `http_call` pushing
-a _partial_ request before being cancelled, thus dropping the connection and never
-finishing transmitting the body.
+Кожна точка призупинення стає **точкою скасування** (cancellation point).\
+Середовище виконання не може витіснити `http_call`, тож її можна відкинути лише після того,
+як вона віддала керування виконавцю через `.await`.
+Це працює рекурсивно: наприклад, `stream.write_all(&request)`, найімовірніше, має у своїй
+реалізації кілька точок призупинення. Цілком можливо, що `http_call` надішле
+_частину_ запиту, перш ніж її буде скасовано, — тоді з'єднання буде розірвано, а тіло
+запиту так і не буде передано до кінця.
 
-## Clean up
+## Очищення
 
-Rust's cancellation mechanism is quite powerful—it allows the caller to cancel an ongoing task
-without needing any form of cooperation from the task itself.\
-At the same time, this can be quite dangerous. It may be desirable to perform a
-**graceful cancellation**, to ensure that some clean-up tasks are performed
-before aborting the operation.
+Механізм скасування в Rust доволі потужний: він дає змогу тому, хто викликає, скасувати задачу, що вже виконується,
+без жодної співпраці з боку самої задачі.\
+Водночас це може бути доволі небезпечно. Іноді бажано виконати
+**плавне скасування** (graceful cancellation), щоб гарантувати, що перед перериванням операції
+буде виконано певні дії з очищення.
 
-For example, consider this fictional API for a SQL transaction:
+Наприклад, розгляньмо такий вигаданий API для SQL-транзакції:
 
 ```rust
 async fn transfer_money(
@@ -70,40 +70,40 @@ async fn transfer_money(
 }
 ```
 
-On cancellation, it'd be ideal to explicitly abort the pending transaction rather
-than leaving it hanging.
-Rust, unfortunately, doesn't provide a bullet-proof mechanism for this kind of
-**asynchronous** clean up operations.
+У разі скасування ідеально було б явно перервати незавершену транзакцію, а не
+залишати її «висіти».
+На жаль, Rust не надає цілком надійного механізму для такого роду
+**асинхронних** операцій очищення.
 
-The most common strategy is to rely on the `Drop` trait to schedule the required
-clean-up work. This can be by:
+Найпоширеніша стратегія — покластися на трейт `Drop`, щоб запланувати потрібну
+роботу з очищення. Для цього можна:
 
-- Spawning a new task on the runtime
-- Enqueueing a message on a channel
-- Spawning a background thread
+- запустити нову задачу в середовищі виконання;
+- поставити повідомлення в чергу каналу;
+- запустити фоновий потік.
 
-The optimal choice is contextual.
+Оптимальний вибір залежить від контексту.
 
-## Cancelling spawned tasks
+## Скасування запущених задач
 
-When you spawn a task using `tokio::spawn`, you can no longer drop it;
-it belongs to the runtime.\
-Nonetheless, you can use its `JoinHandle` to cancel it if needed:
+Коли ви запускаєте задачу за допомогою `tokio::spawn`, ви вже не можете її знищити (drop):
+вона належить середовищу виконання.\
+Проте за потреби її можна скасувати через відповідний `JoinHandle`:
 
 ```rust
 async fn run() {
-    let handle = tokio::spawn(/* some async task */);
-    // Cancel the spawned task
+    let handle = tokio::spawn(/* якась асинхронна задача */);
+    // Скасовуємо запущену задачу
     handle.abort();
 }
 ```
 
-## Further reading
+## Додаткові матеріали
 
-- Be extremely careful when using `tokio`'s `select!` macro to "race" two different futures.
-  Retrying the same task in a loop is dangerous unless you can ensure **cancellation safety**.
-  Check out [`select!`'s documentation](https://tokio.rs/tokio/tutorial/select) for more details.\
-  If you need to interleave two asynchronous streams of data (e.g. a socket and a channel), prefer using
-  [`StreamExt::merge`](https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html#method.merge) instead.
-- A [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) may be
-  preferable to `JoinHandle::abort` in some cases.
+- Будьте вкрай обережні, коли використовуєте макрос `select!` з `tokio`, щоб влаштувати «перегони» (race) між двома різними futures.
+  Повторювати ту саму задачу в циклі небезпечно, якщо ви не можете гарантувати **безпечність скасування** (cancellation safety).
+  Докладніше читайте в [документації `select!`](https://tokio.rs/tokio/tutorial/select).\
+  Якщо вам потрібно чергувати елементи двох асинхронних потоків даних (streams), наприклад сокета й каналу, натомість краще використати
+  [`StreamExt::merge`](https://docs.rs/tokio-stream/latest/tokio_stream/trait.StreamExt.html#method.merge).
+- У деяких випадках [`CancellationToken`](https://docs.rs/tokio-util/latest/tokio_util/sync/struct.CancellationToken.html) може
+  бути кращим вибором, ніж `JoinHandle::abort`.
