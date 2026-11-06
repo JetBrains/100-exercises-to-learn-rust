@@ -1,2 +1,2 @@
-This task is to re-implement the `Ticket::assigned_to` method. 
-Check `TODO` comment in the code.
+У цьому завданні потрібно заново реалізувати метод `Ticket::assigned_to`.
+Перегляньте коментар `TODO` у коді.

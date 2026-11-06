@@ -1,4 +1,4 @@
-This task has two main parts, both described in the `TODO` comments:
+Це завдання складається з двох основних частин, обидві описано в коментарях `TODO`:
 
-- Implement the `Debug`, `Display`, and `Error` traits for the `TicketNewError` `enum`. You'll use the `write!` macro for `Display`.
-- Implement the `easy_ticket` function. It should panic on invalid titles (using the `TicketNewError` message) but use a default description for invalid descriptions.
+- Реалізуйте трейти `Debug`, `Display` і `Error` для переліку `TicketNewError` (`enum`). Для `Display` знадобиться макрос `write!`.
+- Реалізуйте функцію `easy_ticket`. Вона має панікувати, якщо заголовок некоректний (з повідомленням, яке зберігає `TicketNewError`), а якщо некоректний опис — використовувати опис за замовчуванням.

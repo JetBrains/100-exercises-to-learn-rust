@@ -1,6 +1,6 @@
-// TODO: Implement `TryFrom<String>` and `TryFrom<&str>` for the `TicketTitle` type,
-//   enforcing that the title is not empty and is not longer than 50 bytes.
-//   Implement the traits required to make the tests pass too.
+// TODO: реалізуйте `TryFrom<String>` і `TryFrom<&str>` для типу `TicketTitle`,
+//   гарантуючи, що заголовок не порожній і не довший за 50 байтів.
+//   Також реалізуйте трейти, потрібні для проходження тестів.
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct TicketTitle(String);

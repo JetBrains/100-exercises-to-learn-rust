@@ -1,6 +1,6 @@
-// TODO: Implement `Ticket::assigned_to`.
-//  Return the name of the person assigned to the ticket, if the ticket is in progress.
-//  Panic otherwise.
+// TODO: реалізуйте `Ticket::assigned_to`.
+//  Якщо тікет у роботі, поверніть ім'я людини, якій його призначено.
+//  В іншому разі метод має панікувати.
 
 #[derive(Debug, PartialEq)]
 pub struct Ticket {

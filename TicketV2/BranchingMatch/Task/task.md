@@ -1,2 +1,2 @@
-This task is to implement the `n_sides` method for the `Shape` enum. 
-As instructed by the `TODO` comment in the code, you must use a `match` expression to return the correct number of sides for each `Shape` variant.
+У цьому завданні потрібно реалізувати метод `n_sides` для переліку `Shape`.
+Як зазначено в коментарі `TODO` у коді, використайте вираз `match`, щоб повертати правильну кількість сторін для кожного варіанта `Shape`.

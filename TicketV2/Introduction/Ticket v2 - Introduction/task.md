@@ -1,22 +1,22 @@
-## Modelling A Ticket, pt. 2
+## Моделюємо тікет, ч. 2
 ##
 
-The `Ticket` struct we worked on in the previous chapters is a good start,
-but it still screams "I'm a beginner Rustacean!".
+Структура `Ticket`, над якою ми працювали в попередніх розділах, — непоганий початок,
+але вона досі аж кричить: «Мене написав новачок у Rust!»
 
-We'll use this chapter to refine our Rust domain modelling skills.
-We'll need to introduce a few more concepts along the way:
+У цьому розділі ми відшліфуємо навички моделювання предметної області на Rust.
+Дорогою нам знадобиться ще кілька нових понять:
 
-- `enum`s, one of Rust's most powerful features for data modeling
-- The `Option` type, to model nullable values
-- The `Result` type, to model recoverable errors
-- The `Debug` and `Display` traits, for printing
-- The `Error` trait, to mark error types
-- The `TryFrom` and `TryInto` traits, for fallible conversions
-- Rust's package system, explaining what's a library, what's a binary, how to use third-party crates
+- `enum` (переліки) — одна з найпотужніших можливостей Rust для моделювання даних;
+- тип `Option` — для моделювання значень, яких може не бути;
+- тип `Result` — для моделювання відновлюваних помилок;
+- трейти `Debug` і `Display` — для виведення значень;
+- трейт `Error` — щоб позначати типи помилок;
+- трейти `TryFrom` і `TryInto` — для перетворень, які можуть завершитися невдачею;
+- система пакетів Rust: що таке бібліотека, що таке бінарний крейт і як використовувати сторонні крейти.
 
 <br/>
 
-## Task
-Introduction task is to complete the `intro` function.
-The function should return the string: ***I'm ready to refine the `Ticket` type!***
+## Завдання
+У цьому вступному завданні потрібно доповнити функцію `intro`.
+Функція має повернути рядок: ***I'm ready to refine the `Ticket` type!*** (Рядок лишаємо англійською — саме його перевіряє тест.)

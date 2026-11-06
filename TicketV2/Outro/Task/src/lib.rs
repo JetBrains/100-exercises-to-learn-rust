@@ -1,26 +1,26 @@
-// TODO: you have something to do in each of the modules in this crate!
+// TODO: у кожному з модулів цього крейта на вас чекає робота!
 mod description;
 mod status;
 mod title;
 
-// A common pattern in Rust is to split code into multiple (private) modules
-// and then re-export the public parts of those modules at the root of the crate.
+// Поширений патерн у Rust — розбити код на кілька (приватних) модулів,
+// а потім реекспортувати публічні частини цих модулів у корені крейта.
 //
-// This hides the internal structure of the crate from your users, while still
-// allowing you to organize your code however you like.
+// Так внутрішня структура крейта прихована від його користувачів, а ви водночас
+// можете організувати свій код як завгодно.
 pub use description::TicketDescription;
 pub use status::Status;
 pub use title::TicketTitle;
 
 #[derive(Debug, PartialEq, Clone)]
-// We no longer need to make the fields private!
-// Since each field encapsulates its own validation logic, there is no risk of
-// a user of `Ticket` modifying the fields in a way that would break the
-// invariants of the struct.
+// Нам більше не потрібно робити поля приватними!
+// Оскільки кожне поле інкапсулює власну логіку валідації, немає ризику, що
+// користувач `Ticket` змінить поля так, що це порушить
+// інваріанти структури.
 //
-// Careful though: if you had any invariants that spanned multiple fields, you
-// would need to ensure that those invariants are still maintained and go back
-// to making the fields private.
+// Але будьте обережні: якби у вас були інваріанти, що охоплюють кілька полів,
+// вам довелося б подбати про те, щоб ці інваріанти й далі виконувалися, і знову
+// зробити поля приватними.
 pub struct Ticket {
     pub title: TicketTitle,
     pub description: TicketDescription,

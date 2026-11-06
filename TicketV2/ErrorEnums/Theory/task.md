@@ -1,19 +1,19 @@
-## Error enums
+## Переліки помилок
 
-Your solution to the previous exercise may have felt awkward: matching on strings is not ideal!\
-A colleague might rework the error messages returned by `Ticket::new` (e.g. to improve readability) and,
-all of a sudden, your calling code would break.
+Можливо, ваш розв'язок попередньої вправи здався вам незграбним: зіставляти рядки — не найкраща ідея!\
+Колега може переписати повідомлення про помилки, які повертає `Ticket::new` (наприклад, щоб їх було легше читати), —
+і раптом ваш код, що викликає цю функцію, зламається.
 
-You already know the machinery required to fix this: enums!
+Ви вже знаєте інструмент, який допоможе це виправити: переліки!
 
-## Reacting to errors
+## Реагування на помилки
 
-When you want to allow the caller to behave differently based on the specific error that occurred, you can
-use an enum to represent the different error cases:
+Якщо ви хочете, щоб код, який викликає функцію, міг поводитися по-різному залежно від того, яка саме помилка сталася,
+можна представити різні випадки помилок переліком:
 
 ```rust
-// An error enum to represent the different error cases
-// that may occur when parsing a `u32` from a string.
+// Перелік помилок, що представляє різні випадки помилок,
+// які можуть виникнути під час розбору `u32` з рядка.
 enum U32ParseError {
     NotANumber,
     TooLarge,
@@ -21,10 +21,10 @@ enum U32ParseError {
 }
 ```
 
-Using an error enum, you're encoding the different error cases in the type system—they become part of the
-signature of the fallible function.\
-This simplifies error handling for the caller, as they can use a `match` expression to react to the different
-error cases:
+Використовуючи перелік помилок, ви кодуєте різні випадки помилок у системі типів — вони стають частиною
+сигнатури функції, яка може завершитися невдачею.\
+Це спрощує обробку помилок для коду, що викликає функцію: він може використати вираз `match`, щоб окремо
+реагувати на кожен випадок помилки:
 
 ```rust
 match s.parse_u32() {

@@ -1,8 +1,8 @@
-// TODO: Add `anyhow` as a dependency of this project.
-//  Don't touch this import!
+// TODO: додайте `anyhow` як залежність цього проєкту.
+//  Не змінюйте цей імпорт!
 
-// When you import a type (`Error`) from a dependency, the import path must start
-// with the crate name (`anyhow`, in this case).
+// Коли ви імпортуєте тип (`Error`) із залежності, шлях імпорту має починатися
+// з назви крейта (у цьому випадку — `anyhow`).
 use anyhow::Error;
 
 fn main() {}

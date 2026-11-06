@@ -1,38 +1,38 @@
-## Error trait
+## Трейт Error
 
-### Error reporting
+### Звітування про помилки
 
-In the previous exercise you had to destructure the `TitleError` variant to extract the error message and
-pass it to the `panic!` macro.\
-This is a (rudimentary) example of **error reporting**: transforming an error type into a representation that can be
-shown to a user, a service operator, or a developer.
+У попередній вправі вам довелося деструктурувати варіант `TitleError`, щоб дістати повідомлення про помилку й
+передати його макросу `panic!`.\
+Це (примітивний) приклад **звітування про помилки** (error reporting): перетворення типу помилки на подання, яке можна
+показати користувачеві, операторові сервісу чи розробникові.
 
-It's not practical for each Rust developer to come up with their own error reporting strategy: it'd be a waste of time
-and it wouldn't compose well across projects.
-That's why Rust provides the `std::error::Error` trait.
+Було б непрактично, якби кожен розробник на Rust вигадував власну стратегію звітування про помилки: це було б марнуванням часу,
+до того ж такі рішення з різних проєктів погано поєднувалися б між собою.
+Тому Rust надає трейт `std::error::Error`.
 
-### The `Error` trait
+### Трейт `Error`
 
-There are no constraints on the type of the `Err` variant in a `Result`, but it's a good practice to use a type
-that implements the `Error` trait.
-`Error` is the cornerstone of Rust's error handling story:
+На тип варіанта `Err` у `Result` немає жодних обмежень, але доброю практикою вважається використовувати тип,
+який реалізує трейт `Error`.
+`Error` — наріжний камінь обробки помилок у Rust:
 
 ```rust
-// Slightly simplified definition of the `Error` trait
+// Трохи спрощене визначення трейту `Error`
 pub trait Error: Debug + Display {}
 ```
 
-You might recall the `:` syntax from [the `From` trait](../../../Traits/FromTrait/Theory/task.md#supertrait--subtrait)—it's used to specify **supertraits**.
-For `Error`, there are two supertraits: `Debug` and `Display`. If a type wants to implement `Error`, it must also
-implement `Debug` and `Display`.
+Можливо, ви пам'ятаєте синтаксис `:` з уроку про [трейт `From`](../../../Traits/FromTrait/Theory/task.md#supertrait--subtrait): так задають **супертрейти** (supertraits).
+У `Error` два супертрейти: `Debug` і `Display`. Якщо тип хоче реалізувати `Error`, він також має
+реалізувати `Debug` і `Display`.
 
-### `Display` and `Debug`
+### `Display` і `Debug`
 
-We've already encountered the `Debug` trait in [a previous lesson](../../../Traits/DeriveMacros/Theory/task.md)—it's the trait used by
-`assert_eq!` to display the values of the variables it's comparing when the assertion fails.
+Ми вже зустрічали трейт `Debug` в [одному з попередніх уроків](../../../Traits/DeriveMacros/Theory/task.md): саме його використовує
+`assert_eq!`, щоб показати значення порівнюваних змінних, коли перевірка не проходить.
 
-From a "mechanical" perspective, `Display` and `Debug` are identical—they encode how a type should be converted
-into a string-like representation:
+З «механічного» погляду `Display` і `Debug` однакові: вони визначають, як тип перетворюється
+на рядкове подання:
 
 ```rust
 // `Debug`
@@ -46,7 +46,7 @@ pub trait Display {
 }
 ```
 
-The difference is in their _purpose_: `Display` returns a representation that's meant for "end-users",
-while `Debug` provides a low-level representation that's more suitable to developers and service operators.\
-That's why `Debug` can be automatically implemented using the `#[derive(Debug)]` attribute, while `Display`
-**requires** a manual implementation.
+Різниця в їхньому _призначенні_: `Display` повертає подання, розраховане на «кінцевих користувачів»,
+а `Debug` дає низькорівневе подання, яке більше підходить розробникам та операторам сервісів.\
+Саме тому `Debug` можна реалізувати автоматично за допомогою атрибута `#[derive(Debug)]`, тоді як `Display`
+**потребує** ручної реалізації.

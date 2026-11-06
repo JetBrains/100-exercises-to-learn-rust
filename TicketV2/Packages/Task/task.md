@@ -1,2 +1,2 @@
-This task requires you to fix a broken import in the `main.rs` file. 
-As guided by the `TODO` comment in the code.
+У цьому завданні потрібно виправити зламаний імпорт у файлі `main.rs`.
+Дотримуйтеся вказівок у коментарі `TODO` у коді.

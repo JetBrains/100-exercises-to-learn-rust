@@ -1,5 +1,5 @@
-// TODO: `easy_ticket` should panic when the title is invalid.
-//   When the description is invalid, instead, it should use a default description:
+// TODO: `easy_ticket` має панікувати, якщо заголовок некоректний.
+//   Якщо ж некоректний опис, функція має використати опис за замовчуванням:
 //   "Description not provided".
 
 pub fn easy_ticket(title: String, description: String, status: Status) -> Ticket {

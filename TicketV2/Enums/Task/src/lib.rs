@@ -1,9 +1,9 @@
-// TODO: use `Status` as type for `Ticket::status`
-//   Adjust the signature and implementation of all other methods as necessary.
+// TODO: використайте `Status` як тип для `Ticket::status`
+//   За потреби змініть сигнатуру й реалізацію всіх інших методів.
 
 #[derive(Debug, PartialEq)]
-// `derive`s are recursive: it can only derive `PartialEq` if all fields also implement `PartialEq`.
-// Same holds for `Debug`. Do what you must with `Status` to make this work.
+// `derive` працює рекурсивно: він може згенерувати `PartialEq`, лише якщо всі поля теж реалізують `PartialEq`.
+// Те саме стосується `Debug`. Зробіть із `Status` усе потрібне, щоб це запрацювало.
 pub struct Ticket {
     title: String,
     description: String,

@@ -1,15 +1,15 @@
-## `TryFrom` and `TryInto`
+## `TryFrom` і `TryInto`
 
-In the previous chapter we looked at the [`From` and `Into` traits](../../../Traits/FromTrait/Theory/task.md),
-Rust's idiomatic interfaces for **infallible** type conversions.\
-But what if the conversion is not guaranteed to succeed?
+У попередньому розділі ми розглянули [трейти `From` і `Into`](../../../Traits/FromTrait/Theory/task.md) —
+ідіоматичні інтерфейси Rust для перетворень типів, які **не можуть завершитися невдачею** (infallible).\
+Але що, як успіх перетворення не гарантовано?
 
-We now know enough about errors to discuss the **fallible** counterparts of `From` and `Into`:
-`TryFrom` and `TryInto`.
+Тепер ми знаємо про помилки достатньо, щоб обговорити аналоги `From` і `Into` для перетворень, які **можуть завершитися невдачею** (fallible):
+`TryFrom` і `TryInto`.
 
-### `TryFrom` and `TryInto`
+### `TryFrom` і `TryInto`
 
-Both `TryFrom` and `TryInto` are defined in the `std::convert` module, just like `From` and `Into`.
+І `TryFrom`, і `TryInto` оголошено в модулі `std::convert`, так само як `From` і `Into`.
 
 ```rust
 pub trait TryFrom<T>: Sized {
@@ -23,18 +23,18 @@ pub trait TryInto<T>: Sized {
 }
 ```
 
-The main difference between `From`/`Into` and `TryFrom`/`TryInto` is that the latter return a `Result` type.\
-This allows the conversion to fail, returning an error instead of panicking.
+Головна відмінність між `From`/`Into` і `TryFrom`/`TryInto` полягає в тому, що останні повертають тип `Result`.\
+Завдяки цьому перетворення може завершитися невдачею й повернути помилку замість паніки.
 
 ## `Self::Error`
 
-Both `TryFrom` and `TryInto` have an associated `Error` type.
-This allows each implementation to specify its own error type, ideally the most appropriate for the conversion
-being attempted.
+І `TryFrom`, і `TryInto` мають асоційований тип `Error`.
+Це дає змогу кожній реалізації задати власний тип помилки — в ідеалі той, що найкраще підходить для конкретного
+перетворення.
 
-`Self::Error` is a way to refer to the `Error` associated type defined in the trait itself.
+`Self::Error` — це спосіб звернутися до асоційованого типу `Error`, оголошеного в самому трейті.
 
-## Duality
+## Двоїстість
 
-Just like `From` and `Into`, `TryFrom` and `TryInto` are dual traits.\
-If you implement `TryFrom` for a type, you get `TryInto` for free.
+Як і `From` та `Into`, `TryFrom` і `TryInto` — двоїсті трейти.\
+Якщо ви реалізуєте `TryFrom` для типу, `TryInto` отримуєте безкоштовно.

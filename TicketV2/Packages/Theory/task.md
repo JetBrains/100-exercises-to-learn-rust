@@ -1,48 +1,48 @@
-## Libraries and binaries
+## Бібліотеки та бінарні крейти
 
-It took a bit of code to implement the `Error` trait for `TicketNewError`, didn't it?\
-A manual `Display` implementation, plus an `Error` impl block.
+Щоб реалізувати трейт `Error` для `TicketNewError`, знадобилося чимало коду, правда?\
+Ручна реалізація `Display`, а на додачу ще й блок реалізації `Error`.
 
-We can remove some of the boilerplate by using [`thiserror`](https://docs.rs/thiserror/latest/thiserror/),
-a Rust crate that provides a **procedural macro** to simplify the creation of custom error types.\
-But we're getting ahead of ourselves: `thiserror` is a third-party crate, it'd be our first dependency!
+Частину цього шаблонного коду (boilerplate) можна прибрати за допомогою [`thiserror`](https://docs.rs/thiserror/latest/thiserror/) —
+крейта Rust, що надає **процедурний макрос** для спрощеного створення власних типів помилок.\
+Але ми забігаємо наперед: `thiserror` — сторонній крейт, і це була б наша перша залежність!
 
-Let's take a step back to talk about Rust's packaging system before we dive into dependencies.
+Тож зробімо крок назад і, перш ніж занурюватися в залежності, поговорімо про систему пакетів Rust.
 
-## What is a package?
+## Що таке пакет?
 
-A Rust package is defined by the `[package]` section in a `Cargo.toml` file, also known as its **manifest**.
-Within `[package]` you can set the package's metadata, such as its name and version.
+Пакет Rust визначають у розділі `[package]` файлу `Cargo.toml`, який також називають **маніфестом** пакета.
+У `[package]` можна задати метадані пакета, як-от його назву та версію.
 
-Go check the `Cargo.toml` file in the directory of this section's exercise!
+Зазирніть у файл `Cargo.toml` у теці завдання цього уроку!
 
-## What is a crate?
+## Що таке крейт?
 
-Inside a package, you can have one or more **crates**, also known as **targets**.\
-The two most common crate types are **binary crates** and **library crates**.
+Пакет може містити один або кілька **крейтів** (crates), які також називають **цілями** (targets).\
+Два найпоширеніші типи крейтів — **бінарні крейти** та **бібліотечні крейти**.
 
-### Binaries
+### Бінарні крейти
 
-A binary is a program that can be compiled to an **executable file**.\
-It must include a function named `main`—the program's entry point. `main` is invoked when the program is executed.
+Бінарний крейт — це програма, яку можна скомпілювати у **виконуваний файл**.\
+Він має містити функцію з назвою `main` — точку входу програми. `main` викликається, коли програму запускають.
 
-### Libraries
+### Бібліотеки
 
-Libraries, on the other hand, are not executable on their own. You can't _run_ a library,
-but you can _import its code_ from another package that depends on it.\
-A library groups together code (i.e. functions, types, etc.) that can be leveraged by other packages as a **dependency**.
+Бібліотеки, навпаки, самі по собі не виконуються. Бібліотеку не можна _запустити_,
+але можна _імпортувати її код_ в іншому пакеті, який від неї залежить.\
+Бібліотека об'єднує код (тобто функції, типи тощо), який інші пакети можуть використовувати як **залежність**.
 
-All the exercises you've solved so far have been structured as libraries, with a test suite attached to them.
+Усі вправи, які ви досі розв'язували, були побудовані як бібліотеки з набором тестів.
 
-### Conventions
+### Домовленості
 
-There are some conventions around Rust packages that you need to keep in mind:
+Щодо пакетів Rust є кілька домовленостей, про які варто пам'ятати:
 
-- The package's source code is usually located in the `src` directory.
-- If there's a `src/lib.rs` file, `cargo` will infer that the package contains a library crate.
-- If there's a `src/main.rs` file, `cargo` will infer that the package contains a binary crate.
+- Вихідний код пакета зазвичай розташований у теці `src`.
+- Якщо є файл `src/lib.rs`, `cargo` вважатиме, що пакет містить бібліотечний крейт.
+- Якщо є файл `src/main.rs`, `cargo` вважатиме, що пакет містить бінарний крейт.
 
-You can override these defaults by explicitly declaring your targets in the `Cargo.toml` file—see
-[`cargo`'s documentation](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#cargo-targets) for more details.
+Ці типові налаштування можна змінити, явно оголосивши цілі у файлі `Cargo.toml`; докладніше читайте в
+[документації `cargo`](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#cargo-targets).
 
-Keep in mind that while a package can contain multiple crates, it can only contain one library crate.
+Пам'ятайте: хоча пакет може містити кілька крейтів, бібліотечний крейт у ньому може бути лише один.

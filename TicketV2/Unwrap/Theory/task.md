@@ -1,37 +1,37 @@
-## Unwrapping
+## Розпакування (unwrapping)
 
-`Ticket::new` now returns a `Result` instead of panicking on invalid inputs.\
-What does this mean for the caller?
+Тепер `Ticket::new` повертає `Result` замість того, щоб панікувати в разі некоректних вхідних даних.\
+Що це означає для коду, який викликає цю функцію?
 
-## Failures can't be (implicitly) ignored
+## Збої не можна (неявно) ігнорувати
 
-Unlike exceptions, Rust's `Result` forces you to **handle errors at the call site**.\
-If you call a function that returns a `Result`, Rust won't allow you to implicitly ignore the error case.
+На відміну від винятків, `Result` у Rust змушує вас **обробляти помилки в місці виклику**.\
+Якщо ви викликаєте функцію, що повертає `Result`, Rust не дозволить вам неявно проігнорувати випадок помилки.
 
 ```rust
 fn parse_int(s: &str) -> Result<i32, ParseIntError> {
     // ...
 }
 
-// This won't compile: we're not handling the error case.
-// We must either use `match` or one of the combinators provided by 
-// `Result` to "unwrap" the success value or handle the error.
+// Це не скомпілюється: ми не обробляємо випадок помилки.
+// Потрібно або використати `match`, або один із комбінаторів, які надає
+// `Result`, щоб «розпакувати» успішне значення або обробити помилку.
 let number = parse_int("42") + 2;
 ```
 
-## You got a `Result`. Now what?
+## Ви отримали `Result`. Що далі?
 
-When you call a function that returns a `Result`, you have two key options:
+Коли ви викликаєте функцію, що повертає `Result`, у вас є два основні шляхи:
 
-- Panic if the operation failed.
-  This is done using either the `unwrap` or `expect` methods.
+- Панікувати, якщо операція завершилася невдачею.
+  Для цього використовують метод `unwrap` або `expect`.
   ```rust
-  // Panics if `parse_int` returns an `Err`.
+  // Панікує, якщо `parse_int` повертає `Err`.
   let number = parse_int("42").unwrap();
-  // `expect` lets you specify a custom panic message.
+  // `expect` дає змогу задати власне повідомлення паніки.
   let number = parse_int("42").expect("Failed to parse integer");
   ```
-- Destructure the `Result` using a `match` expression to deal with the error case explicitly.
+- Деструктурувати `Result` за допомогою виразу `match`, щоб явно обробити випадок помилки.
   ```rust
   match parse_int("42") {
       Ok(number) => println!("Parsed number: {}", number),

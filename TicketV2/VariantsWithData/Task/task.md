@@ -1,2 +1,2 @@
-This task is to implement the `Ticket::assigned_to` method. 
-Read the `TODO` comment in the code.
+У цьому завданні потрібно реалізувати метод `Ticket::assigned_to`.
+Прочитайте коментар `TODO` у коді.

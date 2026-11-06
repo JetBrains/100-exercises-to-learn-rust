@@ -1,2 +1,2 @@
-This task is to implement the `TryFrom<String>` and `TryFrom<&str>` traits for the `Status` `enum`. 
-Check `TODO` comment in the code.
+У цьому завданні потрібно реалізувати трейти `TryFrom<String>` і `TryFrom<&str>` для переліку `Status` (`enum`).
+Перегляньте коментар `TODO` у коді.

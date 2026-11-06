@@ -1,6 +1,6 @@
-## Fallibility
+## Можливі збої
 
-Let's revisit the `Ticket::new` function from the previous exercise:
+Повернімося до функції `Ticket::new` з попередньої вправи:
 
 ```rust
 impl Ticket {
@@ -31,14 +31,14 @@ impl Ticket {
 }
 ```
 
-As soon as one of the checks fails, the function panics.
-This is not ideal, as it doesn't give the caller a chance to **handle the error**.
+Щойно одна з перевірок не проходить, функція панікує.
+Це не ідеально, бо код, який викликає функцію, не має змоги **обробити помилку**.
 
-It's time to introduce the `Result` type, Rust's primary mechanism for error handling.
+Час познайомитися з типом `Result` — основним механізмом обробки помилок у Rust.
 
-## The `Result` type
+## Тип `Result`
 
-The `Result` type is an enum defined in the standard library:
+Тип `Result` — це перелік, оголошений у стандартній бібліотеці:
 
 ```rust
 enum Result<T, E> {
@@ -47,42 +47,42 @@ enum Result<T, E> {
 }
 ```
 
-It has two variants:
+Він має два варіанти:
 
-- `Ok(T)`: represents a successful operation. It holds `T`, the output of the operation.
-- `Err(E)`: represents a failed operation. It holds `E`, the error that occurred.
+- `Ok(T)`: означає успішну операцію. Містить `T` — результат операції.
+- `Err(E)`: означає невдалу операцію. Містить `E` — помилку, що сталася.
 
-Both `Ok` and `Err` are generic, allowing you to specify your own types for the success and error cases.
+І `Ok`, і `Err` узагальнені (generic), тож ви можете задати власні типи для випадків успіху та помилки.
 
-## No exceptions
+## Жодних винятків
 
-Recoverable errors in Rust are **represented as values**.\
-They're just an instance of a type, being passed around and manipulated like any other value.
-This is a significant difference from other languages, such as Python or C#, where **exceptions** are used to signal errors.
+Відновлювані помилки (recoverable errors) у Rust **представлені значеннями**.\
+Це просто екземпляри певного типу, які передають і обробляють, як і будь-які інші значення.
+У цьому суттєва відмінність від інших мов, як-от Python чи C#, де про помилки сигналізують за допомогою **винятків** (exceptions).
 
-Exceptions create a separate control flow path that can be hard to reason about.\
-You don't know, just by looking at a function's signature, if it can throw an exception or not.
-You don't know, just by looking at a function's signature, **which** exception types it can throw.\
-You must either read the function's documentation or look at its implementation to find out.
+Винятки створюють окремий шлях потоку керування, який буває важко простежити.\
+Лише з сигнатури функції не зрозуміло, чи може вона кинути виняток.
+Лише з сигнатури функції не зрозуміло, **які саме** типи винятків вона може кинути.\
+Щоб це з'ясувати, доведеться або читати документацію функції, або дивитися на її реалізацію.
 
-Exception handling logic has very poor locality: the code that throws the exception is far removed from the code
-that catches it, and there's no direct link between the two.
+Логіка обробки винятків дуже погано локалізована: код, що кидає виняток, розташований далеко від коду,
+що його перехоплює, і між ними немає прямого зв'язку.
 
-## Fallibility is encoded in the type system
+## Можливість збою закодовано в системі типів
 
-Rust, with `Result`, forces you to **encode fallibility in the function's signature**.\
-If a function can fail (and you want the caller to have a shot at handling the error), it must return a `Result`.
+Завдяки `Result` Rust змушує вас **відображати можливість збою в сигнатурі функції**.\
+Якщо функція може завершитися невдачею (і ви хочете, щоб код, який її викликає, мав змогу обробити помилку), вона мусить повертати `Result`.
 
 ```rust
-// Just by looking at the signature, you know that this function 
-// can fail. You can also inspect `ParseIntError` to see what 
-// kind of failures to expect.
+// Лише з сигнатури видно, що ця функція може завершитися
+// невдачею. А переглянувши `ParseIntError`, можна дізнатися,
+// яких саме збоїв слід очікувати.
 fn parse_int(s: &str) -> Result<i32, ParseIntError> {
     // ...
 }
 ```
 
-That's the big advantage of `Result`: it makes fallibility explicit.
+У цьому велика перевага `Result`: він робить можливість збою явною.
 
-Keep in mind, though, that panics exist. They aren't tracked by the type system, just like exceptions in other languages.
-But they're meant for **unrecoverable errors** and should be used sparingly.
+Утім, пам'ятайте, що існують паніки. Як і винятки в інших мовах, система типів їх не відстежує.
+Але паніки призначені для **невідновлюваних помилок** (unrecoverable errors), і вдаватися до них слід нечасто.

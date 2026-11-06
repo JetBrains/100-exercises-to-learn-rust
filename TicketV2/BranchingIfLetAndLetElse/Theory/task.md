@@ -1,6 +1,6 @@
-## Concise branching
+## Лаконічне розгалуження
 
-Your solution to the previous exercise probably looks like this:
+Ваш розв'язок попередньої вправи, імовірно, має приблизно такий вигляд:
 
 ```rust
 impl Ticket {
@@ -18,17 +18,17 @@ impl Ticket {
 }
 ```
 
-You only care about the `Status::InProgress` variant.
-Do you really need to match on all the other variants?
+Вас цікавить лише варіант `Status::InProgress`.
+Чи справді потрібно зіставляти значення з усіма іншими варіантами?
 
-New constructs to the rescue!
+На допомогу приходять нові конструкції!
 
 ## `if let`
 
-The `if let` construct allows you to match on a single variant of an enum,
-without having to handle all the other variants.
+Конструкція `if let` дає змогу зіставити значення з одним варіантом переліку,
+не обробляючи всіх інших варіантів.
 
-Here's how you can use `if let` to simplify the `assigned_to` method:
+Ось як за допомогою `if let` можна спростити метод `assigned_to`:
 
 ```rust
 impl Ticket {
@@ -46,8 +46,8 @@ impl Ticket {
 
 ## `let/else`
 
-If the `else` branch is meant to return early (a panic counts as returning early!),
-you can use the `let/else` construct:
+Якщо гілка `else` має достроково завершити функцію (паніка теж вважається достроковим виходом!),
+можна використати конструкцію `let/else`:
 
 ```rust
 impl Ticket {
@@ -62,12 +62,12 @@ impl Ticket {
 }
 ```
 
-It allows you to assign the destructured variable without incurring
-any "right drift", i.e. the variable is assigned at the same indentation level
-as the code that precedes it.
+Вона дає змогу оголосити деструктуровану змінну без жодного «зсуву праворуч» (right drift),
+тобто змінна з'являється на тому самому рівні відступу,
+що й код перед нею.
 
-## Style
+## Стиль
 
-Both `if let` and `let/else` are idiomatic Rust constructs.\
-Use them as you see fit to improve the readability of your code,
-but don't overdo it: `match` is always there when you need it.
+І `if let`, і `let/else` — ідіоматичні конструкції Rust.\
+Користуйтеся ними на свій розсуд, щоб зробити код зрозумілішим,
+але не перестарайтеся: `match` завжди до ваших послуг, коли він потрібен.

@@ -1,5 +1,5 @@
-// TODO: Implement `TryFrom<String>` and `TryFrom<&str>` for `Status`.
-//  The parsing should be case-insensitive.
+// TODO: реалізуйте `TryFrom<String>` і `TryFrom<&str>` для `Status`.
+//  Розбір рядка має бути нечутливим до регістру.
 
 #[derive(Debug, PartialEq, Clone)]
 pub enum Status {

@@ -1,2 +1,2 @@
-This task is to add a new error variant to the `TicketNewError` `enum` for invalid status strings. 
-As guided by the `TODO` comment in the code.
+У цьому завданні потрібно додати до переліку `TicketNewError` (`enum`) новий варіант помилки для некоректних рядків статусу.
+Дотримуйтеся вказівок у коментарі `TODO` в коді.

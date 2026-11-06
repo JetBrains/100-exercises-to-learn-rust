@@ -1,15 +1,15 @@
 ## `thiserror`
 
-That was a bit of detour, wasn't it? But a necessary one!\
-Let's get back on track now: custom error types and `thiserror`.
+Ми трохи відхилилися від теми, правда? Але це було необхідно!\
+Тепер повернімося до справи: власні типи помилок і `thiserror`.
 
-## Custom error types
+## Власні типи помилок
 
-We've seen how to implement the `Error` trait "manually" for a custom error type.\
-Imagine that you have to do this for most error types in your codebase. That's a lot of boilerplate, isn't it?
+Ми бачили, як «вручну» реалізувати трейт `Error` для власного типу помилки.\
+Уявіть, що так доведеться робити для більшості типів помилок у вашій кодовій базі. Це ж купа шаблонного коду (boilerplate), правда?
 
-We can remove some of the boilerplate by using [`thiserror`](https://docs.rs/thiserror/latest/thiserror/),
-a Rust crate that provides a **procedural macro** to simplify the creation of custom error types.
+Частину цього шаблонного коду можна прибрати за допомогою [`thiserror`](https://docs.rs/thiserror/latest/thiserror/) —
+крейта Rust, що надає **процедурний макрос** для спрощеного створення власних типів помилок.
 
 ```rust
 #[derive(thiserror::Error, Debug)]
@@ -21,21 +21,21 @@ enum TicketNewError {
 }
 ```
 
-## You can write your own macros
+## Ви можете писати власні макроси
 
-All the `derive` macros we've seen so far were provided by the Rust standard library.\
-`thiserror::Error` is the first example of a **third-party** `derive` macro.
+Усі `derive`-макроси, які ми досі бачили, надавала стандартна бібліотека Rust.\
+`thiserror::Error` — перший приклад `derive`-макросу зі **стороннього** крейта.
 
-`derive` macros are a subset of **procedural macros**, a way to generate Rust code at compile time.
-We won't get into the details of how to write a procedural macro in this course, but it's important
-to know that you can write your own!\
-A topic to approach in a more advanced Rust course.
+`derive`-макроси — це різновид **процедурних макросів**, які дають змогу генерувати код Rust під час компіляції.
+У цьому курсі ми не будемо заглиблюватися в те, як писати процедурні макроси, але важливо
+знати, що ви можете писати власні!\
+Це тема для просунутішого курсу з Rust.
 
-## Custom syntax
+## Власний синтаксис
 
-Each procedural macro can define its own syntax, which is usually explained in the crate's documentation.
-In the case of `thiserror`, we have:
+Кожен процедурний макрос може визначати власний синтаксис, який зазвичай описано в документації крейта.
+У випадку `thiserror` маємо:
 
-- `#[derive(thiserror::Error)]`: this is the syntax to derive the `Error` trait for a custom error type, helped by `thiserror`.
-- `#[error("{0}")]`: this is the syntax to define a `Display` implementation for each variant of the custom error type.
-  `{0}` is replaced by the zero-th field of the variant (`String`, in this case) when the error is displayed.
+- `#[derive(thiserror::Error)]`: синтаксис, щоб автоматично реалізувати (derive) трейт `Error` для власного типу помилки за допомогою `thiserror`.
+- `#[error("{0}")]`: синтаксис, щоб визначити реалізацію `Display` для кожного варіанта власного типу помилки.
+  Під час виведення помилки `{0}` замінюється нульовим полем варіанта (у цьому випадку — `String`).

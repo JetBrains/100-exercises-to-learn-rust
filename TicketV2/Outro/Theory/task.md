@@ -1,18 +1,18 @@
-## Wrapping up
+## Підсумки
 
-When it comes to domain modelling, the devil is in the details.\
-Rust offers a wide range of tools to help you represent the constraints of your domain directly in the type system,
-but it takes some practice to get it right and write code that looks idiomatic.
+Коли йдеться про моделювання предметної області, диявол криється в деталях.\
+Rust пропонує широкий набір інструментів, які допомагають відобразити обмеження вашої предметної області безпосередньо в системі типів,
+але, щоб робити це правильно й писати ідіоматичний код, потрібна певна практика.
 
-Let's close the chapter with one final refinement of our `Ticket` model.\
-We'll introduce a new type for each of the fields in `Ticket` to encapsulate the respective constraints.\
-Every time someone accesses a `Ticket` field, they'll get back a value that's guaranteed to be valid—i.e. a
-`TicketTitle` instead of a `String`. They won't have to worry about the title being empty elsewhere in the code:
-as long as they have a `TicketTitle`, they know it's valid **by construction**.
+Завершімо розділ останнім удосконаленням нашої моделі `Ticket`.\
+Для кожного з полів `Ticket` ми запровадимо новий тип, який інкапсулюватиме відповідні обмеження.\
+Тепер кожне звернення до поля `Ticket` повертатиме значення, коректність якого гарантовано, — тобто
+`TicketTitle` замість `String`. Тож в інших місцях коду не доведеться перейматися тим, що заголовок може бути порожнім:
+маючи `TicketTitle`, можна бути певним, що він коректний **за побудовою** (by construction).
 
-This is just an example of how you can use Rust's type system to make your code safer and more expressive.
+Це лише один приклад того, як можна використати систему типів Rust, щоб зробити код безпечнішим і виразнішим.
 
-## Further reading
+## Додаткові матеріали
 
-- [Parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
-- [Using types to guarantee domain invariants](https://www.lpalmieri.com/posts/2020-12-11-zero-to-production-6-domain-modelling/)
+- [«Розбирайте, а не валідуйте» (Parse, don't validate)](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+- [«Використання типів для гарантування інваріантів предметної області» (Using types to guarantee domain invariants)](https://www.lpalmieri.com/posts/2020-12-11-zero-to-production-6-domain-modelling/)

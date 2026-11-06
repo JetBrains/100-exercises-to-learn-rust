@@ -1,15 +1,15 @@
-// TODO: Use two variants, one for a title error and one for a description error.
-//   Each variant should contain a string with the explanation of what went wrong exactly.
-//   You'll have to update the implementation of `Ticket::new` as well.
+// TODO: використайте два варіанти: один для помилки заголовка, інший — для помилки опису.
+//   Кожен варіант має містити рядок із поясненням, що саме пішло не так.
+//   Реалізацію `Ticket::new` теж доведеться оновити.
 #[derive(Debug)]
 enum TicketNewError {
     TitleError(String),
     DescriptionError(String),
 }
 
-// TODO: `easy_ticket` should panic when the title is invalid, using the error message
-//   stored inside the relevant variant of the `TicketNewError` enum.
-//   When the description is invalid, instead, it should use a default description:
+// TODO: якщо заголовок некоректний, `easy_ticket` має панікувати з повідомленням про помилку,
+//   що зберігається у відповідному варіанті переліку `TicketNewError`.
+//   Якщо ж некоректний опис, функція має використати опис за замовчуванням:
 //   "Description not provided".
 pub fn easy_ticket(title: String, description: String, status: Status) -> Ticket {
     match Ticket::new(title.clone(), description, status.clone()) {

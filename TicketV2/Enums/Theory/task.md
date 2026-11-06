@@ -1,9 +1,9 @@
-## Enumerations
+## Переліки
 
-Based on the validation logic you wrote [in a previous section](../../../TicketV1/Validation/Theory/task.md),
-there are only a few valid statuses for a ticket: `To-Do`, `InProgress` and `Done`.\
-This is not obvious if we look at the `status` field in the `Ticket` struct or at the type of the `status`
-parameter in the `new` method:
+Згідно з логікою валідації, яку ви написали [в одному з попередніх розділів](../../../TicketV1/Validation/Theory/task.md),
+тікет може мати лише кілька допустимих статусів: `To-Do`, `InProgress` і `Done`.\
+Проте це зовсім не очевидно, якщо подивитися на поле `status` у структурі `Ticket` або на тип параметра `status`
+у методі `new`:
 
 ```rust
 #[derive(Debug, PartialEq)]
@@ -24,17 +24,17 @@ impl Ticket {
 }
 ```
 
-In both cases we're using `String` to represent the `status` field.
-`String` is a very general type—it doesn't immediately convey the information that the `status` field
-has a limited set of possible values. Even worse, the caller of `Ticket::new` will only find out **at runtime**
-if the status they provided is valid or not.
+В обох випадках поле `status` ми представляємо типом `String`.
+`String` — дуже загальний тип: з нього одразу не видно, що поле `status`
+має обмежений набір можливих значень. Ба гірше, код, який викликає `Ticket::new`, дізнається, чи коректний
+переданий статус, лише **під час виконання**.
 
-We can do better than that with **enumerations**.
+З **переліками** (enumerations) можна зробити краще.
 
 ## `enum`
 
-An enumeration is a type that can have a fixed set of values, called **variants**.\
-In Rust, you define an enumeration using the `enum` keyword:
+Перелік — це тип, значення якого належать до фіксованого набору; ці значення називають **варіантами** (variants).\
+У Rust перелік оголошують за допомогою ключового слова `enum`:
 
 ```rust
 enum Status {
@@ -44,4 +44,4 @@ enum Status {
 }
 ```
 
-`enum`, just like `struct`, defines **a new Rust type**.
+`enum`, як і `struct`, оголошує **новий тип Rust**.

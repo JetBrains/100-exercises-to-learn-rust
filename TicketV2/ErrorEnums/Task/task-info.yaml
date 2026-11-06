@@ -1,33 +1,34 @@
 type: edu
+custom_name: Завдання
 files:
   - name: src/lib.rs
     visible: true
     placeholders:
-      - offset: 245
+      - offset: 219
         length: 16
         placeholder_text: /* TODO */
-      - offset: 288
+      - offset: 262
         length: 49
         placeholder_text: /* TODO */
-      - offset: 701
+      - offset: 678
         length: 321
         placeholder_text: /* TODO */
-      - offset: 1453
+      - offset: 1430
         length: 108
         placeholder_text: |-
           /* TODO */
                     return Err("Title cannot be empty".to_string());
-      - offset: 1613
+      - offset: 1590
         length: 123
         placeholder_text: |-
           /* TODO */
                     return Err("Title cannot be longer than 50 bytes".to_string());
-      - offset: 1794
+      - offset: 1771
         length: 120
         placeholder_text: |-
           /* TODO */
                     return Err("Description cannot be empty".to_string());
-      - offset: 1973
+      - offset: 1950
         length: 136
         placeholder_text: |-
           /* TODO */

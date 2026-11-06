@@ -1,7 +1,7 @@
 ## `match`
 
-You may be wondering—what can you actually **do** with an enum?\
-The most common operation is to **match** on it.
+Можливо, вам цікаво: а що, власне, можна **робити** з переліком?\
+Найпоширеніша операція — **зіставлення** його зі зразками (match).
 
 ```rust
 enum Status {
@@ -14,24 +14,24 @@ impl Status {
     fn is_done(&self) -> bool {
         match self {
             Status::Done => true,
-            // The `|` operator lets you match multiple patterns.
-            // It reads as "either `Status::ToDo` or `Status::InProgress`".
+            // Оператор `|` дає змогу зіставити значення з кількома зразками.
+            // Читається як «або `Status::ToDo`, або `Status::InProgress`».
             Status::InProgress | Status::ToDo => false
         }
     }
 }
 ```
 
-A `match` statement that lets you compare a Rust value against a series of **patterns**.\
-You can think of it as a type-level `if`. If `status` is a `Done` variant, execute the first block;
-if it's a `InProgress` or `ToDo` variant, execute the second block.
+Конструкція `match` дає змогу порівняти значення Rust із низкою **зразків** (patterns).\
+Її можна уявляти як `if` на рівні типів. Якщо `status` — це варіант `Done`, виконується перший блок;
+якщо це варіант `InProgress` або `ToDo` — другий.
 
-## Exhaustiveness
+## Вичерпність
 
-There's one key detail here: `match` is **exhaustive**. You must handle all enum variants.\
-If you forget to handle a variant, Rust will stop you **at compile-time** with an error.
+Тут є одна важлива деталь: `match` **вичерпний** (exhaustive). Ви мусите обробити всі варіанти переліку.\
+Якщо ви забудете обробити якийсь варіант, Rust зупинить вас помилкою ще **під час компіляції**.
 
-E.g. if we forget to handle the `ToDo` variant:
+Наприклад, якщо ми забудемо обробити варіант `ToDo`:
 
 ```rust
 match self {
@@ -40,7 +40,7 @@ match self {
 }
 ```
 
-the compiler will complain:
+компілятор поскаржиться:
 
 ```text
 error[E0004]: non-exhaustive patterns: `ToDo` not covered
@@ -50,15 +50,15 @@ error[E0004]: non-exhaustive patterns: `ToDo` not covered
   |     ^^^^^^^^^^^^ pattern `ToDo` not covered
 ```
 
-This is a big deal!\
-Codebases evolve over time—you might add a new status down the line, e.g. `Blocked`. The Rust compiler
-will emit an error for every single `match` statement that's missing logic for the new variant.
-That's why Rust developers often sing the praises of "compiler-driven refactoring"—the compiler tells you
-what to do next, you just have to fix what it reports.
+Це дуже важливо!\
+Кодові бази з часом змінюються: згодом ви можете додати новий статус, наприклад `Blocked`. Компілятор Rust
+видасть помилку для кожної конструкції `match`, у якій бракує логіки для нового варіанта.
+Саме тому розробники на Rust так часто вихваляють «рефакторинг, керований компілятором» (compiler-driven refactoring):
+компілятор підказує, що робити далі, а вам лишається тільки виправити те, про що він повідомляє.
 
-## Catch-all
+## Зразок для всього іншого (catch-all)
 
-If you don't care about one or more variants, you can use the `_` pattern as a catch-all:
+Якщо вам байдуже до одного чи кількох варіантів, можна використати зразок `_`, який перехоплює все інше (catch-all):
 
 ```rust
 match status {
@@ -67,12 +67,12 @@ match status {
 }
 ```
 
-The `_` pattern matches anything that wasn't matched by the previous patterns.
+Зразку `_` відповідає будь-яке значення, яке не збіглося з жодним із попередніх зразків.
 
 <div class="warning">
-By using this catch-all pattern, you _won't_ get the benefits of compiler-driven refactoring.\
-If you add a new enum variant, the compiler _won't_ tell you that you're not handling it.
+Використовуючи такий зразок для всього іншого, ви _не_ отримаєте переваг рефакторингу, керованого компілятором.\
+Якщо ви додасте новий варіант переліку, компілятор _не_ підкаже, що ви його не обробляєте.
 
-If you're keen on correctness, avoid using catch-alls. Leverage the compiler to re-examine all matching sites and determine how new enum variants should be handled.
+Якщо для вас важлива коректність, уникайте зразків catch-all. Покладіться на компілятор: нехай він допоможе переглянути всі місця зіставлення й вирішити, як обробляти нові варіанти переліку.
 
 </div>

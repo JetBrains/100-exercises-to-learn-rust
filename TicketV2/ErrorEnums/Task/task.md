@@ -1,7 +1,7 @@
-This task requires you to refactor error handling for `Ticket` creation. Your primary goals are to:
+У цьому завданні потрібно переробити обробку помилок під час створення `Ticket`. Ваші основні цілі:
 
-- Define the `TicketNewError` `enum` with specific variants for title and description issues.
-- Update `Ticket::new` to return a `Result` using this new `enum` for errors.
-- Implement `easy_ticket` to use `TicketNewError` for panicking on title errors, but default descriptions for description errors.
+- Оголосити перелік `TicketNewError` (`enum`) з окремими варіантами для проблем із заголовком і з описом.
+- Змінити `Ticket::new` так, щоб він повертав `Result`, у якому для помилок використано цей новий `enum`.
+- Реалізувати `easy_ticket` з використанням `TicketNewError`: у разі помилок заголовка функція має панікувати, а в разі помилок опису — підставляти опис за замовчуванням.
  
-All detailed instructions are in the `TODO` comments in the code.
+Усі докладні інструкції — в коментарях `TODO` у коді.

@@ -1,5 +1,5 @@
-// TODO: Convert the `Ticket::new` method to return a `Result` instead of panicking.
-//   Use `String` as the error type.
+// TODO: переробіть метод `Ticket::new` так, щоб замість паніки він повертав `Result`.
+//   Використайте `String` як тип помилки.
 
 #[derive(Debug, PartialEq)]
 pub struct Ticket {

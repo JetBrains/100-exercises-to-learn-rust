@@ -1,1 +1,1 @@
-This task is to add anyhow as a dependency to the project.
+У цьому завданні потрібно додати до проєкту залежність anyhow.

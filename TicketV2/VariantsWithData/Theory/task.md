@@ -1,4 +1,4 @@
-## Variants can hold data
+## Варіанти можуть містити дані
 
 ```rust
 enum Status {
@@ -8,18 +8,18 @@ enum Status {
 }
 ```
 
-Our `Status` enum is what's usually called a **C-style enum**.\
-Each variant is a simple label, a bit like a named constant. You can find this kind of enum in many programming
-languages, like C, C++, Java, C#, Python, etc.
+Наш перелік `Status` — це те, що зазвичай називають **переліком у стилі C** (C-style enum).\
+Кожен варіант — це просто мітка, щось на кшталт іменованої константи. Такі переліки є в багатьох мовах
+програмування: C, C++, Java, C#, Python тощо.
 
-Rust enums can go further though. We can **attach data to each variant**.
+Проте переліки в Rust здатні на більше. До кожного варіанта можна **прикріпити дані**.
 
-## Variants
+## Варіанти
 
-Let's say that we want to store the name of the person who's currently working on a ticket.\
-We would only have this information if the ticket is in progress. It wouldn't be there for a to-do ticket or
-a done ticket.
-We can model this by attaching a `String` field to the `InProgress` variant:
+Припустімо, ми хочемо зберігати ім'я людини, яка зараз працює над тікетом.\
+Ця інформація є лише тоді, коли тікет у роботі. Для тікета, який ще чекає на виконання або вже виконаний,
+її не буде.
+Це можна змоделювати, додавши до варіанта `InProgress` поле типу `String`:
 
 ```rust
 enum Status {
@@ -31,21 +31,21 @@ enum Status {
 }
 ```
 
-`InProgress` is now a **struct-like variant**.\
-The syntax mirrors, in fact, the one we used to define a struct—it's just "inlined" inside the enum, as a variant.
+Тепер `InProgress` — це **структуроподібний варіант** (struct-like variant).\
+Його синтаксис, по суті, повторює той, яким ми оголошували структуру, — просто тут структуру «вбудовано» в перелік як варіант.
 
-## Accessing variant data
+## Доступ до даних варіанта
 
-If we try to access `assigned_to` on a `Status` instance,
+Якщо спробувати звернутися до `assigned_to` в екземплярі `Status`,
 
 ```rust
 let status: Status = /* */;
 
-// This won't compile
+// Це не скомпілюється
 println!("Assigned to: {}", status.assigned_to);
 ```
 
-the compiler will stop us:
+компілятор нас зупинить:
 
 ```text
 error[E0609]: no field `assigned_to` on type `Status`
@@ -55,8 +55,8 @@ error[E0609]: no field `assigned_to` on type `Status`
   |                                        ^^^^^^^^^^^ unknown field
 ```
 
-`assigned_to` is **variant-specific**, it's not available on all `Status` instances.\
-To access `assigned_to`, we need to use **pattern matching**:
+Поле `assigned_to` **належить конкретному варіанту**: воно є не в усіх екземплярах `Status`.\
+Щоб дістатися до `assigned_to`, потрібне **зіставлення зі зразком** (pattern matching):
 
 ```rust
 match status {
@@ -69,12 +69,12 @@ match status {
 }
 ```
 
-## Bindings
+## Прив'язки
 
-In the match pattern `Status::InProgress { assigned_to }`, `assigned_to` is a **binding**.\
-We're **destructuring** the `Status::InProgress` variant and binding the `assigned_to` field to
-a new variable, also named `assigned_to`.\
-If we wanted, we could bind the field to a different variable name:
+У зразку `Status::InProgress { assigned_to }` ідентифікатор `assigned_to` — це **прив'язка** (binding).\
+Ми **деструктуруємо** варіант `Status::InProgress` і прив'язуємо поле `assigned_to` до
+нової змінної, яка теж називається `assigned_to`.\
+За бажання поле можна прив'язати до змінної з іншою назвою:
 
 ```rust
 match status {
