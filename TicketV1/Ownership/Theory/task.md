@@ -61,9 +61,9 @@ Congrats, this is your first borrow-checker error!
 
 Rust's ownership system is designed to ensure that:
 
-- Data is never mutated while it's being read
-- Data is never read while it's being mutated
-- Data is never accessed after it has been destroyed
+- Data is never mutated while it's being read.
+- Data is never read while it's being mutated.
+- Data is never accessed after it has been destroyed.
 
 These constraints are enforced by the **borrow checker**, a subsystem of the Rust compiler,
 often the subject of jokes and memes in the Rust community.
@@ -72,16 +72,16 @@ Ownership is a key concept in Rust, and it's what makes the language unique.
 Ownership enables Rust to provide **memory safety without compromising performance**.
 All these things are true at the same time for Rust:
 
-1. There is no runtime garbage collector
-2. As a developer, you rarely have to manage memory directly
-3. You can't cause dangling pointers, double frees, and other memory-related bugs
+1. There is no runtime garbage collector.
+2. As a developer, you rarely have to manage memory directly.
+3. You can't cause dangling pointers, double frees, and other memory-related bugs.
 
-Languages like Python, JavaScript, and Java give you 2. and 3., but not 1.\
-Language like C or C++ give you 1., but neither 2. nor 3.
+Languages like Python, JavaScript, and Java give you the benefits described in 2 and 3, but not in 1.\
+Languages like C and C++ give you the benefit described in 1, but neither of those described in 2 or 3.
 
-Depending on your background, 3. might sound a bit arcane: what is a "dangling pointer"?
+Depending on your background, point 3 might sound a bit arcane: what is a "dangling pointer"?
 What is a "double free"? Why are they dangerous?\
-Don't worry: we'll cover these concepts in more details during the rest of the course.
+Don't worry: we'll cover these concepts in more detail during the rest of the course.
 
 For now, though, let's focus on learning how to work within Rust's ownership system.
 
